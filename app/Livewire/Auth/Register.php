@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Spatie\Permission\Models\Role;
 
 #[Title('Register - Moodle Panel')]
 class Register extends Component
@@ -20,18 +21,19 @@ class Register extends Component
 
     #[Validate('required|string|min:8|confirmed')]
     public $password;
-
+    public $roles;
     public $password_confirmation;
-
     public function register()
     {
         $this->validate();
 
-        User::create([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
+
+        $user->syncRoles($this->roles);
 
         $credentials = [
             'email' => $this->email,
@@ -47,6 +49,7 @@ class Register extends Component
 
     public function render()
     {
+        $this->roles = Role::pluck('name','name')->all();
         return view('livewire.auth.register');
     }
 }
