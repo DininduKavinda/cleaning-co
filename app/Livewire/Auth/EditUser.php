@@ -25,7 +25,6 @@ class EditUser extends Component
         $this->form->setData([
             'name' => $this->user->name,
             'email' => $this->user->email,
-            'password' => '',
             'roles' => $this->userRoles,
         ]);
     }
@@ -36,7 +35,7 @@ class EditUser extends Component
 
         $this->user->update([
             'name' => $validatedData['name'],
-            'password' => $validatedData['password'] ? bcrypt($validatedData['password']) : $this->user->password,
+            'email' => $validatedData['email'],
         ]);
 
         $this->user->syncRoles($validatedData['roles']);
@@ -47,7 +46,7 @@ class EditUser extends Component
             Toaster::error('Error has been Occured!');
         }
 
-        return redirect()->route('users');
+        return $this->redirectRoute('users', navigate: true);
     }
 
     public function updated($propertyName)

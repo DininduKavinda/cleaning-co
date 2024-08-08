@@ -1,11 +1,5 @@
 <div class="p-4 sm:ml-64 dark:bg-gray-900">
     <div class="p-4 border-2 border-gray-200 border-line rounded-lg dark:border-gray-700 mt-14">
-        <div class="container mt-5">
-            <a href="{{ url('roles') }}" class="btn btn-primary mx-1">Roles</a>
-            <a href="{{ url('permissions') }}" class="btn btn-info mx-1">Permissions</a>
-            <a href="{{ url('users') }}" class="btn btn-warning mx-1">Users</a>
-        </div>
-
         <div class="container mt-2">
             <div class="row">
                 <div class="col-md-12">
@@ -15,12 +9,14 @@
                     @endif
 
                     <div class="card mt-3">
-                        <div class="card-header">
-                            <h4>Users
-                                @can('create user')
-                                    <a href="{{ url('users/create') }}" class="btn btn-primary float-end">Add User</a>
-                                @endcan
-                            </h4>
+                        <div class="card-header px-4 py-4">
+
+                            @can('create user')
+                                <a wire:navigate href="{{ route('register') }}"
+                                    class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm bg-black font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Add
+                                    User</a>
+                            @endcan
+
                         </div>
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
@@ -36,7 +32,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td class="px-6 py-4">{{ $user->id }}</td>
                                             <td class="px-6 py-4">{{ $user->name }}</td>
                                             <td class="px-6 py-4">{{ $user->email }}</td>
@@ -49,12 +46,15 @@
                                             </td>
                                             <td class="px-6 py-4 text-right">
                                                 @can('update user')
-                                                    <a href="{{ route('editUser',$user->id) }}"
+                                                    <a wire:navigate href="{{ route('editUser', $user->id) }}"
                                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                                 @endcan
 
                                                 @can('delete user')
-                                                        <livewire:auth.delete-user :id/>
+                                                    <div>
+                                                        <button wire:click.prevent="deleteUser({{ $user->id }})"
+                                                            class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                                    </div>
                                                 @endcan
                                             </td>
                                         </tr>

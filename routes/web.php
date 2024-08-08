@@ -4,6 +4,8 @@ use App\Livewire\Auth\EditUser;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Logout;
 use App\Livewire\Auth\Register;
+use App\Livewire\Auth\Role\CreateRoles;
+use App\Livewire\Auth\Role\Roles;
 use App\Livewire\Auth\Users;
 use App\Livewire\Panel\Dashboard;
 use Illuminate\Support\Facades\Route;
@@ -17,10 +19,14 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('auth/logout', Logout::class)->name('logout');
+
     Route::get('auth/register', Register::class)->name('register')->middleware('permission:create user');
     Route::get('userManagement/users', Users::class)->name('users')->middleware('permission:view user');
     Route::get('userManagement/editUser/{id}', EditUser::class)->name('editUser')->middleware('permission:update user');
-    Route::get('userManagement/deleteUser/{id}', Users::class)->name('deleteUser')->middleware('permission:delete user');
+
+    Route::get('userManagement/roles', Roles::class)->name('roles')->middleware('permission:view role');
+    Route::get('userManagement/createRoles', CreateRoles::class)->name('createRoles')->middleware('permission:create role');
+    Route::get('userManagement/editRoles/{id}', EditUser::class)->name('editRoles')->middleware('permission:update role');
 });
 
 

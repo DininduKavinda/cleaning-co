@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Masmerise\Toaster\Toaster;
 use Spatie\Permission\Models\Role;
 
 #[Title('Register - Moodle Panel')]
@@ -35,16 +36,13 @@ class Register extends Component
 
         $user->syncRoles($this->roles);
 
-        $credentials = [
-            'email' => $this->email,
-            'password' => $this->password,
-        ];
+        if ($user) {
 
-        Auth::attempt($credentials);
-
-        session()->flash('message', 'You have successfully registered & logged in!');
-
-        return $this->redirectRoute('dashboard', navigate: true);
+            Toaster::success('Operation Successful!');
+        } else {
+            Toaster::error('Error has been Occured!');
+        }
+        return $this->redirectRoute('users', navigate: true);
     }
 
     public function render()
