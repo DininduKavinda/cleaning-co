@@ -31,13 +31,16 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($permissions as $permission)
-                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <td scope="col" class="px-6 py-3" >{{ $permission->id }}</td>
-                                            <td scope="col" class="px-6 py-3" >{{ $permission->name }}</td>
-                                            <td scope="col" class="px-6 py-3" >
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <td scope="col" class="px-6 py-3">{{ $permission->id }}</td>
+                                            <td scope="col" class="px-6 py-3">{{ $permission->name }}</td>
+                                            <td scope="col" class="px-6 py-3">
                                                 @can('update permission')
-                                                    <a href="{{ url('permissions/' . $permission->id . '/edit') }}"
-                                                        class="btn btn-success">Edit</a>
+                                                    <a href="{{ route('editPermissions', $permission->id) }}" wire:navigate
+                                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                                        Edit
+                                                    </a>
                                                 @endcan
 
                                                 @can('delete permission')
