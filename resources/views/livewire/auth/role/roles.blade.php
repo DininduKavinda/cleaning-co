@@ -35,7 +35,7 @@
                                             <td class="px-6 py-4">{{ $role->id }}</td>
                                             <td class="px-6 py-4">{{ $role->name }}</td>
                                             <td class="px-6 py-4">
-                                                <a href="{{ url('roles/' . $role->id . '/give-permissions') }}"
+                                                <a href="{{ route('rolePermissions' , $role->id ) }}"
                                                     class="font-medium text-green-600 dark:text-green-500 hover:underline">
                                                     Add / Edit Role Permission
                                                 </a>
