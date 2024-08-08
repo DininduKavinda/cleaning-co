@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class RolePermissionFrom extends Form
+class RolePermissionForm extends Form
 {
     public $permission = [];
-    public function setData(array $permission)
+
+    public function setData(array $data)
     {
-        foreach ($permission as $key => $value) {
+        foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->{$key} = $value;
             }

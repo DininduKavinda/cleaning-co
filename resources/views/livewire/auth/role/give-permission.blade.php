@@ -10,15 +10,12 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h4>Role : {{ $role->name }}
-                                <a href="{{ url('roles') }}" class="btn btn-danger float-end">Back</a>
+                            <h4>Role: {{ $role->name }}
+
                             </h4>
                         </div>
                         <div class="card-body">
-
-                            <form wire:submit="saveData">
-                                @csrf
-
+                            <form wire:submit.prevent="saveData">
                                 <div class="mb-3">
                                     @error('permission')
                                         <span class="text-danger">{{ $message }}</span>
@@ -31,8 +28,7 @@
                                             <div class="col-md-2">
                                                 <label>
                                                     <input type="checkbox" wire:model="form.permission"
-                                                        value="{{ $permission->name }}"
-                                                        {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }} />
+                                                        value="{{ $permission->name }}" />
                                                     {{ $permission->name }}
                                                 </label>
                                             </div>
@@ -40,7 +36,10 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="submit"
+                                        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm bg-black font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Update</button>
+                                    <a href="{{ route('roles') }}" wire:navigate
+                                        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm bg-gray-200 font-medium text-center text-black  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Cancel</a>
                                 </div>
                             </form>
                         </div>
