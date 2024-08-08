@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Auth\Role;
 
+use App\Livewire\Forms\RoleForm;
 use Livewire\Component;
+use Masmerise\Toaster\Toaster;
 use Spatie\Permission\Models\Role;
 
 class EditRoles extends Component
@@ -10,6 +12,7 @@ class EditRoles extends Component
 
     public $roleID;
     public $role;
+    public RoleForm $form;
     public function mount($id)
     {
         $this->roleID = $id;
@@ -23,20 +26,17 @@ class EditRoles extends Component
     {
         $validatedData = $this->form->validate();
 
-        $this->user->update([
+        $this->role->update([
             'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
         ]);
 
-        $this->user->syncRoles($validatedData['roles']);
-
-        if ($this->user) {
+        if ($this->role) {
             Toaster::success('Update Successful!');
         } else {
             Toaster::error('Error has been Occured!');
         }
 
-        return $this->redirectRoute('users', navigate: true);
+        return $this->redirectRoute('roles', navigate: true);
     }
 
     public function updated($propertyName)

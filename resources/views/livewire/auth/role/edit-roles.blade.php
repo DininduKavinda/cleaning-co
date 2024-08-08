@@ -19,13 +19,12 @@
                             </h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('roles/' . $role->id) }}" method="POST">
+                            <form wire:submit="saveData">
                                 @csrf
-                                @method('PUT')
 
                                 <div class="mb-3">
                                     <label for="">Role Name</label>
-                                    <input type="text" name="name" value="{{ $role->name }}"
+                                    <input type="text" wire:model="form.name"
                                         class="form-control" />
                                 </div>
                                 <div class="mb-3">

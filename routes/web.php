@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('userManagement/roles', Roles::class)->name('roles')->middleware('permission:view role');
     Route::get('userManagement/createRoles', CreateRoles::class)->name('createRoles')->middleware('permission:create role');
     Route::get('userManagement/editRoles/{id}', EditRoles::class)->name('editRoles')->middleware('permission:update role');
-})
+});
 
 
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
