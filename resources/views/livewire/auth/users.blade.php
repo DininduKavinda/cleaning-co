@@ -49,12 +49,12 @@
                                             </td>
                                             <td class="px-6 py-4 text-right">
                                                 @can('update user')
-                                                    <a href="{{ url('users/' . $user->id . '/edit') }}"
+                                                    <a href="{{ route('editUser',$user->id) }}"
                                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                                 @endcan
-                                                        
+
                                                 @can('delete user')
-                                                    <a href="{{ url('users/' . $user->id . '/delete') }}"
+                                                    <a href="{{ route('deleteUser',$user->id) }}"
                                                         class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
                                                 @endcan
                                             </td>

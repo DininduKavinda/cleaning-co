@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Auth\EditUser;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Logout;
 use App\Livewire\Auth\Register;
@@ -15,9 +16,11 @@ Route::group(['middleware' => 'guest'], function () {
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
-    Route::get('/logout', Logout::class)->name('logout');
-    Route::get('/register', Register::class)->name('register');
-    Route::get('/userss', Users::class)->name('userss');
+    Route::get('auth/logout', Logout::class)->name('logout');
+    Route::get('auth/register', Register::class)->name('register')->middleware('permission:create user');
+    Route::get('userManagement/users', Users::class)->name('users')->middleware('permission:view user');
+    Route::get('userManagement/editUser/{id}', EditUser::class)->name('editUser')->middleware('permission:update user');
+    Route::get('userManagement/deleteUser/{id}', Users::class)->name('deleteUser')->middleware('permission:delete user');
 });
 
 
