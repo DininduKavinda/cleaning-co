@@ -3,6 +3,11 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
 
                     @if ($errors->any())
                         <ul class="alert alert-warning">
@@ -19,35 +24,34 @@
                             </h4>
                         </div>
                         <div class="card-body">
-                            <form wire:submit="saveData">
+                            <form wire:submit.prevent="saveData">
 
                                 <div class="mb-3">
-                                    <label for="">Name</label>
-                                    <input type="text" wire:model="form.name"
-                                        class="form-control" />
+                                    <label for="name">Name</label>
+                                    <input type="text" wire:model="form.name" class="form-control" />
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="">Email</label>
-                                    <input type="text" wire:model="form.email" readonly
-                                        class="form-control" />
+                                    <label for="email">Email</label>
+                                    <input type="text" wire:model="form.email" readonly class="form-control" />
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="">Password</label>
+                                    <label for="password">Password</label>
                                     <input type="text" wire:model="form.password" class="form-control" />
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="">Roles</label>
-                                    <select wire:model="form.roles[]" class="form-control" multiple>
-                                        <option value="">Select Role</option>
+                                    <label for="roles">Roles</label>
+                                    <select wire:model="form.roles" class="form-control" multiple>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role }}"
-                                                {{ in_array($role, $userRoles) ? 'selected' : '' }}>
+                                            <option value="{{ $role }}">
                                                 {{ $role }}
                                             </option>
                                         @endforeach
@@ -56,6 +60,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>

@@ -54,8 +54,7 @@
                                                 @endcan
 
                                                 @can('delete user')
-                                                    <a href="{{ route('deleteUser',$user->id) }}"
-                                                        class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                                        <livewire:auth.delete-user :id/>
                                                 @endcan
                                             </td>
                                         </tr>

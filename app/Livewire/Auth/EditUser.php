@@ -5,6 +5,7 @@ namespace App\Livewire\Auth;
 use App\Livewire\Forms\UserForm;
 use App\Models\User;
 use Livewire\Component;
+use Masmerise\Toaster\Toaster;
 use Spatie\Permission\Models\Role;
 
 class EditUser extends Component
@@ -14,30 +15,51 @@ class EditUser extends Component
     public $userRoles;
     public $userID;
     public UserForm $form;
+
     public function mount($id)
     {
-        $this->userID= $id;
+        $this->userID = $id;
         $this->user = User::find($id);
         $this->roles = Role::pluck('name', 'name')->all();
-        $this->userRoles = $this->user->roles->pluck('name', 'name')->all();
+        $this->userRoles = $this->user->roles->pluck('name')->all();
+        $this->form->setData([
+            'name' => $this->user->name,
+            'email' => $this->user->email,
+            'password' => '',
+            'roles' => $this->userRoles,
+        ]);
     }
+
     public function saveData()
     {
         $validatedData = $this->form->validate();
-        dd([$this->userID, $validatedData ]);
-        // $id = $this->form->id;
 
-        // $validatedData = $this->form->validate();
+        $this->user->update([
+            'name' => $validatedData['name'],
+            'password' => $validatedData['password'] ? bcrypt($validatedData['password']) : $this->user->password,
+        ]);
 
-        // User::find($id)->update($validatedData);
-        // User::find($id)->syncRoles($validatedData->roles);
+        $this->user->syncRoles($validatedData['roles']);
+
+        if ($this->user) {
+            Toaster::success('Update Successful!');
+        } else {
+            Toaster::error('Error has been Occured!');
+        }
+
+        return redirect()->route('users');
     }
+
     public function updated($propertyName)
     {
-        $this->validateOnly($propertyName);
+        $this->validateOnly($propertyName, $this->form->rules());
     }
+
     public function render()
     {
-        return view('livewire.auth.edit-user');
+        return view('livewire.auth.edit-user', [
+            'roles' => $this->roles,
+            'userRoles' => $this->userRoles,
+        ]);
     }
 }
