@@ -3,6 +3,7 @@
 use App\Livewire\Auth\EditUser;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Logout;
+use App\Livewire\Auth\Permission\Permissions;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Role\CreateRoles;
 use App\Livewire\Auth\Role\GivePermission;
@@ -31,6 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('userManagement/editRoles/{id}', EditRoles::class)->name('editRoles')->middleware('permission:update role');
 
     Route::get('userManagement/rolePermissions/{id}', GivePermission::class)->name('rolePermissions')->middleware('permission:create role');
+
+    Route::get('userManagement/permissions', Permissions::class)->name('permissions')->middleware('permission:view permission');
+    Route::get('userManagement/createPermissions', Permissions::class)->name('createPermissions')->middleware('permission:create permission');
 });
 
 
