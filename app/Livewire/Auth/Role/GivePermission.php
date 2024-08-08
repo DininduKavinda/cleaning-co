@@ -14,7 +14,6 @@ class GivePermission extends Component
     public $rolePermissions = [];
     public $permissions = [];
     public RolePermissionForm $form;
-
     public function mount($id)
     {
         $this->role = Role::findOrFail($id);
