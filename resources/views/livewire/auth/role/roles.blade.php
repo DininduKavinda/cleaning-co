@@ -41,7 +41,7 @@
                                                 </a>
 
                                                 @can('update role')
-                                                    <a href="{{ url('roles/' . $role->id . '/edit') }}"
+                                                    <a href="{{ route('editRoles' . $role->id) }}" wire:navigate
                                                         class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                                         Edit
                                                     </a>

@@ -5,6 +5,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Logout;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Role\CreateRoles;
+use App\Livewire\Auth\Role\EditRoles;
 use App\Livewire\Auth\Role\Roles;
 use App\Livewire\Auth\Users;
 use App\Livewire\Panel\Dashboard;
@@ -26,8 +27,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('userManagement/roles', Roles::class)->name('roles')->middleware('permission:view role');
     Route::get('userManagement/createRoles', CreateRoles::class)->name('createRoles')->middleware('permission:create role');
-    Route::get('userManagement/editRoles/{id}', EditUser::class)->name('editRoles')->middleware('permission:update role');
-});
+    Route::get('userManagement/editRoles/{id}', EditRoles::class)->name('editRoles')->middleware('permission:update role');
+})
 
 
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
