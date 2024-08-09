@@ -25,5 +25,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'root@admin.com',
             'password' => '1234',
         ]);
+
+        $this->call([
+            CountrySeeder::class,
+            ProvinceSeeder::class,
+            DistrictSeeder::class,
+            CitySeeder::class,
+            UserRolePermissionSeeder::class,
+        ]);
     }
 }
