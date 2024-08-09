@@ -22,11 +22,6 @@ class CountryResource extends JsonResource
             'country_name'=> $this->country_name,
             'iso_code'=>$this->iso_code,
             'phone_code'=>$this->phone_code,
-            'status_id'=>$this->status->name,
-            'currency_id'=>$this->currency->name,
-            // 'status' => new StatusResource($this->whenLoaded('status')),
-            // 'currency' => new CurrencyResource($this->whenLoaded('currency')),
-            'customers' => CustomerResource::collection($this->whenLoaded('customers')),
         ];
     }
 }

@@ -20,7 +20,6 @@ class CityResource extends JsonResource
             'name_en'=>$this->name_en,
             'name_si'=>$this->name_si,
             'name_ta'=>$this->name_ta,
-            'status_id'=>$this->status->name,
             'postcode'=>$this->postcode,
         ];
     }

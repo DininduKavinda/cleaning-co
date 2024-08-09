@@ -20,7 +20,6 @@ class ProvinceResource extends JsonResource
             'name_si' => $this->name_si,
             'name_ta' => $this->name_ta,
             'country_id' => $this->country->country_name,
-            'status_id' => $this->status->name,
             'districts' => DistrictResource::collection($this->whenLoaded('districts'))
         ];
     }
