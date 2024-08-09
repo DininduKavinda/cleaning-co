@@ -2,6 +2,7 @@
 
 namespace App\Models\Meta;
 
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,5 +21,8 @@ class Province extends Model
     }
     public function districts(){
         return $this->hasMany(District::class);
+    }
+    public function client(){
+        return $this->hasMany(Client::class);
     }
 }

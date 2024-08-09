@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\Meta\CityController;
 use App\Http\Controllers\Api\Meta\CountryController;
 use App\Http\Controllers\Api\Meta\DistrictController;
@@ -29,3 +30,4 @@ Route::group(['prefix' => 'location'], function () {
     Route::apiResource('districts', DistrictController::class);
     Route::apiResource('cities', CityController::class);
 });
+Route::apiResource('clients', ClientController::class);

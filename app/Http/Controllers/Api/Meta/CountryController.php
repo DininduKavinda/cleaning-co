@@ -21,13 +21,7 @@ class CountryController extends Controller
     {
         $filter = new CountryFilter();
         $filterItems = $filter->transform($request);
-        $includeUsers = $request->query('includeUsers');
         $countries = Country::where($filterItems);
-        if ($includeUsers) {
-            $countries = $countries->with(['users', 'status', 'currency']);
-        } else {
-            $countries = $countries->with(['status', 'currency']);
-        }
         return new CountryCollection($countries->paginate(20000)->appends($request->query()));
     }
 

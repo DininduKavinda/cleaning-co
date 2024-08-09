@@ -30,10 +30,14 @@
     @else
         <livewire:components.navbar />
         <livewire:components.sidebar />
-    @endguest
-    {{ $slot }}
-    @guest
-    @else
+        <div class="p-4 sm:ml-64 dark:bg-gray-900">
+            <div class="p-4 border-2 border-gray-200 border-line rounded-lg dark:border-gray-700 mt-14">
+            @endguest
+            {{ $slot }}
+            @guest
+            @else
+            </div>
+        </div>
         {{-- <livewire:components.footbar /> --}}
     @endguest
     @livewireScripts

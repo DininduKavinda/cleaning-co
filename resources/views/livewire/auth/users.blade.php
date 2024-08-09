@@ -1,5 +1,4 @@
-<div class="p-4 sm:ml-64 dark:bg-gray-900">
-    <div class="p-4 border-2 border-gray-200 border-line rounded-lg dark:border-gray-700 mt-14">
+
         <div class="container mt-2">
             <div class="row">
                 <div class="col-md-12">
@@ -21,7 +20,7 @@
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <thead>
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">Id</th>
                                         <th scope="col" class="px-6 py-3">Name</th>
@@ -52,7 +51,7 @@
 
                                                 @can('delete user')
 
-                                                        <button wire:click.prevent="deleteUser({{ $user->id }})"  
+                                                        <button wire:click.prevent="deleteUser({{ $user->id }})"
                                                             class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                                                 @endcan
                                             </td>
@@ -66,5 +65,4 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+

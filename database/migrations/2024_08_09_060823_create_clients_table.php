@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('district_id');
             $table->foreignId('city_id');
             $table->tinyInteger('active')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

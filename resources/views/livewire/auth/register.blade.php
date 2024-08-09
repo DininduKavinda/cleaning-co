@@ -1,5 +1,4 @@
-<div class="p-4 sm:ml-64 dark:bg-gray-900">
-    <div class="p-4 border-2 border-gray-200 border-line rounded-lg dark:border-gray-700 mt-14">
+
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Register New User</h2>
         <form wire:submit="register">
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -66,5 +65,3 @@
                Cancel
             </button>
         </form>
-    </div>
-</div>

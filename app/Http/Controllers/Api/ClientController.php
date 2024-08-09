@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Filters\Customer\ClientsFilter;
+use App\Filters\Clients\ClientsFilter;
 use App\Models\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClientRequest;
@@ -20,15 +20,10 @@ class ClientController extends Controller
     {
         $filter = new ClientsFilter();
         $filterItems = $filter->transform($request);
-        $includeInvoices = $request->query('includeInvoices');
-        $includeUser = $request->query('includeUser');
+        // $includeUser = $request->query('includeUser');
         $clients = Client::where($filterItems);
-        if ($includeInvoices) {
-            $clients = $clients->with('invoices');
-        } elseif ($includeUser) {
-            $clients = $clients->with('user');
-        }
-        return new ClientCollection($clients->paginate()->appends($request->query()));
+        $clients = $clients->with('user');
+        return new ClientCollection($clients->paginate(10000)->appends($request->query()));
     }
 
     /**

@@ -23,9 +23,7 @@ class DistrictController extends Controller
         $includeAll = $request->query('includeAll');
         $districts = District::where($filterItems);
         if($includeAll){
-            $districts= $districts->with(['cities','status']);
-        }else{
-            $districts= $districts->with('status');
+            $districts= $districts->with(['cities']);
         }
         return new DistrictCollection($districts->paginate(20000)->appends($request->query()));
     }

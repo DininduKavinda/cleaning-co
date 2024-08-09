@@ -2,6 +2,7 @@
 
 namespace App\Models\Meta;
 
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,5 +19,8 @@ class Country extends Model
 
     public function provinces(){
         return $this->hasMany(Province::class);
+    }
+    public function client(){
+        return $this->hasMany(Client::class);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filters\Customer;
+namespace App\Filters\Clients;
 
 use App\Filters\ApiFilter;
 

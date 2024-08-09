@@ -13,6 +13,7 @@ use App\Livewire\Auth\Role\EditRoles;
 use App\Livewire\Auth\Role\Roles;
 use App\Livewire\Auth\Users;
 use App\Livewire\Panel\Dashboard;
+use App\Livewire\Panel\Meta\Country;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,19 +26,26 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('auth/logout', Logout::class)->name('logout');
 
-    Route::get('userManagement/register', Register::class)->name('register')->middleware('permission:create user');
-    Route::get('userManagement/users', Users::class)->name('users')->middleware('permission:view user');
-    Route::get('userManagement/editUser/{id}', EditUser::class)->name('editUser')->middleware('permission:update user');
+    Route::group(['prefix' => 'userManagement'], function () {
 
-    Route::get('userManagement/roles', Roles::class)->name('roles')->middleware('permission:view role');
-    Route::get('userManagement/createRoles', CreateRoles::class)->name('createRoles')->middleware('permission:create role');
-    Route::get('userManagement/editRoles/{id}', EditRoles::class)->name('editRoles')->middleware('permission:update role');
+        Route::get('register', Register::class)->name('register')->middleware('permission:create user');
+        Route::get('users', Users::class)->name('users')->middleware('permission:view user');
+        Route::get('editUser/{id}', EditUser::class)->name('editUser')->middleware('permission:update user');
 
-    Route::get('userManagement/rolePermissions/{id}', GivePermission::class)->name('rolePermissions')->middleware('permission:create role');
+        Route::get('roles', Roles::class)->name('roles')->middleware('permission:view role');
+        Route::get('createRoles', CreateRoles::class)->name('createRoles')->middleware('permission:create role');
+        Route::get('editRoles/{id}', EditRoles::class)->name('editRoles')->middleware('permission:update role');
 
-    Route::get('userManagement/permissions', Permissions::class)->name('permissions')->middleware('permission:view permission');
-    Route::get('userManagement/createPermissions', CreatePermissions::class)->name('createPermissions')->middleware('permission:create permission');
-    Route::get('userManagement/editPermissions/{id}', EditPermissions::class)->name('editPermissions')->middleware('permission:update permission');
+        Route::get('rolePermissions/{id}', GivePermission::class)->name('rolePermissions')->middleware('permission:create role');
+
+        Route::get('permissions', Permissions::class)->name('permissions')->middleware('permission:view permission');
+        Route::get('createPermissions', CreatePermissions::class)->name('createPermissions')->middleware('permission:create permission');
+        Route::get('editPermissions/{id}', EditPermissions::class)->name('editPermissions')->middleware('permission:update permission');
+    });
+    Route::group(['prefix' => 'userManagement'], function () {
+        Route::get('country', Country::class)->name('location.country')->middleware('permission:view location');
+        
+    });
 });
 
 
