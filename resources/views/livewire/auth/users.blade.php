@@ -51,10 +51,9 @@
                                                 @endcan
 
                                                 @can('delete user')
-                                                   
-                                                        <button wire:click.prevent="deleteUser({{ $user->id }})"
+
+                                                        <button wire:click.prevent="deleteUser({{ $user->id }})"  
                                                             class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
-                                                 
                                                 @endcan
                                             </td>
                                         </tr>
