@@ -33,18 +33,24 @@
                     </svg>
                 </button>
                 <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                    @can('view user')
                     <li>
                         <a href="{{ route('users') }}" wire:navigate
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Users</a>
                     </li>
+                    @endcan
+                    @can('view role')
                     <li>
                         <a href="{{route('roles')}}"  wire:navigate
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Roles</a>
                     </li>
+                    @endcan
+                    @can('view permission')
                     <li>
                         <a href="{{route('permissions')}}" wire:navigate
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Permissions</a>
                     </li>
+                    @endcan
                 </ul>
             </li>
             <li>
