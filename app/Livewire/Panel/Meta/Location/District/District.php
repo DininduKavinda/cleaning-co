@@ -37,7 +37,7 @@ class District extends Component
     public function deleteData($id)
     {
         $this->district = MetaDistrict::find($id);
-        $this->district->delete();
+        $this->district = $this->district->delete();
         if ($this->district) {
             Toaster::success('Delete Successfully');
         } else {

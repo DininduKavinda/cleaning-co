@@ -17,6 +17,8 @@ class CityResource extends JsonResource
         return [
             'id' => $this->id,
             'district_id'=>$this->district->name_en,
+            'province_id'=>$this->district->province->name_en,
+            'country_id'=>$this->district->province->country->country_name,
             'name_en'=>$this->name_en,
             'name_si'=>$this->name_si,
             'name_ta'=>$this->name_ta,

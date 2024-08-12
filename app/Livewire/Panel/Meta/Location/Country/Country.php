@@ -37,7 +37,7 @@ class Country extends Component
     public function deleteData($id)
     {
         $this->country = MetaCountry::find($id);
-        $this->country->delete();
+        $this->country = $this->country->delete();
         if ($this->country) {
             Toaster::success('Delete Successfully');
         } else {
