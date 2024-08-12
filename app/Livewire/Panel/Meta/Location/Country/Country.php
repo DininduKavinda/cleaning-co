@@ -11,18 +11,15 @@ class Country extends Component
 {
     public $countries = [];
     public $api;
-    public $country;
 
     public function getData()
     {
 
-        $this->api = env('APP_API_URL');
+        $response = MetaCountry::get();
 
-        $response = Http::get($this->api . "location/countries");
+        if ($response) {
 
-        if ($response->successful()) {
-
-            $this->countries = json_decode($response->body(), true);
+            $this->countries = $response;
         } else {
 
             $this->countries = [];
@@ -36,11 +33,14 @@ class Country extends Component
 
     public function deleteData($id)
     {
-        $this->country = MetaCountry::find($id);
-        $this->country = $this->country->delete();
-        if ($this->country) {
+
+        $response = MetaCountry::find($id);
+
+        if ($response) {
+
             Toaster::success('Delete Successfully');
         } else {
+
             Toaster::error('An Error Occured');
         }
     }

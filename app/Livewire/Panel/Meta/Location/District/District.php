@@ -16,13 +16,12 @@ class District extends Component
     public function getData()
     {
 
-        $this->api = env('APP_API_URL');
 
-        $response = Http::get($this->api . "location/districts");
+        $response = MetaDistrict::get();
 
-        if ($response->successful()) {
+        if ($response) {
 
-            $this->districts = json_decode($response->body(), true);
+            $this->districts = $response;
         } else {
 
             $this->districts = [];

@@ -16,13 +16,11 @@ class Province extends Component
     public function getData()
     {
 
-        $this->api = env('APP_API_URL');
+        $response = MetaProvince::get();
 
-        $response = Http::get($this->api . "location/provinces");
+        if ($response) {
 
-        if ($response->successful()) {
-
-            $this->provinces = json_decode($response->body(), true);
+            $this->provinces = $response;
         } else {
 
             $this->provinces = [];

@@ -33,27 +33,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($cities['data'] as $city)
+                @foreach ($cities as $city)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $city['name_en'] }}
+                            {{ $city->name_en }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $city['name_si'] ?? 'N/A' }}
+                            {{ $city->name_si ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $city['postcode'] ?? 'N/A' }}
+                            {{ $city->postcode ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $city['district_id'] ?? 'N/A' }}
+                            {{ $city->district->name_en ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $city['province_id'] ?? 'N/A' }}
+                            {{ $city->district->province->name_en ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $city['country_id'] ?? 'N/A' }}
+                            {{ $city->district->province->country->country_name ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4 text-right">
                             @can('update location')

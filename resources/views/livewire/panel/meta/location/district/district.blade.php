@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($districts['data'] as $district)
+                @foreach ($districts as $district)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
@@ -38,10 +38,10 @@
                             {{ $district['name_si'] ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $district['province_id'] ?? 'N/A' }}
+                            {{ $district->province->name_en ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $district['country_id'] ?? 'N/A' }}
+                            {{ $district->province->country->country_name ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4 text-right">
                             @can('update location')

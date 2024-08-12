@@ -11,20 +11,18 @@ use Masmerise\Toaster\Toaster;
 
 class City extends Component
 {
-    public $cities = [];
+    public $cities;
     public $api;
     public $city;
 
     public function getData()
     {
 
-        $this->api = env('APP_API_URL');
+        $data = MetaCity::get();
 
-        $response = Http::get($this->api . "location/cities");
+        if ($data) {
 
-        if ($response->successful()) {
-
-            $this->cities = json_decode($response->body(), true);
+            $this->cities = $data;
         } else {
 
             $this->cities = [];

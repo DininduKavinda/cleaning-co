@@ -46,11 +46,11 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        // $includeUsers = request()->query('includeUsers');
-        // if ($includeUsers) {
-        //     return new CountryResource($country->loadMissing(['users', 'status', 'currency']));
-        // }
-        // return new CountryResource($country);
+        $includeUsers = request()->query('includeUsers');
+        if ($includeUsers) {
+            return new CountryResource($country->loadMissing(['users', 'status', 'currency']));
+        }
+        return new CountryResource($country);
     }
 
     /**
@@ -75,5 +75,8 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         $country->delete();
+        return response()->json([
+            'message' => 'succesfully Deleted'
+        ]);
     }
 }

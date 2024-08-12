@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($provinces['data'] as $province)
+                @foreach ($provinces as $province)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
@@ -35,7 +35,7 @@
                             {{ $province['name_si'] ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $province['country_id'] ?? 'N/A' }}
+                            {{ $province->country->country_name ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4 text-right">
                             @can('update location')
