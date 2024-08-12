@@ -13,7 +13,12 @@ use App\Livewire\Auth\Role\EditRoles;
 use App\Livewire\Auth\Role\Roles;
 use App\Livewire\Auth\Users;
 use App\Livewire\Panel\Dashboard;
-use App\Livewire\Panel\Meta\Country;
+use App\Livewire\Panel\Meta\Location\Country\Country;
+use App\Livewire\Panel\Meta\Location\Country\Create;
+use App\Livewire\Panel\Meta\Location\District\Create as DistrictCreate;
+use App\Livewire\Panel\Meta\Location\District\District;
+use App\Livewire\Panel\Meta\Location\Province\Create as ProvinceCreate;
+use App\Livewire\Panel\Meta\Location\Province\Province;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -42,9 +47,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('createPermissions', CreatePermissions::class)->name('createPermissions')->middleware('permission:create permission');
         Route::get('editPermissions/{id}', EditPermissions::class)->name('editPermissions')->middleware('permission:update permission');
     });
-    Route::group(['prefix' => 'userManagement'], function () {
+    Route::group(['prefix' => 'location'], function () {
         Route::get('country', Country::class)->name('location.country')->middleware('permission:view location');
-        
+        Route::get('country/create', Create::class)->name('location.country.create')->middleware('permission:create location');
+        Route::get('country/update/{id}', Create::class)->name('location.country.update')->middleware('permission:update location');
+
+        Route::get('province', Province::class)->name('location.province')->middleware('permission:view location');
+        Route::get('province/create', ProvinceCreate::class)->name('location.province.create')->middleware('permission:create location');
+        Route::get('province/update/{id}', ProvinceCreate::class)->name('location.province.update')->middleware('permission:update location');
+
+        Route::get('district', District::class)->name('location.district')->middleware('permission:view location');
+        Route::get('district/create', DistrictCreate::class)->name('location.district.create')->middleware('permission:create location');
+        Route::get('district/update/{id}', DistrictCreate::class)->name('location.district.update')->middleware('permission:update location');
     });
 });
 
