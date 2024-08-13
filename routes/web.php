@@ -12,6 +12,8 @@ use App\Livewire\Auth\Role\GivePermission;
 use App\Livewire\Auth\Role\EditRoles;
 use App\Livewire\Auth\Role\Roles;
 use App\Livewire\Auth\Users;
+use App\Livewire\Panel\ClientArea\Client;
+use App\Livewire\Panel\ClientArea\ClientCreate;
 use App\Livewire\Panel\Dashboard;
 use App\Livewire\Panel\Meta\Location\City\Create as CityCreate;
 use App\Livewire\Panel\Meta\Location\City\City;
@@ -65,6 +67,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('city', City::class)->name('location.city')->middleware('permission:view location');
         Route::get('city/create', CityCreate::class)->name('location.city.create')->middleware('permission:create location');
         Route::get('city/update/{id}', CityCreate::class)->name('location.city.update')->middleware('permission:update location');
+    });
+    Route::group(['prefix' => 'clientArea'], function () {
+        Route::get('client', Client::class)->name('clients')->middleware('permission:view client');
+        Route::get('client/create', ClientCreate::class)->name('client.create')->middleware('permission:create client');
+        Route::get('client/update/{id}', ClientCreate::class)->name('client.update')->middleware('permission:update client');
     });
 });
 

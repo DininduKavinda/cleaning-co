@@ -33,7 +33,7 @@ class Create extends Component
     public function saveData()
     {
         $validatedData = $this->form->validate();
-        
+
         if (!empty($this->cityID)) {
             $this->city =  $this->city->update($validatedData);
         } else {

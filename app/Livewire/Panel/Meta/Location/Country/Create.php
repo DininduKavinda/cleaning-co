@@ -46,6 +46,7 @@ class Create extends Component
     }
     public function render()
     {
+
         return view('livewire.panel.meta.location.country.create');
     }
 }

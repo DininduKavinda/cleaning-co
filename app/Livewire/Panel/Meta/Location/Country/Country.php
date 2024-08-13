@@ -20,15 +20,11 @@ class Country extends Component
         if ($response) {
 
             $this->countries = $response;
+
         } else {
 
             $this->countries = [];
         }
-    }
-
-    public function mount()
-    {
-        $this->getData();
     }
 
     public function deleteData($id)
@@ -36,7 +32,7 @@ class Country extends Component
 
         $response = MetaCountry::find($id);
 
-        if ($response) {
+        if ($response->delete()) {
 
             Toaster::success('Delete Successfully');
         } else {

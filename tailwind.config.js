@@ -14,10 +14,10 @@ export default {
         extend: {
             fontFamily: {
                 'body': [
-                    'JetBrains Mono'
+                    'Rubik'
                 ],
                 'sans': [
-                    'JetBrains Mono'
+                    'Rubik'
                 ]
             },
         },

@@ -1,4 +1,4 @@
-
+<div>
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Register New User</h2>
         <form wire:submit="register">
             <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -65,3 +65,4 @@
                Cancel
             </button>
         </form>
+</div>
