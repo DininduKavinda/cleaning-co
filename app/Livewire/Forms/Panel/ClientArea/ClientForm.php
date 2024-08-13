@@ -8,7 +8,7 @@ use Livewire\Form;
 class ClientForm extends Form
 {
     public $id;
-    public $full_name;
+    public $full_name, $name, $role, $email, $password, $type_id;
     public $mobile;
     public $phone;
     public $address;
@@ -31,6 +31,7 @@ class ClientForm extends Form
     {
         return [
             'id' => ['required', 'max:225'],
+            
             'full_name' => ['required', 'max:225'],
             'mobile' => ['required', 'max:225'],
             'phone' => ['required', 'max:225'],

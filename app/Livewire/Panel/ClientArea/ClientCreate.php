@@ -3,11 +3,13 @@
 namespace App\Livewire\Panel\ClientArea;
 
 use App\Livewire\Forms\Panel\ClientArea\ClientForm;
+use App\Livewire\Forms\UserForm;
 use App\Models\Client;
 use App\Models\Meta\City;
 use App\Models\Meta\Country;
 use App\Models\Meta\District;
 use App\Models\Meta\Province;
+use App\Models\User;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 use Spatie\Permission\Models\Role;
@@ -36,8 +38,11 @@ class ClientCreate extends Component
     public function editData($id)
     {
         $this->clientID = $id;
+
         $this->client = Client::find($id);
+
         $this->clientArray = json_decode($this->client, true);
+
         $this->form->setData($this->clientArray);
 
         $this->loadDependencies();

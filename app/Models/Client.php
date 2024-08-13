@@ -14,6 +14,7 @@ class Client extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
+        'user_id',
         'id',
         'full_name',
         'mobile',
@@ -25,6 +26,9 @@ class Client extends Model
         'country_id',
         'active',
     ];
+    public function user(){
+        return $this->belongTo(User::class);
+    }
     public function country(){
         return $this->belongsTo(Country::class);
     }

@@ -18,15 +18,15 @@
                         @csrf
 
                         <input wire:model='form.id' hidden />
-                        
+
                         <div class="mb-3">
                             <label for="name"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">UserName</label>
                             <input
-                                type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500  @error('name') is-invalid @enderror"
-                                id="name" wire:model="name" placeholder="Username" required="">
-                            @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500  @error('form.name') is-invalid @enderror"
+                                id="name" wire:model="form.name" placeholder="Username" required="">
+                            @if ($errors->has('form.name'))
+                                <span class="text-danger">{{ $errors->first('form.name') }}</span>
                             @endif
                         </div>
                         <div class="mb-3">
@@ -38,22 +38,22 @@
                         <div class="mb-3">
                             <label for="email"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="email" id="email" wire:model="email"
+                            <input type="email" id="email" wire:model="form.email"
                                 class="bg-gray-50 border  @error('email') is-invalid @enderror border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Product brand" required="">
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
-        
+
                         <div class="mb-3">
                             <label for=""
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
-                            <select wire:model="roles"
+                            <select wire:model="form.roles"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Select Role</option>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role }}">{{ $role }}</option>
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -62,24 +62,24 @@
                         <div class="mb-3">
                             <label for="password"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="password" wire:model.blur="password"
+                            <input type="password" id="password" wire:model="form.password"
                                 class="bg-gray-50 border @error('password') is-invalid @enderror border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Password" required="">
                             @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
                         </div>
-        
+
                         <div class="mb-3">
                             <label for="password_confirmation"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="password_confirmation" wire:model.blur="password_confirmation"
+                            <input type="password" id="password_confirmation" wire:model.blur="form.password_confirmation"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="Confirm Password" required="">
                         </div>
-                       
+
                     </div>
-                    
+
                     <div class="mb-3">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
                         <input type="text" wire:model="form.address"
@@ -102,7 +102,7 @@
                         <div class="grid md:grid-cols-4 md:gap-6 mb-3">
                             <div class="mb-3">
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
-                                <select wire:model.blur="form.country_id" 
+                                <select wire:model.blur="form.country_id"
                                     class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 @error('form.country_id') is-invalid @enderror">
                                     <option value="">Select Country</option>
                                     @foreach ($countries as $country)
