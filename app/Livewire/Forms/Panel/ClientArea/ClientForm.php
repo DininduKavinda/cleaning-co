@@ -7,16 +7,7 @@ use Livewire\Form;
 
 class ClientForm extends Form
 {
-    public $id;
-    public $full_name, $name, $role, $email, $password, $type_id;
-    public $mobile;
-    public $phone;
-    public $address;
-    public $city_id;
-    public $district_id;
-    public $province_id;
-    public $country_id;
-    public $active;
+    public $id, $image, $full_name, $name, $roles, $email, $password, $type_id, $mobile, $phone, $address, $city_id, $district_id, $province_id, $password_confirmation, $country_id, $active;
 
     public function setData(array $data)
     {
@@ -30,8 +21,13 @@ class ClientForm extends Form
     public function rules()
     {
         return [
-            'id' => ['required', 'max:225'],
-            
+            'name' => ['required'],
+            'roles' => ['sometimes'],
+            'email' => ['required'],
+            'image' => ['sometimes'],
+            'password' => ['sometimes','confirmed'],
+            'password_confirmation' => ['sometimes'],
+            'type_id' => ['required'],
             'full_name' => ['required', 'max:225'],
             'mobile' => ['required', 'max:225'],
             'phone' => ['required', 'max:225'],
@@ -40,7 +36,7 @@ class ClientForm extends Form
             'district_id' => ['required', 'max:225'],
             'province_id' => ['required', 'max:225'],
             'country_id' => ['required', 'max:225'],
-            'active' => ['required', 'max:225'],
+            'active' => ['required'],
         ];
     }
 }

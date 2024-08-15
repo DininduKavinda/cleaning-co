@@ -20,6 +20,7 @@ class ClientCreate extends Component
     public $clientID;
     public $clientArray;
     public $client;
+    public $user;
     public $roles;
     public $districts = [];
     public $provinces = [];
@@ -29,7 +30,7 @@ class ClientCreate extends Component
     public function mount($id = null)
     {
         $this->countries = Country::all();
-        $this->roles = Role::get();
+        $this->roles = Role::pluck('name', 'name')->all();
         if (!empty($id)) {
             $this->editData($id);
         }
@@ -41,7 +42,11 @@ class ClientCreate extends Component
 
         $this->client = Client::find($id);
 
-        $this->clientArray = json_decode($this->client, true);
+        $this->user = User::find($this->client->user_id);
+
+        $mergedArray = array_merge($this->client->toArray(), $this->user->toArray());
+
+        $this->clientArray = $mergedArray;
 
         $this->form->setData($this->clientArray);
 
@@ -77,9 +82,51 @@ class ClientCreate extends Component
         $validatedData = $this->form->validate();
 
         if (!empty($this->clientID)) {
-            $this->client->update($validatedData);
+
+            $this->client = $this->client->update([
+                'full_name' => $validatedData['full_name'],
+                'image' => $validatedData['image'],
+                'mobile' => $validatedData['mobile'],
+                'phone' => $validatedData['phone'],
+                'address' => $validatedData['address'],
+                'city_id' => $validatedData['city_id'],
+                'district_id' => $validatedData['district_id'],
+                'province_id' => $validatedData['province_id'],
+                'country_id' => $validatedData['country_id'],
+                'active' => $validatedData['active'],
+            ]);
+
+            $this->user = $this->user->update([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'type_id' => $validatedData['type_id'],
+                'image' => $validatedData['image'],
+            ]);
         } else {
-            $this->client = Client::create($validatedData);
+
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => bcrypt($validatedData['password']),
+                'type_id' => $validatedData['type_id'],
+                'image' => $validatedData['image'],
+            ]);
+
+            $user->syncRoles($validatedData['roles']);
+
+            $this->client = Client::create([
+                'user_id' => $user->id,
+                'full_name' => $validatedData['full_name'],
+                'image' => $validatedData['image'],
+                'mobile' => $validatedData['mobile'],
+                'phone' => $validatedData['phone'],
+                'address' => $validatedData['address'],
+                'city_id' => $validatedData['city_id'],
+                'district_id' => $validatedData['district_id'],
+                'province_id' => $validatedData['province_id'],
+                'country_id' => $validatedData['country_id'],
+                'active' => $validatedData['active'],
+            ]);
         }
 
         if ($this->client) {
@@ -90,7 +137,6 @@ class ClientCreate extends Component
 
         return $this->redirectRoute('clients');
     }
-
     private function loadDependencies()
     {
         if ($this->form->country_id) {
