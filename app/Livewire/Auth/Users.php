@@ -3,13 +3,13 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 
 class Users extends Component
 {
     public $users;
+
     public function deleteUser($id)
     {
         $user = User::findOrFail($id);
@@ -19,10 +19,12 @@ class Users extends Component
             Toaster::error('An error has occurred!');
         }
     }
+
     public function render()
     {
 
         $this->users = User::get();
+
         return view('livewire.auth.users');
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Client extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'user_id',
         'id',
@@ -26,19 +27,29 @@ class Client extends Model
         'country_id',
         'active',
     ];
-    public function user(){
+
+    public function user()
+    {
         return $this->belongTo(User::class);
     }
-    public function country(){
+
+    public function country()
+    {
         return $this->belongsTo(Country::class);
     }
-    public function district(){
+
+    public function district()
+    {
         return $this->belongsTo(District::class);
     }
-    public function city(){
+
+    public function city()
+    {
         return $this->belongsTo(City::class);
     }
-    public function province(){
+
+    public function province()
+    {
         return $this->belongsTo(Province::class);
     }
 }

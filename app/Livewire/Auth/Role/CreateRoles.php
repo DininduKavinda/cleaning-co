@@ -12,13 +12,14 @@ class CreateRoles extends Component
     #[Validate([
         'required',
         'string',
-        'unique:roles,name'
+        'unique:roles,name',
     ])]
     public $name;
+
     public function saveData()
     {
         $this->validate();
-        $role =Role::create([
+        $role = Role::create([
             'name' => $this->name,
         ]);
         if ($role) {
@@ -27,8 +28,10 @@ class CreateRoles extends Component
         } else {
             Toaster::error('Error has been Occured!');
         }
+
         return $this->redirectRoute('roles', navigate: true);
     }
+
     public function render()
     {
         return view('livewire.auth.role.create-roles');

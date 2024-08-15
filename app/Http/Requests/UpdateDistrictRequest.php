@@ -22,28 +22,30 @@ class UpdateDistrictRequest extends FormRequest
     public function rules(): array
     {
         $method = $this->method();
-        if($method == 'put'){
+        if ($method == 'put') {
             return [
-                'province_id'=>['required'],
-                'name_en'=>['required','max:255'],
-                'name_si'=>['required','max:255'],
-                'name_ta'=>['required','max:255'],
+                'province_id' => ['required'],
+                'name_en' => ['required', 'max:255'],
+                'name_si' => ['required', 'max:255'],
+                'name_ta' => ['required', 'max:255'],
 
             ];
-        }else{
+        } else {
             return [
-                'province_id'=>['sometimes','required'],
-                'name_en'=>['sometimes','required','max:255'],
-                'name_si'=>['sometimes','required','max:255'],
-                'name_ta'=>['sometimes','required','max:255'],
-         
+                'province_id' => ['sometimes', 'required'],
+                'name_en' => ['sometimes', 'required', 'max:255'],
+                'name_si' => ['sometimes', 'required', 'max:255'],
+                'name_ta' => ['sometimes', 'required', 'max:255'],
+
             ];
         }
 
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name_en' =>$this->name_en
+            'name_en' => $this->name_en,
         ]);
     }
 }

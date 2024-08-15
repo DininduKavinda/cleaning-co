@@ -2,17 +2,16 @@
 
 namespace App\Livewire\Panel\Meta\Location\City;
 
-use App\Livewire\Forms\Panel\meta\Location\City\CityForm;
 use App\Models\Meta\City as MetaCity;
-use App\Models\Meta\District;
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 
 class City extends Component
 {
     public $cities;
+
     public $api;
+
     public $city;
 
     public function getData()
@@ -44,9 +43,11 @@ class City extends Component
             Toaster::error('An Error Occured');
         }
     }
+
     public function render()
     {
         $this->getData();
+
         return view('livewire.panel.meta.location.city.city');
     }
 }

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Api\Meta;
 
 use App\Filters\Meta\ProvinceFilter;
-use App\Http\Resources\Api\Meta\ProvinceResource;
-use App\Models\Meta\Province;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProvinceRequest;
 use App\Http\Requests\UpdateProvinceRequest;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Meta\ProvinceCollection;
+use App\Models\Meta\Province;
+use Illuminate\Http\Request;
 
 class ProvinceController extends Controller
 {
@@ -18,13 +17,14 @@ class ProvinceController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = new ProvinceFilter();
+        $filter = new ProvinceFilter;
         $filterItems = $filter->transform($request);
         $includeAll = $request->query('includeAll');
         $provinces = Province::where($filterItems);
-        if($includeAll){
+        if ($includeAll) {
             $provinces = $provinces->with('districts');
         }
+
         return new ProvinceCollection($provinces->paginate(10000)->append($request->query()));
     }
 
@@ -39,10 +39,7 @@ class ProvinceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProvinceRequest $request)
-    {
-
-    }
+    public function store(StoreProvinceRequest $request) {}
 
     /**
      * Display the specified resource.

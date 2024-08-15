@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Forms\Panel\meta\Location\Country;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CountryForm extends Form
 {
     public $id;
+
     public $country_name;
+
     public $iso_code;
+
     public $phone_code;
 
     public function setData(array $data)

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCityRequest extends FormRequest
+class UpdateStaffRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,17 +22,7 @@ class StoreCityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'district_id' => ['required'],
-            'name_en' => ['required', 'max:255'],
-            'name_si' => ['required', 'max:255'],
-            'name_ta' => ['required', 'max:255'],
+            //
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'district_id' => $this->district_id,
-        ]);
     }
 }

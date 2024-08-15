@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Client;
+use App\Models\Staff;
 use App\Models\User;
 
-class ClientPolicy
+class StaffPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +18,7 @@ class ClientPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Client $client): bool
+    public function view(User $user, Staff $staff): bool
     {
         //
     }
@@ -34,7 +34,7 @@ class ClientPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Client $client): bool
+    public function update(User $user, Staff $staff): bool
     {
         //
     }
@@ -42,7 +42,7 @@ class ClientPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Client $client): bool
+    public function delete(User $user, Staff $staff): bool
     {
         //
     }
@@ -50,7 +50,7 @@ class ClientPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Client $client): bool
+    public function restore(User $user, Staff $staff): bool
     {
         //
     }
@@ -58,7 +58,7 @@ class ClientPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Client $client): bool
+    public function forceDelete(User $user, Staff $staff): bool
     {
         //
     }

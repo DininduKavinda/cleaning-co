@@ -9,7 +9,9 @@ use Masmerise\Toaster\Toaster;
 class Client extends Component
 {
     public $clients;
+
     public $users;
+
     public function getData()
     {
 
@@ -39,7 +41,7 @@ class Client extends Component
 
             } else {
 
-                Toaster::error("Operation Failed");
+                Toaster::error('Operation Failed');
 
             }
 
@@ -50,6 +52,7 @@ class Client extends Component
         }
 
     }
+
     public function render()
     {
 

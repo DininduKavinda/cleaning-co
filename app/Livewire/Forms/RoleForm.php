@@ -7,6 +7,7 @@ use Livewire\Form;
 class RoleForm extends Form
 {
     public $name;
+
     public function setData(array $role)
     {
         foreach ($role as $key => $value) {

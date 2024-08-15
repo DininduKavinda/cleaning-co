@@ -24,25 +24,27 @@ class UpdateCityRequest extends FormRequest
         $method = $this->method();
         if ($method == 'PUT') {
             return [
-                'district_id'=>['required'],
-                'name_en'=>['required','max:255'],
-                'name_si'=>['required','max:255'],
-                'name_ta'=>['required','max:255'],
+                'district_id' => ['required'],
+                'name_en' => ['required', 'max:255'],
+                'name_si' => ['required', 'max:255'],
+                'name_ta' => ['required', 'max:255'],
 
             ];
-        }else{
+        } else {
             return [
-                'district_id'=>['sometimes','required'],
-                'name_en'=>['sometimes','required','max:255'],
-                'name_si'=>['sometimes','required','max:255'],
-                'name_ta'=>['sometimes','required','max:255'],
-              
+                'district_id' => ['sometimes', 'required'],
+                'name_en' => ['sometimes', 'required', 'max:255'],
+                'name_si' => ['sometimes', 'required', 'max:255'],
+                'name_ta' => ['sometimes', 'required', 'max:255'],
+
             ];
         }
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'district_id'=>$this->district_id,
+            'district_id' => $this->district_id,
         ]);
     }
 }

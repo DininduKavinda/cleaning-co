@@ -3,14 +3,15 @@
 namespace App\Livewire\Panel\Meta\Location\Province;
 
 use App\Models\Meta\Province as MetaProvince;
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 
 class Province extends Component
 {
     public $provinces = [];
+
     public $api;
+
     public $province;
 
     public function getData()
@@ -42,9 +43,11 @@ class Province extends Component
             Toaster::error('An Error Occured');
         }
     }
+
     public function render()
     {
         $this->getData();
+
         return view('livewire.panel.meta.location.province.province');
     }
 }

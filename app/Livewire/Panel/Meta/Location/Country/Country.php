@@ -4,12 +4,12 @@ namespace App\Livewire\Panel\Meta\Location\Country;
 
 use App\Models\Meta\Country as MetaCountry;
 use Livewire\Component;
-use Illuminate\Support\Facades\Http;
 use Masmerise\Toaster\Toaster;
 
 class Country extends Component
 {
     public $countries = [];
+
     public $api;
 
     public function getData()
@@ -40,9 +40,11 @@ class Country extends Component
             Toaster::error('An Error Occured');
         }
     }
+
     public function render()
     {
         $this->getData();
+
         return view('livewire.panel.meta.location.country.country');
     }
 }

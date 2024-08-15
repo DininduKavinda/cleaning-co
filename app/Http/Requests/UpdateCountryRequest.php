@@ -36,10 +36,11 @@ class UpdateCountryRequest extends FormRequest
                 'iso_code' => ['sometimes', 'required', 'unique:countries', 'max:225'],
                 'phone_code' => ['sometimes', 'required', 'unique:countries', 'max:20'],
                 'user_id' => ['sometimes', 'required'],
-              
+
             ];
         }
     }
+
     protected function prepareForValidation()
     {
         $this->merge([

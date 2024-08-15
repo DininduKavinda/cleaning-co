@@ -7,12 +7,17 @@ use Livewire\Component;
 class Navbar extends Component
 {
     public $authUser;
-    public function mount(){
+
+    public function mount()
+    {
         $this->authUser = auth()->user();
     }
-    public function dashboard(){
+
+    public function dashboard()
+    {
         $this->redirectRoute('dashboard');
     }
+
     public function render()
     {
         return view('livewire.components.navbar');

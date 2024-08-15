@@ -9,7 +9,9 @@ use Spatie\Permission\Models\Permission;
 class Permissions extends Component
 {
     public $permissions;
+
     public $permission;
+
     public function deletePermission($id)
     {
         $this->permission = Permission::find($id);
@@ -20,9 +22,11 @@ class Permissions extends Component
             Toaster::error('Error has been Occured!');
         }
     }
+
     public function render()
     {
         $this->permissions = Permission::get();
+
         return view('livewire.auth.permission.permissions');
     }
 }

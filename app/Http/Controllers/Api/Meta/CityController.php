@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\Meta;
 
 use App\Filters\Meta\CityFilter;
-use App\Http\Resources\Api\Meta\CityCollection;
-use App\Models\Meta\City;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
+use App\Http\Resources\Api\Meta\CityCollection;
+use App\Models\Meta\City;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class CityController extends Controller
 {
@@ -17,10 +17,11 @@ class CityController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = new CityFilter();
+        $filter = new CityFilter;
         $filterItems = $filter->transform($request);
         $cities = City::where($filterItems);
-       return new CityCollection($cities->paginate(10000)->appends($request->query()));
+
+        return new CityCollection($cities->paginate(10000)->appends($request->query()));
     }
 
     /**

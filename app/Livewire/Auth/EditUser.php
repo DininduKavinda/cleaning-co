@@ -11,9 +11,13 @@ use Spatie\Permission\Models\Role;
 class EditUser extends Component
 {
     public $user;
+
     public $roles;
+
     public $userRoles;
+
     public $userID;
+
     public UserForm $form;
 
     public function mount($id)

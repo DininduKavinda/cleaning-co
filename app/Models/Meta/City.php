@@ -10,17 +10,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class City extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
-       'district_id',
-       'name_en',
-       'name_si',
-       'name_ta',
-       'postcode'
+        'district_id',
+        'name_en',
+        'name_si',
+        'name_ta',
+        'postcode',
     ];
-    public function district(){
+
+    public function district()
+    {
         return $this->belongsTo(District::class);
     }
-    public function client(){
+
+    public function client()
+    {
         return $this->hasMany(Client::class);
     }
 }

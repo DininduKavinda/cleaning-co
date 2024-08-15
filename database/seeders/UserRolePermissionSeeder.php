@@ -4,10 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class UserRolePermissionSeeder extends Seeder
 {
@@ -37,7 +36,6 @@ class UserRolePermissionSeeder extends Seeder
         Permission::create(['name' => 'update product']);
         Permission::create(['name' => 'delete product']);
 
-
         // Create Roles
         $superAdminRole = Role::create(['name' => 'super-admin']); //as super-admin
         $adminRole = Role::create(['name' => 'admin']);
@@ -55,38 +53,35 @@ class UserRolePermissionSeeder extends Seeder
         $adminRole->givePermissionTo(['create user', 'view user', 'update user']);
         $adminRole->givePermissionTo(['create product', 'view product', 'update product']);
 
-
         // Let's Create User and assign Role to it.
 
         $superAdminUser = User::firstOrCreate([
-                    'email' => 'superadmin@gmail.com',
-                ], [
-                    'name' => 'Super Admin',
-                    'email' => 'superadmin@gmail.com',
-                    'password' => Hash::make ('12345678'),
-                ]);
+            'email' => 'superadmin@gmail.com',
+        ], [
+            'name' => 'Super Admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make('12345678'),
+        ]);
 
         $superAdminUser->assignRole($superAdminRole);
 
-
         $adminUser = User::firstOrCreate([
-                            'email' => 'admin@gmail.com'
-                        ], [
-                            'name' => 'Admin',
-                            'email' => 'admin@gmail.com',
-                            'password' => Hash::make ('12345678'),
-                        ]);
+            'email' => 'admin@gmail.com',
+        ], [
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('12345678'),
+        ]);
 
         $adminUser->assignRole($adminRole);
 
-
         $staffUser = User::firstOrCreate([
-                            'email' => 'staff@gmail.com',
-                        ], [
-                            'name' => 'Staff',
-                            'email' => 'staff@gmail.com',
-                            'password' => Hash::make('12345678'),
-                        ]);
+            'email' => 'staff@gmail.com',
+        ], [
+            'name' => 'Staff',
+            'email' => 'staff@gmail.com',
+            'password' => Hash::make('12345678'),
+        ]);
 
         $staffUser->assignRole($staffRole);
     }

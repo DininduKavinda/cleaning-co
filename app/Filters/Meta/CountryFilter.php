@@ -2,7 +2,6 @@
 
 namespace App\Filters\Meta;
 
-use Illuminate\Http\Request;
 use App\Filters\ApiFilter;
 
 class CountryFilter extends ApiFilter
@@ -13,8 +12,9 @@ class CountryFilter extends ApiFilter
         'phone_code' => ['eq', ['gt'], ['lt']],
         'status_id' => ['eq'],
         'user_id' => ['eq'],
-        'currency_id' => ['eq']
+        'currency_id' => ['eq'],
     ];
+
     protected $columnMap = [
         'country_name' => 'country_name',
     ];

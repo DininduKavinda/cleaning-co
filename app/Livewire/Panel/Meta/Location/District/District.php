@@ -3,19 +3,19 @@
 namespace App\Livewire\Panel\Meta\Location\District;
 
 use App\Models\Meta\District as MetaDistrict;
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 
 class District extends Component
 {
     public $districts = [];
+
     public $api;
+
     public $district;
 
     public function getData()
     {
-
 
         $response = MetaDistrict::get();
 
@@ -47,6 +47,7 @@ class District extends Component
     public function render()
     {
         $this->getData();
+
         return view('livewire.panel.meta.location.district.district');
     }
 }

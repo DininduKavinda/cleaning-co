@@ -7,8 +7,11 @@ use Livewire\Form;
 class UserForm extends Form
 {
     public $name;
+
     public $email;
+
     public $password;
+
     public $roles = [];
 
     public function setData(array $user)

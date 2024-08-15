@@ -9,8 +9,11 @@ use Masmerise\Toaster\Toaster;
 class ApiService
 {
     protected $url;
+
     protected $params;
+
     public $data = [];
+
     public $dataList;
 
     public function __construct()
@@ -20,7 +23,7 @@ class ApiService
 
     public function fetchData($functionName, $key, $value)
     {
-        if (!empty($key)) {
+        if (! empty($key)) {
             $criteria = [
                 'criteria[0][key]' => $key,
                 'criteria[0][value]' => $value,
@@ -51,7 +54,7 @@ class ApiService
     {
         // dd($idnumber);
         $this->params['wsfunction'] = $functionName;
-        $url = $this->url . '?' . http_build_query($this->params);
+        $url = $this->url.'?'.http_build_query($this->params);
         $response = Http::asForm()->post($url, $idnumber);
         if ($response->successful()) {
             Toaster::Success('Deleted Successfully');
@@ -71,7 +74,6 @@ class ApiService
 
         $response = Http::get($this->url, $this->params);
 
-
         if ($response->successful()) {
             $data = $response->json();
             if ($type != '') {
@@ -82,19 +84,19 @@ class ApiService
             $data = $dataCollection->first();
             $call($data);
         } else {
-            throw new Exception('Error fetching user data: ' . $response->body());
+            throw new Exception('Error fetching user data: '.$response->body());
         }
     }
 
     public function saveData($functionName, $type, $id, $validatedData)
     {
         $this->params['wsfunction'] = $functionName;
-        $url = $this->url . '?' . http_build_query($this->params);
+        $url = $this->url.'?'.http_build_query($this->params);
 
         $this->dataList = [];
 
         foreach ($validatedData as $key => $value) {
-            if (!empty($value)) {
+            if (! empty($value)) {
                 if (property_exists($this, $key)) {
                     $this->{$key} = $value;
                 }

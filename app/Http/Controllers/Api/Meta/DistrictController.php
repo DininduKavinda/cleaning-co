@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\Meta;
 
 use App\Filters\Meta\DistrictFilter;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDistrictRequest;
+use App\Http\Requests\UpdateDistrictRequest;
 use App\Http\Resources\Api\Meta\DistrictCollection;
 use App\Http\Resources\Api\Meta\DistrictResource;
 use App\Models\Meta\District;
-use App\Http\Requests\StoreDistrictRequest;
-use App\Http\Requests\UpdateDistrictRequest;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class DistrictController extends Controller
@@ -18,13 +18,14 @@ class DistrictController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = new DistrictFilter();
+        $filter = new DistrictFilter;
         $filterItems = $filter->transform($request);
         $includeAll = $request->query('includeAll');
         $districts = District::where($filterItems);
-        if($includeAll){
-            $districts= $districts->with(['cities']);
+        if ($includeAll) {
+            $districts = $districts->with(['cities']);
         }
+
         return new DistrictCollection($districts->paginate(20000)->appends($request->query()));
     }
 

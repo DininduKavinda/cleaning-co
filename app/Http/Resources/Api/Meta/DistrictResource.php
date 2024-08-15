@@ -21,7 +21,7 @@ class DistrictResource extends JsonResource
             'name_ta' => $this->name_ta,
             'province_id' => $this->province->name_en,
             'country_id' => $this->province->country->country_name,
-            'cities' => CityResource::collection($this->whenLoaded('cities'))
+            'cities' => CityResource::collection($this->whenLoaded('cities')),
         ];
     }
 }

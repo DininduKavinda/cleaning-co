@@ -3,7 +3,6 @@
 namespace App\Livewire\Panel\ClientArea;
 
 use App\Livewire\Forms\Panel\ClientArea\ClientForm;
-use App\Livewire\Forms\UserForm;
 use App\Models\Client;
 use App\Models\Meta\City;
 use App\Models\Meta\Country;
@@ -17,21 +16,30 @@ use Spatie\Permission\Models\Role;
 class ClientCreate extends Component
 {
     public ClientForm $form;
+
     public $clientID;
+
     public $clientArray;
+
     public $client;
+
     public $user;
+
     public $roles;
+
     public $districts = [];
+
     public $provinces = [];
+
     public $cities = [];
+
     public $countries;
 
     public function mount($id = null)
     {
         $this->countries = Country::all();
         $this->roles = Role::pluck('name', 'name')->all();
-        if (!empty($id)) {
+        if (! empty($id)) {
             $this->editData($id);
         }
     }
@@ -81,7 +89,7 @@ class ClientCreate extends Component
     {
         $validatedData = $this->form->validate();
 
-        if (!empty($this->clientID)) {
+        if (! empty($this->clientID)) {
 
             $this->client = $this->client->update([
                 'full_name' => $validatedData['full_name'],
@@ -137,6 +145,7 @@ class ClientCreate extends Component
 
         return $this->redirectRoute('clients');
     }
+
     private function loadDependencies()
     {
         if ($this->form->country_id) {

@@ -2,12 +2,43 @@
 
 namespace App\Livewire\Forms\Panel\ClientArea;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class ClientForm extends Form
 {
-    public $id, $image, $full_name, $name, $roles, $email, $password, $type_id, $mobile, $phone, $address, $city_id, $district_id, $province_id, $password_confirmation, $country_id, $active;
+    public $id;
+
+    public $image;
+
+    public $full_name;
+
+    public $name;
+
+    public $roles;
+
+    public $email;
+
+    public $password;
+
+    public $type_id;
+
+    public $mobile;
+
+    public $phone;
+
+    public $address;
+
+    public $city_id;
+
+    public $district_id;
+
+    public $province_id;
+
+    public $password_confirmation;
+
+    public $country_id;
+
+    public $active;
 
     public function setData(array $data)
     {
@@ -25,7 +56,7 @@ class ClientForm extends Form
             'roles' => ['sometimes'],
             'email' => ['required'],
             'image' => ['sometimes'],
-            'password' => ['sometimes','confirmed'],
+            'password' => ['sometimes', 'confirmed'],
             'password_confirmation' => ['sometimes'],
             'type_id' => ['required'],
             'full_name' => ['required', 'max:225'],

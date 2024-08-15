@@ -9,10 +9,12 @@ use Spatie\Permission\Models\Role;
 
 class EditRoles extends Component
 {
-
     public $roleID;
+
     public $role;
+
     public RoleForm $form;
+
     public function mount($id)
     {
         $this->roleID = $id;
@@ -43,6 +45,7 @@ class EditRoles extends Component
     {
         $this->validateOnly($propertyName, $this->form->rules());
     }
+
     public function render()
     {
         return view('livewire.auth.role.edit-roles');

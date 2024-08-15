@@ -3,7 +3,6 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
@@ -22,8 +21,11 @@ class Register extends Component
 
     #[Validate('required|string|min:8|confirmed')]
     public $password;
+
     public $roles;
+
     public $password_confirmation;
+
     public function register()
     {
         $this->validate();
@@ -42,12 +44,14 @@ class Register extends Component
         } else {
             Toaster::error('Error has been Occured!');
         }
+
         return $this->redirectRoute('users', navigate: true);
     }
 
     public function render()
     {
-        $this->roles = Role::pluck('name','name')->all();
+        $this->roles = Role::pluck('name', 'name')->all();
+
         return view('livewire.auth.register');
     }
 }

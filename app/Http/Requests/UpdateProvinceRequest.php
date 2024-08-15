@@ -24,23 +24,25 @@ class UpdateProvinceRequest extends FormRequest
         $method = $this->method();
         if ($method == 'PUT') {
             return [
-                'country_id'=>['required'],
-                'name_en'=>['required','max:255'],
-                'name_si'=>['required','max:255'],
-                'name_ta'=>['required','max:255'],
+                'country_id' => ['required'],
+                'name_en' => ['required', 'max:255'],
+                'name_si' => ['required', 'max:255'],
+                'name_ta' => ['required', 'max:255'],
 
             ];
-        }else{
+        } else {
             return [
-                'country_id'=>['sometimes','required'],
-                'name_en'=>['sometimes','required','max:255'],
-                'name_si'=>['sometimes','required','max:255'],
-                'name_ta'=>['sometimes','required','max:255'],
+                'country_id' => ['sometimes', 'required'],
+                'name_en' => ['sometimes', 'required', 'max:255'],
+                'name_si' => ['sometimes', 'required', 'max:255'],
+                'name_ta' => ['sometimes', 'required', 'max:255'],
 
             ];
         }
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
             'name_en' => $this->name_en,
         ]);

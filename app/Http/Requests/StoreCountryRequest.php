@@ -22,10 +22,10 @@ class StoreCountryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'country_name' => ['required','unique:countries','max:225'],
-            'iso_code' => ['required','unique:countries','max:225'],
-            'phone_code' => ['required','unique:countries','max:20'],
-            'user_id' =>['required'],
+            'country_name' => ['required', 'unique:countries', 'max:225'],
+            'iso_code' => ['required', 'unique:countries', 'max:225'],
+            'phone_code' => ['required', 'unique:countries', 'max:20'],
+            'user_id' => ['required'],
         ];
     }
 }

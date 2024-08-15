@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Country extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'id',
         'country_name',
@@ -17,10 +18,13 @@ class Country extends Model
         'phone_code',
     ];
 
-    public function provinces(){
+    public function provinces()
+    {
         return $this->hasMany(Province::class);
     }
-    public function client(){
+
+    public function client()
+    {
         return $this->hasMany(Client::class);
     }
 }

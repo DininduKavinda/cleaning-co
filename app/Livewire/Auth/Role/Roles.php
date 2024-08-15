@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 class Roles extends Component
 {
     public $roles;
+
     public function deleteRole($id)
     {
         $role = Role::find($id);
@@ -19,9 +20,11 @@ class Roles extends Component
             Toaster::error('Error has been Occured!');
         }
     }
+
     public function render()
     {
         $this->roles = Role::get();
+
         return view('livewire.auth.role.roles');
     }
 }

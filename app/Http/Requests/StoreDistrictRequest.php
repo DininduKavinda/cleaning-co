@@ -22,15 +22,17 @@ class StoreDistrictRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'province_id'=>['required'],
-            'name_en'=>['required','max:255'],
-            'name_si'=>['required','max:255'],
-            'name_ta'=>['required','max:255'],
+            'province_id' => ['required'],
+            'name_en' => ['required', 'max:255'],
+            'name_si' => ['required', 'max:255'],
+            'name_ta' => ['required', 'max:255'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name_en' =>$this->name_en
+            'name_en' => $this->name_en,
         ]);
     }
 }

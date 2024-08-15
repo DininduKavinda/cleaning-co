@@ -8,15 +8,15 @@ use App\Livewire\Auth\Permission\EditPermissions;
 use App\Livewire\Auth\Permission\Permissions;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Role\CreateRoles;
-use App\Livewire\Auth\Role\GivePermission;
 use App\Livewire\Auth\Role\EditRoles;
+use App\Livewire\Auth\Role\GivePermission;
 use App\Livewire\Auth\Role\Roles;
 use App\Livewire\Auth\Users;
 use App\Livewire\Panel\ClientArea\Client;
 use App\Livewire\Panel\ClientArea\ClientCreate;
 use App\Livewire\Panel\Dashboard;
-use App\Livewire\Panel\Meta\Location\City\Create as CityCreate;
 use App\Livewire\Panel\Meta\Location\City\City;
+use App\Livewire\Panel\Meta\Location\City\Create as CityCreate;
 use App\Livewire\Panel\Meta\Location\Country\Country;
 use App\Livewire\Panel\Meta\Location\Country\Create;
 use App\Livewire\Panel\Meta\Location\District\Create as DistrictCreate;
@@ -74,7 +74,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('client/update/{id}', ClientCreate::class)->name('client.update')->middleware('permission:update client');
     });
 });
-
 
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
 Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);

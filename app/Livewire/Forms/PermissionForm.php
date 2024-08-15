@@ -7,6 +7,7 @@ use Livewire\Form;
 class PermissionForm extends Form
 {
     public $name;
+
     public function setData(array $permission)
     {
         foreach ($permission as $key => $value) {

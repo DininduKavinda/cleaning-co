@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\Meta;
 
 use App\Filters\Meta\CountryFilter;
-use App\Models\Meta\Country;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Meta\CountryCollection;
 use App\Http\Resources\Api\Meta\CountryResource;
+use App\Models\Meta\Country;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -16,12 +16,12 @@ class CountryController extends Controller
     /**
      * Display a listing of the resource.
      */
-
     public function index(Request $request)
     {
-        $filter = new CountryFilter();
+        $filter = new CountryFilter;
         $filterItems = $filter->transform($request);
         $countries = Country::where($filterItems);
+
         return new CountryCollection($countries->paginate(20000)->appends($request->query()));
     }
 
@@ -50,6 +50,7 @@ class CountryController extends Controller
         if ($includeUsers) {
             return new CountryResource($country->loadMissing(['users', 'status', 'currency']));
         }
+
         return new CountryResource($country);
     }
 
@@ -75,8 +76,9 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         $country->delete();
+
         return response()->json([
-            'message' => 'succesfully Deleted'
+            'message' => 'succesfully Deleted',
         ]);
     }
 }

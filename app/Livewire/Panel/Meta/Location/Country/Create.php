@@ -10,9 +10,13 @@ use Masmerise\Toaster\Toaster;
 class Create extends Component
 {
     public CountryForm $form;
+
     public $country;
+
     public $countryArray;
+
     public $countryID;
+
     public function editData($id)
     {
         $this->countryID = $id;
@@ -20,18 +24,20 @@ class Create extends Component
         $this->countryArray = json_decode($this->country, true);
         $this->form->setData($this->countryArray);
     }
+
     public function mount($id = null)
     {
-        if ($id != "") {
+        if ($id != '') {
             $this->editData($id);
         }
     }
+
     public function saveData()
     {
         $validatedData = $this->form->validate();
 
-        if (!empty($this->countryID)) {
-            $this->country =  $this->country->update($validatedData);
+        if (! empty($this->countryID)) {
+            $this->country = $this->country->update($validatedData);
         } else {
             $this->country = Country::create($validatedData);
         }
@@ -44,6 +50,7 @@ class Create extends Component
 
         return $this->redirectRoute('location.country', navigate: true);
     }
+
     public function render()
     {
 

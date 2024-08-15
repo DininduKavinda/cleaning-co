@@ -11,9 +11,13 @@ use Spatie\Permission\Models\Role;
 class GivePermission extends Component
 {
     public $role;
+
     public $rolePermissions = [];
+
     public $permissions = [];
+
     public RolePermissionForm $form;
+
     public function mount($id)
     {
         $this->role = Role::findOrFail($id);

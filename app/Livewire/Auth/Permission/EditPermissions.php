@@ -10,8 +10,11 @@ use Spatie\Permission\Models\Permission;
 class EditPermissions extends Component
 {
     public $permissionID;
+
     public $permission;
+
     public PermissionForm $form;
+
     public function mount($id)
     {
         $this->permissionID = $id;
@@ -20,6 +23,7 @@ class EditPermissions extends Component
             'name' => $this->permission->name,
         ]);
     }
+
     public function saveData()
     {
         $validatedData = $this->form->validate();
@@ -36,10 +40,12 @@ class EditPermissions extends Component
 
         return $this->redirectRoute('permissions', navigate: true);
     }
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName, $this->form->rules());
     }
+
     public function render()
     {
         return view('livewire.auth.permission.edit-permissions');

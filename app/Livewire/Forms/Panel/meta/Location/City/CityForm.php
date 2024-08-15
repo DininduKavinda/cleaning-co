@@ -2,15 +2,18 @@
 
 namespace App\Livewire\Forms\Panel\meta\Location\City;
 
-use Livewire\Attributes\Validate;
 use Livewire\Form;
 
 class CityForm extends Form
 {
     public $id;
+
     public $name_en;
+
     public $district_id;
+
     public $name_si;
+
     public $postcode;
 
     public function setData(array $data)
@@ -29,7 +32,7 @@ class CityForm extends Form
             'name_en' => 'required',
             'district_id' => 'required',
             'name_si' => 'sometimes',
-            'postcode' => 'required'
+            'postcode' => 'required',
         ];
     }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Routing\Controllers\Middleware;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller implements HasMiddleware
 {
@@ -22,6 +22,7 @@ class PermissionController extends Controller implements HasMiddleware
     public function index()
     {
         $permissions = Permission::get();
+
         return view('role-permission.permission.index', ['permissions' => $permissions]);
     }
 
@@ -36,12 +37,12 @@ class PermissionController extends Controller implements HasMiddleware
             'name' => [
                 'required',
                 'string',
-                'unique:permissions,name'
-            ]
+                'unique:permissions,name',
+            ],
         ]);
 
         Permission::create([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
         return redirect('permissions')->with('status', 'Permission Created Successfully');
@@ -58,12 +59,12 @@ class PermissionController extends Controller implements HasMiddleware
             'name' => [
                 'required',
                 'string',
-                'unique:permissions,name,' . $permission->id
-            ]
+                'unique:permissions,name,'.$permission->id,
+            ],
         ]);
 
         $permission->update([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
         return redirect('permissions')->with('status', 'Permission Updated Successfully');
@@ -73,6 +74,7 @@ class PermissionController extends Controller implements HasMiddleware
     {
         $permission = Permission::find($permissionId);
         $permission->delete();
+
         return redirect('permissions')->with('status', 'Permission Deleted Successfully');
     }
 }

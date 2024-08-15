@@ -11,7 +11,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +27,7 @@ class User extends Authenticatable
         'image',
         'lastLogin',
     ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -49,7 +50,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function client(){
+
+    public function client()
+    {
         return $this->hasOne(Client::class);
     }
 }

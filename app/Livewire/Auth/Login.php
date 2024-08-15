@@ -10,7 +10,6 @@ use Livewire\Component;
 #[Title('Login - Moodle')]
 class Login extends Component
 {
-
     #[Validate('required|email')]
     public $email;
 
@@ -26,8 +25,7 @@ class Login extends Component
             'password' => $this->password,
         ];
 
-        if(Auth::attempt($credentials))
-        {
+        if (Auth::attempt($credentials)) {
             session()->flash('message', 'You have successfully logged in!');
 
             return $this->redirectRoute('dashboard', navigate: true);
@@ -35,6 +33,7 @@ class Login extends Component
 
         session()->flash('error', 'Invalid credentials!');
     }
+
     public function render()
     {
         return view('livewire.auth.login');
