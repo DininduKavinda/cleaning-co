@@ -3,11 +3,12 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Masmerise\Toaster\Toaster;
+use Spatie\Permission\Models\Role;
 
 #[Title('Register - Moodle Panel')]
 class Register extends Component
@@ -21,32 +22,36 @@ class Register extends Component
     #[Validate('required|string|min:8|confirmed')]
     public $password;
 
+    public $roles;
+
     public $password_confirmation;
 
     public function register()
     {
         $this->validate();
 
-        User::create([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
 
-        $credentials = [
-            'email' => $this->email,
-            'password' => $this->password,
-        ];
+        $user->syncRoles($this->roles);
 
-        Auth::attempt($credentials);
+        if ($user) {
 
-        session()->flash('message', 'You have successfully registered & logged in!');
+            Toaster::success('Operation Successful!');
+        } else {
+            Toaster::error('Error has been Occured!');
+        }
 
-        return $this->redirectRoute('dashboard', navigate: true);
+        return $this->redirectRoute('users', navigate: true);
     }
 
     public function render()
     {
+        $this->roles = Role::pluck('name', 'name')->all();
+
         return view('livewire.auth.register');
     }
 }

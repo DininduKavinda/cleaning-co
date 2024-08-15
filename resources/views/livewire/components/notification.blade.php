@@ -24,7 +24,7 @@
         <div class="divide-y divide-gray-100 dark:divide-gray-700">
             <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <div class="flex-shrink-0">
-                    <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-1.jpg"
+                    <img class="rounded-full w-11 h-11" src="{{asset('WolMart.gif')}}"
                         alt="Jese image">
                     <div
                         class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
@@ -46,7 +46,7 @@
             </a>
             <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <div class="flex-shrink-0">
-                    <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-2.jpg"
+                    <img class="rounded-full w-11 h-11" src="{{asset('WolMart.gif')}}"
                         alt="Joseph image">
                     <div
                         class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-gray-900 border border-white rounded-full dark:border-gray-800">
@@ -67,7 +67,7 @@
             </a>
             <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <div class="flex-shrink-0">
-                    <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-3.jpg"
+                    <img class="rounded-full w-11 h-11" src="{{asset('WolMart.gif')}}"
                         alt="Bonnie image">
                     <div
                         class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
@@ -88,7 +88,7 @@
             </a>
             <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <div class="flex-shrink-0">
-                    <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-4.jpg"
+                    <img class="rounded-full w-11 h-11" src="{{asset('WolMart.gif')}}"
                         alt="Leslie image">
                     <div
                         class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-green-400 border border-white rounded-full dark:border-gray-800">
@@ -109,7 +109,7 @@
             </a>
             <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                 <div class="flex-shrink-0">
-                    <img class="rounded-full w-11 h-11" src="/docs/images/people/profile-picture-5.jpg"
+                    <img class="rounded-full w-11 h-11" src="{{asset('WolMart.gif')}}"
                         alt="Robert image">
                     <div
                         class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-purple-500 border border-white rounded-full dark:border-gray-800">

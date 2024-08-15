@@ -18,12 +18,20 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => '1234'
+            'password' => '1234',
         ]);
         User::factory()->create([
             'name' => 'Root User',
             'email' => 'root@admin.com',
             'password' => '1234',
+        ]);
+
+        $this->call([
+            CountrySeeder::class,
+            ProvinceSeeder::class,
+            DistrictSeeder::class,
+            CitySeeder::class,
+            UserRolePermissionSeeder::class,
         ]);
     }
 }

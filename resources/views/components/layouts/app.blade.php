@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Moodle Panel' }}</title>
+    <title>{{ $title ?? 'Cleaning-Co' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
@@ -30,10 +30,14 @@
     @else
         <livewire:components.navbar />
         <livewire:components.sidebar />
-    @endguest
-    {{ $slot }}
-    @guest
-    @else
+        <div class="p-4 sm:ml-64 dark:bg-gray-900">
+            <div class="p-4 border-2 border-gray-200 border-line rounded-lg dark:border-gray-700 mt-14">
+            @endguest
+            {{ $slot }}
+            @guest
+            @else
+            </div>
+        </div>
         {{-- <livewire:components.footbar /> --}}
     @endguest
     @livewireScripts

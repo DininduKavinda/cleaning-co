@@ -13,6 +13,7 @@ class Logout extends Component
 
         return $this->redirectRoute('login', navigate: true);
     }
+
     public function render()
     {
         return view('livewire.auth.logout');
