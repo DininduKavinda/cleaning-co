@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('geo_latitude');
             $table->string('geo_longtude');
             $table->integer('area');
-            $table->date('permitted_on');
+            $table->date('permitted_on')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

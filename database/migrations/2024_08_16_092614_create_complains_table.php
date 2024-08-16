@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('complains', function (Blueprint $table) {
-            $table->foreignId('matter_id');
-            $table->foreignId('client_id');
-            $table->foreignId('staff_id');
+            $table->foreignId('matter_id')->nullable();
+            $table->foreignId('client_id')->nullable();
+            $table->foreignId('staff_id')->nullable();
             $table->id();
             $table->text('description');
             $table->tinyInteger('active');

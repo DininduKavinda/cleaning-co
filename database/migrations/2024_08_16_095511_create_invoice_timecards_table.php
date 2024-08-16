@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('invoice_timecards', function (Blueprint $table) {
             $table->foreignId('timecard_id');
-            $table->foreignId('atter_id');
+            $table->foreignId('matter_id');
             $table->foreignId('invoice_id');
             $table->id();
             $table->decimal('fee');

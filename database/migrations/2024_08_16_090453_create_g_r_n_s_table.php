@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('g_r_n_s', function (Blueprint $table) {
             $table->foreignId('item_id');
-            $table->foreignId('approved_by');
+            $table->foreignId('approved_by')->nullable();
             $table->foreignId('returned_by');
             $table->foreignId('matter_id')->nullable();
             $table->id();

@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('matter_documents', function (Blueprint $table) {
             $table->foreignId('matter_id');
-            $table->foreignId('uploaded_by');
+            $table->foreignId('client_id')->nullable();
+            $table->foreignId('staff_id')->nullable();
             $table->id();
             $table->string('document');
             $table->string('file_name');
             $table->tinyInteger('status');
             $table->text('notes');
-            $table->tinyIncrements('active');
+            $table->tinyInteger('active');
             $table->softDeletes();
             $table->timestamps();
         });
