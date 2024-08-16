@@ -22,6 +22,8 @@ class Register extends Component
     #[Validate('required|string|min:8|confirmed')]
     public $password;
 
+    public $user_type_id;
+
     public $roles;
 
     public $password_confirmation;
@@ -31,6 +33,8 @@ class Register extends Component
         $this->validate();
 
         $user = User::create([
+            'user_type_id' => $this->user_type_id,
+            'active' => 1,
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
