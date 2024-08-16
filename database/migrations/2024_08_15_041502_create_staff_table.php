@@ -12,7 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('staff', function (Blueprint $table) {
+            $table->foreignId('level_id');
+            $table->foreignId('city_id');
+            $table->foreignId('department_id');
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('nic');
+            $table->string('titile');
+            $table->string('initial');
+            $table->string('full_name');
+            $table->date('dob');
+            $table->string('address');
+            $table->string('mobile');
+            $table->string('phone');
+            $table->string('civil_status');
+            $table->tinyInteger('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

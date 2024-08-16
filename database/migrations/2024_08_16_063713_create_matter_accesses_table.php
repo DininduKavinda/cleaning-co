@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('matter_accesses', function (Blueprint $table) {
+            $table->foreignId('matter_id');
+            $table->foreignId('staff_id');
             $table->id();
-            $table->string('name');
-            $table->string('address');
-            $table->string('phone');
-            $table->string('mobile');
-            $table->string('nic');
-            $table->foreignId('city_id');
-            $table->tinyInteger('active')->nullable();
+            $table->string('geo_latitude');
+            $table->string('geo_longtude');
+            $table->integer('area');
+            $table->date('permitted_on');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('matter_accesses');
     }
 };

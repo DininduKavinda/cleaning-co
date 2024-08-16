@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('timecards', function (Blueprint $table) {
+            $table->foreignId('timecard_task_id');
+            $table->foreignId('matter_id');
             $table->id();
             $table->string('name');
-            $table->string('address');
-            $table->string('phone');
-            $table->string('mobile');
-            $table->string('nic');
-            $table->foreignId('city_id');
-            $table->tinyInteger('active')->nullable();
+            $table->date('date');
+            $table->string('type');
+            $table->dateTime('started_at');
+            $table->dateTime('ended_time');
+            $table->decimal('time_spent');
+            $table->decimal('charge_rate');
+            $table->tinyInteger('active');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('timecards');
     }
 };
