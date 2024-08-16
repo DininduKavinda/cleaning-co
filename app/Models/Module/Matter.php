@@ -4,6 +4,8 @@ namespace App\Models\Module;
 
 use App\Models\Client;
 use App\Models\Department;
+use App\Models\Invoice\Invoice;
+use App\Models\Invoice\InvoiceTimecard;
 use App\Models\Item\GDN;
 use App\Models\Item\GRN;
 use App\Models\Meta\Complain;
@@ -84,5 +86,12 @@ class Matter extends Model
     public function complains()
     {
         return $this->hasMany(Complain::class);
+    }
+    public function invoice(){
+        return $this->hasOne(Invoice::class);
+    }
+     public function invoice_timecard()
+    {
+        return $this->hasMany(InvoiceTimecard::class);
     }
 }

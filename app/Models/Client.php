@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Invoice\Invoice;
 use App\Models\Meta\City;
 use App\Models\Meta\Complain;
 use App\Models\Module\Matter;
@@ -48,5 +49,8 @@ class Client extends Model
     public function complains()
     {
         return $this->hasMany(Complain::class);
+    }
+    public function invoice(){
+        return $this->hasMany(Invoice::class);
     }
 }
