@@ -29,6 +29,7 @@ class City extends Model
     {
         return $this->hasMany(Client::class);
     }
+
     public function staffs()
     {
         return $this->hasMany(Staff::class);

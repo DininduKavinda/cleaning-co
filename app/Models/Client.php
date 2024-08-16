@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Meta\City;
+use App\Models\Meta\Complain;
 use App\Models\Module\Matter;
 use App\Models\Module\MatterDocument;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,10 +34,19 @@ class Client extends Model
     {
         return $this->belongsTo(City::class);
     }
-    public function matters(){
+
+    public function matters()
+    {
         return $this->hasMany(Matter::class);
     }
-    public function matter_documents(){
+
+    public function matter_documents()
+    {
         return $this->hasMany(MatterDocument::class);
+    }
+
+    public function complains()
+    {
+        return $this->hasMany(Complain::class);
     }
 }

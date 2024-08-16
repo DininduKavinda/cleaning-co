@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ItemType extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'name',
         'id',
-        'active'
+        'active',
     ];
-    public function item(){
+
+    public function item()
+    {
         return $this->hasMany(Item::class);
     }
 }

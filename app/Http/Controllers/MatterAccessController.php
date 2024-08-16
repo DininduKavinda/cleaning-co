@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Module\MatterAccess;
 use App\Http\Requests\StoreMatterAccessRequest;
 use App\Http\Requests\UpdateMatterAccessRequest;
+use App\Models\Module\MatterAccess;
 
 class MatterAccessController extends Controller
 {

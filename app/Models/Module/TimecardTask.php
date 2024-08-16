@@ -9,14 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TimecardTask extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'id',
         'name',
         'rate',
         'rate_type',
-        'active'
+        'active',
     ];
-    public function timecards(){
+
+    public function timecards()
+    {
         return $this->hasMany(TimeCard::class);
     }
 }

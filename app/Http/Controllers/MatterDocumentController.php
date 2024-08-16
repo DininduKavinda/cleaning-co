@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Module\MatterDocument;
 use App\Http\Requests\StoreMatterDocumentRequest;
 use App\Http\Requests\UpdateMatterDocumentRequest;
+use App\Models\Module\MatterDocument;
 
 class MatterDocumentController extends Controller
 {

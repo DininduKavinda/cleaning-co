@@ -9,15 +9,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Inventory extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'item_id',
         'id',
         'status',
         'notes',
         'physical_location',
-        'active'
+        'active',
     ];
-    public function item(){
+
+    public function item()
+    {
         return $this->hasOne(Item::class);
     }
 }

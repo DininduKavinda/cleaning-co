@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Level;
 use App\Http\Requests\StoreLevelRequest;
 use App\Http\Requests\UpdateLevelRequest;
+use App\Models\Level;
 
 class LevelController extends Controller
 {

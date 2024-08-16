@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Task extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'id',
         'name',
-        'active'
+        'active',
     ];
-     public function matters(){
+
+    public function matters()
+    {
         return $this->hasMany(Matter::class);
     }
 }

@@ -10,15 +10,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Department extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'id',
         'name',
-        'active'
+        'active',
     ];
-    public function staffs(){
+
+    public function staffs()
+    {
         return $this->hasMany(Staff::class);
     }
-     public function matters(){
+
+    public function matters()
+    {
         return $this->hasMany(Matter::class);
     }
 }

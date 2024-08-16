@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item\ItemType;
 use App\Http\Requests\StoreItemTypeRequest;
 use App\Http\Requests\UpdateItemTypeRequest;
+use App\Models\Item\ItemType;
 
 class ItemTypeController extends Controller
 {

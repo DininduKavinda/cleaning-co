@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MatterDocument extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'id',
         'matter_id',
@@ -20,15 +21,21 @@ class MatterDocument extends Model
         'client_id',
         'staff_id',
         'notes',
-        'active'
+        'active',
     ];
-    public function matter(){
+
+    public function matter()
+    {
         return $this->belongsTo(Matter::class);
     }
-    public function client(){
+
+    public function client()
+    {
         return $this->belongsTo(Client::class);
     }
-    public function staff(){
+
+    public function staff()
+    {
         return $this->belongsTo(Staff::class);
     }
 }

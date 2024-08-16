@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Module\Timecard;
 use App\Http\Requests\StoreTimecardRequest;
 use App\Http\Requests\UpdateTimecardRequest;
+use App\Models\Module\Timecard;
 
 class TimecardController extends Controller
 {

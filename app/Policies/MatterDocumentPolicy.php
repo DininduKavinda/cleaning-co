@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Module\MatterDocument;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class MatterDocumentPolicy
 {

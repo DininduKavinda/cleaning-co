@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MatterAccess extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'matter_id',
         'staff_id',
@@ -18,12 +19,14 @@ class MatterAccess extends Model
         'geo_longtude',
         'area',
         'permitted_on',
-        'active'
+        'active',
     ];
+
     public function matter()
     {
         return $this->hasMany(Matter::class);
     }
+
     public function staff()
     {
         return $this->hasMany(Staff::class);
