@@ -5,9 +5,8 @@ import '../../vendor/masmerise/livewire-toaster/resources/js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('dom loaded');
+    console.log('dom Loaded');
  })
 document.addEventListener('livewire:navigated', () => {
-   console.log('navigated');
    initFlowbite();
 })

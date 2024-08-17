@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('full_name');
+            $table->string('name');
             $table->string('address');
             $table->string('phone');
             $table->string('mobile');
-            $table->foreignId('country_id');
-            $table->foreignId('province_id');
-            $table->foreignId('district_id');
+            $table->string('nic');
             $table->foreignId('city_id');
             $table->tinyInteger('active')->nullable();
             $table->softDeletes();
