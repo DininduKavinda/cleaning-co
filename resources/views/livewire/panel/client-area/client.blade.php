@@ -50,7 +50,7 @@
                             {{ $client['id' ?? 'N/A'] }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $client['full_name'] ?? 'N/A' }}
+                            {{ $client['name'] ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $client['mobile'] ?? 'N/A' }}

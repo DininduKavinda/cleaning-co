@@ -11,6 +11,7 @@ use App\Models\Meta\Province;
 use App\Models\User;
 use App\Models\UserType;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Masmerise\Toaster\Toaster;
 use Spatie\Permission\Models\Role;
 
@@ -37,6 +38,7 @@ class ClientCreate extends Component
     public $countries;
 
     public $userTypes = [];
+    use WithFileUploads;
 
     public function mount($id = null)
     {
@@ -102,43 +104,47 @@ class ClientCreate extends Component
                 'phone' => $validatedData['phone'],
                 'address' => $validatedData['address'],
                 'city_id' => $validatedData['city_id'],
-                'district_id' => $validatedData['district_id'],
-                'province_id' => $validatedData['province_id'],
-                'country_id' => $validatedData['country_id'],
                 'active' => $validatedData['active'],
             ]);
 
+            $reference_id = $this->client->id;
+            $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
+            $validatedData['image']->storeAs(path: 'user_images', name: $name);
+            $filePath = 'user_images/' . $name;
             $this->user = $this->user->update([
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'type_id' => $validatedData['type_id'],
-                'image' => $validatedData['image'],
+                'image' => $filePath,
             ]);
+            $this->user->syncRoles($validatedData['roles']);
         } else {
 
-            $user = User::create([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'password' => bcrypt($validatedData['password']),
-                'user_type_id' => $validatedData['user_type_id'],
-                'image' => $validatedData['image'],
-            ]);
-
-            $user->syncRoles($validatedData['roles']);
 
             $this->client = Client::create([
-                'user_id' => $user->id,
-                'full_name' => $validatedData['full_name'],
-                'image' => $validatedData['image'],
+                'name' => $validatedData['full_name'],
                 'mobile' => $validatedData['mobile'],
                 'phone' => $validatedData['phone'],
                 'address' => $validatedData['address'],
                 'city_id' => $validatedData['city_id'],
-                'district_id' => $validatedData['district_id'],
-                'province_id' => $validatedData['province_id'],
-                'country_id' => $validatedData['country_id'],
+                'nic' => $validatedData['nic'],
                 'active' => $validatedData['active'],
             ]);
+
+            $reference_id = $this->client->id;
+            $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
+            $validatedData['image']->storeAs(path: 'user_images', name: $name);
+            $filePath = 'user_images/' . $name;
+
+            $user = User::create([
+                'reference_id' =>$reference_id,
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => bcrypt($validatedData['password']),
+                'user_type_id' => $validatedData['user_type_id'],
+                'image' => $filePath,
+            ]);
+            $user->syncRoles($validatedData['roles']);
         }
 
         if ($this->client) {

@@ -29,7 +29,7 @@
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $country['country_name' ?? 'N/A']}}
+                            {{ $country['country_name' ?? 'N/A'] }}
                         </th>
                         <td class="px-6 py-4">
                             {{ $country['iso_code'] ?? 'N/A' }}
@@ -41,8 +41,8 @@
                             <a href="{{ route('location.country.update', $country['id']) }}" wire:navigate
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             @can('delete location')
-                                <button wire:click.prevent="deleteData({{ $country['id'] }})"
-                                onclick="confirmDelete('Country', () => @this.call('deleteData', {{ $country['id'] }}))"
+                                <button
+                                    onclick="confirmDelete('Country', () => @this.call('deleteData', {{ $country['id'] }}))"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                             @endcan
                         </td>
