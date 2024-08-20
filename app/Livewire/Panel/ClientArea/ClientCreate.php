@@ -9,6 +9,7 @@ use App\Models\Meta\Country;
 use App\Models\Meta\District;
 use App\Models\Meta\Province;
 use App\Models\User;
+use App\Models\UserType;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 use Spatie\Permission\Models\Role;
@@ -35,9 +36,12 @@ class ClientCreate extends Component
 
     public $countries;
 
+    public $userTypes = [];
+
     public function mount($id = null)
     {
         $this->countries = Country::all();
+        $this->userTypes = UserType::all();
         $this->roles = Role::pluck('name', 'name')->all();
         if (! empty($id)) {
             $this->editData($id);
@@ -116,7 +120,7 @@ class ClientCreate extends Component
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'password' => bcrypt($validatedData['password']),
-                'type_id' => $validatedData['type_id'],
+                'user_type_id' => $validatedData['user_type_id'],
                 'image' => $validatedData['image'],
             ]);
 

@@ -34,7 +34,8 @@ class Timecard extends Model
     {
         return $this->belongsTo(Matter::class);
     }
-     public function invoice_timecard()
+
+    public function invoice_timecard()
     {
         return $this->hasMany(InvoiceTimecard::class);
     }

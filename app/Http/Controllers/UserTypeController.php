@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Divition;
-use App\Http\Requests\StoreDivitionRequest;
-use App\Http\Requests\UpdateDivitionRequest;
+use App\Models\UserType;
+use App\Http\Requests\StoreUserTypeRequest;
+use App\Http\Requests\UpdateUserTypeRequest;
 
-class DivitionController extends Controller
+class UserTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class DivitionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDivitionRequest $request)
+    public function store(StoreUserTypeRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class DivitionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Divition $divition)
+    public function show(UserType $userType)
     {
         //
     }
@@ -43,7 +43,7 @@ class DivitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Divition $divition)
+    public function edit(UserType $userType)
     {
         //
     }
@@ -51,7 +51,7 @@ class DivitionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDivitionRequest $request, Divition $divition)
+    public function update(UpdateUserTypeRequest $request, UserType $userType)
     {
         //
     }
@@ -59,7 +59,7 @@ class DivitionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Divition $divition)
+    public function destroy(UserType $userType)
     {
         //
     }

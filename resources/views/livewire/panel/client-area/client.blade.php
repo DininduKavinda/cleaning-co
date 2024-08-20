@@ -99,7 +99,8 @@
                             <a href="{{ route('client.update', $client['id']) }}" wire:navigate
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             @can('delete location')
-                                <button wire:click.prevent="deleteData({{ $client['id'] }})"
+                                <button
+                                onclick="confirmDelete('Client', () => @this.call('deleteData', {{ $client['id'] }}))"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                             @endcan
                         </td>

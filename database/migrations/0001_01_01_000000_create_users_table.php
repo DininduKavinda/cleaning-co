@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->foreignId('reference_id')->nullable();
-            $table->tinyInteger('user_type_id')->nullable();
+            $table->foreignId('user_type_id')->nullable();
             $table->id();
             $table->string('name');
             $table->string('email')->unique();

@@ -82,6 +82,22 @@
             }
 
         });
+
+        function confirmDelete(entityName, deleteCallback) {
+            Swal.fire({
+                title: `Are you sure you want to delete this ${entityName}?`,
+                text: "This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteCallback();
+                }
+            });
+        }
     </script>
     <x-toaster-hub />
 </body>

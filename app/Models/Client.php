@@ -50,7 +50,9 @@ class Client extends Model
     {
         return $this->hasMany(Complain::class);
     }
-    public function invoice(){
+
+    public function invoice()
+    {
         return $this->hasMany(Invoice::class);
     }
 }

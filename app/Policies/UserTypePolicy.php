@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Invoice\Invoice;
 use App\Models\User;
+use App\Models\UserType;
+use Illuminate\Auth\Access\Response;
 
-class InvoicePolicy
+class UserTypePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +19,7 @@ class InvoicePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Invoice $invoice): bool
+    public function view(User $user, UserType $userType): bool
     {
         //
     }
@@ -34,7 +35,7 @@ class InvoicePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Invoice $invoice): bool
+    public function update(User $user, UserType $userType): bool
     {
         //
     }
@@ -42,7 +43,7 @@ class InvoicePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Invoice $invoice): bool
+    public function delete(User $user, UserType $userType): bool
     {
         //
     }
@@ -50,7 +51,7 @@ class InvoicePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Invoice $invoice): bool
+    public function restore(User $user, UserType $userType): bool
     {
         //
     }
@@ -58,7 +59,7 @@ class InvoicePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Invoice $invoice): bool
+    public function forceDelete(User $user, UserType $userType): bool
     {
         //
     }

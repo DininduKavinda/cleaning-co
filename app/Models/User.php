@@ -30,6 +30,16 @@ class User extends Authenticatable
         'active',
     ];
 
+    public function user_type(){
+        return $this->belongsTo(UserType::class);
+    }
+    public function clients(){
+        return $this->belongsTo(Client::class, 'reference_id');
+    }
+    public function staffs(){
+        return $this->belongsTo(Staff::class, 'reference_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

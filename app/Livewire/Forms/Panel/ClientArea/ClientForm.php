@@ -20,7 +20,7 @@ class ClientForm extends Form
 
     public $password;
 
-    public $type_id;
+    public $user_type_id;
 
     public $mobile;
 

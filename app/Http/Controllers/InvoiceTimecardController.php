@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoice\InvoiceTimecard;
 use App\Http\Requests\StoreInvoiceTimecardRequest;
 use App\Http\Requests\UpdateInvoiceTimecardRequest;
+use App\Models\Invoice\InvoiceTimecard;
 
 class InvoiceTimecardController extends Controller
 {

@@ -42,7 +42,8 @@
                                                 @endcan
 
                                                 @can('delete permission')
-                                                    <button wire:click.prevent="deletePermission({{ $permission->id }})"
+                                                    <button
+                                                        onclick="confirmDelete('Permission', () => @this.call('deletePermission', {{ $permission->id }}))"
                                                         class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                                                 @endcan
                                             </td>

@@ -43,7 +43,8 @@
                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             @endcan
                             @can('delete location')
-                                <button wire:click.prevent="deleteData({{ $province['id'] }})"
+                                <button
+                                    onclick="confirmDelete('province', () => @this.call('deleteData', {{ $province['id'] }}))"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                             @endcan
                         </td>
