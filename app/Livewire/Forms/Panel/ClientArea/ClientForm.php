@@ -37,7 +37,9 @@ class ClientForm extends Form
     public $password_confirmation;
 
     public $country_id;
+
     public $nic;
+
     public $active;
 
     public function setData(array $data)
@@ -55,7 +57,7 @@ class ClientForm extends Form
             'name' => ['required'],
             'roles' => ['sometimes'],
             'email' => ['required'],
-            'image' => ['required','image','max:1024'],
+            'image' => ['required', 'image', 'max:1024'],
             'password' => ['sometimes', 'confirmed'],
             'password_confirmation' => ['sometimes'],
             'user_type_id' => ['required'],

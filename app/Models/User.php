@@ -30,13 +30,18 @@ class User extends Authenticatable
         'active',
     ];
 
-    public function user_type(){
+    public function user_type()
+    {
         return $this->belongsTo(UserType::class);
     }
-    public function clients(){
+
+    public function clients()
+    {
         return $this->belongsTo(Client::class, 'reference_id');
     }
-    public function staffs(){
+
+    public function staffs()
+    {
         return $this->belongsTo(Staff::class, 'reference_id');
     }
 

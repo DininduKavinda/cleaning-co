@@ -38,6 +38,7 @@ class ClientCreate extends Component
     public $countries;
 
     public $userTypes = [];
+
     use WithFileUploads;
 
     public function mount($id = null)
@@ -56,9 +57,15 @@ class ClientCreate extends Component
 
         $this->client = Client::find($id);
 
-        $this->user = User::find($this->client->user_id);
+        $this->user = User::where('reference_id', $id)->where('user_type_id', 1)->first();
 
-        $mergedArray = array_merge($this->client->toArray(), $this->user->toArray());
+        $clientArray = $this->client->toArray();
+
+        $clientArray['full_name'] = $clientArray['name'];
+
+        unset($clientArray['name']);
+
+        $mergedArray = array_merge($clientArray, $this->user->toArray());
 
         $this->clientArray = $mergedArray;
 
@@ -66,6 +73,7 @@ class ClientCreate extends Component
 
         $this->loadDependencies();
     }
+
 
     public function updatedFormCountryId($countryId)
     {
@@ -96,55 +104,9 @@ class ClientCreate extends Component
         $validatedData = $this->form->validate();
 
         if (! empty($this->clientID)) {
-
-            $this->client = $this->client->update([
-                'full_name' => $validatedData['full_name'],
-                'image' => $validatedData['image'],
-                'mobile' => $validatedData['mobile'],
-                'phone' => $validatedData['phone'],
-                'address' => $validatedData['address'],
-                'city_id' => $validatedData['city_id'],
-                'active' => $validatedData['active'],
-            ]);
-
-            $reference_id = $this->client->id;
-            $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
-            $validatedData['image']->storeAs(path: 'user_images', name: $name);
-            $filePath = 'user_images/' . $name;
-            $this->user = $this->user->update([
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'type_id' => $validatedData['type_id'],
-                'image' => $filePath,
-            ]);
-            $this->user->syncRoles($validatedData['roles']);
+            $this->updateData($validatedData);
         } else {
-
-
-            $this->client = Client::create([
-                'name' => $validatedData['full_name'],
-                'mobile' => $validatedData['mobile'],
-                'phone' => $validatedData['phone'],
-                'address' => $validatedData['address'],
-                'city_id' => $validatedData['city_id'],
-                'nic' => $validatedData['nic'],
-                'active' => $validatedData['active'],
-            ]);
-
-            $reference_id = $this->client->id;
-            $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
-            $validatedData['image']->storeAs(path: 'user_images', name: $name);
-            $filePath = 'user_images/' . $name;
-
-            $user = User::create([
-                'reference_id' =>$reference_id,
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'password' => bcrypt($validatedData['password']),
-                'user_type_id' => $validatedData['user_type_id'],
-                'image' => $filePath,
-            ]);
-            $user->syncRoles($validatedData['roles']);
+            $this->createData($validatedData);
         }
 
         if ($this->client) {
@@ -169,6 +131,57 @@ class ClientCreate extends Component
         if ($this->form->district_id) {
             $this->cities = City::where('district_id', $this->form->district_id)->get();
         }
+    }
+
+    public function createData($validatedData)
+    {
+        $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
+        $filePath = $validatedData['image']->storeAs(path: 'user_images', name: $name);
+
+        $this->client = Client::create([
+            'name' => $validatedData['full_name'],
+            'mobile' => $validatedData['mobile'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'city_id' => $validatedData['city_id'],
+            'nic' => $validatedData['nic'],
+            'active' => $validatedData['active'],
+        ]);
+
+        $reference_id = $this->client->id;
+
+        $user = User::create([
+            'reference_id' => $reference_id,
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'user_type_id' => $validatedData['user_type_id'],
+            'image' => $filePath,
+        ]);
+        $user->syncRoles($validatedData['roles']);
+    }
+    public function updateData($validatedData)
+    {
+        $this->client = $this->client->update([
+            'name' => $validatedData['full_name'],
+            'image' => $validatedData['image'],
+            'mobile' => $validatedData['mobile'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'city_id' => $validatedData['city_id'],
+            'active' => $validatedData['active'],
+        ]);
+
+        $reference_id = $this->client->id;
+        $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
+        $filePath = $validatedData['image']->storeAs('user_images',  $name);
+        $this->user = $this->user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'type_id' => $validatedData['type_id'],
+            'image' => $filePath,
+        ]);
+        $this->user->syncRoles($validatedData['roles']);
     }
 
     public function render()

@@ -9,11 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class UserType extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable =[
+
+    protected $fillable = [
         'id',
         'name',
     ];
-    public function users(){
+
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 }

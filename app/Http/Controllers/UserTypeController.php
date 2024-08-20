@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserType;
 use App\Http\Requests\StoreUserTypeRequest;
 use App\Http\Requests\UpdateUserTypeRequest;
+use App\Models\UserType;
 
 class UserTypeController extends Controller
 {

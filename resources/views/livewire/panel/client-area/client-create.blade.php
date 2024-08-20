@@ -16,8 +16,8 @@
                 <div class="flex justify-center py-5">
                     <figure
                         class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
-                        <img id="imagePreview" wire:ignore id="fileInput"  class="rounded-full w-96 h-96" src="{{ asset('image.jpg') }}"
-                            alt="image description">
+                        <img id="imagePreview" wire:ignore id="fileInput" class="rounded-full w-96 h-96"
+                            src="{{ asset('image.jpg') }}" alt="image description">
                     </figure>
                 </div>
                 <div class="card-body">
@@ -87,19 +87,19 @@
                                     @endforeach
                                 </select>
                             </div>
-                            @if (empty($this->form->id))
-                                <div class="mb-3">
-                                    <label for=""
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
-                                    <select wire:model="form.roles"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="">Select Role</option>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role }}">{{ $role }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endif
+
+                            <div class="mb-3">
+                                <label for=""
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
+                                <select wire:model="form.roles"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="">Select Role</option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role }}">{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
                         @if (empty($this->form->id))
                             <div class="grid md:grid-cols-2 md:gap-6 mb-3">

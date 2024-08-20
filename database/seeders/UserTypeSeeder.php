@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\UserType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserTypeSeeder extends Seeder
@@ -22,7 +21,7 @@ class UserTypeSeeder extends Seeder
                 [
                     'id' => 2,
                     'name' => 'staff',
-                ]
+                ],
             ];
         UserType::insert($user_types);
     }
