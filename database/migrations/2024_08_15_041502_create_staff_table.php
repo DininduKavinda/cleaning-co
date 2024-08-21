@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->foreignId('level_id');
+            $table->foreignId('country_id');
+            $table->foreignId('province_id');
+            $table->foreignId('district_id');
             $table->foreignId('city_id');
             $table->foreignId('department_id');
             $table->id();

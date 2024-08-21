@@ -10,6 +10,7 @@ use App\Models\Meta\District;
 use App\Models\Meta\Province;
 use App\Models\User;
 use App\Models\UserType;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Masmerise\Toaster\Toaster;
@@ -25,7 +26,7 @@ class ClientCreate extends Component
 
     public $client;
 
-    public $user;
+    public $user, $users;
 
     public $roles;
 
@@ -38,6 +39,7 @@ class ClientCreate extends Component
     public $countries;
 
     public $userTypes = [];
+    public $reference_id;
 
     use WithFileUploads;
 
@@ -57,7 +59,13 @@ class ClientCreate extends Component
 
         $this->client = Client::find($id);
 
+        $this->reference_id = $id;
+
         $this->user = User::where('reference_id', $id)->where('user_type_id', 1)->first();
+
+        $this->users = $this->user;
+
+        $this->roles = $this->user->roles->pluck('name')->all();
 
         $clientArray = $this->client->toArray();
 
@@ -65,7 +73,7 @@ class ClientCreate extends Component
 
         unset($clientArray['name']);
 
-        $mergedArray = array_merge($clientArray, $this->user->toArray());
+        $mergedArray = array_merge($clientArray, $this->user->toArray(), $this->roles);
 
         $this->clientArray = $mergedArray;
 
@@ -135,8 +143,12 @@ class ClientCreate extends Component
 
     public function createData($validatedData)
     {
-        $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
-        $filePath = $validatedData['image']->storeAs(path: 'user_images', name: $name);
+        if ($validatedData['image']) {
+            $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
+            $filePath = $validatedData['image']->storeAs(path: 'storage/user_images', name: $name);
+        } else {
+            $filePath = null;
+        }
 
         $this->client = Client::create([
             'name' => $validatedData['full_name'],
@@ -144,6 +156,9 @@ class ClientCreate extends Component
             'phone' => $validatedData['phone'],
             'address' => $validatedData['address'],
             'city_id' => $validatedData['city_id'],
+            'district_id' => $validatedData['district_id'],
+            'province_id' => $validatedData['province_id'],
+            'country_id' => $validatedData['country_id'],
             'nic' => $validatedData['nic'],
             'active' => $validatedData['active'],
         ]);
@@ -164,24 +179,34 @@ class ClientCreate extends Component
     {
         $this->client = $this->client->update([
             'name' => $validatedData['full_name'],
-            'image' => $validatedData['image'],
             'mobile' => $validatedData['mobile'],
             'phone' => $validatedData['phone'],
             'address' => $validatedData['address'],
             'city_id' => $validatedData['city_id'],
+            'district_id' => $validatedData['district_id'],
+            'province_id' => $validatedData['province_id'],
+            'country_id' => $validatedData['country_id'],
+            'nic' => $validatedData['nic'],
             'active' => $validatedData['active'],
         ]);
 
-        $reference_id = $this->client->id;
-        $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
-        $filePath = $validatedData['image']->storeAs('user_images',  $name);
+        if ($validatedData['image'] != $this->user->image) {
+            File::delete($this->user->image);
+            $name = md5($validatedData['image'] . microtime()) . '.' . $validatedData['image']->extension();
+            $filePath = $validatedData['image']->storeAs(path: 'storage/user_images', name: $name);
+        } else {
+            $filePath = $this->user->image;
+        }
+
         $this->user = $this->user->update([
+            'reference_id' => $this->reference_id,
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
-            'type_id' => $validatedData['type_id'],
+            'password' => bcrypt($validatedData['password']),
+            'user_type_id' => $validatedData['user_type_id'],
             'image' => $filePath,
         ]);
-        $this->user->syncRoles($validatedData['roles']);
+        $this->users->syncRoles($validatedData['roles']);
     }
 
     public function render()

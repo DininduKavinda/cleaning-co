@@ -6,6 +6,9 @@ use App\Models\Item\GDN;
 use App\Models\Item\GRN;
 use App\Models\Meta\City;
 use App\Models\Meta\Complain;
+use App\Models\Meta\Country;
+use App\Models\Meta\District;
+use App\Models\Meta\Province;
 use App\Models\Module\Matter;
 use App\Models\Module\MatterAccess;
 use App\Models\Module\MatterDocument;
@@ -19,6 +22,9 @@ class Staff extends Model
 
     protected $fillable = [
         'level_id',
+        'country_id',
+        'province_id',
+        'district_id',
         'city_id',
         'department_id',
         'id',
@@ -51,6 +57,18 @@ class Staff extends Model
         return $this->belongsTo(City::class);
     }
 
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
     public function matters()
     {
         return $this->hasMany(Matter::class);

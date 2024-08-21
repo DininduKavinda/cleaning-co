@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('phone');
             $table->string('mobile');
             $table->string('nic');
+            $table->foreignId('country_id');
+            $table->foreignId('province_id');
+            $table->foreignId('district_id');
             $table->foreignId('city_id');
             $table->tinyInteger('active')->nullable();
             $table->softDeletes();

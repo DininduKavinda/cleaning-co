@@ -57,7 +57,7 @@ class ClientForm extends Form
             'name' => ['required'],
             'roles' => ['sometimes'],
             'email' => ['required'],
-            'image' => ['required', 'image', 'max:1024'],
+            'image' => ['max:1024'],
             'password' => ['sometimes', 'confirmed'],
             'password_confirmation' => ['sometimes'],
             'user_type_id' => ['required'],
@@ -70,7 +70,7 @@ class ClientForm extends Form
             'province_id' => ['required', 'max:225'],
             'country_id' => ['required', 'max:225'],
             'nic' => ['required'],
-            'active' => ['required'],
+            'active' => ['sometimes'],
         ];
     }
 }

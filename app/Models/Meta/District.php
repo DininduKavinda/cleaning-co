@@ -3,6 +3,7 @@
 namespace App\Models\Meta;
 
 use App\Models\Client;
+use App\Models\Staff;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -28,8 +29,13 @@ class District extends Model
         return $this->hasMany(City::class);
     }
 
-    public function client()
+    public function clients()
     {
         return $this->hasMany(Client::class);
+    }
+
+    public function staffs()
+    {
+        return $this->hasMany(Staff::class);
     }
 }

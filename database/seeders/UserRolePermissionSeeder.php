@@ -31,10 +31,20 @@ class UserRolePermissionSeeder extends Seeder
         Permission::create(['name' => 'update user']);
         Permission::create(['name' => 'delete user']);
 
-        Permission::create(['name' => 'view product']);
-        Permission::create(['name' => 'create product']);
-        Permission::create(['name' => 'update product']);
-        Permission::create(['name' => 'delete product']);
+        Permission::create(['name' => 'view location']);
+        Permission::create(['name' => 'create location']);
+        Permission::create(['name' => 'update location']);
+        Permission::create(['name' => 'delete location']);
+
+        Permission::create(['name' => 'view client']);
+        Permission::create(['name' => 'create client']);
+        Permission::create(['name' => 'update client']);
+        Permission::create(['name' => 'delete client']);
+
+        Permission::create(['name' => 'view staff']);
+        Permission::create(['name' => 'create staff']);
+        Permission::create(['name' => 'update staff']);
+        Permission::create(['name' => 'delete staff']);
 
         // Create Roles
         $superAdminRole = Role::create(['name' => 'super-admin']); //as super-admin
@@ -51,16 +61,16 @@ class UserRolePermissionSeeder extends Seeder
         $adminRole->givePermissionTo(['create role', 'view role', 'update role']);
         $adminRole->givePermissionTo(['create permission', 'view permission']);
         $adminRole->givePermissionTo(['create user', 'view user', 'update user']);
-        $adminRole->givePermissionTo(['create product', 'view product', 'update product']);
+        $adminRole->givePermissionTo(['create location', 'view location', 'update location']);
 
         // Let's Create User and assign Role to it.
 
         $superAdminUser = User::firstOrCreate([
-            'email' => 'superadmin@gmail.com',
+            'email' => 'root@gmail.com',
         ], [
-            'name' => 'Super Admin',
-            'email' => 'superadmin@gmail.com',
-            'password' => Hash::make('12345678'),
+            'name' => 'Root',
+            'email' => 'root@gmail.com',
+            'password' => Hash::make('1234'),
         ]);
 
         $superAdminUser->assignRole($superAdminRole);
@@ -70,7 +80,7 @@ class UserRolePermissionSeeder extends Seeder
         ], [
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('1234'),
         ]);
 
         $adminUser->assignRole($adminRole);
@@ -80,7 +90,7 @@ class UserRolePermissionSeeder extends Seeder
         ], [
             'name' => 'Staff',
             'email' => 'staff@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('1234'),
         ]);
 
         $staffUser->assignRole($staffRole);

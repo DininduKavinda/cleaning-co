@@ -34,9 +34,9 @@ class Client extends Component
 
         if ($response) {
 
-            // $user = User::where('user_type_id',1)->where('reference_id',$id);
+            $user = User::where('user_type_id',1)->where('reference_id',$id);
             $this->clients = $response->delete();
-            // $delete = $user->delete();
+            $delete = $user->delete();
 
             if ($this->clients) {
 
