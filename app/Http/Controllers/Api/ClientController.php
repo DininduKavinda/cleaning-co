@@ -58,7 +58,7 @@ class ClientController extends Controller
     {
 
         $client =  new ClientResource(Client::create([
-            'name' => $request->name,
+            'name' => $request->full_name,
             'nic' => $request->nic,
             'mobile' => $request->mobile,
             'phone' => $request->phone,
@@ -71,13 +71,13 @@ class ClientController extends Controller
         ]));
 
         if ($client) {
-            $user = new UserResource(User::create([
-                'reference_id' => $request->reference_id,
-                'user_type_id' => $request->user_type_id,
-                'id' => $request->id,
-                'name' => $request->full_name,
+            $user = new ClientResource(User::create([
+                'reference_id' => $client->id,
+                'user_type_id' => 1,
+                'name' => $request->name,
                 'email' => $request->email,
                 'image' => $request->image,
+                'password' => bcrypt($request->password),
                 'last_login' => $request->last_login,
                 'active' => $request->active,
             ]));
@@ -117,7 +117,44 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        $client->update($request->all());
+        $client_id = $client->id;
+        $client = $client->update([
+            'name' => $request->full_name,
+            'nic' => $request->nic,
+            'mobile' => $request->mobile,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'city_id' => $request->city_id,
+            'district_id' => $request->district_id,
+            'province_id' => $request->province_id,
+            'country_id' => $request->country_id,
+            'active' => $request->active,
+        ]);
+        if ($client) {
+            $user = User::where('user_type_id',1)->where('reference_id',$client_id);
+            $user->update([
+                'reference_id' => $client_id,
+                'user_type_id' => 1,
+                'name' => $request->name,
+                'email' => $request->email,
+                'image' => $request->image,
+                'password' => bcrypt($request->password),
+                'last_login' => $request->last_login,
+                'active' => $request->active,
+            ]);
+            if ($user) {
+                $message = 'Client Created Successfully';
+            }
+            else{
+                $message = 'Error Occured When Creating User';
+            }
+        } else {
+            $message = 'Error Occured When Creating Client';
+        }
+
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 
     /**

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClientRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -21,19 +21,13 @@ class UpdateClientRequest extends FormRequest
      */
     public function rules(): array
     {
+
         $method = $this->method();
         if ($method == 'put') {
             return [
-                'nic' => ['required'],
+                'reference_id' => ['sometimes'],
+                'user_type_id' => ['sometimes'],
                 'name' => ['required'],
-                'mobile' => ['required'],
-                'phone' => ['required'],
-                'address' => ['required'],
-                'country_id' => ['required'],
-                'province_id' => ['required'],
-                'district_id' => ['required'],
-                'city_id' => ['required'],
-                'full_name' => ['required'],
                 'email' => ['required', 'email'],
                 'image' => ['sometimes'],
                 'last_login' => ['sometimes'],
@@ -41,16 +35,9 @@ class UpdateClientRequest extends FormRequest
             ];
         } else {
             return [
-                'nic' => ['sometimes', 'required'],
+                'reference_id' => ['sometimes'],
+                'user_type_id' => ['sometimes'],
                 'name' => ['sometimes', 'required'],
-                'mobile' => ['sometimes', 'required'],
-                'phone' => ['sometimes', 'required'],
-                'address' => ['sometimes', 'required'],
-                'country_id' => ['sometimes', 'required'],
-                'province_id' => ['sometimes', 'required'],
-                'district_id' => ['sometimes', 'required'],
-                'city_id' => ['sometimes', 'required'],
-                'full_name' => ['sometimes', 'required'],
                 'email' => ['sometimes', 'required', 'email'],
                 'image' => ['sometimes'],
                 'last_login' => ['sometimes'],
