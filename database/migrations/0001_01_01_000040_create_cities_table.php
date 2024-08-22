@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matter_accesses', function (Blueprint $table) {
-            $table->foreignId('matter_id');
-            $table->foreignId('staff_id');
+        Schema::create('cities', function (Blueprint $table) {
+            $table->foreign('district_id')->references('id')->on('districts');
             $table->id();
-            $table->string('geo_latitude');
-            $table->string('geo_longtude');
-            $table->integer('area');
-            $table->date('permitted_on')->nullable();
+            $table->foreignId('district_id')->cascadeOnDelete();
+            $table->string('name_en');
+            $table->string('name_si')->nullable();
+            $table->string('name_ta')->nullable();
+            $table->integer('postcode')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matter_accesses');
+        Schema::dropIfExists('cities');
     }
 };

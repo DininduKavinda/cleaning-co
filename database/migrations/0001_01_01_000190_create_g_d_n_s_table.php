@@ -12,6 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('g_d_n_s', function (Blueprint $table) {
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('approved_by')->references('id')->on('staff');
+            $table->foreign('despatched_by')->references('id')->on('staff');
+            $table->foreign('matter_id')->references('id')->on('matters');
             $table->foreignId('item_id');
             $table->foreignId('approved_by')->nullable();
             $table->foreignId('despatched_by');

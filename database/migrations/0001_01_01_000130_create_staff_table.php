@@ -12,6 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('staff', function (Blueprint $table) {
+            $table->foreign('district_id')->references('id')->on('districts');
+            $table->foreign('province_id')->references('id')->on('provinces');
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->foreignId('level_id');
             $table->foreignId('country_id');
             $table->foreignId('province_id');

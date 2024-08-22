@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('districts', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
+            $table->foreign('item_type_id')->references('id')->on('item_types');
+            $table->foreignId('item_type_id');
             $table->id();
-            $table->foreignId('province_id')->cascadeOnDelete();
-            $table->string('name_en');
-            $table->string('name_si')->nullable();
-            $table->string('name_ta')->nullable();
+            $table->string('name');
+            $table->decimal('price');
+            $table->tinyInteger('active');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('districts');
+        Schema::dropIfExists('items');
     }
 };

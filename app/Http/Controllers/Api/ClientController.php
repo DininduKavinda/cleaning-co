@@ -8,7 +8,9 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Resources\Api\ClientCollection;
 use App\Http\Resources\Api\ClientResource;
+use App\Http\Resources\UserResource;
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -20,11 +22,25 @@ class ClientController extends Controller
     {
         $filter = new ClientsFilter;
         $filterItems = $filter->transform($request);
-        // $includeUser = $request->query('includeUser');
+        $includeUser = $request->query('includeUser');
+        $includeLocations = $request->query('includeLocations');
+        $includeAll = $request->query('includeAll');
         $clients = Client::where($filterItems);
-        $clients = $clients->with('user');
-
-        return new ClientCollection($clients->paginate(10000)->appends($request->query()));
+        if ($includeUser) {
+            $clients = $clients->with(['user']);
+        } elseif ($includeLocations) {
+            $clients = $clients->with(['district']);
+            $clients = $clients->with(['country']);
+            $clients = $clients->with(['province']);
+            $clients = $clients->with(['city']);
+        } elseif ($includeAll) {
+            $clients = $clients->with(['user']);
+            $clients = $clients->with(['district']);
+            $clients = $clients->with(['country']);
+            $clients = $clients->with(['province']);
+            $clients = $clients->with(['city']);
+        }
+        return new ClientCollection($clients->paginate(10)->appends($request->query()));
     }
 
     /**
@@ -40,7 +56,44 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        return new ClientResource(Client::create($request->all()));
+
+        $client =  new ClientResource(Client::create([
+            'name' => $request->name,
+            'nic' => $request->nic,
+            'mobile' => $request->mobile,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'city_id' => $request->city_id,
+            'district_id' => $request->district_id,
+            'province_id' => $request->province_id,
+            'country_id' => $request->country_id,
+            'active' => $request->active,
+        ]));
+
+        if ($client) {
+            $user = new UserResource(User::create([
+                'reference_id' => $request->reference_id,
+                'user_type_id' => $request->user_type_id,
+                'id' => $request->id,
+                'name' => $request->full_name,
+                'email' => $request->email,
+                'image' => $request->image,
+                'last_login' => $request->last_login,
+                'active' => $request->active,
+            ]));
+            if ($user) {
+                $message = 'Client Creaeted Successfully';
+            }
+            else{
+                $message = 'Error Occured When Creating User';
+            }
+        } else {
+            $message = 'Error Occured When Creating Client';
+        }
+
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 
     /**

@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matter_documents', function (Blueprint $table) {
+        Schema::create('matter_accesses', function (Blueprint $table) {
+            $table->foreign('matter_id')->references('id')->on('matters');
+            $table->foreign('staff_id')->references('id')->on('staff');
             $table->foreignId('matter_id');
-            $table->foreignId('client_id')->nullable();
-            $table->foreignId('staff_id')->nullable();
+            $table->foreignId('staff_id');
             $table->id();
-            $table->string('document');
-            $table->string('file_name');
-            $table->tinyInteger('status');
-            $table->text('notes');
-            $table->tinyInteger('active');
+            $table->string('geo_latitude');
+            $table->string('geo_longtude');
+            $table->integer('area');
+            $table->date('permitted_on')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matter_documents');
+        Schema::dropIfExists('matter_accesses');
     }
 };

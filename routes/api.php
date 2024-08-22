@@ -29,4 +29,7 @@ Route::group(['prefix' => 'location'], function () {
     Route::apiResource('districts', DistrictController::class);
     Route::apiResource('cities', CityController::class);
 });
-Route::apiResource('clients', ClientController::class);
+
+Route::group(['prefix' => 'core'], function () {
+    Route::apiResource('clients', ClientController::class);
+});

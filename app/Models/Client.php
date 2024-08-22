@@ -34,7 +34,7 @@ class Client extends Model
 
     public function user()
     {
-        return $this->belongTo(User::class);
+        return $this->hasOne(User::class,'reference_id');
     }
 
     public function city()

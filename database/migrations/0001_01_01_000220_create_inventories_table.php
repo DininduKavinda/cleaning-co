@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matters', function (Blueprint $table) {
-            $table->foreignId('task_id');
-            $table->foreignId('client_id');
-            $table->foreignId('staff_id');
-            $table->foreignId('approved_by');
-            $table->foreignId('department_id');
+        Schema::create('inventories', function (Blueprint $table) {
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreignId('item_id');
             $table->id();
-            $table->string('code');
-            $table->string('description');
-            $table->date('started_at');
-            $table->date('ended_at');
             $table->tinyInteger('status');
+            $table->text('notes');
+            $table->string('physical_location')->nullable();
             $table->tinyInteger('active');
             $table->softDeletes();
             $table->timestamps();
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matters');
+        Schema::dropIfExists('inventories');
     }
 };

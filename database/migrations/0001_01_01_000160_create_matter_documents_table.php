@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventories', function (Blueprint $table) {
-            $table->foreignId('item_id');
+        Schema::create('matter_documents', function (Blueprint $table) {
+            $table->foreign('matter_id')->references('id')->on('matters');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('staff_id')->references('id')->on('staff');
+            $table->foreignId('matter_id');
+            $table->foreignId('client_id')->nullable();
+            $table->foreignId('staff_id')->nullable();
             $table->id();
+            $table->string('document');
+            $table->string('file_name');
             $table->tinyInteger('status');
             $table->text('notes');
-            $table->string('physical_location')->nullable();
             $table->tinyInteger('active');
             $table->softDeletes();
             $table->timestamps();
@@ -28,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('matter_documents');
     }
 };

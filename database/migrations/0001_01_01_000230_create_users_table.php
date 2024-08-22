@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->foreign('user_type_id')->references('id')->on('user_types');
             $table->foreignId('reference_id')->nullable();
             $table->foreignId('user_type_id')->nullable();
             $table->id();

@@ -41,6 +41,10 @@ class Staff extends Model
         'civil_status',
         'active',
     ];
+    public function user()
+    {
+        return $this->hasOne(User::class,'reference_id');
+    }
 
     public function department()
     {

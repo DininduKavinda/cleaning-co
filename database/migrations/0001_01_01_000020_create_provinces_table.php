@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
-            $table->foreignId('item_type_id');
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->id();
-            $table->string('name');
-            $table->decimal('price');
-            $table->tinyInteger('active');
+            $table->foreignId('country_id')->cascadeOnDelete();
+            $table->string('name_en');
+            $table->string('name_si')->nullable();
+            $table->string('name_ta')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('provinces');
     }
 };

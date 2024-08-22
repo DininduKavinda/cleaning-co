@@ -12,6 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('invoice_timecards', function (Blueprint $table) {
+            $table->foreign('timecard_id')->references('id')->on('timecards');
+            $table->foreign('matter_id')->references('id')->on('matters');
+            $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->foreignId('timecard_id');
             $table->foreignId('matter_id');
             $table->foreignId('invoice_id');

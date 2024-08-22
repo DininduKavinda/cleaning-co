@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('g_r_n_s', function (Blueprint $table) {
-            $table->foreignId('item_id');
-            $table->foreignId('approved_by')->nullable();
-            $table->foreignId('returned_by');
+        Schema::create('complains', function (Blueprint $table) {
+            $table->foreign('staff_id')->references('id')->on('staff');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('matter_id')->references('id')->on('matters');
             $table->foreignId('matter_id')->nullable();
+            $table->foreignId('client_id')->nullable();
+            $table->foreignId('staff_id')->nullable();
             $table->id();
-            $table->text('notes');
-            $table->integer('qty');
+            $table->text('description');
             $table->tinyInteger('active');
             $table->softDeletes();
             $table->timestamps();
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('g_r_n_s');
+        Schema::dropIfExists('complains');
     }
 };
