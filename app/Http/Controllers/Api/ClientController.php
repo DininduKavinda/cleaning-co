@@ -8,13 +8,24 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Resources\Api\ClientCollection;
 use App\Http\Resources\Api\ClientResource;
-use App\Http\Resources\UserResource;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\File;
 
-class ClientController extends Controller
+class ClientController extends Controller  implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view client', only: ['indexs', 'shows']),
+            new Middleware('permission:create client', only: ['creates', 'stores']),
+            new Middleware('permission:update client', only: ['updates', 'edits']),
+            new Middleware('permission:delete client', only: ['destroys']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -56,35 +67,41 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-
+        $validatedData = $request->validated();
         $client =  new ClientResource(Client::create([
-            'name' => $request->full_name,
-            'nic' => $request->nic,
-            'mobile' => $request->mobile,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'city_id' => $request->city_id,
-            'district_id' => $request->district_id,
-            'province_id' => $request->province_id,
-            'country_id' => $request->country_id,
-            'active' => $request->active,
+            'name' => $validatedData['full_name'],
+            'nic' => $validatedData['nic'],
+            'mobile' => $validatedData['mobile'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'city_id' => $validatedData['city_id'],
+            'district_id' => $validatedData['district_id'],
+            'province_id' => $validatedData['province_id'],
+            'country_id' => $validatedData['country_id'],
+            'active' => $validatedData['active'],
         ]));
 
         if ($client) {
+            if ($request->hasFile('image')) {
+                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $request->image->move('img/profile/client', $imageName);
+                $validatedData['image'] = 'img/profile/client' . $imageName;
+            } else {
+                $validatedData['image'] = null;
+            }
             $user = new ClientResource(User::create([
                 'reference_id' => $client->id,
                 'user_type_id' => 1,
-                'name' => $request->name,
-                'email' => $request->email,
-                'image' => $request->image,
-                'password' => bcrypt($request->password),
-                'last_login' => $request->last_login,
-                'active' => $request->active,
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'image' => $validatedData['image'],
+                'password' => bcrypt($validatedData['password']),
+                'last_login' => $validatedData['last_login'],
+                'active' => $validatedData['active'],
             ]));
             if ($user) {
                 $message = 'Client Creaeted Successfully';
-            }
-            else{
+            } else {
                 $message = 'Error Occured When Creating User';
             }
         } else {
@@ -99,8 +116,18 @@ class ClientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Client $client)
+    public function show(Client $client, Request $request)
     {
+        $includeUser = $request->query('includeUser');
+        $includeLocations = $request->query('includeLocations');
+        $includeAll = $request->query('includeAll');
+        if ($includeUser) {
+            $client = $client->loadMissing(['user']);
+        } elseif ($includeLocations) {
+            $client = $client->loadMissing(['district', 'country', 'province', 'city']);
+        } elseif ($includeAll) {
+            $client = $client->loadMissing(['user', 'district', 'country', 'province', 'city']);
+        }
         return new ClientResource($client);
     }
 
@@ -117,35 +144,43 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
+
+        $validatedData = $request->validated();
         $client_id = $client->id;
-        $client = $client->update([
-            'name' => $request->full_name,
-            'nic' => $request->nic,
-            'mobile' => $request->mobile,
-            'phone' => $request->phone,
-            'address' => $request->address,
-            'city_id' => $request->city_id,
-            'district_id' => $request->district_id,
-            'province_id' => $request->province_id,
-            'country_id' => $request->country_id,
-            'active' => $request->active,
+        $clients = $client->update([
+            'name' => $validatedData['full_name'],
+            'nic' => $validatedData['nic'],
+            'mobile' => $validatedData['mobile'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'city_id' => $validatedData['city_id'],
+            'district_id' => $validatedData['district_id'],
+            'province_id' => $validatedData['province_id'],
+            'country_id' => $validatedData['country_id'],
+            'active' => $validatedData['active'],
         ]);
-        if ($client) {
-            $user = User::where('user_type_id',1)->where('reference_id',$client_id);
+        if ($clients) {
+            $user = User::where('user_type_id', 1)->where('reference_id', $client_id);
+            if ($request->hasFile('image')) {
+                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $request->image->move('img/profile/client', $imageName);
+                $file_path = 'img/profile/client/' . $imageName;
+                $remove_old = File::delete($user->first()->image);
+                $validatedData['image'] = $file_path;
+            } else {
+                $validatedData['image'] = $user->first()->image;
+            }
             $user->update([
                 'reference_id' => $client_id,
                 'user_type_id' => 1,
-                'name' => $request->name,
-                'email' => $request->email,
-                'image' => $request->image,
-                'password' => bcrypt($request->password),
-                'last_login' => $request->last_login,
-                'active' => $request->active,
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'image' => $validatedData['image'],
+                'active' => $validatedData['active'],
             ]);
             if ($user) {
                 $message = 'Client Created Successfully';
-            }
-            else{
+            } else {
                 $message = 'Error Occured When Creating User';
             }
         } else {
@@ -162,6 +197,17 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
+        $client_id = $client->id;
+        $user = User::where('user_type_id', 1)->where('reference_id', $client_id);
+        if ($user) {
+            $user->delete();
+            $client->delete();
+            $message = 'Client And User Deleted Successfully';
+        } else {
+            $message = 'An Error Occured';
+        }
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 }

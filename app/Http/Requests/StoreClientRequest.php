@@ -36,7 +36,7 @@ class StoreClientRequest extends FormRequest
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|same:password',
             'email' => ['required','email'],
-            'image' => ['sometimes'],
+            'image' => ['max:2048'],
             'last_login' => ['sometimes'],
             'active' => ['sometimes'],
         ];

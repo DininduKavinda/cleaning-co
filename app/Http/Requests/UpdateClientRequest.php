@@ -35,7 +35,7 @@ class UpdateClientRequest extends FormRequest
                 'city_id' => ['required'],
                 'full_name' => ['required'],
                 'email' => ['required', 'email'],
-                'image' => ['sometimes'],
+                'image' => ['max:2048'],
                 'last_login' => ['sometimes'],
                 'active' => ['sometimes'],
             ];
@@ -52,7 +52,7 @@ class UpdateClientRequest extends FormRequest
                 'city_id' => ['sometimes', 'required'],
                 'full_name' => ['sometimes', 'required'],
                 'email' => ['sometimes', 'required', 'email'],
-                'image' => ['sometimes'],
+                'image' => ['max:2048'],
                 'last_login' => ['sometimes'],
                 'active' => ['sometimes'],
             ];
