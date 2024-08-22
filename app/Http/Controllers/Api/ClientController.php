@@ -40,16 +40,9 @@ class ClientController extends Controller  implements HasMiddleware
         if ($includeUser) {
             $clients = $clients->with(['user']);
         } elseif ($includeLocations) {
-            $clients = $clients->with(['district']);
-            $clients = $clients->with(['country']);
-            $clients = $clients->with(['province']);
-            $clients = $clients->with(['city']);
+            $clients = $clients->with(['district', 'country', 'province', 'city']);
         } elseif ($includeAll) {
-            $clients = $clients->with(['user']);
-            $clients = $clients->with(['district']);
-            $clients = $clients->with(['country']);
-            $clients = $clients->with(['province']);
-            $clients = $clients->with(['city']);
+            $clients = $clients->with(['user','district', 'country', 'province', 'city']);
         }
         return new ClientCollection($clients->paginate(10)->appends($request->query()));
     }
