@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'image' => $this->image,
+            'roles' => $this->roles->pluck('name'),
             'last_login' => $this->last_login,
             'active' => $this->active,
         ];

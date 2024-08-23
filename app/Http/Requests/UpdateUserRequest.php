@@ -11,7 +11,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,6 +29,7 @@ class UpdateUserRequest extends FormRequest
                 'user_type_id' => ['sometimes'],
                 'name' => ['required'],
                 'email' => ['required', 'email'],
+                'roles' => ['required'],
                 'image' => ['sometimes'],
                 'last_login' => ['sometimes'],
                 'active' => ['sometimes'],
@@ -40,6 +41,7 @@ class UpdateUserRequest extends FormRequest
                 'name' => ['sometimes', 'required'],
                 'email' => ['sometimes', 'required', 'email'],
                 'image' => ['sometimes'],
+                'roles' => ['sometimes','required'],
                 'last_login' => ['sometimes'],
                 'active' => ['sometimes'],
             ];

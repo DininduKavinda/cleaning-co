@@ -14,10 +14,10 @@ class RoleController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('permission:view role', only: ['index']),
-            new Middleware('permission:create role', only: ['create', 'store', 'addPermissionToRole', 'givePermissionToRole']),
-            new Middleware('permission:update role', only: ['update', 'edit']),
-            new Middleware('permission:delete role', only: ['destroy']),
+            new Middleware('permission:view role', only: ['indexs']),
+            new Middleware('permission:create role', only: ['creates', 'stores', 'addPermissionToRoles', 'givePermissionToRoles']),
+            new Middleware('permission:update role', only: ['updates', 'edits']),
+            new Middleware('permission:delete role', only: ['destroys']),
         ];
     }
 
@@ -103,7 +103,6 @@ class RoleController extends Controller implements HasMiddleware
         $request->validate([
             'permission' => 'required',
         ]);
-
         $role = Role::findOrFail($roleId);
         $role->syncPermissions($request->permission);
 

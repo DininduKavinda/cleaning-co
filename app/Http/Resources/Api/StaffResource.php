@@ -33,8 +33,8 @@ class StaffResource extends JsonResource
             'province_id' => $this->province_id,
             'country_id' => $this->country_id,
             'active' => $this->active,
-            'level_id'  => $this->level_id, // no level yet
-            'department_id' => $this->department_id, // no Department yet
+            'level_id'  => $this->level_id,
+            'department_id' => $this->department_id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'title' => $this->title,

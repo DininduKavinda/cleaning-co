@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\PermissionController;
+use App\Http\Controllers\Api\Auth\RoleController;
+use App\Http\Controllers\Api\Auth\UserController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\Meta\CityController;
 use App\Http\Controllers\Api\Meta\CountryController;
@@ -40,4 +43,12 @@ Route::group(['prefix' => 'core'], function () {
 Route::group(['prefix' => 'company'], function () {
     Route::apiResource('departments', DepartmentController::class);
     Route::apiResource('levels', LevelController::class);
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('roles', RoleController::class);
+    Route::apiResource('permissions', PermissionController::class);
+    Route::get('addPermissionToRole/{id}', [RoleController::class, 'addPermissionToRole']);
+    Route::post('givePermissionToRole/{id}', [RoleController::class, 'givePermissionToRole']);
 });
