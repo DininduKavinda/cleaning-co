@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
 use App\Http\Resources\Api\Meta\CityCollection;
+use App\Http\Resources\Api\Meta\CityResource;
 use App\Models\Meta\City;
 use Illuminate\Http\Request;
 
@@ -50,7 +51,8 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        return new CityResource(City::create($validatedData));
     }
 
     /**
@@ -58,23 +60,32 @@ class CityController extends Controller
      */
     public function show(City $city)
     {
-        //
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeDistrict = request()->query('includeDistrict');
+        $includeAll = request()->query('includeAll');
+        if ($includeStaff) {
+            $city = $city->loadMissing(['staff']);
+        } elseif ($includeClients) {
+            $city = $city->loadMissing(['clients']);
+        } elseif ($includeDistrict) {
+            $city = $city->loadMissing(['district']);
+        }
+        return new CityResource($city);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(City $city)
-    {
-        //
-    }
+    public function edit(City $city) {}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateCityRequest $request, City $city)
     {
-        //
+        $validatedData = $request->validated();
+        $city->update($validatedData);
     }
 
     /**
@@ -82,6 +93,14 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
-        //
+        $city = $city->delete();
+        if ($city) {
+            $message = 'success';
+        } else {
+            $message = 'error';
+        }
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 }
