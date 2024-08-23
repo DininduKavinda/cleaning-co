@@ -25,7 +25,7 @@ class ProvinceController extends Controller
             $provinces = $provinces->with('districts');
         }
 
-        return new ProvinceCollection($provinces->paginate(10000)->append($request->query()));
+        return new ProvinceCollection($provinces->paginate(10)->append($request->query()));
     }
 
     /**
