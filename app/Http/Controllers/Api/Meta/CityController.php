@@ -19,9 +19,22 @@ class CityController extends Controller
     {
         $filter = new CityFilter;
         $filterItems = $filter->transform($request);
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeDistrict = request()->query('includeDistrict');
+        $includeAll = $request->query('includeAll');
         $cities = City::where($filterItems);
-
-        return new CityCollection($cities->paginate(10000)->appends($request->query()));
+        if ($includeStaff) {
+            $cities = $cities->with(['staff']);
+        } elseif ($includeClients) {
+            $cities = $cities->with(['clients']);
+        } elseif ($includeDistrict) {
+            $cities = $cities->with(['district']);
+        }
+        if ($includeAll) {
+            $cities = $cities->with(['staff', 'clients', 'district']);
+        }
+        return new CityCollection($cities->paginate(10)->appends($request->query()));
     }
 
     /**

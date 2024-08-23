@@ -103,7 +103,7 @@ class ProvinceController extends Controller
      */
     public function destroy(Province $province)
     {
-        $province->delete();
+        $province=$province->delete();
         if($province){
             $message = 'success';
         }else{
