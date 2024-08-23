@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProvinceRequest;
 use App\Http\Requests\UpdateProvinceRequest;
 use App\Http\Resources\Api\Meta\ProvinceCollection;
+use App\Http\Resources\Api\Meta\ProvinceResource;
 use App\Models\Meta\Province;
 use Illuminate\Http\Request;
 
@@ -19,12 +20,23 @@ class ProvinceController extends Controller
     {
         $filter = new ProvinceFilter;
         $filterItems = $filter->transform($request);
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeDistricts = request()->query('includeDistricts');
+        $includeCountry = request()->query('includeCountry');
         $includeAll = $request->query('includeAll');
         $provinces = Province::where($filterItems);
         if ($includeAll) {
-            $provinces = $provinces->with('districts');
+            $provinces = $provinces->with(['districts', 'staffs', 'clients', 'country']);
+        } elseif ($includeStaff) {
+            $provinces = $provinces->with(['staffs']);
+        } elseif ($includeClients) {
+            $provinces = $provinces->with(['clients']);
+        } elseif ($includeDistricts) {
+            $provinces = $provinces->with(['districts']);
+        } elseif ($includeCountry) {
+            $provinces = $provinces->with(['country']);
         }
-
         return new ProvinceCollection($provinces->paginate(10)->append($request->query()));
     }
 
@@ -39,14 +51,34 @@ class ProvinceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProvinceRequest $request) {}
+    public function store(StoreProvinceRequest $request)
+    {
+        $validatedData = $request->validated();
+        return new ProvinceResource(Province::create($validatedData));
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(Province $province)
     {
-        //
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeDistricts = request()->query('includeDistricts');
+        $includeCountry = request()->query('includeCountry');
+        $includeAll = request()->query('includeAll');
+        if ($includeAll) {
+            $provinces = $province->loadMissing(['districts', 'staffs', 'clients', 'country']);
+        } elseif ($includeStaff) {
+            $provinces = $province->loadMissing(['staffs']);
+        } elseif ($includeClients) {
+            $provinces = $province->loadMissing(['clients']);
+        } elseif ($includeDistricts) {
+            $provinces = $province->loadMissing(['districts']);
+        } elseif ($includeCountry) {
+            $provinces = $province->loadMissing(['country']);
+        }
+        return new ProvinceResource($province);
     }
 
     /**
@@ -62,7 +94,8 @@ class ProvinceController extends Controller
      */
     public function update(UpdateProvinceRequest $request, Province $province)
     {
-        //
+        $validatedData = $request->validated();
+        $province->update($validatedData);
     }
 
     /**
@@ -70,6 +103,14 @@ class ProvinceController extends Controller
      */
     public function destroy(Province $province)
     {
-        //
+        $province->delete();
+        if($province){
+            $message = 'success';
+        }else{
+            $message = 'error';
+        }
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 }

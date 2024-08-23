@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Api\Meta;
 
+use App\Http\Resources\Api\ClientResource;
+use App\Http\Resources\Api\StaffResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,8 +21,11 @@ class ProvinceResource extends JsonResource
             'name_en' => $this->name_en,
             'name_si' => $this->name_si,
             'name_ta' => $this->name_ta,
-            'country_id' => $this->country->country_name,
+            'country_id' => $this->country_id,
             'districts' => DistrictResource::collection($this->whenLoaded('districts')),
+            'country' => new CountryResource($this->whenLoaded('user')),
+            'staff' => StaffResource::collection($this->whenLoaded('staff')),
+            'clients' => ClientResource::collection($this->whenLoaded('clients')),
         ];
     }
 }
