@@ -24,7 +24,7 @@ return new class extends Migration
             $table->dateTime('ended_time');
             $table->decimal('time_spent');
             $table->decimal('charge_rate');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

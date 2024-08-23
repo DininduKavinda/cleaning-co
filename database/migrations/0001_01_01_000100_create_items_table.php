@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('price');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

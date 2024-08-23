@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Meta\CityController;
 use App\Http\Controllers\Api\Meta\CountryController;
 use App\Http\Controllers\Api\Meta\DistrictController;
 use App\Http\Controllers\Api\Meta\ProvinceController;
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,10 @@ Route::group(['prefix' => 'location'], function () {
 
 Route::group(['prefix' => 'core'], function () {
     Route::apiResource('clients', ClientController::class);
+    Route::apiResource('staff', ClientController::class);
+});
+
+Route::group(['prefix' => 'company'], function () {
+    Route::apiResource('departments', DepartmentController::class);
+    Route::apiResource('levels', DepartmentController::class);
 });

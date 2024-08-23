@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->decimal('amount');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

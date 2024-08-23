@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('staff_id')->nullable();
             $table->id();
             $table->text('description');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

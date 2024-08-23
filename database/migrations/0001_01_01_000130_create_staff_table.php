@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('mobile');
             $table->string('phone');
             $table->string('civil_status');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

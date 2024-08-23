@@ -28,7 +28,7 @@ return new class extends Migration
             $table->date('started_at');
             $table->date('ended_at');
             $table->tinyInteger('status');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

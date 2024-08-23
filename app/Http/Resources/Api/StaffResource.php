@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use App\Http\Resources\Api\Com\DepartmentResource;
 use App\Http\Resources\Api\Meta\CityResource;
 use App\Http\Resources\Api\Meta\CountryResource;
 use App\Http\Resources\Api\Meta\DistrictResource;
@@ -43,6 +44,8 @@ class StaffResource extends JsonResource
             'district' => new DistrictResource($this->whenLoaded('district')),
             'province' => new ProvinceResource($this->whenLoaded('province')),
             'country' => new CountryResource($this->whenLoaded('country')),
+            'level' =>  new LevelResource($this->whenLoaded('level')),
+            'department'=> new DepartmentResource($this->whenLoaded('department')),
         ];
     }
 }

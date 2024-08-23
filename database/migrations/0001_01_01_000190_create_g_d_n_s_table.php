@@ -23,7 +23,7 @@ return new class extends Migration
             $table->id();
             $table->text('notes');
             $table->integer('qty');
-            $table->tinyInteger('active');
+            $table->tinyInteger('active')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

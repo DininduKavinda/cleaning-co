@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('avtive');
+            $table->tinyInteger('avtive')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
