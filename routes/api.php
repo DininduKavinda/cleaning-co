@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Meta\CountryController;
 use App\Http\Controllers\Api\Meta\DistrictController;
 use App\Http\Controllers\Api\Meta\ProvinceController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\LevelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,5 +39,5 @@ Route::group(['prefix' => 'core'], function () {
 
 Route::group(['prefix' => 'company'], function () {
     Route::apiResource('departments', DepartmentController::class);
-    Route::apiResource('levels', DepartmentController::class);
+    Route::apiResource('levels', LevelController::class);
 });

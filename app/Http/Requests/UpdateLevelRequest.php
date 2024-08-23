@@ -11,7 +11,7 @@ class UpdateLevelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,24 @@ class UpdateLevelRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if($method == 'put'){
+            return [
+                'name' => ['required'],
+                'active'=>['sometimes']
+            ];
+        }else{
+            return [
+                'name' => ['sometimes'],
+                'active'=>['sometimes']
+            ];
+        }
+    }
+    protected function prepareForValidation(){
+        if ($this->name) {
+            $this->merge([
+                'name' => $this->name,
+            ]);
+        }
     }
 }

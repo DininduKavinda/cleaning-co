@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Api;
 
 use App\Http\Resources\Api\Com\DepartmentResource;
+use App\Http\Resources\Api\Com\LevelResource;
 use App\Http\Resources\Api\Meta\CityResource;
 use App\Http\Resources\Api\Meta\CountryResource;
 use App\Http\Resources\Api\Meta\DistrictResource;
