@@ -43,8 +43,10 @@ class UpdateCountryRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            'country_name' => $this->country_name,
-        ]);
+        if ($this->country_name) {
+            $this->merge([
+                'country_name' => $this->country_name,
+            ]);
+        }
     }
 }
