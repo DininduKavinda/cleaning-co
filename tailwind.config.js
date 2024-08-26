@@ -1,29 +1,22 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'class',
     content: [
-        "./resources/**/*.blade.php",
-        "./resources/**/**/*.blade.php",
-        "./resources/**/**/**/*.blade.php",
-        "./resources/**/**/**/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.vue",
-        "./vendor/masmerise/livewire-toaster/resources/views/*.blade.php"
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+        './resources/js/**/*.jsx',
     ],
+
     theme: {
         extend: {
             fontFamily: {
-                'body': [
-                    'Rubik'
-                ],
-                'sans': [
-                    'Rubik'
-                ]
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
     },
-    plugins: [
-        require('flowbite/plugin')
-    ],
-}
 
+    plugins: [forms],
+};
