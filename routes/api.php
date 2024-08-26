@@ -10,8 +10,12 @@ use App\Http\Controllers\Api\Meta\CountryController;
 use App\Http\Controllers\Api\Meta\DistrictController;
 use App\Http\Controllers\Api\Meta\ProvinceController;
 use App\Http\Controllers\Api\Com\DepartmentController;
+use App\Http\Controllers\Api\Com\ItemController;
+use App\Http\Controllers\Api\Com\ItemTypeController;
 use App\Http\Controllers\Api\Com\LevelController;
 use App\Http\Controllers\Api\Com\TaskController;
+use App\Http\Controllers\Api\Com\TimecardTaskController;
+use App\Http\Controllers\Api\Com\UserTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +49,10 @@ Route::group(['prefix' => 'common'], function () {
     Route::apiResource('departments', DepartmentController::class);
     Route::apiResource('levels', LevelController::class);
     Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('timecardTasks', TimecardTaskController::class);
+    Route::apiResource('itemTypes', ItemTypeController::class);
+    Route::apiResource('items', ItemController::class);
+    Route::apiResource('userTypes', UserTypeController::class);
 });
 
 Route::group(['prefix' => 'admin'], function () {
