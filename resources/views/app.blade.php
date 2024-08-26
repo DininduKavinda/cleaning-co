@@ -52,7 +52,7 @@
     <!--fontawesome-->
     <script src="{{ asset('theme/assets/js/vendors/font-awesome/fontawesome-min.js') }}"></script>
     <!-- password_show-->
-    {{-- <script src="{{ asset('theme/assets/js/password.js') }}"></script> --}}
+    {{-- <script src="{{ asset('theme/assets/js/password.js') }}"></script> --}} --}}
     <!-- custom script -->
     {{-- <script src="{{ asset('theme/assets/js/script.js') }}"></script> --}}
 </body>
