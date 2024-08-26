@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Core;
 
-use App\Http\Requests\StoreMatterDocumentRequest;
-use App\Http\Requests\UpdateMatterDocumentRequest;
-use App\Models\Module\MatterDocument;
+use App\Http\Requests\StoreMatterRequest;
+use App\Http\Requests\UpdateMatterRequest;
+use App\Models\Module\Matter;
+use Illuminate\Routing\Controller;
 
-class MatterDocumentController extends Controller
+class MatterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class MatterDocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMatterDocumentRequest $request)
+    public function store(StoreMatterRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class MatterDocumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MatterDocument $matterDocument)
+    public function show(Matter $matter)
     {
         //
     }
@@ -43,7 +44,7 @@ class MatterDocumentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MatterDocument $matterDocument)
+    public function edit(Matter $matter)
     {
         //
     }
@@ -51,7 +52,7 @@ class MatterDocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMatterDocumentRequest $request, MatterDocument $matterDocument)
+    public function update(UpdateMatterRequest $request, Matter $matter)
     {
         //
     }
@@ -59,7 +60,7 @@ class MatterDocumentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MatterDocument $matterDocument)
+    public function destroy(Matter $matter)
     {
         //
     }

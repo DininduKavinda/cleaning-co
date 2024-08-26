@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Core;
 
 use App\Http\Requests\StoreMatterAccessRequest;
 use App\Http\Requests\UpdateMatterAccessRequest;
 use App\Models\Module\MatterAccess;
+use Illuminate\Routing\Controller;
 
 class MatterAccessController extends Controller
 {

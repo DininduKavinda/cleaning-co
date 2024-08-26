@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('department_id');
             $table->id();
             $table->string('code');
+            $table->string('name');
             $table->string('description');
             $table->date('started_at');
             $table->date('ended_at');
