@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Com\LevelController;
 use App\Http\Controllers\Api\Com\TaskController;
 use App\Http\Controllers\Api\Com\TimecardTaskController;
 use App\Http\Controllers\Api\Com\UserTypeController;
+use App\Http\Controllers\Api\Core\MatterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,11 @@ Route::group(['prefix' => 'common'], function () {
     Route::apiResource('itemTypes', ItemTypeController::class);
     Route::apiResource('items', ItemController::class);
     Route::apiResource('userTypes', UserTypeController::class);
+});
+
+
+Route::group(['prefix' => 'core'], function () {
+    Route::apiResource('matters', MatterController::class);
 });
 
 Route::group(['prefix' => 'admin'], function () {

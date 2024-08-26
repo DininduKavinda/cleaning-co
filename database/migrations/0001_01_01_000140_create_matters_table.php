@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('description');
             $table->date('started_at');
             $table->date('ended_at');
+            $table->string('map_latitude')->nullable();
+            $table->string('map_longitude')->nullable();
             $table->tinyInteger('status');
             $table->tinyInteger('active')->nullable();
             $table->softDeletes();

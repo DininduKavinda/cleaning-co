@@ -39,7 +39,7 @@ class MatterResource extends JsonResource
             'approved' => new StaffResource($this->whenLoaded('approved')),
             'department' => new DepartmentResource($this->whenLoaded('department')),
             'timecards' => TimecardTaskResource::collection($this->whenLoaded('timecards')),
-            'timecardTasks' => TimecardTaskResource::collection($this->whenLoaded('timecardTasks')),
+            'matter_documents'=> MatterDocumentResource::collection($this->whenLoaded('matter_documents')),
         ];
     }
 }

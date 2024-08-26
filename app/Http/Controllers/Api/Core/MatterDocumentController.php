@@ -2,19 +2,40 @@
 
 namespace App\Http\Controllers\Api\Core;
 
+use App\Filters\Core\MatterDocumentFilter;
 use App\Http\Requests\StoreMatterDocumentRequest;
 use App\Http\Requests\UpdateMatterDocumentRequest;
 use App\Models\Module\MatterDocument;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\Core\MatterDocumentCollection;
+use App\Http\Resources\Api\Core\MatterDocumentResource;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class MatterDocumentController extends Controller
+class MatterDocumentController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view level', only: ['indexs', 'shows']),
+            new Middleware('permission:create level', only: ['creates', 'stores']),
+            new Middleware('permission:update clilevelent', only: ['updates', 'edits']),
+            new Middleware('permission:delete level', only: ['destroys']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $filter = new MatterDocumentFilter;
+        $filterItems = request()->transform($filter);
+        $includeMatter = request()->query('includeMatter');
+        $mD = MatterDocument::where($filterItems);
+        if($includeMatter){
+            $mD = $mD->with(['matter', 'client', 'staff']);
+        }
+        return new MatterDocumentCollection($mD->paginate(10)->appends(request()->query()));
     }
 
     /**
@@ -30,7 +51,9 @@ class MatterDocumentController extends Controller
      */
     public function store(StoreMatterDocumentRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $matter = MatterDocument::create($validatedData);
+        return response()->json(['data' => $matter], 201);
     }
 
     /**
@@ -38,7 +61,11 @@ class MatterDocumentController extends Controller
      */
     public function show(MatterDocument $matterDocument)
     {
-        //
+        $includeMatter = request()->query('includeMatter');
+        if($includeMatter){
+            $matterDocument = $matterDocument->with(['matter', 'client', 'staff']);
+        }
+        return new MatterDocumentResource($matterDocument);
     }
 
     /**
@@ -54,7 +81,9 @@ class MatterDocumentController extends Controller
      */
     public function update(UpdateMatterDocumentRequest $request, MatterDocument $matterDocument)
     {
-        //
+        $validatedData = $request->validated();
+        $matterDocument->update($validatedData);
+        return response()->json(['data' => $matterDocument], 200);
     }
 
     /**
@@ -62,6 +91,7 @@ class MatterDocumentController extends Controller
      */
     public function destroy(MatterDocument $matterDocument)
     {
-        //
+        $matterDocument->delete();
+        return response()->json(['message' => 'Deleted Successfully'], 204);
     }
 }
