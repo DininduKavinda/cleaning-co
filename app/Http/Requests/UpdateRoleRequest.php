@@ -11,7 +11,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +19,24 @@ class UpdateRoleRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'put') {
+            return [
+                'name' => ['required','unique:role,name'],
+            ];
+        }else{
+            return [
+                'name' => ['required', 'unique:role,name,'],
+            ];
+        }
+    }
+    protected function prepareForValidation(){
+        if ($this->name) {
+            $this->merge([
+                'name' => $this->name,
+            ]);
+        }
     }
 }
