@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Com;
 
 use App\Filters\Com\DepartmentFilter;
 use App\Http\Requests\StoreDepartmentRequest;
@@ -11,6 +11,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use App\Http\Controllers\Controller;
 
 class DepartmentController extends Controller implements HasMiddleware
 {

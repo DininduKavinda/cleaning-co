@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Com;
 
 use App\Filters\Com\LevelFilter;
 use App\Http\Requests\StoreLevelRequest;
@@ -11,6 +11,7 @@ use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use App\Http\Controllers\Controller;
 
 class LevelController extends Controller implements HasMiddleware
 {

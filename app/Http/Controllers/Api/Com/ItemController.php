@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Com;
 
-use App\Http\Requests\StoreItemTypeRequest;
-use App\Http\Requests\UpdateItemTypeRequest;
-use App\Models\Item\ItemType;
+use App\Http\Requests\StoreItemRequest;
+use App\Http\Requests\UpdateItemRequest;
+use App\Models\Item\Item;
+use App\Http\Controllers\Controller;
 
-class ItemTypeController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class ItemTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreItemTypeRequest $request)
+    public function store(StoreItemRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class ItemTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ItemType $itemType)
+    public function show(Item $item)
     {
         //
     }
@@ -43,7 +44,7 @@ class ItemTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ItemType $itemType)
+    public function edit(Item $item)
     {
         //
     }
@@ -51,7 +52,7 @@ class ItemTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateItemTypeRequest $request, ItemType $itemType)
+    public function update(UpdateItemRequest $request, Item $item)
     {
         //
     }
@@ -59,7 +60,7 @@ class ItemTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ItemType $itemType)
+    public function destroy(Item $item)
     {
         //
     }
