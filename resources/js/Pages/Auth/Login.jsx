@@ -62,9 +62,6 @@ export default function Login({ status, canResetPassword }) {
                         required
                         placeholder="*********"
                     />
-                    <div className="show-hide">
-                        <span className="show"></span>
-                    </div>
 
                     {errors.password && (
                         <div className="mt-2 text-sm text-red-600">
