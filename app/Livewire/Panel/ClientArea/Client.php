@@ -3,6 +3,7 @@
 namespace App\Livewire\Panel\ClientArea;
 
 use App\Models\Client as ModelsClient;
+use App\Models\User;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
 
@@ -33,7 +34,9 @@ class Client extends Component
 
         if ($response) {
 
+            $user = User::where('user_type_id',1)->where('reference_id',$id);
             $this->clients = $response->delete();
+            $delete = $user->delete();
 
             if ($this->clients) {
 

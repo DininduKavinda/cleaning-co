@@ -40,10 +40,13 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         $user = User::where('email', $request->email)->first();
+
         if (! empty($user)) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('mytoken')->accessToken;
-
+                $lastLogin = $user->update([
+                    'last_login' => date('Y-m-d H:i:s'),
+                ]);
                 return response()->json([
                     'status' => true,
                     'message' => 'User logged in Successfully',

@@ -12,10 +12,10 @@ class PermissionController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('permission:view permission', only: ['index']),
-            new Middleware('permission:create permission', only: ['create', 'store']),
-            new Middleware('permission:update permission', only: ['update', 'edit']),
-            new Middleware('permission:delete permission', only: ['destroy']),
+            new Middleware('permission:view permission', only: ['indexs']),
+            new Middleware('permission:create permission', only: ['creates', 'stores']),
+            new Middleware('permission:update permission', only: ['updates', 'edits']),
+            new Middleware('permission:delete permission', only: ['destroys']),
         ];
     }
 

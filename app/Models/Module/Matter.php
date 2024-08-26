@@ -87,10 +87,13 @@ class Matter extends Model
     {
         return $this->hasMany(Complain::class);
     }
-    public function invoice(){
+
+    public function invoice()
+    {
         return $this->hasOne(Invoice::class);
     }
-     public function invoice_timecard()
+
+    public function invoice_timecard()
     {
         return $this->hasMany(InvoiceTimecard::class);
     }

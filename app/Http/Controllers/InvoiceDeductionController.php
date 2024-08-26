@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoice\InvoiceDeduction;
 use App\Http\Requests\StoreInvoiceDeductionRequest;
 use App\Http\Requests\UpdateInvoiceDeductionRequest;
+use App\Models\Invoice\InvoiceDeduction;
 
 class InvoiceDeductionController extends Controller
 {

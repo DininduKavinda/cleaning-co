@@ -49,7 +49,9 @@
                                         @can('delete user')
                                             <button type="button"
                                                 class="font-medium text-red-600 dark:text-red-500 hover:underline"
-                                                onclick="ConfirmationDialog.confirm(() => @this.call('deleteUser', {{ $user->id }}))">Delete</button>
+                                                onclick="confirmDelete('user', () => @this.call('deleteUser', {{ $user->id }}))">
+                                                Delete
+                                            </button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -61,3 +63,4 @@
         </div>
     </div>
 </div>
+

@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             DistrictSeeder::class,
             CitySeeder::class,
             UserRolePermissionSeeder::class,
+            UserTypeSeeder::class,
         ]);
     }
 }

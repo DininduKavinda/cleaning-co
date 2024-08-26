@@ -11,7 +11,7 @@ class StoreDepartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class StoreDepartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>['required'],
+            'active'=>['sometimes'],
         ];
+    }
+    protected function prepareForValidation(){
+        $this->merge([
+            'name'=>$this->name,
+        ]);
     }
 }

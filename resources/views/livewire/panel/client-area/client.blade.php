@@ -50,7 +50,7 @@
                             {{ $client['id' ?? 'N/A'] }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $client['full_name'] ?? 'N/A' }}
+                            {{ $client['name'] ?? 'N/A' }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $client['mobile'] ?? 'N/A' }}
@@ -74,7 +74,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div >
-                                @if ($client['active'] == 0)
+                                @if ($client['active'] == 0|| null)
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" data-tooltip-target="tooltip-right"
                                         class="size-6">
                                         <path fill-rule="evenodd"
@@ -99,7 +99,8 @@
                             <a href="{{ route('client.update', $client['id']) }}" wire:navigate
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             @can('delete location')
-                                <button wire:click.prevent="deleteData({{ $client['id'] }})"
+                                <button
+                                onclick="confirmDelete('Client', () => @this.call('deleteData', {{ $client['id'] }}))"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                             @endcan
                         </td>

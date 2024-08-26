@@ -9,14 +9,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class InvoiceDeduction extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'id',
         'name',
         'description',
         'amount',
-        'active'
+        'active',
     ];
-    public function invoice(){
+
+    public function invoice()
+    {
         return $this->hasMany(Invoice::class);
     }
 }

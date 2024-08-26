@@ -47,7 +47,8 @@
                                                 @endcan
 
                                                 @can('delete role')
-                                                    <button wire:click.prevent="deleteRole({{ $role->id }})"
+                                                    <button
+                                                        onclick="confirmDelete('Role', () => @this.call('deleteRole', {{ $role->id }}))"
                                                         class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                                                 @endcan
                                             </td>

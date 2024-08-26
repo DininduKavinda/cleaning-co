@@ -43,8 +43,10 @@ class UpdateProvinceRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            'name_en' => $this->name_en,
-        ]);
+        if ($this->name_en) {
+            $this->merge([
+                'name_en' => $this->name_en,
+            ]);
+        }
     }
 }

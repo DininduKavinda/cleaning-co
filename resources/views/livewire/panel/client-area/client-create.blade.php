@@ -13,6 +13,14 @@
                 <div class="card-header">
                     <h4 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Create Client</h4>
                 </div>
+                <div class="flex justify-center py-5">
+                    <figure
+                        class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+                        <img id="imagePreview" wire:ignore id="fileInput" class="rounded-full w-96 h-96"
+                            @if (empty($this->form->image)) src="{{ asset('image.jpg') }}" @else src="{{ asset($this->form->image) }}" @endif
+                            alt="image description">
+                    </figure>
+                </div>
                 <div class="card-body">
                     <form wire:submit.prevent='saveData'>
                         @csrf
@@ -29,25 +37,16 @@
                                     <span class="text-danger">{{ $errors->first('form.name') }}</span>
                                 @endif
                             </div>
-                            <div class="grid md:grid-cols-2 md:gap-6 ">
-                                <div class="mb-3">
-                                    <label for=""
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Active</label>
-                                    <select wire:model="form.active"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="">Select Option</option>
-                                        <option value="0">Active</option>
-                                        <option value="1">Inactive</option>
-                                    </select>
-                                </div>
-                                <div class="">
-                                    <label for=""
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile
-                                        Photo</label>
-                                    <input type="text"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500  @error('form.name') is-invalid @enderror"
-                                        id="name" wire:model="form.image" placeholder="Image" required="">
-                                </div>
+
+
+                            <div class="">
+                                <label for=""
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIC
+                                </label>
+                                <input type="text"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500  @error('form.name') is-invalid @enderror"
+                                    id="name" wire:model="form.nic" placeholder="" required="">
+
                             </div>
                         </div>
                         <div class="mb-3">
@@ -72,51 +71,51 @@
                                 <label for=""
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User
                                     Type</label>
-                                <select wire:model="form.type_id"
+                                <select wire:model="form.user_type_id" disabled
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="">Select Type</option>
-                                    <option value="1">Client</option>
-                                    <option value="2">Admin</option>
-                                    <option value="3">Super Admin</option>
-                                </select>
-                            </div>
-                            @if (empty($this->form->id))
-                            <div class="mb-3">
-                                <label for=""
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
-                                <select wire:model="form.roles"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="">Select Role</option>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role }}">{{ $role }}</option>
+                                    <option selected value="1">Client</option>
+                                    @foreach ($userTypes as $userType)
+                                        <option value="{{ $userType->id }}">{{ $userType->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            @endif
+
+                            <div class="mb-3">
+                                <label for=""
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Roles</label>
+                                <select wire:model="form.roles" required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="">Select Role</option>
+                                    @foreach ($roles as $role)
+                                        <option selected value="{{ $role }}">{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
                         @if (empty($this->form->id))
-                        <div class="grid md:grid-cols-2 md:gap-6 mb-3">
-                            <div class="mb-3">
-                                <label for="password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input type="password" id="password" wire:model="form.password"
-                                    class="bg-gray-50 border @error('password') is-invalid @enderror border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Password" required="">
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
+                            <div class="grid md:grid-cols-2 md:gap-6 mb-3">
+                                <div class="mb-3">
+                                    <label for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                    <input type="password" id="password" wire:model="form.password"
+                                        class="bg-gray-50 border @error('password') is-invalid @enderror border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="Password" required="">
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
+                                </div>
 
-                            <div class="mb-3">
-                                <label for="password_confirmation"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input type="password" id="password_confirmation"
-                                    wire:model.blur="form.password_confirmation"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Confirm Password" required="">
-                            </div>
+                                <div class="mb-3">
+                                    <label for="password_confirmation"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                    <input type="password" id="password_confirmation"
+                                        wire:model.blur="form.password_confirmation"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="Confirm Password" required="">
+                                </div>
 
-                        </div>
+                            </div>
                         @endif
 
 
@@ -191,6 +190,21 @@
                             </div>
                         </div>
 
+                        <div class="mb-6">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="user_avatar">Upload Image</label>
+                            <input id="fileInput" accept="image/*" wire:model="form.image" type="file"
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                        </div>
+                        <div class="grid md:grid-cols-1 md:gap-6 mb-3">
+                            <div class="mb-2">
+                                <label class="inline-flex items-center mb-5 cursor-pointer">
+                                    <input wire:model="form.active" type="checkbox" {{ ($this->form->active)  ? "" : "checked" }} value="1" class="sr-only peer" >
+                                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Check to Inactive User</span>
+                                  </label>
+                            </div>
+                        </div>
                         <button type="submit"
                             class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm bg-black font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">Save</button>
                         <a href="{{ route('clients') }}" wire:navigate
@@ -201,3 +215,13 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const imagePreview = document.getElementById('imagePreview');
+            imagePreview.src = reader.result;
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    });
+</script>

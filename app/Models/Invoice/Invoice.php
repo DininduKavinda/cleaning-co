@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Invoice extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'client_id',
         'invoice_deduction_id',
@@ -29,16 +30,23 @@ class Invoice extends Model
         'status',
         'active',
     ];
-    public function client(){
+
+    public function client()
+    {
         return $this->belongsTo(Client::class);
     }
-    public function invoice_deduction(){
+
+    public function invoice_deduction()
+    {
         return $this->belongsTo(InvoiceDeduction::class);
     }
-    public function matter(){
+
+    public function matter()
+    {
         return $this->belongsTo(Matter::class);
     }
-     public function invoice_timecard()
+
+    public function invoice_timecard()
     {
         return $this->hasMany(InvoiceTimecard::class);
     }
