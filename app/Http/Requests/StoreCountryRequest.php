@@ -28,4 +28,9 @@ class StoreCountryRequest extends FormRequest
             'user_id' => ['required'],
         ];
     }
+    protected function prepareForValidation(){
+        $this->merge([
+            'country_name' => $this->country_name,
+        ]);
+    }
 }

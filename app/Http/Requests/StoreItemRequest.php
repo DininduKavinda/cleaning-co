@@ -11,7 +11,7 @@ class StoreItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class StoreItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'item_type_id' => ['required'],
+            'name' =>  ['required'],
+            'price' =>  ['required'],
+            'active' =>  ['sometimes'],
         ];
+    }
+    protected function prepareForValidation(){
+        $this->merge([
+            'name' => $this->name ,
+        ]);
     }
 }

@@ -20,9 +20,21 @@ class CountryController extends Controller
     {
         $filter = new CountryFilter;
         $filterItems = $filter->transform($request);
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeProvinces = request()->query('includeProvinces');
+        $includeAll = request()->query('includeAll');
         $countries = Country::where($filterItems);
-
-        return new CountryCollection($countries->paginate(20000)->appends($request->query()));
+        if ($includeAll) {
+            $countries = $countries->with(['staffs', 'clients', 'provinces']);
+        } elseif ($includeStaff) {
+            $countries =  $countries->with(['staffs']);
+        } elseif ($includeClients) {
+            $countries =  $countries->with(['clients']);
+        } elseif ($includeProvinces) {
+            $countries =  $countries->with(['provinces']);
+        }
+        return new CountryCollection($countries->paginate(10)->appends($request->query()));
     }
 
     /**
@@ -38,7 +50,8 @@ class CountryController extends Controller
      */
     public function store(StoreCountryRequest $request)
     {
-        return new CountryResource(Country::create($request->all()));
+        $validatedData = $request->validated();
+        return new CountryResource(Country::create($validatedData));
     }
 
     /**
@@ -46,9 +59,18 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        $includeUsers = request()->query('includeUsers');
-        if ($includeUsers) {
-            return new CountryResource($country->loadMissing(['users', 'status', 'currency']));
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeProvinces = request()->query('includeProvinces');
+        $includeAll = request()->query('includeAll');
+        if ($includeAll) {
+            $country = $country->loadMissing(['staffs', 'clients', 'provinces']);
+        } elseif ($includeStaff) {
+            $country =  $country->loadMissing(['staffs']);
+        } elseif ($includeClients) {
+            $country =  $country->loadMissing(['clients']);
+        } elseif ($includeProvinces) {
+            $country =  $country->loadMissing(['provinces']);
         }
 
         return new CountryResource($country);
@@ -67,7 +89,8 @@ class CountryController extends Controller
      */
     public function update(UpdateCountryRequest $request, Country $country)
     {
-        $country->update($request->all());
+        $validatedData = $request->validated();
+        $country->update($validatedData);
     }
 
     /**
@@ -76,9 +99,13 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         $country->delete();
-
+        if($country){
+            $message = 'success';
+        }else{
+            $message = 'error';
+        }
         return response()->json([
-            'message' => 'succesfully Deleted',
+            'message' => $message,
         ]);
     }
 }

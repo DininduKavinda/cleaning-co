@@ -21,8 +21,45 @@ class UpdateMatterRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method =  $this->method();
+        if ($method == 'put') {
+            return [
+                'task_id' => ['required'],
+                'client_id' => ['required'],
+                'staff_id' => ['required'],
+                'approved_by' => ['required'],
+                'department_id' => ['required'],
+                'name' => ['required'],
+                'code' => ['required'],
+                'description' => ['required'],
+                'started_at' => ['required'],
+                'ended_at' => ['required'],
+                'status' => ['required'],
+                'active' => ['sometimes'],
+            ];
+        } else {
+            return [
+                'task_id' => ['sometimes', 'required'],
+                'client_id' => ['sometimes', 'required'],
+                'staff_id' => ['sometimes', 'required'],
+                'approved_by' => ['sometimes', 'required'],
+                'department_id' => ['sometimes', 'required'],
+                'name' => ['sometimes', 'required'],
+                'code' => ['sometimes', 'required'],
+                'description' => ['sometimes', 'required'],
+                'started_at' => ['sometimes', 'required'],
+                'ended_at' => ['sometimes', 'required'],
+                'status' => ['sometimes', 'required'],
+                'active' => ['sometimes'],
+            ];
+        }
+    }
+    protected function prepareForValidation()
+    {
+        if ($this->name) {
+            $this->merge([
+                'name' => $this->name,
+            ]);
+        }
     }
 }

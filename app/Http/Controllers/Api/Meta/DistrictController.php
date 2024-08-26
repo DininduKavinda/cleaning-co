@@ -20,13 +20,24 @@ class DistrictController extends Controller
     {
         $filter = new DistrictFilter;
         $filterItems = $filter->transform($request);
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeCities = request()->query('includeCities');
+        $includeProvince = request()->query('includeProvince');
         $includeAll = $request->query('includeAll');
         $districts = District::where($filterItems);
         if ($includeAll) {
+            $districts = $districts->with(['cities', 'province', 'staff', 'clients']);
+        } elseif ($includeStaff) {
+            $districts = $districts->with(['staff']);
+        } elseif ($includeClients) {
+            $districts = $districts->with(['clients']);
+        } elseif ($includeCities) {
             $districts = $districts->with(['cities']);
+        } elseif ($includeProvince) {
+            $districts = $districts->with(['province']);
         }
-
-        return new DistrictCollection($districts->paginate(20000)->appends($request->query()));
+        return new DistrictCollection($districts->paginate(10)->appends($request->query()));
     }
 
     /**
@@ -42,7 +53,8 @@ class DistrictController extends Controller
      */
     public function store(StoreDistrictRequest $request)
     {
-        return new DistrictResource(District::create($request->all()));
+        $validatedData = $request->validated();
+        return new DistrictResource(District::create($validatedData));
     }
 
     /**
@@ -50,11 +62,23 @@ class DistrictController extends Controller
      */
     public function show(District $district)
     {
-        // $includeAll = request()->query('includeAll');
-        // if($includeAll){
-        //     return new DistrictResource($district->loadMissing(['cities','status']));
-        // }
-        // return new DistrictResource($district);
+        $includeStaff = request()->query('includeStaff');
+        $includeClients = request()->query('includeClients');
+        $includeCities = request()->query('includeCities');
+        $includeProvince = request()->query('includeProvince');
+        $includeAll = request()->query('includeAll');
+        if ($includeAll) {
+            $districts = $district->loadMissing(['cities', 'province', 'staff', 'clients']);
+        } elseif ($includeStaff) {
+            $districts = $district->loadMissing(['staff']);
+        } elseif ($includeClients) {
+            $districts = $district->loadMissing(['clients']);
+        } elseif ($includeCities) {
+            $districts = $district->loadMissing(['cities']);
+        } elseif ($includeProvince) {
+            $districts = $district->loadMissing(['province']);
+        }
+        return new DistrictResource($district);
     }
 
     /**
@@ -70,7 +94,8 @@ class DistrictController extends Controller
      */
     public function update(UpdateDistrictRequest $request, District $district)
     {
-        $district->update($request->all());
+        $validatedData = $request->validated();
+        $district->update($validatedData);
     }
 
     /**
@@ -78,6 +103,14 @@ class DistrictController extends Controller
      */
     public function destroy(District $district)
     {
-        $district->delete();
+        $district = $district->delete();
+        if ($district) {
+            $message = 'success';
+        } else {
+            $message = 'error';
+        }
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 }

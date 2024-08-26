@@ -11,7 +11,7 @@ class StoreStaffRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,35 @@ class StoreStaffRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'level_id' => ['required'],
+            'country_id' => ['required'],
+            'province_id' => ['required'],
+            'district_id' => ['required'],
+            'city_id' => ['required'],
+            'department_id' => ['required'],
+            'first_name' => ['like'],
+            'last_name' => ['like'],
+            'nic' => ['required'],
+            'titile' => ['required'],
+            'initial' => ['like'],
+            'full_name' => ['like'],
+            'dob' => ['required'],
+            'address' => ['required'],
+            'mobile' => ['required'],
+            'phone' => ['required'],
+            'civil_status' => ['required'],
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|same:password',
+            'email' => ['required','email'],
+            'image' => ['max:2048'],
+            'last_login' => ['sometimes'],
+            'active' => ['required'],
         ];
+    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'name' => $this->name,
+        ]);
     }
 }

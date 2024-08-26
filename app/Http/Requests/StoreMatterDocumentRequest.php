@@ -11,7 +11,7 @@ class StoreMatterDocumentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreMatterDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'matter_id' => ['required'],
+            'client_id' => ['required'],
+            'staff_id' => ['required'],
+            'document' => ['required'],
+            'status' => ['required'],
+            'notes' => ['required'],
+            'file_name' => ['required'],
+            'active' => ['sometimes'],
         ];
+    }
+    protected function prepareForValidation(){
+        $this->merge([
+            'name' => $this->name,
+        ]);
     }
 }

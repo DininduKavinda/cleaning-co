@@ -21,8 +21,63 @@ class UpdateStaffRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'put') {
+            return [
+                'level_id' => ['required'],
+                'country_id' => ['required'],
+                'province_id' => ['required'],
+                'district_id' => ['required'],
+                'city_id' => ['required'],
+                'department_id' => ['required'],
+                'first_name' => ['required'],
+                'last_name' => ['required'],
+                'nic' => ['required'],
+                'titile' => ['required'],
+                'initial' => ['required'],
+                'full_name' => ['required'],
+                'dob' => ['required'],
+                'address' => ['required'],
+                'mobile' => ['required'],
+                'phone' => ['required'],
+                'civil_status' => ['required'],
+                'email' => ['required', 'email'],
+                'image' => ['max:2048'],
+                'last_login' => ['sometimes'],
+                'active' => ['required'],
+            ];
+        } else {
+            return [
+                'level_id' => ['sometimes', 'required'],
+                'country_id' => ['sometimes', 'required'],
+                'province_id' => ['sometimes', 'required'],
+                'district_id' => ['sometimes', 'required'],
+                'city_id' => ['sometimes', 'required'],
+                'department_id' => ['sometimes', 'required'],
+                'first_name' => ['sometimes', 'required'],
+                'last_name' => ['sometimes', 'required'],
+                'nic' => ['sometimes', 'required'],
+                'titile' => ['sometimes', 'required'],
+                'initial' => ['sometimes', 'required'],
+                'full_name' => ['sometimes', 'required'],
+                'dob' => ['sometimes', 'required'],
+                'address' => ['sometimes', 'required'],
+                'mobile' => ['sometimes', 'required'],
+                'phone' => ['sometimes', 'required'],
+                'civil_status' => ['sometimes', 'required'],
+                'email' => ['required', 'email'],
+                'image' => ['sometimes', 'max:2048'],
+                'last_login' => ['sometimes'],
+                'active' => ['sometimes', 'required'],
+            ];
+        }
+    }
+    protected function prepareForValidation()
+    {
+        if ($this->name) {
+            $this->merge([
+                'name' => $this->name,
+            ]);
+        }
     }
 }

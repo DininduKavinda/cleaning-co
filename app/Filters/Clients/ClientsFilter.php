@@ -7,18 +7,19 @@ use App\Filters\ApiFilter;
 class ClientsFilter extends ApiFilter
 {
     protected $safeParams = [
-        'full_name' => ['like'],
+        'name' => ['like'],
         'address' => ['like'],
         'phone' => ['eq'],
         'mobile' => ['eq'],
-        'post_code' => ['eq'],
+        'nic' => ['eq'],
         'city_id' => ['eq'],
         'district_id' => ['eq'],
         'province_id' => ['eq'],
-        'status_id' => ['eq'],
+        'country_id' => ['eq'],
+        'active' => ['eq'],
     ];
 
     protected $columnMap = [
-        'full_name' => 'full_name',
+        'name' => 'name',
     ];
 }

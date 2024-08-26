@@ -25,6 +25,9 @@ use App\Livewire\Panel\Meta\Location\Province\Create as ProvinceCreate;
 use App\Livewire\Panel\Meta\Location\Province\Province;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/mapbox', function () {
+    return view('mapbox');
+});
 Route::get('/', function () {
     return view('welcome');
 });
