@@ -5,7 +5,7 @@ function UserTable({ users }) {
     return (
         <div className="table-responsive signal-table">
             <table className="table table-hover">
-                <thead>
+                <thead className="table-success">
                     <tr>
                         <th scope="col">Id</th>
                         <th scope="col">Name</th>
@@ -15,7 +15,7 @@ function UserTable({ users }) {
                         <th scope="col">Active</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-group-divider">
                     {users.map((user) => (
                         <tr key={user.id}>
                             <th scope="row">{user.id}</th>
