@@ -27639,7 +27639,7 @@ input::-webkit-inner-spin-button {
   padding: 15px 25px;
   height: calc(100vh - 70px);
   overflow: auto;
-  display: flex;
+  /* display: flex; */
 }
 .sidebar-menu .sidebar-list {
   border-bottom: 1px solid var(--border-color);

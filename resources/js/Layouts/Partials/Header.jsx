@@ -1,3 +1,5 @@
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import { Link } from "@inertiajs/react";
 import React from "react";
 
 export default function Header() {
@@ -16,7 +18,10 @@ export default function Header() {
                         alt="logo"
                     />
                 </a>
-                <a className="close-btn toggle-sidebar" href="javascript:void(0)">
+                <a
+                    className="close-btn toggle-sidebar"
+                    href="javascript:void(0)"
+                >
                     <svg className="svg-color">
                         <use href="theme/assets/svg/iconly-sprite.svg#Category"></use>
                     </svg>
@@ -44,7 +49,9 @@ export default function Header() {
                                         className="spinner-border Typeahead-spinner"
                                         role="status"
                                     >
-                                        <span className="sr-only">Loading...</span>
+                                        <span className="sr-only">
+                                            Loading...
+                                        </span>
                                     </div>
                                     <i
                                         className="close-search"
@@ -75,9 +82,14 @@ export default function Header() {
                         <li className="custom-dropdown">
                             <div className="translate_wrapper">
                                 <div className="current_lang">
-                                    <a className="lang" href="javascript:void(0)">
+                                    <a
+                                        className="lang"
+                                        href="javascript:void(0)"
+                                    >
                                         <i className="flag-icon flag-icon-us"></i>
-                                        <h6 className="lang-txt f-w-700">ENG</h6>
+                                        <h6 className="lang-txt f-w-700">
+                                            ENG
+                                        </h6>
                                     </a>
                                 </div>
                                 <ul className="custom-menu profile-menu language-menu py-0 more_lang">
@@ -88,7 +100,9 @@ export default function Header() {
                                             data-value="English"
                                         >
                                             <i className="flag-icon flag-icon-us"></i>
-                                            <div className="lang-txt">English</div>
+                                            <div className="lang-txt">
+                                                English
+                                            </div>
                                         </a>
                                     </li>
                                     <li className="d-block">
@@ -98,7 +112,9 @@ export default function Header() {
                                             data-value="fr"
                                         >
                                             <i className="flag-icon flag-icon-fr"></i>
-                                            <div className="lang-txt">Français</div>
+                                            <div className="lang-txt">
+                                                Français
+                                            </div>
                                         </a>
                                     </li>
                                     <li className="d-block">
@@ -108,7 +124,9 @@ export default function Header() {
                                             data-value="es"
                                         >
                                             <i className="flag-icon flag-icon-es"></i>
-                                            <div className="lang-txt">Español</div>
+                                            <div className="lang-txt">
+                                                Español
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
@@ -169,7 +187,7 @@ export default function Header() {
                                                             className="form-control input-number"
                                                             type="text"
                                                             name="quantity"
-                                                           defaultValue="1"
+                                                            defaultValue="1"
                                                         />
                                                         <span className="input-group-prepend">
                                                             <button
@@ -188,7 +206,10 @@ export default function Header() {
                                                 </h6>
                                             </div>
                                             <div className="close-circle">
-                                                <a className="bg-danger" href="#">
+                                                <a
+                                                    className="bg-danger"
+                                                    href="#"
+                                                >
                                                     <i data-feather="x"></i>
                                                 </a>
                                             </div>
@@ -221,7 +242,7 @@ export default function Header() {
                                                             className="form-control input-number"
                                                             type="text"
                                                             name="quantity"
-                                                           defaultValue="1"
+                                                            defaultValue="1"
                                                         />
                                                         <span className="input-group-prepend">
                                                             <button
@@ -240,7 +261,10 @@ export default function Header() {
                                                 </h6>
                                             </div>
                                             <div className="close-circle">
-                                                <a className="bg-danger" href="#">
+                                                <a
+                                                    className="bg-danger"
+                                                    href="#"
+                                                >
                                                     <i data-feather="x"></i>
                                                 </a>
                                             </div>
@@ -283,7 +307,9 @@ export default function Header() {
                             <div className="custom-menu notification-dropdown py-0 overflow-hidden">
                                 <h3 className="title bg-primary-light dropdown-title">
                                     Notification{" "}
-                                    <span className="font-primary">View all</span>
+                                    <span className="font-primary">
+                                        View all
+                                    </span>
                                 </h3>
                                 <ul className="activity-timeline">
                                     <li className="d-flex align-items-start">
@@ -365,7 +391,10 @@ export default function Header() {
                             </div>
                         </li>
                         <li>
-                            <a className="full-screen" href="javascript:void(0)">
+                            <a
+                                className="full-screen"
+                                href="javascript:void(0)"
+                            >
                                 <svg>
                                     <use href="theme/assets/svg/iconly-sprite.svg#scanfull"></use>
                                 </svg>
@@ -484,7 +513,7 @@ export default function Header() {
                             <div className="user-wrap">
                                 <div className="user-img">
                                     <img
-                                        src="theme/assets/images/profile.png"
+                                        src={'theme/assets/images/profile.png'}
                                         alt="user"
                                     />
                                 </div>
@@ -513,7 +542,10 @@ export default function Header() {
                                         <svg className="svg-color">
                                             <use href="theme/assets/svg/iconly-sprite.svg#Message"></use>
                                         </svg>
-                                        <a className="ms-2" href="letter-box.html">
+                                        <a
+                                            className="ms-2"
+                                            href="letter-box.html"
+                                        >
                                             Inbox
                                         </a>
                                     </li>
@@ -529,9 +561,14 @@ export default function Header() {
                                         <svg className="svg-color">
                                             <use href="theme/assets/svg/iconly-sprite.svg#Login"></use>
                                         </svg>
-                                        <a className="ms-2" href="login.html">
-                                            Log Out
-                                        </a>
+                                        <ResponsiveNavLink
+
+                                    method="post"
+                                    href={route("logout")}
+                                    as="button"
+                                >
+                                    Log Out
+                                </ResponsiveNavLink>
                                     </li>
                                 </ul>
                             </div>
