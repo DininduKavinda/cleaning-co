@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title inertia>{{ config('app.name', 'Cleaning Company') }}</title>
 
     <link rel="icon" href="{{ asset('theme/assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/favicon.png') }}" type="image/x-icon">
@@ -30,6 +30,12 @@
     <!-- App css -->
     <link rel="stylesheet" href="{{ asset('theme/assets/css/style.css') }}">
     <link id="color" rel="stylesheet" href="{{ asset('theme/assets/css/color-1.css') }}" media="screen">
+    <!-- Whether Icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('theme/assets/css/vendors/weather-icons/weather-icons.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/assets/css/vendors/scrollbar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/assets/css/vendors/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('theme/assets/css/vendors/slick-theme.css') }}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -41,18 +47,58 @@
     @inertiaHead
 </head>
 
-<body class="font-sans antialiased">
-    @inertia
-
+<body>
+    <div class="tap-top"><i class="iconly-Arrow-Up icli"></i></div>
+    <!-- loader-->
+    <div class="loader-wrapper">
+        <div class="loader"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+        @inertia
+    </div>
     <!-- jquery-->
-    <script src="{{ asset('theme/assets/js/vendors/jquery/jquery.min.js') }}"></script>
+    <script src="{{asset('theme/assets/js/vendors/jquery/jquery.min.js')}}"></script>
     <!-- bootstrap js-->
-    <script src="{{ asset('theme/assets/js/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}" defer=""></script>
-    <script src="{{ asset('theme/assets/js/vendors/bootstrap/dist/js/popper.min.js') }}" defer=""></script>
+    <script src="{{asset('theme/assets/js/vendors/bootstrap/dist/js/bootstrap.bundle.min.js')}}" defer=""></script>
+    <script src="{{asset('theme/assets/js/vendors/bootstrap/dist/js/popper.min.js')}}" defer=""></script>
     <!--fontawesome-->
-    <script src="{{ asset('theme/assets/js/vendors/font-awesome/fontawesome-min.js') }}"></script>
+    <script src="{{asset('theme/assets/js/vendors/font-awesome/fontawesome-min.js')}}"></script>
+    <!-- feather-->
+    <script src="{{asset('theme/assets/js/vendors/feather-icon/feather.min.js')}}"></script>
+    <script src="{{asset('theme/assets/js/vendors/feather-icon/custom-script.js')}}"></script>
+    <!-- sidebar -->
+    <script src="{{asset('theme/assets/js/sidebar.js')}}"></script>
+    <!-- height_equal-->
+    <script src="{{asset('theme/assets/js/height-equal.js')}}"></script>
+    <!-- config-->
+    <script src="{{asset('theme/assets/js/config.js')}}"></script>
+    <!-- apex-->
+    <script src="{{asset('theme/assets/js/chart/apex-chart/apex-chart.js')}}"></script>
+    <script src="{{asset('theme/assets/js/chart/apex-chart/stock-prices.js')}}"></script>
+    <!-- scrollbar-->
+    <script src="{{asset('theme/assets/js/scrollbar/simplebar.js')}}"></script>
+    <script src="{{asset('theme/assets/js/scrollbar/custom.js')}}"></script>
+    <!-- slick-->
+    <script src="{{asset('theme/assets/js/slick/slick.min.js')}}"></script>
+    <script src="{{asset('theme/assets/js/slick/slick.js')}}"></script>
+    <!-- data_table-->
+    <script src="{{asset('theme/assets/js/js-datatables/datatables/jquery.dataTables.min.js')}}"></script>
+    <!-- page_datatable-->
+    <script src="{{asset('theme/assets/js/js-datatables/datatables/datatable.custom.js')}}"></script>
+    <!-- page_datatable1-->
+    <script src="{{asset('theme/assets/js/js-datatables/datatables/datatable.custom1.js')}}"></script>
+    <!-- page_datatable-->
+    <script src="{{asset('theme/assets/js/datatable/datatables/datatable.custom.js')}}"></script>
+    <!-- theme_customizer-->
+    <script src="{{asset('theme/assets/js/theme-customizer/customizer.js')}}"></script>
+    <!-- tilt-->
+    <script src="{{asset('theme/assets/js/animation/tilt/tilt.jquery.js')}}"></script>
+    <!-- page_tilt-->
+    <script src="{{asset('theme/assets/js/animation/tilt/tilt-custom.js')}}"></script>
+    <!-- dashboard_1-->
+    <script src="{{asset('theme/assets/js/dashboard/dashboard_1.js')}}"></script>
     <!-- custom script -->
-    <script src="{{ asset('theme/assets/js/script.js') }}"></script>
+    <script src="{{asset('theme/assets/js/script.js')}}"></script>
 </body>
 
 </html>
