@@ -1,5 +1,6 @@
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -8,12 +9,17 @@ export default function Login({ status, canResetPassword }) {
         remember: false,
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+
     const submit = (e) => {
         e.preventDefault();
-
         post(route("login"), {
             onFinish: () => reset("password"),
         });
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
     return (
@@ -52,18 +58,26 @@ export default function Login({ status, canResetPassword }) {
                         Password
                     </label>
 
-                    <input
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        onChange={(e) => setData("password", e.target.value)}
-                        className="form-control"
-                        required
-                        placeholder="*********"
-                    />
-                    <div className="show-hide">
-                        <span className="show"></span>
+                    <div className="input-group">
+                        <input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            value={data.password}
+                            onChange={(e) =>
+                                setData("password", e.target.value)
+                            }
+                            className="form-control"
+                            required
+                            placeholder="*********"
+                        />
+                        <button
+                            type="button"
+                            className="btn btn-outline-secondary"
+                            onClick={togglePasswordVisibility}
+                        >
+                            {showPassword ? "Hide" : "Show"}
+                        </button>
                     </div>
 
                     {errors.password && (
