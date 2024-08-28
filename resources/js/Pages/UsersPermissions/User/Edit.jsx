@@ -6,7 +6,7 @@ import { usePage } from "@inertiajs/react";
 function UserForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.user?.id;
-
+    console.log(page_info);
     const [user, setUser] = useState({
         name: "",
         email: "",

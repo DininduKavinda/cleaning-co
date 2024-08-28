@@ -25,10 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['prefix'=>'users'], function () {
-    Route::get('/', [UsersController::class, 'index'])->name('user.users');
-    Route::get('/create', [UsersController::class, 'createView'])->name('user.create');
-    Route::get('/edit/{id}', [UsersController::class, 'createView'])->name('user.edit');
+Route::group(['prefix'=>'userManagement'], function () {
+    Route::resource('users',UsersController::class);
+    // Route::get('/users', [UsersController::class, 'index'])->name('users');
+    // Route::get('/create', [UsersController::class, 'create'])->name('users.create');
+    // Route::get('/show/{id}', [UsersController::class, 'show'])->name('users.show');
 })->middleware('auth');
+
+// Route::group(['prefix'=>'permission'], function(){
+//     Route::get('/', [])
+// })->middleware('auth');
 
 require __DIR__ . '/auth.php';

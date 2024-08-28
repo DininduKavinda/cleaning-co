@@ -30,21 +30,21 @@ function SideBar() {
                     </li>
 
                     {/* Sidebar Item 1 */}
-                    <li
-                        className="sidebar-list"
-                    >
+                    <li className="sidebar-list">
                         <i className="fa-solid fa-thumbtack"></i>
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href    ={route("dashboard")}
+                            href={route("dashboard")}
                         >
                             <svg className="stroke-icon">
-                                <use href={'/theme/assets/svg/iconly-sprite.svg#Home-dashboard'}></use>
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Home-dashboard"
+                                    }
+                                ></use>
                             </svg>
                             <h6>Dashboards</h6>
-                            <span className="badge">3</span>
                         </Link>
-                      
                     </li>
                     <li className="sidebar-main-title">
                         <div>
@@ -65,10 +65,14 @@ function SideBar() {
                             onClick={() => handleSidebarClick(1)}
                         >
                             <svg className="stroke-icon stroke-none">
-                                <use href={'/theme/assets/svg/iconly-sprite.svg#Profile'}></use>
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Profile"
+                                    }
+                                ></use>
                             </svg>
                             <h6>Users</h6>
-                            <span className="badge">3</span>
+
                             <i className="iconly-Arrow-Right-2 icli"></i>
                         </button>
                         <ul
@@ -78,13 +82,49 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("user.users")}>User</Link>
+                                <Link href={route("users.index")}>User</Link>
                             </li>
                             <li>
-                                <Link href={route("user.create")}>New User</Link>
+                                <Link href={route("users.create")}>
+                                    New User
+                                </Link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                        className={`sidebar-list ${
+                            activeItem === 2 ? "active" : ""
+                        }`}
+                    >
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <button
+                            className="sidebar-link btn btn-outline-none w-100 "
+                            onClick={() => handleSidebarClick(2)}
+                        >
+                            <svg className="stroke-icon stroke-none">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Profile"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Permissions</h6>
+
+                            <i className="iconly-Arrow-Right-2 icli"></i>
+                        </button>
+                        <ul
+                            className="sidebar-submenu"
+                            style={{
+                                display: activeItem === 2 ? "block" : "none",
+                            }}
+                        >
+                            <li>
+                                <Link href={route("users.index")}>User</Link>
                             </li>
                             <li>
-                                <Link to="dashboard-03.html">Assign Users</Link>
+                                <Link href={route("users.create")}>
+                                    New User
+                                </Link>
                             </li>
                         </ul>
                     </li>

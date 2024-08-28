@@ -1,15 +1,14 @@
 import React from "react";
-import { Link, router  } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 
 function UserTable({ users }) {
-    
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
                 await axios.delete(
                     `http://127.0.0.1:8000/api/admin/users/${id}`
                 );
-                router.visit(route('user.users'));
+                router.visit(route("users.index"));
             } catch (error) {
                 console.error("Error deleting user:", error);
             }
@@ -62,7 +61,10 @@ function UserTable({ users }) {
                                     </td>
                                     <td>
                                         <Link
-                                            href={`/users/edit/${user.id}`}
+                                            href={`${route(
+                                                "users.show",
+                                                user.id
+                                            )}`}
                                             className="btn btn-warning btn-sm"
                                         >
                                             Edit

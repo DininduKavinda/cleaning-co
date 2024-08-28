@@ -25,13 +25,12 @@ class UsersController extends Controller implements HasMiddleware
     {
         return Inertia::render('UsersPermissions/User/User');
     }
-    public function createView($id =null): response
+    public function create(): response
     {
-        if(!empty($id)){
-            $user= User::find($id);
-            return Inertia::render('UsersPermissions/User/Edit',['user'=>$user]);
-        }else{
-            return Inertia::render('UsersPermissions/User/Edit');
-        }
+        return Inertia::render('UsersPermissions/User/Edit');
+    }
+    public function show(User $user): response
+    {
+        return Inertia::render('UsersPermissions/User/Edit', ['user' => $user]);
     }
 }
