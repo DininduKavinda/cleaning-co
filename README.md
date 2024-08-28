@@ -1,5 +1,4 @@
-API{
-    
-   Role-> create and update
+User Copy -> Role
 
-}
+Permission Create
+ Every Pagination
