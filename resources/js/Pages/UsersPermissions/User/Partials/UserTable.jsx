@@ -1,6 +1,20 @@
 import React from "react";
+import { Link, router  } from "@inertiajs/react";
 
 function UserTable({ users }) {
+    
+    const handleDelete = async (id) => {
+        if (window.confirm("Are you sure you want to delete this user?")) {
+            try {
+                await axios.delete(
+                    `http://127.0.0.1:8000/api/admin/users/${id}`
+                );
+                router.visit(route('user.users'));
+            } catch (error) {
+                console.error("Error deleting user:", error);
+            }
+        }
+    };
     return (
         <div className="card overflow-hidden">
             <div className="card-header card-no-border">
@@ -26,6 +40,9 @@ function UserTable({ users }) {
                                 <th className="bg-primary" scope="col">
                                     Active
                                 </th>
+                                <th className="bg-primary" scope="col">
+                                    Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
@@ -42,6 +59,22 @@ function UserTable({ users }) {
                                     <td>{user.last_login || "Never"}</td>
                                     <td>
                                         {user.active ? "Active" : "Inactive"}
+                                    </td>
+                                    <td>
+                                        <Link
+                                            href={`/users/edit/${user.id}`}
+                                            className="btn btn-warning btn-sm"
+                                        >
+                                            Edit
+                                        </Link>
+                                        <button
+                                            onClick={() =>
+                                                handleDelete(user.id)
+                                            }
+                                            className="btn btn-danger btn-sm ms-2"
+                                        >
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}

@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
 
 function SearchBox({ onSearch, onEmailSearch, onActiveSearch }) {
@@ -76,10 +77,10 @@ function SearchBox({ onSearch, onEmailSearch, onActiveSearch }) {
                         </div>
                         <div className="col-md-6 d-md-block d-none">
                             <div className="form-group mb-0 me-0"></div>
-                            <a className="btn btn-primary d-flex align-items-center" href="#">
+                            <Link className="btn btn-primary d-flex align-items-center" href={route('user.create')}>
                                 {" "}
                                 <i data-feather="plus-square"></i>Create New{" "}
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="mb-4">
