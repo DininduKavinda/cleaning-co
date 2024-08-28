@@ -1,4 +1,3 @@
-// src/Pages/User.js
 import React, { useEffect, useState } from "react";
 import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
@@ -10,6 +9,7 @@ function User({ auth }) {
     const [users, setUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [emailQuery, setEmailQuery] = useState("");
+    const [activeQuery, setActiveQuery] = useState("");
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -17,9 +17,13 @@ function User({ auth }) {
                 let url = "http://127.0.0.1:8000/api/admin/users";
                 const params = [];
 
-                if (searchQuery || emailQuery) {
+                if (searchQuery || activeQuery || emailQuery) {
                     params.push(`name[like]=${searchQuery}`);
                     params.push(`email[like]=${emailQuery}`);
+                    if(activeQuery.valueOf() !== ""){
+                        params.push(`active[eq]=${activeQuery}`);
+                    }
+                   
                 }
 
                 if (params.length > 0) {
@@ -29,12 +33,15 @@ function User({ auth }) {
                 const response = await axios.get(url);
                 setUsers(response.data.data);
             } catch (error) {
-                console.error("There was an error fetching the user data!", error);
+                console.error(
+                    "There was an error fetching the user data!",
+                    error
+                );
             }
         };
 
         fetchUsers();
-    }, [searchQuery, emailQuery]);
+    }, [searchQuery, emailQuery, activeQuery]);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
@@ -42,6 +49,10 @@ function User({ auth }) {
 
     const handleEmailSearch = (email) => {
         setEmailQuery(email);
+    };
+
+    const handleActiveSearch = (active) => {
+        setActiveQuery(active);
     };
 
     return (
@@ -74,8 +85,13 @@ function User({ auth }) {
                     </div>
                 </div>
             </div>
+
             <div className="col-sm-12">
-                <SearchBox onSearch={handleSearch} onEmailSearch={handleEmailSearch} />
+                <SearchBox
+                    onActiveSearch={handleActiveSearch}
+                    onSearch={handleSearch}
+                    onEmailSearch={handleEmailSearch}
+                />
                 <UserTable users={users} />
             </div>
         </AuthenticatedLayout>

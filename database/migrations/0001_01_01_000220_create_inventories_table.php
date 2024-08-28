@@ -18,7 +18,7 @@ return new class extends Migration
             $table->tinyInteger('status');
             $table->text('notes');
             $table->string('physical_location')->nullable();
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

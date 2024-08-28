@@ -25,8 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/users', [UsersController::class, 'index'])->name('user.users');
-});
+Route::group(['prefix'=>'users'], function () {
+    Route::get('/', [UsersController::class, 'index'])->name('user.users');
+    Route::get('/create', [UsersController::class, 'createView'])->name('user.create');
+    Route::get('/edit/{id}', [UsersController::class, 'createView'])->name('user.edit');
+})->middleware('auth');
 
 require __DIR__ . '/auth.php';

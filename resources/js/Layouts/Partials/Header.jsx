@@ -9,12 +9,12 @@ export default function Header() {
                 <a href="index.html">
                     <img
                         className="light-logo img-fluid"
-                        src="theme/assets/images/logo/logo1.png"
+                        src="/theme/assets/images/logo/logo1.png"
                         alt="logo"
                     />
                     <img
                         className="dark-logo img-fluid"
-                        src="theme/assets/images/logo/logo-dark.png"
+                        src="/theme/assets/images/logo/logo-dark.png"
                         alt="logo"
                     />
                 </a>
@@ -23,7 +23,7 @@ export default function Header() {
                     href="javascript:void(0)"
                 >
                     <svg className="svg-color">
-                        <use href="theme/assets/svg/iconly-sprite.svg#Category"></use>
+                        <use href="/theme/assets/svg/iconly-sprite.svg#Category"></use>
                     </svg>
                 </a>
             </div>
@@ -136,7 +136,7 @@ export default function Header() {
                             {" "}
                             <a href="javascript:void(0)">
                                 <svg>
-                                    <use href="theme/assets/svg/iconly-sprite.svg#Search"></use>
+                                    <use href="/theme/assets/svg/iconly-sprite.svg#Search"></use>
                                 </svg>
                             </a>
                         </li>
@@ -144,14 +144,14 @@ export default function Header() {
                             {" "}
                             <a className="dark-mode" href="javascript:void(0)">
                                 <svg>
-                                    <use href="theme/assets/svg/iconly-sprite.svg#moondark"></use>
+                                    <use href="/theme/assets/svg/iconly-sprite.svg#moondark"></use>
                                 </svg>
                             </a>
                         </li>
                         <li className="custom-dropdown">
                             <a href="javascript:void(0)">
                                 <svg>
-                                    <use href="theme/assets/svg/iconly-sprite.svg#cart-icon"></use>
+                                    <use href="/theme/assets/svg/iconly-sprite.svg#cart-icon"></use>
                                 </svg>
                             </a>
                             <span className="badge rounded-pill badge-primary">
@@ -164,7 +164,7 @@ export default function Header() {
                                         <div className="d-flex">
                                             <img
                                                 className="img-fluid b-r-5 me-3 img-60"
-                                                src="theme/assets/images/dashboard-2/1.png"
+                                                src="/theme/assets/images/dashboard-2/1.png"
                                                 alt=""
                                             />
                                             <div className="flex-grow-1">
@@ -219,7 +219,7 @@ export default function Header() {
                                         <div className="d-flex">
                                             <img
                                                 className="img-fluid b-r-5 me-3 img-60"
-                                                src="theme/assets/images/dashboard-2/2.png"
+                                                src="/theme/assets/images/dashboard-2/2.png"
                                                 alt=""
                                             />
                                             <div className="flex-grow-1">
@@ -298,7 +298,7 @@ export default function Header() {
                         <li className="custom-dropdown">
                             <a href="javascript:void(0)">
                                 <svg>
-                                    <use href="theme/assets/svg/iconly-sprite.svg#notification"></use>
+                                    <use href="/theme/assets/svg/iconly-sprite.svg#notification"></use>
                                 </svg>
                             </a>
                             <span className="badge rounded-pill badge-primary">
@@ -320,7 +320,7 @@ export default function Header() {
                                                 30-04-2024<span>Today</span>
                                                 <span className="circle-dot-primary float-end">
                                                     <svg className="circle-color">
-                                                        <use href="theme/assets/svg/iconly-sprite.svg#circle"></use>
+                                                        <use href="/theme/assets/svg/iconly-sprite.svg#circle"></use>
                                                     </svg>
                                                 </span>
                                             </h6>
@@ -340,7 +340,7 @@ export default function Header() {
                                                 <span>1 hour ago</span>
                                                 <span className="float-end circle-dot-secondary">
                                                     <svg className="circle-color">
-                                                        <use href="theme/assets/svg/iconly-sprite.svg#circle"></use>
+                                                        <use href="/theme/assets/svg/iconly-sprite.svg#circle"></use>
                                                     </svg>
                                                 </span>
                                             </h6>
@@ -358,7 +358,7 @@ export default function Header() {
                                                 04-08-2024<span>Today</span>
                                                 <span className="float-end circle-dot-primary">
                                                     <svg className="circle-color">
-                                                        <use href="theme/assets/svg/iconly-sprite.svg#circle"></use>
+                                                        <use href="/theme/assets/svg/iconly-sprite.svg#circle"></use>
                                                     </svg>
                                                 </span>
                                             </h6>
@@ -376,7 +376,7 @@ export default function Header() {
                                                 12-11-2024<span>Yesterday</span>
                                                 <span className="float-end circle-dot-secondary">
                                                     <svg className="circle-color">
-                                                        <use href="theme/assets/svg/iconly-sprite.svg#circle"></use>
+                                                        <use href="/theme/assets/svg/iconly-sprite.svg#circle"></use>
                                                     </svg>
                                                 </span>
                                             </h6>
@@ -396,14 +396,14 @@ export default function Header() {
                                 href="javascript:void(0)"
                             >
                                 <svg>
-                                    <use href="theme/assets/svg/iconly-sprite.svg#scanfull"></use>
+                                    <use href="/theme/assets/svg/iconly-sprite.svg#scanfull"></use>
                                 </svg>
                             </a>
                         </li>
                         <li className="custom-dropdown">
                             <a href="javascript:void(0)">
                                 <svg>
-                                    <use href="theme/assets/svg/iconly-sprite.svg#bookmark"></use>
+                                    <use href="/theme/assets/svg/iconly-sprite.svg#bookmark"></use>
                                 </svg>
                             </a>
                             <div className="custom-menu bookmark-dropdown py-0 overflow-hidden">
@@ -421,7 +421,7 @@ export default function Header() {
                                                 />
                                                 <span className="input-group-text">
                                                     <svg className="svg-color">
-                                                        <use href="theme/assets/svg/iconly-sprite.svg#Search"></use>
+                                                        <use href="/theme/assets/svg/iconly-sprite.svg#Search"></use>
                                                     </svg>
                                                 </span>
                                             </div>
@@ -431,14 +431,14 @@ export default function Header() {
                                         <div className="flex-shrink-0 me-2 btn-activity-primary">
                                             <a href="index.html">
                                                 <svg className="svg-color">
-                                                    <use href="theme/assets/svg/iconly-sprite.svg#cube"></use>
+                                                    <use href="/theme/assets/svg/iconly-sprite.svg#cube"></use>
                                                 </svg>
                                             </a>
                                         </div>
                                         <div className="d-flex justify-content-between align-items-center w-100">
                                             <a href="index.html">Dashboard</a>
                                             <svg className="svg-color icon-star">
-                                                <use href="theme/assets/svg/iconly-sprite.svg#star"></use>
+                                                <use href="/theme/assets/svg/iconly-sprite.svg#star"></use>
                                             </svg>
                                         </div>
                                     </li>
@@ -446,14 +446,14 @@ export default function Header() {
                                         <div className="flex-shrink-0 me-2 btn-activity-secondary">
                                             <a href="to-do.html">
                                                 <svg className="svg-color">
-                                                    <use href="theme/assets/svg/iconly-sprite.svg#check"></use>
+                                                    <use href="/theme/assets/svg/iconly-sprite.svg#check"></use>
                                                 </svg>
                                             </a>
                                         </div>
                                         <div className="d-flex justify-content-between align-items-center w-100">
                                             <a href="to-do.html">To-do</a>
                                             <svg className="svg-color icon-star">
-                                                <use href="theme/assets/svg/iconly-sprite.svg#star"></use>
+                                                <use href="/theme/assets/svg/iconly-sprite.svg#star"></use>
                                             </svg>
                                         </div>
                                     </li>
@@ -461,14 +461,14 @@ export default function Header() {
                                         <div className="flex-shrink-0 me-2 btn-activity-danger">
                                             <a href="apex_chart.html">
                                                 <svg className="svg-color">
-                                                    <use href="theme/assets/svg/iconly-sprite.svg#pie"></use>
+                                                    <use href="/theme/assets/svg/iconly-sprite.svg#pie"></use>
                                                 </svg>
                                             </a>
                                         </div>
                                         <div className="d-flex justify-content-between align-items-center w-100">
                                             <a href="apex_chart.html">Chart</a>
                                             <svg className="svg-color icon-star">
-                                                <use href="theme/assets/svg/iconly-sprite.svg#star"></use>
+                                                <use href="/theme/assets/svg/iconly-sprite.svg#star"></use>
                                             </svg>
                                         </div>
                                     </li>
@@ -513,7 +513,7 @@ export default function Header() {
                             <div className="user-wrap">
                                 <div className="user-img">
                                     <img
-                                        src={'theme/assets/images/profile.png'}
+                                        src={'/theme/assets/images/profile.png'}
                                         alt="user"
                                     />
                                 </div>
@@ -529,7 +529,7 @@ export default function Header() {
                                 <ul className="profile-body">
                                     <li className="d-flex">
                                         <svg className="svg-color">
-                                            <use href="theme/assets/svg/iconly-sprite.svg#Profile"></use>
+                                            <use href="/theme/assets/svg/iconly-sprite.svg#Profile"></use>
                                         </svg>
                                         <a
                                             className="ms-2"
@@ -540,7 +540,7 @@ export default function Header() {
                                     </li>
                                     <li className="d-flex">
                                         <svg className="svg-color">
-                                            <use href="theme/assets/svg/iconly-sprite.svg#Message"></use>
+                                            <use href="/theme/assets/svg/iconly-sprite.svg#Message"></use>
                                         </svg>
                                         <a
                                             className="ms-2"
@@ -551,7 +551,7 @@ export default function Header() {
                                     </li>
                                     <li className="d-flex">
                                         <svg className="svg-color">
-                                            <use href="theme/assets/svg/iconly-sprite.svg#Document"></use>
+                                            <use href="/theme/assets/svg/iconly-sprite.svg#Document"></use>
                                         </svg>
                                         <a className="ms-2" href="to-do.html">
                                             Task
@@ -559,7 +559,7 @@ export default function Header() {
                                     </li>
                                     <li className="d-flex">
                                         <svg className="svg-color">
-                                            <use href="theme/assets/svg/iconly-sprite.svg#Login"></use>
+                                            <use href="/theme/assets/svg/iconly-sprite.svg#Login"></use>
                                         </svg>
                                         <ResponsiveNavLink
 

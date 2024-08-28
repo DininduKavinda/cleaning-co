@@ -67,7 +67,7 @@
     <script src="{{asset('theme/assets/js/vendors/feather-icon/feather.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/vendors/feather-icon/custom-script.js')}}"></script>
     <!-- sidebar -->
-    <script src="{{asset('theme/assets/js/sidebar.js')}}"></script>
+    {{-- <script src="{{asset('theme/assets/js/sidebar.js')}}"></script> --}}
     <!-- height_equal-->
     <script src="{{asset('theme/assets/js/height-equal.js')}}"></script>
     <!-- config-->

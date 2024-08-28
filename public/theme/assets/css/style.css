@@ -23350,7 +23350,7 @@ label {
 }
 
 /**=====================
-     2.13 Datapicker CSS End 
+     2.13 Datapicker CSS End
   ==========================**/
 .touchspin-wrapper .btn-touchspin {
   border-radius: 5px;
@@ -40919,7 +40919,7 @@ pre {
 }
 
 .login_two_image {
-  background-image: url(../images/login/3.jpg);
+  background-image: url(/theme/assets/images/login/2.jpg);
   background-size: cover;
   background-position: center center;
 }

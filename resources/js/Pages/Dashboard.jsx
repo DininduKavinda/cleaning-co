@@ -45,32 +45,32 @@ export default function Dashboard({ auth }) {
                                 <div className="welcome-card">
                                     <img
                                         className="w-100 img-fluid"
-                                        src="theme/assets/images/dashboard-1/welcome-bg.png"
+                                        src="/theme/assets/images/dashboard-1/welcome-bg.png"
                                         alt=""
                                     />
                                     <img
                                         className="position-absolute img-1 img-fluid"
-                                        src="theme/assets/images/dashboard-1/img-1.png"
+                                        src="/theme/assets/images/dashboard-1/img-1.png"
                                         alt=""
                                     />
                                     <img
                                         className="position-absolute img-2 img-fluid"
-                                        src="theme/assets/images/dashboard-1/img-2.png"
+                                        src="/theme/assets/images/dashboard-1/img-2.png"
                                         alt=""
                                     />
                                     <img
                                         className="position-absolute img-3 img-fluid"
-                                        src="theme/assets/images/dashboard-1/img-3.png"
+                                        src="/theme/assets/images/dashboard-1/img-3.png"
                                         alt=""
                                     />
                                     <img
                                         className="position-absolute img-4 img-fluid"
-                                        src="theme/assets/images/dashboard-1/img-4.png"
+                                        src="/theme/assets/images/dashboard-1/img-4.png"
                                         alt=""
                                     />
                                     <img
                                         className="position-absolute img-5 img-fluid"
-                                        src="theme/assets/images/dashboard-1/img-5.png"
+                                        src="/theme/assets/images/dashboard-1/img-5.png"
                                         alt=""
                                     />
                                 </div>
@@ -80,7 +80,7 @@ export default function Dashboard({ auth }) {
                                     <h1>
                                         Hello, Amirreza{" "}
                                         <img
-                                            src="theme/assets/images/dashboard-1/hand.png"
+                                            src="/theme/assets/images/dashboard-1/hand.png"
                                             alt=""
                                         />
                                     </h1>
@@ -99,7 +99,7 @@ export default function Dashboard({ auth }) {
                                     </Link>
                                     <span>
                                         <svg className="stroke-icon">
-                                            <use href="theme/assets/svg/icon-sprite.svg#watch"></use>
+                                            <use href="/theme/assets/svg/icon-sprite.svg#watch"></use>
                                         </svg>{" "}
                                         11:14 AM
                                     </span>
@@ -154,7 +154,7 @@ export default function Dashboard({ auth }) {
                                     <span className="text-primary">
                                         36.28%
                                         <svg className="stroke-icon stroke-primary">
-                                            <use href="theme/assets/svg/icon-sprite.svg#arrow-down"></use>
+                                            <use href="/theme/assets/svg/icon-sprite.svg#arrow-down"></use>
                                         </svg>
                                     </span>
                                 </div>
@@ -180,7 +180,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 bg-light-primary">
                                                 <svg className="stroke-icon">
-                                                    <use href="theme/assets/svg/icon-sprite.svg#job-bag"></use>
+                                                    <use href="/theme/assets/svg/icon-sprite.svg#job-bag"></use>
                                                 </svg>
                                             </div>
                                             <div className="flex-grow-1">
@@ -193,7 +193,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 bg-light-secondary">
                                                 <svg className="stroke-icon">
-                                                    <use href="theme/assets/svg/icon-sprite.svg#employees"></use>
+                                                    <use href="/theme/assets/svg/icon-sprite.svg#employees"></use>
                                                 </svg>
                                             </div>
                                             <div className="flex-grow-1">
@@ -206,7 +206,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 bg-light-warning">
                                                 <svg className="stroke-icon">
-                                                    <use href="theme/assets/svg/icon-sprite.svg#hours-work"></use>
+                                                    <use href="/theme/assets/svg/icon-sprite.svg#hours-work"></use>
                                                 </svg>
                                             </div>
                                             <div className="flex-grow-1">
@@ -216,7 +216,7 @@ export default function Dashboard({ auth }) {
                                         </div>
                                     </li>
                                 </ul>
-                                <div className="table-responsive theme-scrollbar">
+                                <div className="table-responsive /theme-scrollbar">
                                     <table
                                         className="table display"
                                         style="width:100%"
@@ -240,7 +240,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-2">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/user/1.png"
+                                                                src="/theme/assets/images/dashboard-1/user/1.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -260,7 +260,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-2">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/user/2.png"
+                                                                src="/theme/assets/images/dashboard-1/user/2.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -280,7 +280,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-2">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/user/3.png"
+                                                                src="/theme/assets/images/dashboard-1/user/3.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -302,7 +302,7 @@ export default function Dashboard({ auth }) {
                                 <h3>Transition History</h3>
                             </div>
                             <div className="card-body transaction-history pt-0">
-                                <div className="table-responsive theme-scrollbar">
+                                <div className="table-responsive /theme-scrollbar">
                                     <table
                                         className="table display table-bordernone"
                                         id="transaction"
@@ -325,7 +325,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-3">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/icon/1.png"
+                                                                src="/theme/assets/images/dashboard-1/icon/1.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -362,7 +362,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-3">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/icon/2.png"
+                                                                src="/theme/assets/images/dashboard-1/icon/2.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -399,7 +399,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-3">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/icon/3.png"
+                                                                src="/theme/assets/images/dashboard-1/icon/3.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -436,7 +436,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-3">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/icon/4.png"
+                                                                src="/theme/assets/images/dashboard-1/icon/4.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -474,7 +474,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-3">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/icon/5.png"
+                                                                src="/theme/assets/images/dashboard-1/icon/5.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -511,7 +511,7 @@ export default function Dashboard({ auth }) {
                                                     <div className="d-flex align-items-center gap-3">
                                                         <div className="flex-shrink-0">
                                                             <img
-                                                                src="theme/assets/images/dashboard-1/icon/6.png"
+                                                                src="/theme/assets/images/dashboard-1/icon/6.png"
                                                                 alt=""
                                                             />
                                                         </div>
@@ -596,7 +596,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-success">
                                             <img
-                                                src="theme/assets/images/dashboard-1/icon/checked.png"
+                                                src="/theme/assets/images/dashboard-1/icon/checked.png"
                                                 alt=""
                                             />
                                         </div>
@@ -614,7 +614,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-warning">
                                             <img
-                                                src="theme/assets/images/dashboard-1/icon/danger.png"
+                                                src="/theme/assets/images/dashboard-1/icon/danger.png"
                                                 alt=""
                                             />
                                         </div>
@@ -631,7 +631,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-danger">
                                             <img
-                                                src="theme/assets/images/dashboard-1/icon/cancel.png"
+                                                src="/theme/assets/images/dashboard-1/icon/cancel.png"
                                                 alt=""
                                             />
                                         </div>
@@ -648,7 +648,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-success">
                                             <img
-                                                src="theme/assets/images/dashboard-1/icon/checked.png"
+                                                src="/theme/assets/images/dashboard-1/icon/checked.png"
                                                 alt=""
                                             />
                                         </div>
@@ -665,7 +665,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-success">
                                             <img
-                                                src="theme/assets/images/dashboard-1/icon/checked.png"
+                                                src="/theme/assets/images/dashboard-1/icon/checked.png"
                                                 alt=""
                                             />
                                         </div>
@@ -682,7 +682,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-warning">
                                             <img
-                                                src="theme/assets/images/dashboard-1/icon/danger.png"
+                                                src="/theme/assets/images/dashboard-1/icon/danger.png"
                                                 alt=""
                                             />
                                         </div>
@@ -806,7 +806,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-light-primary border-light-primary">
                                             <svg className="stroke-icon stroke-primary">
-                                                <use href="theme/assets/svg/icon-sprite.svg#box"></use>
+                                                <use href="/theme/assets/svg/icon-sprite.svg#box"></use>
                                             </svg>
                                         </div>
                                         <div className="flex-grow-1">
@@ -820,7 +820,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-light-warning border-light-warning">
                                             <svg className="stroke-icon stroke-warning">
-                                                <use href="theme/assets/svg/icon-sprite.svg#dolar"></use>
+                                                <use href="/theme/assets/svg/icon-sprite.svg#dolar"></use>
                                             </svg>
                                         </div>
                                         <div className="flex-grow-1">
@@ -834,7 +834,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-light-danger border-light-danger">
                                             <svg className="stroke-icon stroke-danger">
-                                                <use href="theme/assets/svg/icon-sprite.svg#round-right"></use>
+                                                <use href="/theme/assets/svg/icon-sprite.svg#round-right"></use>
                                             </svg>
                                         </div>
                                         <div className="flex-grow-1">
@@ -848,7 +848,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-light-primary border-light-primary">
                                             <svg className="stroke-icon stroke-primary">
-                                                <use href="theme/assets/svg/icon-sprite.svg#pie-chart"></use>
+                                                <use href="/theme/assets/svg/icon-sprite.svg#pie-chart"></use>
                                             </svg>
                                         </div>
                                         <div className="flex-grow-1">
@@ -862,7 +862,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-light-warning border-light-warning">
                                             <svg className="stroke-icon stroke-warning">
-                                                <use href="theme/assets/svg/icon-sprite.svg#globe"></use>
+                                                <use href="/theme/assets/svg/icon-sprite.svg#globe"></use>
                                             </svg>
                                         </div>
                                         <div className="flex-grow-1">
@@ -876,7 +876,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-light-danger border-light-danger">
                                             <svg className="stroke-icon stroke-none">
-                                                <use href="theme/assets/svg/icon-sprite.svg#box-user"></use>
+                                                <use href="/theme/assets/svg/icon-sprite.svg#box-user"></use>
                                             </svg>
                                         </div>
                                         <div className="flex-grow-1">
@@ -890,7 +890,7 @@ export default function Dashboard({ auth }) {
                                     <li className="d-flex align-items-center gap-2">
                                         <div className="flex-shrink-0 bg-light-primary border-light-primary">
                                             <svg className="stroke-icon stroke-primary">
-                                                <use href="theme/assets/svg/icon-sprite.svg#work-bag"></use>
+                                                <use href="/theme/assets/svg/icon-sprite.svg#work-bag"></use>
                                             </svg>
                                         </div>
                                         <div className="flex-grow-1">
@@ -1006,7 +1006,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 comman-round">
                                                 <img
-                                                    src="theme/assets/images/dashboard-1/user/01.png"
+                                                    src="/theme/assets/images/dashboard-1/user/01.png"
                                                     alt=""
                                                 />
                                             </div>
@@ -1016,7 +1016,7 @@ export default function Dashboard({ auth }) {
                                                 </Link>
                                                 <p>
                                                     <svg className="stroke-icon">
-                                                        <use href="theme/assets/svg/icon-sprite.svg#map-icon"></use>
+                                                        <use href="/theme/assets/svg/icon-sprite.svg#map-icon"></use>
                                                     </svg>
                                                     Texas
                                                 </p>
@@ -1031,7 +1031,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 comman-round">
                                                 <img
-                                                    src="theme/assets/images/dashboard-1/user/02.png"
+                                                    src="/theme/assets/images/dashboard-1/user/02.png"
                                                     alt=""
                                                 />
                                             </div>
@@ -1041,7 +1041,7 @@ export default function Dashboard({ auth }) {
                                                 </Link>
                                                 <p>
                                                     <svg className="stroke-icon">
-                                                        <use href="theme/assets/svg/icon-sprite.svg#map-icon"></use>
+                                                        <use href="/theme/assets/svg/icon-sprite.svg#map-icon"></use>
                                                     </svg>
                                                     Texas
                                                 </p>
@@ -1056,7 +1056,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 comman-round">
                                                 <img
-                                                    src="theme/assets/images/dashboard-1/user/03.png"
+                                                    src="/theme/assets/images/dashboard-1/user/03.png"
                                                     alt=""
                                                 />
                                             </div>
@@ -1066,7 +1066,7 @@ export default function Dashboard({ auth }) {
                                                 </Link>
                                                 <p>
                                                     <svg className="stroke-icon">
-                                                        <use href="theme/assets/svg/icon-sprite.svg#map-icon"></use>
+                                                        <use href="/theme/assets/svg/icon-sprite.svg#map-icon"></use>
                                                     </svg>
                                                     Texas
                                                 </p>
@@ -1081,7 +1081,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 comman-round">
                                                 <img
-                                                    src="theme/assets/images/dashboard-1/user/04.png"
+                                                    src="/theme/assets/images/dashboard-1/user/04.png"
                                                     alt=""
                                                 />
                                             </div>
@@ -1091,7 +1091,7 @@ export default function Dashboard({ auth }) {
                                                 </Link>
                                                 <p>
                                                     <svg className="stroke-icon">
-                                                        <use href="theme/assets/svg/icon-sprite.svg#map-icon"></use>
+                                                        <use href="/theme/assets/svg/icon-sprite.svg#map-icon"></use>
                                                     </svg>
                                                     Texas
                                                 </p>
@@ -1106,7 +1106,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 comman-round">
                                                 <img
-                                                    src="theme/assets/images/dashboard-1/user/05.png"
+                                                    src="/theme/assets/images/dashboard-1/user/05.png"
                                                     alt=""
                                                 />
                                             </div>
@@ -1116,7 +1116,7 @@ export default function Dashboard({ auth }) {
                                                 </Link>
                                                 <p>
                                                     <svg className="stroke-icon">
-                                                        <use href="theme/assets/svg/icon-sprite.svg#map-icon"></use>
+                                                        <use href="/theme/assets/svg/icon-sprite.svg#map-icon"></use>
                                                     </svg>
                                                     Texas
                                                 </p>
@@ -1131,7 +1131,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 comman-round">
                                                 <img
-                                                    src="theme/assets/images/dashboard-1/user/06.png"
+                                                    src="/theme/assets/images/dashboard-1/user/06.png"
                                                     alt=""
                                                 />
                                             </div>
@@ -1141,7 +1141,7 @@ export default function Dashboard({ auth }) {
                                                 </Link>
                                                 <p>
                                                     <svg className="stroke-icon">
-                                                        <use href="theme/assets/svg/icon-sprite.svg#map-icon"></use>
+                                                        <use href="/theme/assets/svg/icon-sprite.svg#map-icon"></use>
                                                     </svg>
                                                     Texas
                                                 </p>
@@ -1156,7 +1156,7 @@ export default function Dashboard({ auth }) {
                                         <div className="d-flex gap-2">
                                             <div className="flex-shrink-0 comman-round">
                                                 <img
-                                                    src="theme/assets/images/dashboard-1/user/07.png"
+                                                    src="/theme/assets/images/dashboard-1/user/07.png"
                                                     alt=""
                                                 />
                                             </div>
@@ -1166,7 +1166,7 @@ export default function Dashboard({ auth }) {
                                                 </Link>
                                                 <p>
                                                     <svg className="stroke-icon">
-                                                        <use href="theme/assets/svg/icon-sprite.svg#map-icon"></use>
+                                                        <use href="/theme/assets/svg/icon-sprite.svg#map-icon"></use>
                                                     </svg>
                                                     Texas
                                                 </p>
@@ -1228,7 +1228,7 @@ export default function Dashboard({ auth }) {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="img-fluid"
-                                                src="theme/assets/images/dashboard-1/news-update/1.png"
+                                                src="/theme/assets/images/dashboard-1/news-update/1.png"
                                                 alt=""
                                             />
                                         </div>
@@ -1250,7 +1250,7 @@ export default function Dashboard({ auth }) {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="img-fluid"
-                                                src="theme/assets/images/dashboard-1/news-update/2.png"
+                                                src="/theme/assets/images/dashboard-1/news-update/2.png"
                                                 alt=""
                                             />
                                         </div>
@@ -1270,7 +1270,7 @@ export default function Dashboard({ auth }) {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="img-fluid"
-                                                src="theme/assets/images/dashboard-1/news-update/3.png"
+                                                src="/theme/assets/images/dashboard-1/news-update/3.png"
                                                 alt=""
                                             />
                                         </div>
@@ -1292,7 +1292,7 @@ export default function Dashboard({ auth }) {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="img-fluid"
-                                                src="theme/assets/images/dashboard-1/news-update/4.png"
+                                                src="/theme/assets/images/dashboard-1/news-update/4.png"
                                                 alt=""
                                             />
                                         </div>
@@ -1313,7 +1313,7 @@ export default function Dashboard({ auth }) {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="img-fluid"
-                                                src="theme/assets/images/dashboard-1/news-update/5.png"
+                                                src="/theme/assets/images/dashboard-1/news-update/5.png"
                                                 alt=""
                                             />
                                         </div>
@@ -1335,7 +1335,7 @@ export default function Dashboard({ auth }) {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="img-fluid"
-                                                src="theme/assets/images/dashboard-1/news-update/6.png"
+                                                src="/theme/assets/images/dashboard-1/news-update/6.png"
                                                 alt=""
                                             />
                                         </div>
@@ -1357,7 +1357,7 @@ export default function Dashboard({ auth }) {
                                         <div className="flex-shrink-0">
                                             <img
                                                 className="img-fluid"
-                                                src="theme/assets/images/dashboard-1/news-update/7.png"
+                                                src="/theme/assets/images/dashboard-1/news-update/7.png"
                                                 alt=""
                                             />
                                         </div>
@@ -1428,7 +1428,7 @@ export default function Dashboard({ auth }) {
                                     </div>
                                     <div className="col-6 col-md-12 invest-content text-center">
                                         <svg className="stroke-icon">
-                                            <use href="theme/assets/svg/icon-sprite.svg#chart-invest"></use>
+                                            <use href="/theme/assets/svg/icon-sprite.svg#chart-invest"></use>
                                         </svg>
                                         <div className="btn btn-pill btn-primary">
                                             {" "}
@@ -1452,7 +1452,7 @@ export default function Dashboard({ auth }) {
                                 <h3>Manage Invoice</h3>
                             </div>
                             <div className="card-body pt-0 manage-invoice filled-checkbox">
-                                <div className="table-responsive theme-scrollbar">
+                                <div className="table-responsive /theme-scrollbar">
                                     <table
                                         className="table display table-bordernone mt-0"
                                         id="manage-invoice"

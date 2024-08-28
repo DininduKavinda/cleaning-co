@@ -30,7 +30,7 @@ return new class extends Migration
             $table->date('due_date');
             $table->tinyInteger('paid');
             $table->tinyInteger('status');
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

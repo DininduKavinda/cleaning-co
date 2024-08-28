@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('fee');
             $table->decimal('net_fee');
             $table->text('description');
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -31,38 +31,20 @@ function SideBar() {
 
                     {/* Sidebar Item 1 */}
                     <li
-                        className={`sidebar-list ${
-                            activeItem === 0 ? "active" : ""
-                        }`}
+                        className="sidebar-list"
                     >
                         <i className="fa-solid fa-thumbtack"></i>
-                        <button
+                        <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            onClick={() => handleSidebarClick(0)}
+                            href    ={route("dashboard")}
                         >
                             <svg className="stroke-icon">
-                                <use href={'theme/assets/svg/iconly-sprite.svg#Home-dashboard'}></use>
+                                <use href={'/theme/assets/svg/iconly-sprite.svg#Home-dashboard'}></use>
                             </svg>
                             <h6>Dashboards</h6>
                             <span className="badge">3</span>
-                            <i className="iconly-Arrow-Right-2 icli"></i>
-                        </button>
-                        <ul
-                            className="sidebar-submenu"
-                            style={{
-                                display: activeItem === 0 ? "block" : "none",
-                            }}
-                        >
-                            <li>
-                                <Link to="index.html">Default</Link>
-                            </li>
-                            <li>
-                                <Link to="dashboard-02.html">Ecommerce</Link>
-                            </li>
-                            <li>
-                                <Link to="dashboard-03.html">Education</Link>
-                            </li>
-                        </ul>
+                        </Link>
+                      
                     </li>
                     <li className="sidebar-main-title">
                         <div>
@@ -83,7 +65,7 @@ function SideBar() {
                             onClick={() => handleSidebarClick(1)}
                         >
                             <svg className="stroke-icon stroke-none">
-                                <use href={'theme/assets/svg/iconly-sprite.svg#Profile'}></use>
+                                <use href={'/theme/assets/svg/iconly-sprite.svg#Profile'}></use>
                             </svg>
                             <h6>Users</h6>
                             <span className="badge">3</span>
@@ -99,7 +81,7 @@ function SideBar() {
                                 <Link href={route("user.users")}>User</Link>
                             </li>
                             <li>
-                                <Link to="dashboard-02.html">New User</Link>
+                                <Link href={route("user.create")}>New User</Link>
                             </li>
                             <li>
                                 <Link to="dashboard-03.html">Assign Users</Link>
