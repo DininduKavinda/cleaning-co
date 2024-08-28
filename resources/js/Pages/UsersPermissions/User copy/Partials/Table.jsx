@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, router } from "@inertiajs/react";
 
-function UserTable({ users }) {
+function Table({ users }) {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
@@ -88,4 +88,4 @@ function UserTable({ users }) {
     );
 }
 
-export default UserTable;
+export default Table;

@@ -16,14 +16,14 @@ class UsersController extends Controller implements HasMiddleware
     {
         return [
             new Middleware('permission:view user', only: ['index']),
-            new Middleware('permission:create user', only: ['creates', 'stores']),
-            new Middleware('permission:update user', only: ['updates', 'edits']),
-            new Middleware('permission:delete user', only: ['destroys']),
+            new Middleware('permission:create user', only: ['create', 'store']),
+            new Middleware('permission:update user', only: ['update', 'edit']),
+            new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
     public function index(): response
     {
-        return Inertia::render('UsersPermissions/User/User');
+        return Inertia::render('UsersPermissions/User/Index');
     }
     public function create(): response
     {

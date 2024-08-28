@@ -3,9 +3,9 @@ import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
-import UserTable from "./Partials/UserTable";
+import Table from "./Partials/Table";
 
-function User({ auth }) {
+function Index({ auth }) {
     const [users, setUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [emailQuery, setEmailQuery] = useState("");
@@ -92,10 +92,10 @@ function User({ auth }) {
                     onSearch={handleSearch}
                     onEmailSearch={handleEmailSearch}
                 />
-                <UserTable users={users} />
+                <Table users={users} />
             </div>
         </AuthenticatedLayout>
     );
 }
 
-export default User;
+export default Index;

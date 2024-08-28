@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\PermissionController;
 use App\Http\Controllers\Web\UsersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,15 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::group(['prefix'=>'userManagement'], function () {
+Route::group(['prefix'=>'users_permissions'], function () {
     Route::resource('users',UsersController::class);
-    // Route::get('/users', [UsersController::class, 'index'])->name('users');
-    // Route::get('/create', [UsersController::class, 'create'])->name('users.create');
-    // Route::get('/show/{id}', [UsersController::class, 'show'])->name('users.show');
+    Route::resource('permissions',PermissionController::class);
 })->middleware('auth');
-
-// Route::group(['prefix'=>'permission'], function(){
-//     Route::get('/', [])
-// })->middleware('auth');
 
 require __DIR__ . '/auth.php';

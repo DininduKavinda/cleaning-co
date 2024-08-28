@@ -82,7 +82,7 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("users.index")}>User</Link>
+                                <Link href={route("users.index")}>Users</Link>
                             </li>
                             <li>
                                 <Link href={route("users.create")}>
@@ -119,11 +119,11 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("users.index")}>User</Link>
+                                <Link href={route("permissions.index")}>Permissions</Link>
                             </li>
                             <li>
-                                <Link href={route("users.create")}>
-                                    New User
+                                <Link href={route("permissions.create")}>
+                                    New Permission
                                 </Link>
                             </li>
                         </ul>
