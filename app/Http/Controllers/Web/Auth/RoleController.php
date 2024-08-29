@@ -33,4 +33,8 @@ class RoleController extends Controller implements HasMiddleware
     {
         return Inertia::render('UsersPermissions/Role/Edit', ['role' => $role]);
     }
+    public function edit(Role $role): response
+    {
+        return  Inertia::render('UsersPermissions/Role/GivePermission', ['role' => $role]);
+    }
 }

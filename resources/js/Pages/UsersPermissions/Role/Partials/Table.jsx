@@ -39,12 +39,19 @@ function Table({ roles }) {
                                     <td>{role.name}</td>
 
                                     <td>
+                                    <Link href={`${route(
+                                                "roles.edit",
+                                                role.id
+                                            )}`} className="btn btn-primary btn-sm">
+                                       Role Permission
+                                    </Link>
+
                                         <Link
                                             href={`${route(
                                                 "roles.show",
                                                 role.id
                                             )}`}
-                                            className="btn btn-warning btn-sm"
+                                            className="btn btn-warning btn-sm ms-2"
                                         >
                                             Edit
                                         </Link>
