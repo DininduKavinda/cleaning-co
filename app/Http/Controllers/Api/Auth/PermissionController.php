@@ -30,7 +30,7 @@ class PermissionController extends Controller implements HasMiddleware
     {
       $filter = new PermissionFilter;
       $filterItems = $filter->transform($request);
-      $permissions = Permission::where($filterItems)->paginate(500);
+      $permissions = Permission::where($filterItems)->paginate(10);
       return new PermissionCollection($permissions);
     }
 

@@ -10,36 +10,44 @@ function Index({ auth }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [emailQuery, setEmailQuery] = useState("");
     const [activeQuery, setActiveQuery] = useState("");
+    const [pagination, setPagination] = useState({
+        currentPage: 1,
+        lastPage: 1,
+        total: 0,
+        perPage: 10,
+    });
+
+    const fetchUsers = async (page = 1) => {
+        try {
+            let url = `http://127.0.0.1:8000/api/admin/users?page=${page}`;
+            const params = [];
+
+            if (searchQuery || activeQuery || emailQuery) {
+                params.push(`name[like]=${searchQuery}`);
+                params.push(`email[like]=${emailQuery}`);
+                if (activeQuery.valueOf() !== "") {
+                    params.push(`active[eq]=${activeQuery}`);
+                } 
+            }
+
+            if (params.length > 0) {
+                url += `&${params.join("&")}`;
+            }
+
+            const response = await axios.get(url);
+            setUsers(response.data.data);
+            setPagination({
+                currentPage: response.data.meta.current_page,
+                lastPage: response.data.meta.last_page,
+                total: response.data.meta.total,
+                perPage: response.data.meta.per_page,
+            });
+        } catch (error) {
+            console.error("There was an error fetching the user data!", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                let url = "http://127.0.0.1:8000/api/admin/users";
-                const params = [];
-
-                if (searchQuery || activeQuery || emailQuery) {
-                    params.push(`name[like]=${searchQuery}`);
-                    params.push(`email[like]=${emailQuery}`);
-                    if(activeQuery.valueOf() !== ""){
-                        params.push(`active[eq]=${activeQuery}`);
-                    }
-                   
-                }
-
-                if (params.length > 0) {
-                    url += `?${params.join("&")}`;
-                }
-
-                const response = await axios.get(url);
-                setUsers(response.data.data);
-            } catch (error) {
-                console.error(
-                    "There was an error fetching the user data!",
-                    error
-                );
-            }
-        };
-
         fetchUsers();
     }, [searchQuery, emailQuery, activeQuery]);
 
@@ -53,6 +61,10 @@ function Index({ auth }) {
 
     const handleActiveSearch = (active) => {
         setActiveQuery(active);
+    };
+
+    const handlePageChange = (page) => {
+        fetchUsers(page);
     };
 
     return (
@@ -92,7 +104,11 @@ function Index({ auth }) {
                     onSearch={handleSearch}
                     onEmailSearch={handleEmailSearch}
                 />
-                <Table users={users} />
+                <Table
+                    users={users}
+                    pagination={pagination}
+                    onPageChange={handlePageChange}
+                />
             </div>
         </AuthenticatedLayout>
     );

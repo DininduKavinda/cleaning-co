@@ -17,12 +17,24 @@ function GivePermission({ auth }) {
     }, [roleId]);
 
     const fetchPermissions = async () => {
-        try {
-            const response = await axios.get(
-                "http://127.0.0.1:8000/api/admin/permissions"
-            );
+        let allPermissions = [];
+        let page = 1;
+        let lastPage = 1;
 
-            const groupedPermissions = response.data.data.reduce(
+        try {
+            while (page <= lastPage) {
+                const response = await axios.get(
+                    `http://127.0.0.1:8000/api/admin/permissions?page=${page}`
+                );
+                const data = response.data.data;
+                allPermissions = [...allPermissions, ...data];
+
+                // Update pagination info
+                page++;
+                lastPage = response.data.meta.last_page;
+            }
+
+            const groupedPermissions = allPermissions.reduce(
                 (groups, permission) => {
                     const group = permission.name.split(" ")[1];
                     if (!groups[group]) {

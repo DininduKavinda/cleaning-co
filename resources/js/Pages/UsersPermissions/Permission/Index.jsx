@@ -8,39 +8,51 @@ import Table from "./Partials/Table";
 function Index({ auth }) {
     const [permissions, setPermissions] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [pagination, setPagination] = useState({
+        currentPage: 1,
+        lastPage: 1,
+        total: 0,
+        perPage: 10,
+    });
 
-    useEffect(() => {
-        const fetchPermissions = async () => {
-            try {
-                let url = "http://127.0.0.1:8000/api/admin/permissions";
-                const params = [];
+    const fetchPermissions = async (page = 1) => {
+        try {
+            let url = `http://127.0.0.1:8000/api/admin/permissions?page=${page}`;
+            const params = [];
 
-                if (searchQuery ) {
-                    params.push(`name[like]=${searchQuery}`);                   
-                }
-
-                if (params.length > 0) {
-                    url += `?${params.join("&")}`;
-                }
-
-                const response = await axios.get(url);
-                setPermissions(response.data.data);
-            
-            } catch (error) {
-                console.error(
-                    "There was an error fetching the permission data!",
-                    error
-                );
+            if (searchQuery) {
+                params.push(`name[like]=${searchQuery}`);
             }
-        };
 
+            if (params.length > 0) {
+                url += `&${params.join("&")}`;
+            }
+
+            const response = await axios.get(url);
+            setPermissions(response.data.data);
+            setPagination({
+                currentPage: response.data.meta.current_page,
+                lastPage: response.data.meta.last_page,
+                total: response.data.meta.total,
+                perPage: response.data.meta.per_page,
+            });
+        } catch (error) {
+            console.error(
+                "There was an error fetching the permission data!",
+                error
+            );
+        }
+    };
+    useEffect(() => {
         fetchPermissions();
     }, [searchQuery]);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
     };
-
+    const handlePageChange = (page) => {
+        fetchPermissions(page);
+    };
 
     return (
         <AuthenticatedLayout
@@ -74,10 +86,12 @@ function Index({ auth }) {
             </div>
 
             <div className="col-sm-12">
-                <SearchBox
-                    onSearch={handleSearch}
+                <SearchBox onSearch={handleSearch} />
+                <Table
+                    permissions={permissions}
+                    pagination={pagination}
+                    onPageChange={handlePageChange}
                 />
-                <Table permissions={permissions} />
             </div>
         </AuthenticatedLayout>
     );
