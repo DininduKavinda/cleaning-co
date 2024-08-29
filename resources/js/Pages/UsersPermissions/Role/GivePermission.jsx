@@ -91,75 +91,102 @@ function GivePermission({ auth }) {
                     <div className="col-md-12">
                         <div className="card">
                             <div className="card-header">
-                                <h4 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+                                <h4 className="">
                                     Role: {page_info.role?.name}
                                 </h4>
                             </div>
-                            <div className="card-body">
-                                <form onSubmit={handleSubmit}>
-                                    {Object.keys(permissions).map((group) => (
-                                        <div key={group} className="mb-4">
-                                            <h5 className="mb-2 font-bold text-lg">
-                                                {group.charAt(0).toUpperCase() +
-                                                    group.slice(1)}
-                                            </h5>
-                                            <div className="flex flex-wrap">
-                                                {permissions[group].map(
-                                                    (permission) => (
+                            <div className="col-sm-12">
+                                <div className="card-body">
+                                    <div className="row">
+                                        <form onSubmit={handleSubmit}>
+                                            {Object.keys(permissions).map(
+                                                (group) => (
+                                                    <div className="col-xxl-4 col-md-6">
                                                         <div
-                                                            key={permission.id}
-                                                            className="w-full md:w-1/4 p-2"
+                                                            key={group}
+                                                            className=""
                                                         >
-                                                            <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 p-4">
-                                                                <label className="flex items-center">
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        value={
-                                                                            permission.name
-                                                                        }
-                                                                        checked={checkedPermissions.includes(
-                                                                            permission.name
-                                                                        )}
-                                                                        onChange={
-                                                                            handleCheckboxChange
-                                                                        }
-                                                                        className="mr-2"
-                                                                    />
-                                                                    {permission.name
-                                                                        .replace(
-                                                                            "_",
-                                                                            " "
+                                                            <div className="card-header border-l-primary border-3 card-no-border pb-0 card height-equal">
+                                                                <h5 className="">
+                                                                    {group
+                                                                        .charAt(
+                                                                            0
                                                                         )
-                                                                        .replace(
-                                                                            /\b\w/g,
-                                                                            (
-                                                                                l
-                                                                            ) =>
-                                                                                l.toUpperCase()
+                                                                        .toUpperCase() +
+                                                                        group.slice(
+                                                                            1
                                                                         )}
-                                                                </label>
+                                                                </h5>
+                                                                <div className="">
+                                                                    {permissions[
+                                                                        group
+                                                                    ].map(
+                                                                        (
+                                                                            permission
+                                                                        ) => (
+                                                                            <div
+                                                                                key={
+                                                                                    permission.id
+                                                                                }
+                                                                                className=""
+                                                                            >
+                                                                                <div className="form-check form-switch form-check-inline">
+                                                                                    <label className="d-flex">
+                                                                                        <input
+                                                                                            type="checkbox"
+                                                                                            role="switch"
+                                                                                            value={
+                                                                                                permission.name
+                                                                                            }
+                                                                                            checked={checkedPermissions.includes(
+                                                                                                permission.name
+                                                                                            )}
+                                                                                            onChange={
+                                                                                                handleCheckboxChange
+                                                                                            }
+                                                                                            className="form-check-input switch-primary check-size "
+                                                                                        />
+
+                                                                                        {permission.name
+                                                                                            .replace(
+                                                                                                "_",
+                                                                                                " "
+                                                                                            )
+                                                                                            .replace(
+                                                                                                /\b\w/g,
+                                                                                                (
+                                                                                                    l
+                                                                                                ) =>
+                                                                                                    l.toUpperCase()
+                                                                                            )}
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    )}
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    )
-                                                )}
+                                                    </div>
+                                                )
+                                            )}
+                                            <div className="card-body btn-showcase">
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-primary d-flex  ms-2"
+                                                >
+                                                    Update
+                                                </button>
+                                                <Link
+                                                    href={route("roles.index")}
+                                                    className="btn btn-info"
+                                                >
+                                                    Cancel
+                                                </Link>
                                             </div>
-                                        </div>
-                                    ))}
-                                    <div className="card-body btn-showcase">
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary d-flex  ms-2"
-                                        >
-                                            Update
-                                        </button>
-                                        <Link
-                                            href={route("roles.index")}
-                                            className="btn btn-info"
-                                        >
-                                            Cancel
-                                        </Link>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
