@@ -128,6 +128,43 @@ function SideBar() {
                             </li>
                         </ul>
                     </li>
+                    <li
+                        className={`sidebar-list ${
+                            activeItem === 3 ? "active" : ""
+                        }`}
+                    >
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <button
+                            className="sidebar-link btn btn-outline-none w-100 "
+                            onClick={() => handleSidebarClick(3)}
+                        >
+                            <svg className="stroke-icon stroke-none">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Profile"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Roles</h6>
+
+                            <i className="iconly-Arrow-Right-2 icli"></i>
+                        </button>
+                        <ul
+                            className="sidebar-submenu"
+                            style={{
+                                display: activeItem === 3 ? "block" : "none",
+                            }}
+                        >
+                            <li>
+                                <Link href={route("roles.index")}>Roles</Link>
+                            </li>
+                            <li>
+                                <Link href={route("roles.create")}>
+                                    New Role
+                                </Link>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div className="right-arrow" id="right-arrow">

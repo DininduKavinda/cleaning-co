@@ -1,4 +1,5 @@
 User Copy -> Role
 
 Permission Create
- Every Pagination
+Every Pagination
+Sidebar And Header buttons

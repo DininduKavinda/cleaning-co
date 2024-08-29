@@ -24,11 +24,11 @@ class UpdateRoleRequest extends FormRequest
         $method = $this->method();
         if ($method == 'put') {
             return [
-                'name' => ['required','unique:role,name'],
+                'name' => ['required'],
             ];
         }else{
             return [
-                'name' => ['required', 'unique:role,name,'],
+                'name' => ['required'],
             ];
         }
     }

@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Web\PermissionController;
-use App\Http\Controllers\Web\UsersController;
+use App\Http\Controllers\Web\Auth\PermissionController;
+use App\Http\Controllers\Web\Auth\RoleController;
+use App\Http\Controllers\Web\Auth\UsersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix'=>'users_permissions'], function () {
     Route::resource('users',UsersController::class);
     Route::resource('permissions',PermissionController::class);
+    Route::resource('roles', RoleController::class);
 })->middleware('auth');
 
 require __DIR__ . '/auth.php';

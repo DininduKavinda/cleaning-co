@@ -6,61 +6,32 @@ import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
 
 function Index({ auth }) {
-    const [users, setUsers] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [emailQuery, setEmailQuery] = useState("");
-    const [activeQuery, setActiveQuery] = useState("");
+    const [roles, setRoles] = useState([]);
 
     useEffect(() => {
-        const fetchUsers = async () => {
+        const fetchRoles = async () => {
             try {
-                let url = "http://127.0.0.1:8000/api/admin/users";
-                const params = [];
-
-                if (searchQuery || activeQuery || emailQuery) {
-                    params.push(`name[like]=${searchQuery}`);
-                    params.push(`email[like]=${emailQuery}`);
-                    if(activeQuery.valueOf() !== ""){
-                        params.push(`active[eq]=${activeQuery}`);
-                    }
-                   
-                }
-
-                if (params.length > 0) {
-                    url += `?${params.join("&")}`;
-                }
-
+                let url = "http://127.0.0.1:8000/api/admin/roles";
                 const response = await axios.get(url);
-                setUsers(response.data.data);
+                setRoles(response.data.data);
             } catch (error) {
                 console.error(
-                    "There was an error fetching the user data!",
+                    "There was an error fetching the role data!",
                     error
                 );
             }
         };
 
-        fetchUsers();
-    }, [searchQuery, emailQuery, activeQuery]);
+        fetchRoles();
+    });
 
-    const handleSearch = (query) => {
-        setSearchQuery(query);
-    };
-
-    const handleEmailSearch = (email) => {
-        setEmailQuery(email);
-    };
-
-    const handleActiveSearch = (active) => {
-        setActiveQuery(active);
-    };
 
     return (
         <AuthenticatedLayout
-            user={auth.user}
+            role={auth.role}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Users
+                    Roles
                 </h2>
             }
         >
@@ -68,7 +39,7 @@ function Index({ auth }) {
                 <div className="page-title">
                     <div className="row">
                         <div className="col-sm-6 col-12">
-                            <h2>Users</h2>
+                            <h2>Roles</h2>
                             <p className="mb-0 text-title-gray">
                                 Welcome back! Let’s start from where you left.
                             </p>
@@ -88,11 +59,8 @@ function Index({ auth }) {
 
             <div className="col-sm-12">
                 <SearchBox
-                    onActiveSearch={handleActiveSearch}
-                    onSearch={handleSearch}
-                    onEmailSearch={handleEmailSearch}
                 />
-                <Table users={users} />
+                <Table roles={roles} />
             </div>
         </AuthenticatedLayout>
     );

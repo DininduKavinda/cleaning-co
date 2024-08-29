@@ -16,6 +16,9 @@ function SearchBox({ onSearch }) {
             <div className="col-md-12 project-list">
                 <div className="card">
                     <div className="row">
+                    <div className="col-md-6">
+
+</div>
                         <div className="col-md-6 d-md-block d-none">
                             <div className="form-group mb-0 me-0"></div>
                             <Link className="btn btn-primary d-flex align-items-center" href={route('permissions.create')}>
@@ -26,7 +29,7 @@ function SearchBox({ onSearch }) {
                     </div>
                     <div className="mb-4">
                         <div className="row">
-                            <div className="col-md-6">
+                            <div className="col-md-12">
                                 <label>Name</label>
                                 <input
                                     type="text"
