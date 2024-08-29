@@ -7,7 +7,7 @@ use App\Filters\ApiFilter;
 class CountryFilter extends ApiFilter
 {
     protected $safeParams = [
-        'country_name' => ['eq', 'like'],
+        'country_name' => ['like'],
         'iso_code' => ['like'],
         'phone_code' => ['eq', ['gt'], ['lt']],
         'status_id' => ['eq'],

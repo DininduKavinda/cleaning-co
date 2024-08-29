@@ -41,7 +41,7 @@ Route::group(['prefix' => 'location'], function () {
     Route::apiResource('cities', CityController::class);
 });
 
-Route::group(['prefix' => 'core'], function () {
+Route::group(['prefix' => 'web'], function () {
     Route::apiResource('clients', ClientController::class);
     Route::apiResource('staff', ClientController::class);
 });

@@ -119,7 +119,9 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("permissions.index")}>Permissions</Link>
+                                <Link href={route("permissions.index")}>
+                                    Permissions
+                                </Link>
                             </li>
                             <li>
                                 <Link href={route("permissions.create")}>
@@ -164,6 +166,44 @@ function SideBar() {
                                 </Link>
                             </li>
                         </ul>
+                    </li>
+                    <li className="sidebar-main-title">
+                        <div>
+                            <h5 className="lan-1 f-w-700 sidebar-title">
+                                Employee Management
+                            </h5>
+                        </div>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("clients.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Home-dashboard"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Clients</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-list">
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("staff.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Home-dashboard"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Employee</h6>
+                        </Link>
                     </li>
                 </ul>
             </div>

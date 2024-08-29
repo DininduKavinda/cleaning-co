@@ -8,23 +8,18 @@ import Table from "./Partials/Table";
 function Index({ auth }) {
     const [roles, setRoles] = useState([]);
 
+    const fetchRoles = async () => {
+        try {
+            const response = await axios.get("http://127.0.0.1:8000/api/admin/roles");
+            setRoles(response.data.data);
+        } catch (error) {
+            console.error("There was an error fetching the role data!", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchRoles = async () => {
-            try {
-                let url = "http://127.0.0.1:8000/api/admin/roles";
-                const response = await axios.get(url);
-                setRoles(response.data.data);
-            } catch (error) {
-                console.error(
-                    "There was an error fetching the role data!",
-                    error
-                );
-            }
-        };
-
-        fetchRoles();
-    });
-
+        fetchRoles(); // Fetch roles only once on component mount
+    }, []); // Empty dependency array ensures the effect runs only once
 
     return (
         <AuthenticatedLayout
@@ -58,8 +53,7 @@ function Index({ auth }) {
             </div>
 
             <div className="col-sm-12">
-                <SearchBox
-                />
+                <SearchBox />
                 <Table roles={roles} />
             </div>
         </AuthenticatedLayout>
