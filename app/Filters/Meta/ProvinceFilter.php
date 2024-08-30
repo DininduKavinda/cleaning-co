@@ -11,10 +11,10 @@ class ProvinceFilter extends ApiFilter
         'name_si' => ['like'],
         'name_ta' => ['like'],
         'status_id' => ['eq'],
-        'country_id' => ['eq'], 
+        'country_id' => ['eq'],
     ];
 
     protected $columnMap = [
-        'name_ta' => 'name_ta',
+        'country_id' => 'country_id',
     ];
 }

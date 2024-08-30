@@ -61,10 +61,10 @@ Route::group(['prefix' => 'core'], function () {
     Route::apiResource('matters', MatterController::class);
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin'] , function () {
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
     Route::get('addPermissionToRole/{id}', [RoleController::class, 'addPermissionToRole']);
     Route::post('givePermissionToRole/{id}', [RoleController::class, 'givePermissionToRole']);
-});
+})->middleware(['auth:api']);

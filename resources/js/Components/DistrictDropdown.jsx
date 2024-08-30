@@ -13,7 +13,7 @@ const DistrictDropdown = ({ provinceId, setDistrictId }) => {
             const response = await axios.get(`http://127.0.0.1:8000/api/location/districts?name_en[like]=${inputValue}&province_id[eq]=${provinceId}`);
             const districts = response.data.data.map((district) => ({
                 value: district.id,
-                label: district.district_name,
+                label: district.name_en,
             }));
             setOptions(districts);
         } catch (error) {

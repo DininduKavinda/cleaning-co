@@ -13,7 +13,7 @@ const CityDropdown = ({ districtId, setCityId }) => {
             const response = await axios.get(`http://127.0.0.1:8000/api/location/cities?name_en[like]=${inputValue}&district_id[eq]=${districtId}`);
             const cities = response.data.data.map((city) => ({
                 value: city.id,
-                label: city.city_name,
+                label: city.name_en,
             }));
             setOptions(cities);
         } catch (error) {
