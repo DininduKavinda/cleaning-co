@@ -14,17 +14,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Resources\Api\Auth\RoleCollection;
 
-class RoleController extends Controller implements HasMiddleware
+class RoleController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:view role', only: ['indexs','shows']),
-            new Middleware('permission:create role', only: ['creates', 'stores', 'addPermissionToRoles', 'givePermissionToRoles']),
-            new Middleware('permission:update role', only: ['updates', 'edits']),
-            new Middleware('permission:delete role', only: ['destroys']),
-        ];
-    }
 
     public function index()
     {

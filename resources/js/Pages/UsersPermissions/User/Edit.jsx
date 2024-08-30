@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage } from "@inertiajs/react";
+import { createUser, getUserById, updateUser } from "@/Helpers/Api/ApiHelper";
 
 function UserForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.user?.id;
-    console.log(page_info);
+    // console.log(page_info);
     const [user, setUser] = useState({
         name: "",
         email: "",
         password: "",
         confirm_password: "",
         roles: [],
-        last_login: null,
+        last_lo in: null,
         active: 1,
     });
     const [isEditing, setIsEditing] = useState(false);
@@ -27,7 +28,7 @@ function UserForm({ auth }) {
 
     const fetchUser = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/admin/users/${id}`);
+            const response = await getUserById(id);
             const userData = response.data.data;
             setUser({
                 name: userData.name,
@@ -49,9 +50,9 @@ function UserForm({ auth }) {
         e.preventDefault();
         try {
             if (isEditing) {
-                await axios.put(`http://127.0.0.1:8000/api/admin/users/${id}`, user);
+                await updateUser(id, user);
             } else {
-                await axios.post(`http://127.0.0.1:8000/api/admin/users`, user);
+                await createUser(user);
             }
             // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {

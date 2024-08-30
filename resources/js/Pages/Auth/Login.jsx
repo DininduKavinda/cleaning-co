@@ -11,8 +11,26 @@ export default function Login({ status, canResetPassword }) {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                `http://127.0.0.1:8000/api/auth/login`,
+                data
+            );
+
+            if (response.status === 200) {
+                const token = response.data.token;
+
+                localStorage.setItem("authToken", token);
+
+                console.log("Login successful, token received:");
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
+
         post(route("login"), {
             onFinish: () => reset("password"),
         });

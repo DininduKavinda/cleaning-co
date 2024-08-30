@@ -4,6 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
+import { getUsers } from "@/Helpers/Api/ApiHelper";
 
 function Index({ auth }) {
     const [users, setUsers] = useState([]);
@@ -19,22 +20,21 @@ function Index({ auth }) {
 
     const fetchUsers = async (page = 1) => {
         try {
-            let url = `http://127.0.0.1:8000/api/admin/users?page=${page}`;
             const params = [];
-
+            let url = "";
             if (searchQuery || activeQuery || emailQuery) {
                 params.push(`name[like]=${searchQuery}`);
                 params.push(`email[like]=${emailQuery}`);
                 if (activeQuery.valueOf() !== "") {
                     params.push(`active[eq]=${activeQuery}`);
-                } 
+                }
             }
 
             if (params.length > 0) {
                 url += `&${params.join("&")}`;
             }
 
-            const response = await axios.get(url);
+            const response = await getUsers(page, url);
             setUsers(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,
