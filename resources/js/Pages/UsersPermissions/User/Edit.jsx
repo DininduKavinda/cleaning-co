@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
-import { usePage } from "@inertiajs/react";
-import { Inertia } from "@inertiajs/inertia";
-import { createUser, getUserById, updateUser } from "@/Helpers/Api/UserApi";
+import { usePage, useForm } from "@inertiajs/react";
+import { getUserById } from "@/Helpers/Api/UserApi";
+import { showToast } from "@/Components/Toastr";
 
 function UserForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.user?.id;
-    // console.log(page_info);
-    const [user, setUser] = useState({
+
+    const {
+        data: user,
+        setData: setUser,
+        put,
+        post,
+        reset,
+    } = useForm({
         name: "",
         email: "",
         password: "",
@@ -48,11 +54,30 @@ function UserForm({ auth }) {
         setUser({ ...user, [name]: value });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (isEditing) {
-            Inertia.put(route("users.update", id), user);
+            put(route("users.update", id), {
+                onSuccess: () => {
+                    showToast("User updated successfully!", "success");
+                    reset("password");
+                },
+                onError: (errors) => {
+                    showToast("Error updating user!", "error");
+                    console.error(errors);
+                },
+            });
         } else {
-            Inertia.post(route("users.store"), user);
+            post(route("users.create"), {
+                onSuccess: () => {
+                    showToast("User created successfully!", "success");
+                    reset("password");
+                },
+                onError: (errors) => {
+                    showToast("Error creating user!", "error");
+                    console.error(errors);
+                },
+            });
         }
     };
 

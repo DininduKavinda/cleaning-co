@@ -17,7 +17,7 @@ function ClientForm({ auth }) {
         mobile: "",
         phone: "",
         address: "",
-        roles: ["admin"],
+        roles: ["user"],
         country_id: "",
         province_id: "",
         district_id: "",

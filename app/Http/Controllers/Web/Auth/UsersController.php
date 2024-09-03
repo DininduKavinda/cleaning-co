@@ -11,6 +11,8 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller implements HasMiddleware
 {
@@ -31,7 +33,7 @@ class UsersController extends Controller implements HasMiddleware
     {
         return Inertia::render('UsersPermissions/User/Edit');
     }
-    public function store(StoreUserRequest $request): response
+    public function store(StoreUserRequest $request): Response
     {
         $validatedData = $request->validated();
 
@@ -41,7 +43,7 @@ class UsersController extends Controller implements HasMiddleware
 
         return Inertia::render('UsersPermissions/User/Index');
     }
-    public function update(UpdateUserRequest $request,User $user): response
+    public function update(UpdateUserRequest $request, User $user): response
     {
         $validatedData = $request->validated();
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
-import { usePage } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 import { createRole, getRoleById, updateRole } from "@/Helpers/Api/RoleApi";
 
 function RoleForm({ auth }) {
@@ -41,7 +41,10 @@ function RoleForm({ auth }) {
         e.preventDefault();
         try {
             if (isEditing) {
-                await updateRole(id, role);
+                await updateRole(id, role).then(
+                    router.visit(route("roles.index"))
+                );
+
             } else {
                 await createRole(role);
             }

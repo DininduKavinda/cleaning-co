@@ -73,11 +73,11 @@
     <!-- config-->
     <script src="{{asset('theme/assets/js/config.js')}}"></script>
     <!-- apex-->
-    <script src="{{asset('theme/assets/js/chart/apex-chart/apex-chart.js')}}"></script>
-    <script src="{{asset('theme/assets/js/chart/apex-chart/stock-prices.js')}}"></script>
+    {{-- <script src="{{asset('theme/assets/js/chart/apex-chart/apex-chart.js')}}"></script>
+    <script src="{{asset('theme/assets/js/chart/apex-chart/stock-prices.js')}}"></script> --}}
     <!-- scrollbar-->
-    <script src="{{asset('theme/assets/js/scrollbar/simplebar.js')}}"></script>
-    <script src="{{asset('theme/assets/js/scrollbar/custom.js')}}"></script>
+    {{-- <script src="{{asset('theme/assets/js/scrollbar/simplebar.js')}}"></script>
+    <script src="{{asset('theme/assets/js/scrollbar/custom.js')}}"></script> --}}
     <!-- slick-->
     <script src="{{asset('theme/assets/js/slick/slick.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/slick/slick.js')}}"></script>
@@ -96,7 +96,7 @@
     <!-- page_tilt-->
     <script src="{{asset('theme/assets/js/animation/tilt/tilt-custom.js')}}"></script>
     <!-- dashboard_1-->
-    <script src="{{asset('theme/assets/js/dashboard/dashboard_1.js')}}"></script>
+    {{-- <script src="{{asset('theme/assets/js/dashboard/dashboard_1.js')}}"></script> --}}
     <!-- custom script -->
     <script src="{{asset('theme/assets/js/script.js')}}"></script>
 </body>

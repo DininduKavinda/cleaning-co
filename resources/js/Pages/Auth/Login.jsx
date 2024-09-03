@@ -25,7 +25,6 @@ export default function Login({ status, canResetPassword }) {
 
                 localStorage.setItem("authToken", token);
 
-                console.log("Login successful, token received:");
             }
         } catch (error) {
             console.error("Error during login:", error);
