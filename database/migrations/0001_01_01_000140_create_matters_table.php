@@ -24,11 +24,14 @@ return new class extends Migration
             $table->foreignId('department_id');
             $table->id();
             $table->string('code');
+            $table->string('name');
             $table->string('description');
             $table->date('started_at');
             $table->date('ended_at');
+            $table->string('map_latitude')->nullable();
+            $table->string('map_longitude')->nullable();
             $table->tinyInteger('status');
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

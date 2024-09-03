@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('geo_longtude');
             $table->integer('area');
             $table->date('permitted_on')->nullable();
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

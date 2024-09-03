@@ -22,7 +22,23 @@ class StoreMatterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'task_id' => ['required'],
+            'client_id' => ['required'],
+            'staff_id' => ['required'],
+            'approved_by' => ['required'],
+            'department_id' => ['required'],
+            'name' => ['required'],
+            'code' => ['required'],
+            'description' => ['required'],
+            'started_at' => ['required'],
+            'ended_at' => ['required'],
+            'status' => ['required'],
+            'active' => ['sometimes'],
         ];
+    }
+    protected function prepareForValidation(){
+        $this->merge([
+            'name'=>$this->name,
+        ]);
     }
 }

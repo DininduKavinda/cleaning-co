@@ -14,30 +14,21 @@ use App\Http\Requests\UpdatePermissionRequest;
 use App\Http\Resources\Api\Auth\PermissionResource;
 use App\Http\Resources\UserResource;
 
-class PermissionController extends Controller implements HasMiddleware
+class PermissionController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:view permission', only: ['indexs']),
-            new Middleware('permission:create permission', only: ['creates', 'stores']),
-            new Middleware('permission:update permission', only: ['updates', 'edits']),
-            new Middleware('permission:delete permission', only: ['destroys']),
-        ];
-    }
 
     public function index(Request $request)
     {
-      $filter = new PermissionFilter;
-      $filterItems = $filter->transform($request);
-      $permissions = Permission::where($filterItems)->paginate(10);
-      return new PermissionCollection($permissions);
+        $filter = new PermissionFilter;
+        $filterItems = $filter->transform($request);
+        $permissions = Permission::where($filterItems)->paginate(10);
+        return new PermissionCollection($permissions);
     }
 
 
     public function create()
     {
-      //
+        //
     }
 
     public function store(StorePermissionRequest $request)

@@ -11,7 +11,7 @@ class UpdateMatterDocumentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,37 @@ class UpdateMatterDocumentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method = 'put') {
+            return [
+                'matter_id' => ['required'],
+                'client_id' => ['required'],
+                'staff_id' => ['required'],
+                'document' => ['required'],
+                'status' => ['required'],
+                'notes' => ['required'],
+                'file_name' => ['required'],
+                'active' => ['sometimes'],
+            ];
+        } else {
+            return [
+                'matter_id' => ['sometimes', 'required'],
+                'client_id' => ['sometimes', 'required'],
+                'staff_id' => ['sometimes', 'required'],
+                'document' => ['sometimes', 'required'],
+                'status' => ['sometimes', 'required'],
+                'notes' => ['sometimes', 'required'],
+                'file_name' => ['sometimes', 'required'],
+                'active' => ['sometimes'],
+            ];
+        }
+    }
+    protected function prepareForValidation()
+    {
+        if ($this->file_name) {
+            $this->merge([
+                'file_name' => $this->file_name,
+            ]);
+        }
     }
 }
