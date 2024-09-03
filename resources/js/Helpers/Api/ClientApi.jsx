@@ -11,19 +11,26 @@ const TOKEN = localStorage.getItem("authToken");
 const HEADER = {
     headers: {
         Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "multipart/form-data",
+    },
+};
+
+const HEADER2 = {
+    headers: {
+        Authorization: `Bearer ${TOKEN}`,
     },
 };
 
 //Clients APi Services
 
 export const getClients = (page, url) =>
-    axios.get(`${CLIENTS_URL}?page=${page}${url}`, HEADER);
+    axios.get(`${CLIENTS_URL}?page=${page}${url}`, HEADER2);
 
-export const getClientById = (clientId) => axios.get(`${CLIENTS_URL}/${clientId}`, HEADER);
+export const getClientById = (clientId) => axios.get(`${CLIENTS_URL}/${clientId}`, HEADER2);
 
 export const createClient = (clientData) => axios.post(CLIENTS_URL, clientData, HEADER, );
 
 export const updateClient = (clientId, clientData) =>
     axios.put(`${CLIENTS_URL}/${clientId}`, clientData, HEADER);
 
-export const deleteClient = (clientId) => axios.delete(`${CLIENTS_URL}/${clientId}`, HEADER);
+export const deleteClient = (clientId) => axios.delete(`${CLIENTS_URL}/${clientId}`, HEADER2);

@@ -31,6 +31,8 @@ class ClientResource extends JsonResource
             'province_id' => $this->province_id,
             'country_id' => $this->country_id,
             'active' => $this->active,
+            'roles' => $this->user->roles->pluck('name'),
+            'email' => $this->user->email,
             'user' => new UserResource($this->whenLoaded('user')),
             'city' => new CityResource($this->whenLoaded('city')),
             'district' => new DistrictResource($this->whenLoaded('district')),

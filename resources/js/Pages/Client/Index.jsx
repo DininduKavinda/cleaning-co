@@ -35,8 +35,16 @@ function Index({ auth }) {
                 url += `&${params.join("&")}`;
             }
 
-            const response = await getClients(page, url);
+            const response = await axios.get(
+                `http://127.0.0.1:8000/api/web/clients?page=${page}${url}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                    },
+                }
+            );
             setClients(response.data.data);
+            console.log(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,
                 lastPage: response.data.meta.last_page,
@@ -44,7 +52,10 @@ function Index({ auth }) {
                 perPage: response.data.meta.per_page,
             });
         } catch (error) {
-            console.error("There was an error fetching the client data!", error);
+            console.error(
+                "There was an error fetching the client data!",
+                error
+            );
         }
     };
 
@@ -70,7 +81,7 @@ function Index({ auth }) {
 
     return (
         <AuthenticatedLayout
-            client={auth.client}
+            client={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     Clients

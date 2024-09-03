@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import axios from "axios";
 import { usePage } from "@inertiajs/react";
-import LocationForm from "@/Components/LoacationForm";
-import { getClientById } from "@/Helpers/Api/ClientApi";
+import LocationForm from "@/Components/LocationForm";
+import {
+    createClient,
+    getClientById,
+    updateClient,
+} from "@/Helpers/Api/ClientApi";
 
 function ClientForm({ auth }) {
     const page_info = usePage().props;
@@ -14,7 +17,7 @@ function ClientForm({ auth }) {
         mobile: "",
         phone: "",
         address: "",
-        roles: ["user"] || "",
+        roles: ["admin"],
         country_id: "",
         province_id: "",
         district_id: "",
@@ -22,9 +25,9 @@ function ClientForm({ auth }) {
         full_name: "",
         email: "",
         password: "",
-        confirm_password: "",
+        password_confirmation: "",
         image: null,
-        last_login: null,
+        last_login: "",
         active: 1,
     });
     const [isEditing, setIsEditing] = useState(false);
@@ -75,31 +78,16 @@ function ClientForm({ auth }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        Object.keys(client).forEach((key) => {
-            formData.append(key, client[key]);
-        });
+        // const formData = new FormData();
+        // Object.keys(client).forEach((key) => {
+        //     formData.append(key, client[key]);
+        // });
         try {
+            console.log(client);
             if (isEditing) {
-                await axios.put(
-                    `http://127.0.0.1:8000/api/web/clients/${id}`,
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                );
+                await updateClient(id, client);
             } else {
-                await axios.post(
-                    `http://127.0.0.1:8000/api/web/clients`,
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                );
+                await createClient(client);
             }
             // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {
@@ -171,12 +159,22 @@ function ClientForm({ auth }) {
                                                         {client.name ||
                                                             "New Client"}
                                                     </h3>
-                                                    <p>
-                                                        {client.roles.join(
+                                                    <input
+                                                        className="border-0"
+                                                        name="roles"
+                                                        value={client.roles.join(
                                                             ", "
-                                                        ) ||
-                                                            "No roles assigned"}
-                                                    </p>
+                                                        )}
+                                                        onChange={(e) =>
+                                                            setClient({
+                                                                ...client,
+                                                                roles: e.target.value.split(
+                                                                    ", "
+                                                                ),
+                                                            })
+                                                        }
+                                                        disabled
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
@@ -279,7 +277,8 @@ function ClientForm({ auth }) {
                                                     onChange={handleInputChange}
                                                     required
                                                 />
-                                                <input hidden
+                                                <input
+                                                    hidden
                                                     className="form-control"
                                                     name="active"
                                                     value={client.active}
@@ -317,9 +316,9 @@ function ClientForm({ auth }) {
                                                         <input
                                                             type="password"
                                                             className="form-control"
-                                                            name="confirm_password"
+                                                            name="password_confirmation"
                                                             value={
-                                                                client.confirm_password
+                                                                client.password_confirmation
                                                             }
                                                             onChange={
                                                                 handleInputChange
@@ -330,18 +329,22 @@ function ClientForm({ auth }) {
                                                 </div>
                                             </>
                                         )}
-                                        <LocationForm />
+                                        <LocationForm
+                                            client={client}
+                                            setClient={setClient}
+                                        />
+
+                                        <div className="card-footer">
+                                            <button
+                                                className="btn btn-primary btn-block"
+                                                type="submit"
+                                            >
+                                                {isEditing
+                                                    ? "Update Client"
+                                                    : "Create Client"}
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="card-footer">
-                                    <button
-                                        className="btn btn-primary btn-block"
-                                        type="submit"
-                                    >
-                                        {isEditing
-                                            ? "Update Client"
-                                            : "Create Client"}
-                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, router } from "@inertiajs/react";
+import { deleteClient } from "@/Helpers/Api/ClientApi";
 
 function Table({ clients, pagination, onPageChange }) {
     const handleDelete = async (id) => {
         if (         window.confirm("Are you sure you want to delete this client?")) {
             try {
-                await axios.delete(
-                    `http://127.0.0.1:8000/api/web/clients/${id}`
-                );
+                await deleteClient(id);
                 router.visit(route("clients.index"));
             } catch (error) {
                 console.error("Error deleting client:", error);

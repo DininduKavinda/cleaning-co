@@ -11,7 +11,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
 
     public function index(Request $request)
     {
@@ -76,7 +77,7 @@ class UserController extends Controller {
 
         $user->update($validatedData);
 
-        $user->syncRoles($validatedData['roles']);
+        $user->syncRoles([$validatedData['roles'], 'web']);
 
         return response()->json([
             'user' => new UserResource($user),
