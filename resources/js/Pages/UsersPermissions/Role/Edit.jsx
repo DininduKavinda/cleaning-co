@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage } from "@inertiajs/react";
+import { createRole, getRoleById, updateRole } from "@/Helpers/Api/RoleApi";
 
 function RoleForm({ auth }) {
     const page_info = usePage().props;
@@ -21,7 +22,7 @@ function RoleForm({ auth }) {
 
     const fetchRole = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/admin/roles/${id}`);
+            const response = await getRoleById(id);
             const roleData = response.data.data;
             setRole({
                 name: roleData.name,
@@ -40,9 +41,9 @@ function RoleForm({ auth }) {
         e.preventDefault();
         try {
             if (isEditing) {
-                await axios.put(`http://127.0.0.1:8000/api/admin/roles/${id}`, role);
+                await updateRole(id, role);
             } else {
-                await axios.post(`http://127.0.0.1:8000/api/admin/roles`, role);
+                await createRole(role);
             }
             // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {

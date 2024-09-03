@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage } from "@inertiajs/react";
 import LocationForm from "@/Components/LoacationForm";
+import { getClientById } from "@/Helpers/Api/ClientApi";
 
 function ClientForm({ auth }) {
     const page_info = usePage().props;
@@ -38,9 +39,7 @@ function ClientForm({ auth }) {
 
     const fetchClient = async () => {
         try {
-            const response = await axios.get(
-                `http://127.0.0.1:8000/api/web/clients/${id}`
-            );
+            const response = await getClientById(id);
             const clientData = response.data.data;
             setClient({
                 nic: clientData.nic,

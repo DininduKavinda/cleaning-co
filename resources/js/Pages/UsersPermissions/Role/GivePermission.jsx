@@ -8,7 +8,13 @@ function GivePermission({ auth }) {
     const roleId = page_info.role?.id;
     const [permissions, setPermissions] = useState([]);
     const [checkedPermissions, setCheckedPermissions] = useState([]);
+    const TOKEN = localStorage.getItem("authToken");
 
+    const HEADER = {
+        headers: {
+            Authorization: `Bearer ${TOKEN}`,
+        },
+    };
     useEffect(() => {
         if (roleId) {
             fetchPermissions();
@@ -24,7 +30,8 @@ function GivePermission({ auth }) {
         try {
             while (page <= lastPage) {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/admin/permissions?page=${page}`
+                    `http://127.0.0.1:8000/api/admin/permissions?page=${page}`,
+                    HEADER
                 );
                 const data = response.data.data;
                 allPermissions = [...allPermissions, ...data];
@@ -54,7 +61,8 @@ function GivePermission({ auth }) {
     const fetchRolePermissions = async () => {
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/admin/addPermissionToRole/${roleId}`
+                `http://127.0.0.1:8000/api/admin/addPermissionToRole/${roleId}`,
+                HEADER
             );
             const activePermissions = response.data.rolePermissionsNames;
             setCheckedPermissions(
@@ -81,7 +89,7 @@ function GivePermission({ auth }) {
                 `http://127.0.0.1:8000/api/admin/givePermissionToRole/${roleId}`,
                 {
                     permission: checkedPermissions,
-                }
+                } ,HEADER
             );
             alert("Permissions updated successfully!");
         } catch (error) {

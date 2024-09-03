@@ -4,7 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
-import { getUsers } from "@/Helpers/Api/ApiHelper";
+import { getUsers } from "@/Helpers/Api/UserApi";
 
 function Index({ auth }) {
     const [users, setUsers] = useState([]);

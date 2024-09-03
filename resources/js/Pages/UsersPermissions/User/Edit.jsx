@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage } from "@inertiajs/react";
-import { createUser, getUserById, updateUser } from "@/Helpers/Api/ApiHelper";
+import { createUser, getUserById, updateUser } from "@/Helpers/Api/UserApi";
 
 function UserForm({ auth }) {
     const page_info = usePage().props;
@@ -14,7 +14,7 @@ function UserForm({ auth }) {
         password: "",
         confirm_password: "",
         roles: [],
-        last_lo in: null,
+        last_login: null,
         active: 1,
     });
     const [isEditing, setIsEditing] = useState(false);
@@ -36,6 +36,7 @@ function UserForm({ auth }) {
                 roles: userData.roles,
                 active: userData.active,
             });
+            // console.log(userData);
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
@@ -48,12 +49,14 @@ function UserForm({ auth }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // console.log(user);
         try {
             if (isEditing) {
                 await updateUser(id, user);
             } else {
                 await createUser(user);
             }
+
             // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {
             console.error("Error saving user data:", error);

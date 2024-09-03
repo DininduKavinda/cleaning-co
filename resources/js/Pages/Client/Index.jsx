@@ -4,6 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
+import { getClients } from "@/Helpers/Api/ClientApi";
 
 function Index({ auth }) {
     const [clients, setClients] = useState([]);
@@ -19,7 +20,7 @@ function Index({ auth }) {
 
     const fetchClients = async (page = 1) => {
         try {
-            let url = `http://127.0.0.1:8000/api/web/clients?page=${page}`;
+            let url = "";
             const params = [];
 
             if (searchQuery || activeQuery || emailQuery) {
@@ -27,14 +28,14 @@ function Index({ auth }) {
                 params.push(`email[like]=${emailQuery}`);
                 if (activeQuery.valueOf() !== "") {
                     params.push(`active[eq]=${activeQuery}`);
-                } 
+                }
             }
 
             if (params.length > 0) {
                 url += `&${params.join("&")}`;
             }
 
-            const response = await axios.get(url);
+            const response = await getClients(page, url);
             setClients(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,

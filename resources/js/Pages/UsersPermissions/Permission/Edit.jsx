@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage } from "@inertiajs/react";
+import { createPermission, getPermissionById, updatePermission } from "@/Helpers/Api/PermissionApi";
 
 function PermissionForm({ auth }) {
     const page_info = usePage().props;
@@ -20,7 +21,7 @@ function PermissionForm({ auth }) {
 
     const fetchPermission = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/admin/permissions/${id}`);
+            const response = await getPermissionById(id);
             const permissionData = response.data.data;
             setPermission({
                 name: permissionData.name,
@@ -37,11 +38,12 @@ function PermissionForm({ auth }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // console.log(permission);
         try {
             if (isEditing) {
-                await axios.put(`http://127.0.0.1:8000/api/admin/permissions/${id}`, permission);
+                await updatePermission(id, permission);
             } else {
-                await axios.post(`http://127.0.0.1:8000/api/admin/permissions`, permission);
+                await createPermission(permission);
             }
             // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {
@@ -104,7 +106,7 @@ function PermissionForm({ auth }) {
                                                 required
                                             />
                                         </div>
-                                        
+
                                         <div className="form-footer">
                                             <button className="btn btn-primary btn-block" type="submit">
                                                 {isEditing ? "Update Profile" : "Create Profile"}

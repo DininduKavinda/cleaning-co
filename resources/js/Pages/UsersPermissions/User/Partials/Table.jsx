@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, router } from "@inertiajs/react";
+import { deleteUser } from "@/Helpers/Api/UserApi";
 
 function Table({ users, pagination, onPageChange }) {
     const handleDelete = async (id) => {
         if (         window.confirm("Are you sure you want to delete this user?")) {
             try {
-                await axios.delete(
-                    `http://127.0.0.1:8000/api/admin/users/${id}`
-                );
+                await deleteUser(id);
                 router.visit(route("users.index"));
             } catch (error) {
                 console.error("Error deleting user:", error);

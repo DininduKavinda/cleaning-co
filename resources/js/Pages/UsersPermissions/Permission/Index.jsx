@@ -4,6 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
+import { getPermissions } from "@/Helpers/Api/PermissionApi";
 
 function Index({ auth }) {
     const [permissions, setPermissions] = useState([]);
@@ -17,7 +18,7 @@ function Index({ auth }) {
 
     const fetchPermissions = async (page = 1) => {
         try {
-            let url = `http://127.0.0.1:8000/api/admin/permissions?page=${page}`;
+            let url = "";
             const params = [];
 
             if (searchQuery) {
@@ -28,7 +29,7 @@ function Index({ auth }) {
                 url += `&${params.join("&")}`;
             }
 
-            const response = await axios.get(url);
+            const response = await getPermissions(page, url);
             setPermissions(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,

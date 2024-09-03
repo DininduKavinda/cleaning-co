@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, router } from "@inertiajs/react";
+import { deleteRole } from "@/Helpers/Api/RoleApi";
 
 function Table({ roles }) {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this role?")) {
             try {
-                await axios.delete(
-                    `http://127.0.0.1:8000/api/admin/roles/${id}`
-                );
+                await deleteRole(id);
                 router.visit(route("roles.index"));
             } catch (error) {
                 console.error("Error deleting role:", error);

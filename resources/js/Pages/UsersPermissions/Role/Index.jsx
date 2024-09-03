@@ -4,13 +4,14 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
+import { getRoles } from "@/Helpers/Api/RoleApi";
 
 function Index({ auth }) {
     const [roles, setRoles] = useState([]);
 
     const fetchRoles = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8000/api/admin/roles");
+            const response = await getRoles();
             setRoles(response.data.data);
         } catch (error) {
             console.error("There was an error fetching the role data!", error);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, router } from "@inertiajs/react";
+import { deletePermission } from "@/Helpers/Api/PermissionApi";
 
 function Table({ permissions, pagination, onPageChange }) {
     const handleDelete = async (id) => {
@@ -7,9 +8,8 @@ function Table({ permissions, pagination, onPageChange }) {
             window.confirm("Are you sure you want to delete this permission?")
         ) {
             try {
-                await axios.delete(
-                    `http://127.0.0.1:8000/api/admin/permissions/${id}`
-                );
+                await deletePermission(id);
+
                 router.visit(route("permissions.index"));
             } catch (error) {
                 console.error("Error deleting permission:", error);
