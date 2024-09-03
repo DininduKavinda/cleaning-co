@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('last_login')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

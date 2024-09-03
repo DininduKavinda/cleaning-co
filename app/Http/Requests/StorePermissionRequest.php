@@ -22,7 +22,7 @@ class StorePermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'unique:permissions,name',
+            'name'=>'required',
         ];
     }
     protected function prepareForValidation(){

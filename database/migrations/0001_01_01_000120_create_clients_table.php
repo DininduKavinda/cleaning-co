@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignId('province_id');
             $table->foreignId('district_id');
             $table->foreignId('city_id');
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

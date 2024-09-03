@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('map_latitude')->nullable();
             $table->string('map_longitude')->nullable();
             $table->tinyInteger('status');
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

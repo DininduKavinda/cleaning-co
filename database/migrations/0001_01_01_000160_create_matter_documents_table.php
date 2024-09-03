@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('file_name');
             $table->tinyInteger('status');
             $table->text('notes');
-            $table->tinyInteger('active')->nullable();
+            $table->tinyInteger('active')->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

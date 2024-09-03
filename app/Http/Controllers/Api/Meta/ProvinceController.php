@@ -37,7 +37,7 @@ class ProvinceController extends Controller
         } elseif ($includeCountry) {
             $provinces = $provinces->with(['country']);
         }
-        return new ProvinceCollection($provinces->paginate(10)->append($request->query()));
+        return new ProvinceCollection($provinces->paginate(10)->appends($request->query()));
     }
 
     /**
