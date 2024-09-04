@@ -4,7 +4,7 @@ import { deleteStaff } from "@/Helpers/Api/StaffApi";
 
 function Table({ staffs, pagination, onPageChange }) {
     const handleDelete = async (id) => {
-        if (         window.confirm("Are you sure you want to delete this staff?")) {
+        if (window.confirm("Are you sure you want to delete this staff?")) {
             try {
                 await deleteStaff(id);
                 router.visit(route("staff.index"));
@@ -36,7 +36,7 @@ function Table({ staffs, pagination, onPageChange }) {
         }
 
         return (
-            <nav aria-label="Page navigation example  ">
+            <nav aria-label="Page navigation example">
                 <ul className="pagination pagination-secondary gap-2 justify-content-center">
                     <li className="page-item">
                         <a
@@ -79,78 +79,54 @@ function Table({ staffs, pagination, onPageChange }) {
                     <table className="table table-hover">
                         <thead className="table-primary">
                             <tr>
-                                <th className="bg-primary" scope="col">
-                                    Id
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Name
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    NIC
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Roles
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Email
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Country
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Province
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    District
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    City
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Last Login
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Active
-                                </th>
-                                <th className="bg-primary" scope="col">
-                                    Action
-                                </th>
+                                <th className="bg-primary" scope="col">Id</th>
+                                <th className="bg-primary" scope="col">Level</th>
+                                <th className="bg-primary" scope="col">Country </th>
+                                <th className="bg-primary" scope="col">Province </th>
+                                <th className="bg-primary" scope="col">District </th>
+                                <th className="bg-primary" scope="col">City </th>
+                                <th className="bg-primary" scope="col">Department </th>
+                                <th className="bg-primary" scope="col">NIC</th>
+                                <th className="bg-primary" scope="col">Roles</th>
+                                <th className="bg-primary" scope="col">Title</th>
+                                <th className="bg-primary" scope="col">Initial</th>
+                                <th className="bg-primary" scope="col">Address</th>
+                                <th className="bg-primary" scope="col">Mobile</th>
+                                <th className="bg-primary" scope="col">Civil Status</th>
+                                <th className="bg-primary" scope="col">Active</th>
+                                <th className="bg-primary" scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
                             {staffs.map((staff) => (
                                 <tr key={staff.id}>
                                     <th scope="row">{staff.id}</th>
-                                    <td>{staff.full_name}</td>
+                                    <td>{staff.level_id}</td>
+                                    <td>{staff.country_id}</td>
+                                    <td>{staff.province_id}</td>
+                                    <td>{staff.district_id}</td>
+                                    <td>{staff.city_id}</td>
+                                    <td>{staff.department_id}</td>
                                     <td>{staff.nic}</td>
                                     <td>
                                         {staff.roles.length > 0
                                             ? staff.roles.join(", ")
                                             : "No Roles"}
                                     </td>
-                                    <td>{staff.email}</td>
-                                    <td>{staff.country.country_name}</td>
-                                    <td>{staff.province.name_en}</td>
-                                    <td>{staff.district.name_en}</td>
-                                    <td>{staff.city.name_en}</td>
-                                    <td>{staff.last_login || "Never"}</td>
-                                    <td>
-                                        {staff.active ? "Active" : "Inactive"}
-                                    </td>
+                                    <td>{staff.title}</td>
+                                    <td>{staff.initial}</td>
+                                    <td>{staff.address}</td>
+                                    <td>{staff.mobile}</td>                                    <td>{staff.civil_status}</td>
+                                    <td>{staff.active ? "Active" : "Inactive"}</td>
                                     <td>
                                         <Link
-                                            href={`${route(
-                                                "staff.show",
-                                                staff.id
-                                            )}`}
+                                            href={`${route("staff.show", staff.id)}`}
                                             className="btn btn-warning btn-sm"
                                         >
                                             Edit
                                         </Link>
                                         <button
-                                            onClick={() =>
-                                                handleDelete(staff.id)
-                                            }
+                                            onClick={() => handleDelete(staff.id)}
                                             className="btn btn-danger btn-sm ms-2"
                                         >
                                             Delete
