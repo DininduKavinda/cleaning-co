@@ -81,10 +81,10 @@ function Table({ staffs, pagination, onPageChange }) {
                             <tr>
                                 <th className="bg-primary" scope="col">Id</th>
                                 <th className="bg-primary" scope="col">Level</th>
-                                <th className="bg-primary" scope="col">Country </th>
-                                <th className="bg-primary" scope="col">Province </th>
-                                <th className="bg-primary" scope="col">District </th>
-                                <th className="bg-primary" scope="col">City </th>
+                                <th className="bg-primary" scope="col">Country</th>
+                                <th className="bg-primary" scope="col">Province</th>
+                                <th className="bg-primary" scope="col">District</th>
+                                <th className="bg-primary" scope="col">City</th>
                                 <th className="bg-primary" scope="col">Department </th>
                                 <th className="bg-primary" scope="col">NIC</th>
                                 <th className="bg-primary" scope="col">Roles</th>
