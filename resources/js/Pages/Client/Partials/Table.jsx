@@ -92,6 +92,21 @@ function Table({ clients, pagination, onPageChange }) {
                                     Roles
                                 </th>
                                 <th className="bg-primary" scope="col">
+                                    Country
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    Province
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    District
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    City
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    Roles
+                                </th>
+                                <th className="bg-primary" scope="col">
                                     Last Login
                                 </th>
                                 <th className="bg-primary" scope="col">
@@ -107,12 +122,17 @@ function Table({ clients, pagination, onPageChange }) {
                                 <tr key={client.id}>
                                     <th scope="row">{client.id}</th>
                                     <td>{client.full_name}</td>
-                                    <td>{client.email}</td>
+                                    <td>{client.nic}</td>
                                     <td>
                                         {client.roles.length > 0
                                             ? client.roles.join(", ")
                                             : "No Roles"}
                                     </td>
+                                    <td>{client.email}</td>
+                                    <td>{client.country.country_name}</td>
+                                    <td>{client.province.name_en}</td>
+                                    <td>{client.district.name_en}</td>
+                                    <td>{client.city.name_en}</td>
                                     <td>{client.last_login || "Never"}</td>
                                     <td>
                                         {client.active ? "Active" : "Inactive"}

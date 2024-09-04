@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "http://127.0.0.1:8000/api/";
 
-const IncludeAll = "?includeAll=true";
+const IncludeAll = "&includeAll=true";
 
 const CLIENTS_URL = BASE_URL + "web/clients";
 
@@ -24,7 +24,7 @@ const HEADER2 = {
 //Clients APi Services
 
 export const getClients = (page, url) =>
-    axios.get(`${CLIENTS_URL}?page=${page}${url}`, HEADER2);
+    axios.get(`${CLIENTS_URL}?page=${page}${url}${IncludeAll}`, HEADER2);
 
 export const getClientById = (clientId) =>
     axios.get(`${CLIENTS_URL}/${clientId}`, HEADER2);
