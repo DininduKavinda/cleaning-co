@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Com\TaskController;
 use App\Http\Controllers\Api\Com\TimecardTaskController;
 use App\Http\Controllers\Api\Com\UserTypeController;
 use App\Http\Controllers\Api\Core\MatterController;
+use App\Http\Controllers\Api\StaffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,7 +44,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::group(['prefix' => 'web'], function () {
         Route::apiResource('clients', ClientController::class);
-        Route::apiResource('staff', ClientController::class);
+        Route::apiResource('staff', StaffController::class);
     });
 
 
@@ -70,4 +71,3 @@ Route::group(['middleware' => ['auth:api']], function () {
     });
 });
 
-    

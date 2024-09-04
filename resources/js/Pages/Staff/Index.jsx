@@ -4,10 +4,10 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
-import { getClients } from "@/Helpers/Api/ClientApi";
+import { getStaffs } from "@/Helpers/Api/StaffApi";
 
 function Index({ auth }) {
-    const [clients, setClients] = useState([]);
+    const [staffs, setStaffs] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
 
     const [activeQuery, setActiveQuery] = useState("");
@@ -25,7 +25,7 @@ function Index({ auth }) {
         perPage: 10,
     });
 
-    const fetchClients = async (page = 1) => {
+    const fetchStaffs = async (page = 1) => {
         try {
             const params = [];
 
@@ -58,9 +58,9 @@ function Index({ auth }) {
             }
             const queryString = params.length > 0 ? `&${params.join("&")}` : "";
 
-            const response = await getClients(page, queryString);
+            const response = await getStaffs(page, queryString);
 
-            setClients(response.data.data);
+            setStaffs(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,
                 lastPage: response.data.meta.last_page,
@@ -69,14 +69,14 @@ function Index({ auth }) {
             });
         } catch (error) {
             console.error(
-                "There was an error fetching the client data!",
+                "There was an error fetching the staff data!",
                 error
             );
         }
     };
 
     useEffect(() => {
-        fetchClients();
+        fetchStaffs();
     }, [
         searchQuery,
 
@@ -98,14 +98,14 @@ function Index({ auth }) {
 
     const handleNicSearch = (nic) => setNicQuery(nic);
 
-    const handlePageChange = (page) => fetchClients(page);
+    const handlePageChange = (page) => fetchStaffs(page);
 
     return (
         <AuthenticatedLayout
-            client={auth.user}
+            staff={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    Clients
+                    Staffs
                 </h2>
             }
         >
@@ -113,7 +113,7 @@ function Index({ auth }) {
                 <div className="page-title">
                     <div className="row">
                         <div className="col-sm-6 col-12">
-                            <h2>Clients</h2>
+                            <h2>Staffs</h2>
                             <p className="mb-0 text-title-gray">
                                 Welcome back! Let’s start from where you left.
                             </p>
@@ -142,7 +142,7 @@ function Index({ auth }) {
                     onNicSearch={handleNicSearch}
                 />
                 <Table
-                    clients={clients}
+                    staffs={staffs}
                     pagination={pagination}
                     onPageChange={handlePageChange}
                 />

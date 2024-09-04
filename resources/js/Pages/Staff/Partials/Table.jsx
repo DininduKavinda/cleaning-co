@@ -1,15 +1,15 @@
 import React from "react";
 import { Link, router } from "@inertiajs/react";
-import { deleteClient } from "@/Helpers/Api/ClientApi";
+import { deleteStaff } from "@/Helpers/Api/StaffApi";
 
-function Table({ clients, pagination, onPageChange }) {
+function Table({ staffs, pagination, onPageChange }) {
     const handleDelete = async (id) => {
-        if (         window.confirm("Are you sure you want to delete this client?")) {
+        if (         window.confirm("Are you sure you want to delete this staff?")) {
             try {
-                await deleteClient(id);
-                router.visit(route("clients.index"));
+                await deleteStaff(id);
+                router.visit(route("staff.index"));
             } catch (error) {
-                console.error("Error deleting client:", error);
+                console.error("Error deleting staff:", error);
             }
         }
     };
@@ -118,30 +118,30 @@ function Table({ clients, pagination, onPageChange }) {
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
-                            {clients.map((client) => (
-                                <tr key={client.id}>
-                                    <th scope="row">{client.id}</th>
-                                    <td>{client.full_name}</td>
-                                    <td>{client.nic}</td>
+                            {staffs.map((staff) => (
+                                <tr key={staff.id}>
+                                    <th scope="row">{staff.id}</th>
+                                    <td>{staff.full_name}</td>
+                                    <td>{staff.nic}</td>
                                     <td>
-                                        {client.roles.length > 0
-                                            ? client.roles.join(", ")
+                                        {staff.roles.length > 0
+                                            ? staff.roles.join(", ")
                                             : "No Roles"}
                                     </td>
-                                    <td>{client.email}</td>
-                                    <td>{client.country.country_name}</td>
-                                    <td>{client.province.name_en}</td>
-                                    <td>{client.district.name_en}</td>
-                                    <td>{client.city.name_en}</td>
-                                    <td>{client.last_login || "Never"}</td>
+                                    <td>{staff.email}</td>
+                                    <td>{staff.country.country_name}</td>
+                                    <td>{staff.province.name_en}</td>
+                                    <td>{staff.district.name_en}</td>
+                                    <td>{staff.city.name_en}</td>
+                                    <td>{staff.last_login || "Never"}</td>
                                     <td>
-                                        {client.active ? "Active" : "Inactive"}
+                                        {staff.active ? "Active" : "Inactive"}
                                     </td>
                                     <td>
                                         <Link
                                             href={`${route(
-                                                "clients.show",
-                                                client.id
+                                                "staff.show",
+                                                staff.id
                                             )}`}
                                             className="btn btn-warning btn-sm"
                                         >
@@ -149,7 +149,7 @@ function Table({ clients, pagination, onPageChange }) {
                                         </Link>
                                         <button
                                             onClick={() =>
-                                                handleDelete(client.id)
+                                                handleDelete(staff.id)
                                             }
                                             className="btn btn-danger btn-sm ms-2"
                                         >
