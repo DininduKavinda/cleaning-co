@@ -44,7 +44,7 @@ function Index({ auth }) {
                 }
             );
             setClients(response.data.data);
-            console.log(response.data.data);
+            // console.log(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,
                 lastPage: response.data.meta.last_page,

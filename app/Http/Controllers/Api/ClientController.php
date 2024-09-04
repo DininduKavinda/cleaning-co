@@ -62,7 +62,7 @@ class ClientController extends Controller  implements HasMiddleware
     {
         $validatedData = $request->validated();
         $client =  new ClientResource(Client::create([
-            'name' => $validatedData['full_name'],
+            'full_name' => $validatedData['full_name'],
             'nic' => $validatedData['nic'],
             'mobile' => $validatedData['mobile'],
             'phone' => $validatedData['phone'],
@@ -92,7 +92,8 @@ class ClientController extends Controller  implements HasMiddleware
                 'last_login' => $validatedData['last_login'],
                 'active' => $validatedData['active'],
             ]);
-            $user->syncRoles($validatedData['roles'],'web');
+            auth()->shouldUse('web');
+            $user->syncRoles(['user']);
             if ($user) {
                 $message = 'Client Creaeted Successfully';
             } else {
@@ -138,11 +139,11 @@ class ClientController extends Controller  implements HasMiddleware
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-
         $validatedData = $request->validated();
+
         $client_id = $client->id;
         $clients = $client->update([
-            'name' => $validatedData['full_name'],
+            'full_name' => $validatedData['full_name'],
             'nic' => $validatedData['nic'],
             'mobile' => $validatedData['mobile'],
             'phone' => $validatedData['phone'],
@@ -172,7 +173,6 @@ class ClientController extends Controller  implements HasMiddleware
                 'image' => $validatedData['image'],
                 'active' => $validatedData['active'],
             ]);
-            $user->syncRoles($validatedData['roles']);
             if ($user) {
                 $message = 'Client Created Successfully';
             } else {
@@ -181,7 +181,7 @@ class ClientController extends Controller  implements HasMiddleware
         } else {
             $message = 'Error Occured When Creating Client';
         }
-
+        // $message = $validatedData;
         return response()->json([
             'message' => $message,
         ]);

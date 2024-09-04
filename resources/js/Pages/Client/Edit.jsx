@@ -78,21 +78,21 @@ function ClientForm({ auth }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const formData = new FormData();
-        // Object.keys(client).forEach((key) => {
-        //     formData.append(key, client[key]);
-        // });
+        const formData = new FormData();
+        Object.keys(client).forEach((key) => {
+            formData.append(key, client[key]);
+        });
         try {
-            console.log(client);
             if (isEditing) {
-                await updateClient(id, client);
+                // const TOKEN = localStorage.getItem("authToken");
+                // console.log("FormData before sending:",formData);
+                // await updateClient(id, formData);
+                const response = await updateClient(id,formData);
             } else {
-                await createClient(client);
+                await createClient(formData);
             }
-            // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {
             console.error("Error saving client data:", error);
-            // Handle error (e.g., show an error message)
         }
     };
 
@@ -159,22 +159,11 @@ function ClientForm({ auth }) {
                                                         {client.name ||
                                                             "New Client"}
                                                     </h3>
-                                                    <input
-                                                        className="border-0"
-                                                        name="roles"
-                                                        value={client.roles.join(
+                                                    <p>
+                                                        {client.roles.join(
                                                             ", "
                                                         )}
-                                                        onChange={(e) =>
-                                                            setClient({
-                                                                ...client,
-                                                                roles: e.target.value.split(
-                                                                    ", "
-                                                                ),
-                                                            })
-                                                        }
-                                                        disabled
-                                                    />
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

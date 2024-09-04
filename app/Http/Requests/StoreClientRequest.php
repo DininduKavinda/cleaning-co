@@ -32,7 +32,6 @@ class StoreClientRequest extends FormRequest
             'province_id'=>['required'],
             'district_id'=>['required'],
             'city_id'=>['required'],
-            'roles' => ['sometimes'],
             'full_name' => ['required'],
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|same:password',

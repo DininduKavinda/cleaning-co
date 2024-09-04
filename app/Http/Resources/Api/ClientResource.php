@@ -21,7 +21,8 @@ class ClientResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'full_name' => $this->full_name,
+            'name' => $this->user->name,
             'nic' => $this->nic,
             'mobile' => $this->mobile,
             'phone' => $this->phone,

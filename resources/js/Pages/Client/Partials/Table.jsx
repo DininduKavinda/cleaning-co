@@ -106,7 +106,7 @@ function Table({ clients, pagination, onPageChange }) {
                             {clients.map((client) => (
                                 <tr key={client.id}>
                                     <th scope="row">{client.id}</th>
-                                    <td>{client.name}</td>
+                                    <td>{client.full_name}</td>
                                     <td>{client.email}</td>
                                     <td>
                                         {client.roles.length > 0

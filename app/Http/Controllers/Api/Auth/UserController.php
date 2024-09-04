@@ -47,6 +47,8 @@ class UserController extends Controller
 
         $user = User::create($validatedData);
 
+        auth()->shouldUse('web');
+
         $user->syncRoles($validatedData['roles']);
 
         return response()->json([
@@ -77,7 +79,9 @@ class UserController extends Controller
 
         $user->update($validatedData);
 
-        $user->syncRoles([$validatedData['roles'], 'web']);
+        auth()->shouldUse('web');
+
+        $user->syncRoles([$validatedData['roles']]);
 
         return response()->json([
             'user' => new UserResource($user),
