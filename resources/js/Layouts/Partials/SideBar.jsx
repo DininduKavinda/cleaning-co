@@ -183,7 +183,7 @@ function SideBar() {
                             <svg className="stroke-icon">
                                 <use
                                     href={
-                                        "/theme/assets/svg/iconly-sprite.svg#Home-dashboard"
+                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
                                     }
                                 ></use>
                             </svg>
@@ -198,7 +198,7 @@ function SideBar() {
                             <svg className="stroke-icon">
                                 <use
                                     href={
-                                        "/theme/assets/svg/iconly-sprite.svg#Home-dashboard"
+                                        "/theme/assets/svg/iconly-sprite.svg#Activity"
                                     }
                                 ></use>
                             </svg>
