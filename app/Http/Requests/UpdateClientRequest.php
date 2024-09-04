@@ -60,9 +60,9 @@ class UpdateClientRequest extends FormRequest
     }
     protected function prepareForValidation()
     {
-        if ($this->name) {
+        if ($this->nic) {
             $this->merge([
-                'name' => $this->name,
+                'nic' => $this->nic,
             ]);
         }
     }

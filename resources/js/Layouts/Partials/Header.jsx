@@ -79,59 +79,7 @@ export default function Header() {
                 </div>
                 <div className="nav-right">
                     <ul className="header-right">
-                        <li className="custom-dropdown">
-                            <div className="translate_wrapper">
-                                <div className="current_lang">
-                                    <a
-                                        className="lang"
-                                        href="javascript:void(0)"
-                                    >
-                                        <i className="flag-icon flag-icon-us"></i>
-                                        <h6 className="lang-txt f-w-700">
-                                            ENG
-                                        </h6>
-                                    </a>
-                                </div>
-                                <ul className="custom-menu profile-menu language-menu py-0 more_lang">
-                                    <li className="d-block">
-                                        <a
-                                            className="lang"
-                                            href="#"
-                                            data-value="English"
-                                        >
-                                            <i className="flag-icon flag-icon-us"></i>
-                                            <div className="lang-txt">
-                                                English
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li className="d-block">
-                                        <a
-                                            className="lang"
-                                            href="#"
-                                            data-value="fr"
-                                        >
-                                            <i className="flag-icon flag-icon-fr"></i>
-                                            <div className="lang-txt">
-                                                Français
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li className="d-block">
-                                        <a
-                                            className="lang"
-                                            href="#"
-                                            data-value="es"
-                                        >
-                                            <i className="flag-icon flag-icon-es"></i>
-                                            <div className="lang-txt">
-                                                Español
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+
                         <li className="search d-lg-none d-flex">
                             {" "}
                             <a href="javascript:void(0)">
@@ -140,14 +88,14 @@ export default function Header() {
                                 </svg>
                             </a>
                         </li>
-                        <li>
+                        {/* <li>
                             {" "}
                             <a className="dark-mode" href="javascript:void(0)">
                                 <svg>
                                     <use href="/theme/assets/svg/iconly-sprite.svg#moondark"></use>
                                 </svg>
                             </a>
-                        </li>
+                        </li> */}
                         <li className="custom-dropdown">
                             <a href="javascript:void(0)">
                                 <svg>
@@ -475,7 +423,7 @@ export default function Header() {
                                 </ul>
                             </div>
                         </li>
-                        <li className="cloud-design">
+                        {/* <li className="cloud-design">
                             <a className="cloud-mode">
                                 <svg
                                     className="climacon climacon_cloudDrizzle"
@@ -508,7 +456,7 @@ export default function Header() {
                                 </svg>
                                 <h3>15</h3>
                             </a>
-                        </li>
+                        </li> */}
                         <li className="profile-nav custom-dropdown">
                             <div className="user-wrap">
                                 <div className="user-img">

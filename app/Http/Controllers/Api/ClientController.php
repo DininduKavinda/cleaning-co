@@ -42,7 +42,7 @@ class ClientController extends Controller  implements HasMiddleware
         } elseif ($includeLocations) {
             $clients = $clients->with(['district', 'country', 'province', 'city']);
         } elseif ($includeAll) {
-            $clients = $clients->with(['user','district', 'country', 'province', 'city']);
+            $clients = $clients->with(['user', 'district', 'country', 'province', 'city']);
         }
         return new ClientCollection($clients->paginate(10)->appends($request->query()));
     }
@@ -60,49 +60,51 @@ class ClientController extends Controller  implements HasMiddleware
      */
     public function store(StoreClientRequest $request)
     {
-        // $validatedData = $request->validated();
-        // $client =  new ClientResource(Client::create([
-        //     'name' => $validatedData['full_name'],
-        //     'nic' => $validatedData['nic'],
-        //     'mobile' => $validatedData['mobile'],
-        //     'phone' => $validatedData['phone'],
-        //     'address' => $validatedData['address'],
-        //     'city_id' => $validatedData['city_id'],
-        //     'district_id' => $validatedData['district_id'],
-        //     'province_id' => $validatedData['province_id'],
-        //     'country_id' => $validatedData['country_id'],
-        //     'active' => $validatedData['active'],
-        // ]));
+        $validatedData = $request->validated();
+        $client =  new ClientResource(Client::create([
+            'full_name' => $validatedData['full_name'],
+            'nic' => $validatedData['nic'],
+            'mobile' => $validatedData['mobile'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'city_id' => $validatedData['city_id'],
+            'district_id' => $validatedData['district_id'],
+            'province_id' => $validatedData['province_id'],
+            'country_id' => $validatedData['country_id'],
+            'active' => $validatedData['active'],
+        ]));
 
-        // if ($client) {
-        //     if ($request->hasFile('image')) {
-        //         $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-        //         $request->image->move('img/profile/client', $imageName);
-        //         $validatedData['image'] = 'img/profile/client' . $imageName;
-        //     } else {
-        //         $validatedData['image'] = null;
-        //     }
-        //     $user = new ClientResource(User::create([
-        //         'reference_id' => $client->id,
-        //         'user_type_id' => 1,
-        //         'name' => $validatedData['name'],
-        //         'email' => $validatedData['email'],
-        //         'image' => $validatedData['image'],
-        //         'password' => bcrypt($validatedData['password']),
-        //         'last_login' => $validatedData['last_login'],
-        //         'active' => $validatedData['active'],
-        //     ]));
-        //     if ($user) {
-        //         $message = 'Client Creaeted Successfully';
-        //     } else {
-        //         $message = 'Error Occured When Creating User';
-        //     }
-        // } else {
-        //     $message = 'Error Occured When Creating Client';
-        // }
+        if ($client) {
+            if ($request->hasFile('image')) {
+                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $request->image->move('img/profile/client', $imageName);
+                $validatedData['image'] = 'img/profile/client' . $imageName;
+            } else {
+                $validatedData['image'] = null;
+            }
+            $user = User::create([
+                'reference_id' => $client->id,
+                'user_type_id' => 1,
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'image' => $validatedData['image'],
+                'password' => bcrypt($validatedData['password']),
+                'last_login' => $validatedData['last_login'],
+                'active' => $validatedData['active'],
+            ]);
+            auth()->shouldUse('web');
+            $user->syncRoles(['user']);
+            if ($user) {
+                $message = 'Client Creaeted Successfully';
+            } else {
+                $message = 'Error Occured When Creating User';
+            }
+        } else {
+            $message = 'Error Occured When Creating Client';
+        }
 
         return response()->json([
-            'message' => $request->all(),
+            'message' => $message,
         ]);
     }
 
@@ -137,11 +139,11 @@ class ClientController extends Controller  implements HasMiddleware
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-
         $validatedData = $request->validated();
+
         $client_id = $client->id;
         $clients = $client->update([
-            'name' => $validatedData['full_name'],
+            'full_name' => $validatedData['full_name'],
             'nic' => $validatedData['nic'],
             'mobile' => $validatedData['mobile'],
             'phone' => $validatedData['phone'],
@@ -179,7 +181,7 @@ class ClientController extends Controller  implements HasMiddleware
         } else {
             $message = 'Error Occured When Creating Client';
         }
-
+        // $message = $validatedData;
         return response()->json([
             'message' => $message,
         ]);

@@ -9,8 +9,15 @@ import { getClients } from "@/Helpers/Api/ClientApi";
 function Index({ auth }) {
     const [clients, setClients] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const [emailQuery, setEmailQuery] = useState("");
+
     const [activeQuery, setActiveQuery] = useState("");
+    const [countryQuery, setCountryQuery] = useState("");
+    const [provinceQuery, setProvinceQuery] = useState("");
+    const [cityQuery, setCityQuery] = useState("");
+    const [districtQuery, setDistrictQuery] = useState("");
+
+    const [nicQuery, setNicQuery] = useState("");
+
     const [pagination, setPagination] = useState({
         currentPage: 1,
         lastPage: 1,
@@ -20,22 +27,39 @@ function Index({ auth }) {
 
     const fetchClients = async (page = 1) => {
         try {
-            let url = "";
             const params = [];
 
-            if (searchQuery || activeQuery || emailQuery) {
-                params.push(`name[like]=${searchQuery}`);
-                params.push(`email[like]=${emailQuery}`);
-                if (activeQuery.valueOf() !== "") {
+            if (
+                searchQuery ||
+                activeQuery ||
+                countryQuery ||
+                provinceQuery ||
+                cityQuery ||
+                districtQuery ||
+                nicQuery
+            ) {
+                params.push(`full_name[like]=${searchQuery}`);
+                if (activeQuery != "") {
                     params.push(`active[eq]=${activeQuery}`);
                 }
+                if (countryQuery != "") {
+                    params.push(`country_id[eq]=${countryQuery}`);
+                }
+                if (provinceQuery != "") {
+                    params.push(`province_id[eq]=${provinceQuery}`);
+                }
+                if (cityQuery != "") {
+                    params.push(`city_id[eq]=${cityQuery}`);
+                }
+                if (districtQuery != "") {
+                    params.push(`district_id[eq]=${districtQuery}`);
+                }
+                params.push(`nic[like]=${nicQuery}`);
             }
+            const queryString = params.length > 0 ? `&${params.join("&")}` : "";
 
-            if (params.length > 0) {
-                url += `&${params.join("&")}`;
-            }
+            const response = await getClients(page, queryString);
 
-            const response = await getClients(page, url);
             setClients(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,
@@ -44,33 +68,41 @@ function Index({ auth }) {
                 perPage: response.data.meta.per_page,
             });
         } catch (error) {
-            console.error("There was an error fetching the client data!", error);
+            console.error(
+                "There was an error fetching the client data!",
+                error
+            );
         }
     };
 
     useEffect(() => {
         fetchClients();
-    }, [searchQuery, emailQuery, activeQuery]);
+    }, [
+        searchQuery,
 
-    const handleSearch = (query) => {
-        setSearchQuery(query);
-    };
+        activeQuery,
+        countryQuery,
+        provinceQuery,
+        cityQuery,
+        districtQuery,
 
-    const handleEmailSearch = (email) => {
-        setEmailQuery(email);
-    };
+        nicQuery,
+    ]);
 
-    const handleActiveSearch = (active) => {
-        setActiveQuery(active);
-    };
+    const handleSearch = (query) => setSearchQuery(query);
+    const handleActiveSearch = (active) => setActiveQuery(active);
+    const handleCountrySearch = (country) => setCountryQuery(country);
+    const handleProvinceSearch = (province) => setProvinceQuery(province);
+    const handleCitySearch = (city) => setCityQuery(city);
+    const handleDistrictSearch = (district) => setDistrictQuery(district);
 
-    const handlePageChange = (page) => {
-        fetchClients(page);
-    };
+    const handleNicSearch = (nic) => setNicQuery(nic);
+
+    const handlePageChange = (page) => fetchClients(page);
 
     return (
         <AuthenticatedLayout
-            client={auth.client}
+            client={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                     Clients
@@ -101,9 +133,13 @@ function Index({ auth }) {
 
             <div className="col-sm-12">
                 <SearchBox
-                    onActiveSearch={handleActiveSearch}
                     onSearch={handleSearch}
-                    onEmailSearch={handleEmailSearch}
+                    onActiveSearch={handleActiveSearch}
+                    onCountrySearch={handleCountrySearch}
+                    onProvinceSearch={handleProvinceSearch}
+                    onCitySearch={handleCitySearch}
+                    onDistrictSearch={handleDistrictSearch}
+                    onNicSearch={handleNicSearch}
                 />
                 <Table
                     clients={clients}

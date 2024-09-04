@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, router } from "@inertiajs/react";
+import { deleteClient } from "@/Helpers/Api/ClientApi";
 
 function Table({ clients, pagination, onPageChange }) {
     const handleDelete = async (id) => {
         if (         window.confirm("Are you sure you want to delete this client?")) {
             try {
-                await axios.delete(
-                    `http://127.0.0.1:8000/api/web/clients/${id}`
-                );
+                await deleteClient(id);
                 router.visit(route("clients.index"));
             } catch (error) {
                 console.error("Error deleting client:", error);
@@ -87,10 +86,25 @@ function Table({ clients, pagination, onPageChange }) {
                                     Name
                                 </th>
                                 <th className="bg-primary" scope="col">
-                                    Email
+                                    NIC
                                 </th>
                                 <th className="bg-primary" scope="col">
                                     Roles
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    Email
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    Country
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    Province
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    District
+                                </th>
+                                <th className="bg-primary" scope="col">
+                                    City
                                 </th>
                                 <th className="bg-primary" scope="col">
                                     Last Login
@@ -107,13 +121,18 @@ function Table({ clients, pagination, onPageChange }) {
                             {clients.map((client) => (
                                 <tr key={client.id}>
                                     <th scope="row">{client.id}</th>
-                                    <td>{client.name}</td>
-                                    <td>{client.email}</td>
+                                    <td>{client.full_name}</td>
+                                    <td>{client.nic}</td>
                                     <td>
                                         {client.roles.length > 0
                                             ? client.roles.join(", ")
                                             : "No Roles"}
                                     </td>
+                                    <td>{client.email}</td>
+                                    <td>{client.country.country_name}</td>
+                                    <td>{client.province.name_en}</td>
+                                    <td>{client.district.name_en}</td>
+                                    <td>{client.city.name_en}</td>
                                     <td>{client.last_login || "Never"}</td>
                                     <td>
                                         {client.active ? "Active" : "Inactive"}

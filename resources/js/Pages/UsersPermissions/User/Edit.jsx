@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
-import { usePage } from "@inertiajs/react";
-import { createUser, getUserById, updateUser } from "@/Helpers/Api/UserApi";
+import { usePage, useForm } from "@inertiajs/react";
+import { getUserById } from "@/Helpers/Api/UserApi";
+import { showToast } from "@/Components/Toastr";
 
 function UserForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.user?.id;
-    // console.log(page_info);
-    const [user, setUser] = useState({
+
+    const {
+        data: user,
+        setData: setUser,
+        put,
+        post,
+        reset,
+    } = useForm({
         name: "",
         email: "",
         password: "",
@@ -47,20 +54,30 @@ function UserForm({ auth }) {
         setUser({ ...user, [name]: value });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(user);
-        try {
-            if (isEditing) {
-                await updateUser(id, user);
-            } else {
-                await createUser(user);
-            }
-
-            // Handle success (e.g., redirect, show a message, etc.)
-        } catch (error) {
-            console.error("Error saving user data:", error);
-            // Handle error (e.g., show an error message)
+        if (isEditing) {
+            put(route("users.update", id), {
+                onSuccess: () => {
+                    showToast("User updated successfully!", "success");
+                    reset("password");
+                },
+                onError: (errors) => {
+                    showToast("Error updating user!", "error");
+                    console.error(errors);
+                },
+            });
+        } else {
+            post(route("users.create"), {
+                onSuccess: () => {
+                    showToast("User created successfully!", "success");
+                    reset("password");
+                },
+                onError: (errors) => {
+                    showToast("Error creating user!", "error");
+                    console.error(errors);
+                },
+            });
         }
     };
 
@@ -77,7 +94,9 @@ function UserForm({ auth }) {
                 <div className="page-title">
                     <div className="row">
                         <div className="col-sm-6 col-12">
-                            <h2>{isEditing ? "Edit Profile" : "Create Profile"}</h2>
+                            <h2>
+                                {isEditing ? "Edit Profile" : "Create Profile"}
+                            </h2>
                         </div>
                         <div className="col-sm-6 col-12">
                             <ol className="breadcrumb">
@@ -88,7 +107,9 @@ function UserForm({ auth }) {
                                 </li>
                                 <li className="breadcrumb-item">Users</li>
                                 <li className="breadcrumb-item active">
-                                    {isEditing ? "Edit Profile" : "Create Profile"}
+                                    {isEditing
+                                        ? "Edit Profile"
+                                        : "Create Profile"}
                                 </li>
                             </ol>
                         </div>
@@ -109,7 +130,9 @@ function UserForm({ auth }) {
                                 <div className="card-body">
                                     <form onSubmit={handleSubmit}>
                                         <div className="mb-3">
-                                            <label className="form-label">Name</label>
+                                            <label className="form-label">
+                                                Name
+                                            </label>
                                             <input
                                                 className="form-control"
                                                 name="name"
@@ -119,7 +142,9 @@ function UserForm({ auth }) {
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className="form-label">Email</label>
+                                            <label className="form-label">
+                                                Email
+                                            </label>
                                             <input
                                                 className="form-control"
                                                 name="email"
@@ -131,31 +156,49 @@ function UserForm({ auth }) {
                                         {!isEditing && (
                                             <>
                                                 <div className="mb-3">
-                                                    <label className="form-label">Password</label>
+                                                    <label className="form-label">
+                                                        Password
+                                                    </label>
                                                     <input
                                                         type="password"
                                                         className="form-control"
                                                         name="password"
                                                         value={user.password}
-                                                        onChange={handleInputChange}
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
                                                         required
                                                     />
                                                 </div>
                                                 <div className="mb-3">
-                                                    <label className="form-label">Confirm Password</label>
+                                                    <label className="form-label">
+                                                        Confirm Password
+                                                    </label>
                                                     <input
                                                         type="password"
                                                         className="form-control"
                                                         name="confirm_password"
-                                                        value={user.confirm_password}
-                                                        onChange={handleInputChange}
+                                                        value={
+                                                            user.confirm_password
+                                                        }
+                                                        onChange={
+                                                            handleInputChange
+                                                        }
                                                         required
                                                     />
                                                 </div>
                                             </>
                                         )}
                                         <div className="mb-3">
-                                            <label className="form-label">Roles <span>(write roles manually for security reasons e.g., admin, superadmin, staff, client)</span></label>
+                                            <label className="form-label">
+                                                Roles{" "}
+                                                <span>
+                                                    (write roles manually for
+                                                    security reasons e.g.,
+                                                    admin, superadmin, staff,
+                                                    client)
+                                                </span>
+                                            </label>
                                             <input
                                                 className="form-control"
                                                 name="roles"
@@ -163,26 +206,39 @@ function UserForm({ auth }) {
                                                 onChange={(e) =>
                                                     setUser({
                                                         ...user,
-                                                        roles: e.target.value.split(", "),
+                                                        roles: e.target.value.split(
+                                                            ", "
+                                                        ),
                                                     })
                                                 }
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className="form-label">Active</label>
+                                            <label className="form-label">
+                                                Active
+                                            </label>
                                             <select
                                                 className="form-control"
                                                 name="active"
                                                 value={user.active}
                                                 onChange={handleInputChange}
                                             >
-                                                <option value={1}>Active</option>
-                                                <option value={0}>Inactive</option>
+                                                <option value={1}>
+                                                    Active
+                                                </option>
+                                                <option value={0}>
+                                                    Inactive
+                                                </option>
                                             </select>
                                         </div>
                                         <div className="form-footer">
-                                            <button className="btn btn-primary btn-block" type="submit">
-                                                {isEditing ? "Update Profile" : "Create Profile"}
+                                            <button
+                                                className="btn btn-primary btn-block"
+                                                type="submit"
+                                            >
+                                                {isEditing
+                                                    ? "Update Profile"
+                                                    : "Create Profile"}
                                             </button>
                                         </div>
                                     </form>

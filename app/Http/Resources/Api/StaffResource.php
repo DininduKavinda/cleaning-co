@@ -38,6 +38,7 @@ class StaffResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'title' => $this->title,
+            'roles' => $this->user->roles->pluck('name'),
             'initial' => $this->initial,
             'civil_status' => $this->civil_status,
             'user' => new UserResource($this->whenLoaded('user')),

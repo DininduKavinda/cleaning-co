@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller implements HasMiddleware
 {
@@ -28,6 +32,26 @@ class UsersController extends Controller implements HasMiddleware
     public function create(): response
     {
         return Inertia::render('UsersPermissions/User/Edit');
+    }
+    public function store(StoreUserRequest $request): Response
+    {
+        $validatedData = $request->validated();
+
+        $user = User::create($validatedData);
+
+        $user->syncRoles($validatedData['roles']);
+
+        return Inertia::render('UsersPermissions/User/Index');
+    }
+    public function update(UpdateUserRequest $request, User $user): response
+    {
+        $validatedData = $request->validated();
+
+        $user->update($validatedData);
+
+        $user->syncRoles($validatedData['roles']);
+
+        return Inertia::render('UsersPermissions/User/Index');
     }
     public function show(User $user): response
     {

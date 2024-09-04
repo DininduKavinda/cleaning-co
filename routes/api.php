@@ -17,12 +17,21 @@ use App\Http\Controllers\Api\Com\TaskController;
 use App\Http\Controllers\Api\Com\TimecardTaskController;
 use App\Http\Controllers\Api\Com\UserTypeController;
 use App\Http\Controllers\Api\Core\MatterController;
+use App\Http\Controllers\Api\StaffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:api');
+
+
+Route::group(['prefix' => 'location'], function () {
+    Route::apiResource('countries', CountryController::class);
+    Route::apiResource('provinces', ProvinceController::class);
+    Route::apiResource('districts', DistrictController::class);
+    Route::apiResource('cities', CityController::class);
+});
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('register', [AuthController::class, 'register']);
@@ -33,18 +42,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('check-token', [AuthController::class, 'checkToken']);
 
-
-    Route::group(['prefix' => 'location'], function () {
-        Route::apiResource('countries', CountryController::class);
-        Route::apiResource('provinces', ProvinceController::class);
-        Route::apiResource('districts', DistrictController::class);
-        Route::apiResource('cities', CityController::class);
-    });
-
-
     Route::group(['prefix' => 'web'], function () {
         Route::apiResource('clients', ClientController::class);
-        Route::apiResource('staff', ClientController::class);
+        Route::apiResource('staff', StaffController::class);
     });
 
 
@@ -69,7 +69,5 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::get('addPermissionToRole/{id}', [RoleController::class, 'addPermissionToRole']);
         Route::post('givePermissionToRole/{id}', [RoleController::class, 'givePermissionToRole']);
     });
-
 });
-
 

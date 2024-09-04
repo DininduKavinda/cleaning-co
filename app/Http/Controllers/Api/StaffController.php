@@ -11,21 +11,10 @@ use App\Http\Resources\Api\StaffResource;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\File;
 
-class StaffController extends Controller implements HasMiddleware
+class StaffController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:view staff', only: ['index', 'show']),
-            new Middleware('permission:create staff', only: ['create', 'store']),
-            new Middleware('permission:update staff', only: ['update', 'edit']),
-            new Middleware('permission:delete staff', only: ['destroy']),
-        ];
-    }
     /**
      * Display a listing of the resource.
      */

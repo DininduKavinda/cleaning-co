@@ -21,7 +21,8 @@ class ClientResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'full_name' => $this->full_name,
+            'name' => $this->user->name,
             'nic' => $this->nic,
             'mobile' => $this->mobile,
             'phone' => $this->phone,
@@ -31,6 +32,8 @@ class ClientResource extends JsonResource
             'province_id' => $this->province_id,
             'country_id' => $this->country_id,
             'active' => $this->active,
+            'roles' => $this->user->roles->pluck('name'),
+            'email' => $this->user->email,
             'user' => new UserResource($this->whenLoaded('user')),
             'city' => new CityResource($this->whenLoaded('city')),
             'district' => new DistrictResource($this->whenLoaded('district')),

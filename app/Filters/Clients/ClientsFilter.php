@@ -7,11 +7,11 @@ use App\Filters\ApiFilter;
 class ClientsFilter extends ApiFilter
 {
     protected $safeParams = [
-        'name' => ['like'],
+        'full_name' => ['like'],
         'address' => ['like'],
         'phone' => ['eq'],
         'mobile' => ['eq'],
-        'nic' => ['eq'],
+        'nic' => ['like'],
         'city_id' => ['eq'],
         'district_id' => ['eq'],
         'province_id' => ['eq'],

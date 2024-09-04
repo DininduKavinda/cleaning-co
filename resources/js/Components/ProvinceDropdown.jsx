@@ -1,5 +1,4 @@
-// components/ProvinceDropdown.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 
@@ -7,10 +6,23 @@ const ProvinceDropdown = ({ countryId, setProvinceId }) => {
     const [options, setOptions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    useEffect(() => {
+        if (countryId) {
+            fetchProvinces('');
+        } else {
+            setOptions([]);
+        }
+    }, [countryId]);
+
     const fetchProvinces = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/location/provinces?name_en[like]=${inputValue}&country_id[eq]=${countryId}`);
+            const response = await axios.get(`http://127.0.0.1:8000/api/location/provinces`, {
+                params: {
+                    'name_en[like]': inputValue,
+                    'country_id[eq]': countryId,
+                },
+            });
             const provinces = response.data.data.map((province) => ({
                 value: province.id,
                 label: province.name_en,
@@ -24,11 +36,7 @@ const ProvinceDropdown = ({ countryId, setProvinceId }) => {
     };
 
     const handleInputChange = (inputValue) => {
-        if (inputValue) {
-            fetchProvinces(inputValue);
-        } else {
-            setOptions([]);
-        }
+        fetchProvinces(inputValue);
     };
 
     const handleChange = (selectedOption) => {

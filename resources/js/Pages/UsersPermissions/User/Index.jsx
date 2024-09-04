@@ -36,6 +36,7 @@ function Index({ auth }) {
 
             const response = await getUsers(page, url);
             setUsers(response.data.data);
+            // console.log(response.data.data);
             setPagination({
                 currentPage: response.data.meta.current_page,
                 lastPage: response.data.meta.last_page,

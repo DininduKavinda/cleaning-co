@@ -1,5 +1,4 @@
-// components/CityDropdown.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 
@@ -7,10 +6,23 @@ const CityDropdown = ({ districtId, setCityId }) => {
     const [options, setOptions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    useEffect(() => {
+        if (districtId) {
+            fetchCities('');
+        } else {
+            setOptions([]);
+        }
+    }, [districtId]);
+
     const fetchCities = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/location/cities?name_en[like]=${inputValue}&district_id[eq]=${districtId}`);
+            const response = await axios.get(`http://127.0.0.1:8000/api/location/cities`, {
+                params: {
+                    'name_en[like]': inputValue,
+                    'district_id[eq]': districtId,
+                },
+            });
             const cities = response.data.data.map((city) => ({
                 value: city.id,
                 label: city.name_en,
@@ -24,11 +36,7 @@ const CityDropdown = ({ districtId, setCityId }) => {
     };
 
     const handleInputChange = (inputValue) => {
-        if (inputValue) {
-            fetchCities(inputValue);
-        } else {
-            setOptions([]);
-        }
+        fetchCities(inputValue);
     };
 
     const handleChange = (selectedOption) => {
