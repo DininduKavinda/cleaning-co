@@ -84,9 +84,6 @@ function ClientForm({ auth }) {
         });
         try {
             if (isEditing) {
-                // const TOKEN = localStorage.getItem("authToken");
-                // console.log("FormData before sending:",formData);
-                // await updateClient(id, formData);
                 const response = await updateClient(id,formData);
             } else {
                 await createClient(formData);
