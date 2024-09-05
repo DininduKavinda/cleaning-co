@@ -28,7 +28,7 @@ function ClientForm({ auth }) {
         password_confirmation: "",
         image: null,
         last_login: "",
-        active: 1,
+        active: 1
     });
     const [isEditing, setIsEditing] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);

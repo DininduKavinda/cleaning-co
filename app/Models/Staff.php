@@ -31,7 +31,7 @@ class Staff extends Model
         'first_name',
         'last_name',
         'nic',
-        'titile',
+        'title',
         'initial',
         'full_name',
         'dob',
