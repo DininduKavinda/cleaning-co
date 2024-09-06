@@ -11,7 +11,7 @@ class UpdateStaffRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -39,6 +39,7 @@ class UpdateStaffRequest extends FormRequest
                 'dob' => ['required'],
                 'address' => ['required'],
                 'mobile' => ['required'],
+                'name' => ['required'],
                 'phone' => ['required'],
                 'civil_status' => ['required'],
                 'email' => ['required', 'email'],
@@ -56,6 +57,7 @@ class UpdateStaffRequest extends FormRequest
                 'department_id' => ['sometimes', 'required'],
                 'first_name' => ['sometimes', 'required'],
                 'last_name' => ['sometimes', 'required'],
+                'name' => ['sometimes','required'],
                 'nic' => ['sometimes', 'required'],
                 'title' => ['sometimes', 'required'],
                 'initial' => ['sometimes', 'required'],

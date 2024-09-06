@@ -19,7 +19,7 @@ function LevelDropdown({ value, onChange }) {
                     `http://127.0.0.1:8000/api/common/levels`,
                     HEADER
                 );
-                setLevels(response.data.data); // Assuming the API returns a list of levels
+                setLevels(response.data.data);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching levels:", error);

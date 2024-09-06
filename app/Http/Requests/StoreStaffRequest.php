@@ -35,6 +35,7 @@ class StoreStaffRequest extends FormRequest
             'initial' => ['required'],
             'full_name' => ['required'],
             'dob' => ['required'],
+            'name' => ['required'],
             'address' => ['required'],
             'mobile' => ['required'],
             'phone' => ['required'],

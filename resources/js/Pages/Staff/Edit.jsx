@@ -11,11 +11,12 @@ function StaffForm({ auth }) {
     const id = page_info.staff?.id;
     const [staff, setStaff] = useState({
         level_id: "",
+        name: "",
+        department_id: "",
         country_id: "",
         province_id: "",
         district_id: "",
         city_id: "",
-        department_id: "",
         first_name: "",
         last_name: "",
         nic: "",
@@ -31,7 +32,7 @@ function StaffForm({ auth }) {
         password: "",
         password_confirmation: "",
         image: null,
-        last_login: null,
+        last_login: "",
         active: 1,
     });
     const [isEditing, setIsEditing] = useState(false);
@@ -58,6 +59,7 @@ function StaffForm({ auth }) {
                 first_name: staffData.first_name,
                 last_name: staffData.last_name,
                 nic: staffData.nic,
+                name: staffData.name,
                 title: staffData.title,
                 initial: staffData.initial,
                 full_name: staffData.full_name,
@@ -177,6 +179,16 @@ function StaffForm({ auth }) {
                                         </div>
                                     </div>
                                     <div className="mb-3">
+                                        <h6 className="form-label">Username</h6>
+                                        <input
+                                            className="form-control"
+                                            name="name"
+                                            value={staff.name}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-3">
                                         <h6 className="form-label">NIC</h6>
                                         <input
                                             className="form-control"
@@ -291,13 +303,14 @@ function StaffForm({ auth }) {
                                                     selectedLevel={
                                                         staff.level_id
                                                     }
-                                                    onLevelChange={(value) =>
+                                                    onChange={(value) =>
                                                         setStaff({
                                                             ...staff,
                                                             level_id: value,
                                                         })
                                                     }
                                                 />
+
                                             </div>
                                         </div>
                                         <div className="col-sm-6">
@@ -309,7 +322,7 @@ function StaffForm({ auth }) {
                                                     selectedDepartment={
                                                         staff.department_id
                                                     }
-                                                    onDepartmentChange={(
+                                                    onChange={(
                                                         value
                                                     ) =>
                                                         setStaff({
