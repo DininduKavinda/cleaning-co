@@ -13,17 +13,8 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use App\Http\Controllers\Controller;
 
-class DepartmentController extends Controller implements HasMiddleware
+class DepartmentController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:view department', only: ['indexs', 'shows']),
-            new Middleware('permission:create department', only: ['creates', 'stores']),
-            new Middleware('permission:update clidepartmentent', only: ['updates', 'edits']),
-            new Middleware('permission:delete department', only: ['destroys']),
-        ];
-    }
     /**
      * Display a listing of the resource.
      */

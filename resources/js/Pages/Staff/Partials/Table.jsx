@@ -94,6 +94,7 @@ function Table({ staffs, pagination, onPageChange }) {
                                 <th className="bg-primary" scope="col">Address</th>
                                 <th className="bg-primary" scope="col">Name</th>
                                 <th className="bg-primary" scope="col">NIC</th>
+                                <th className="bg-primary" scope="col">DOB</th>
                                 <th className="bg-primary" scope="col">Status</th>
                                 <th className="bg-primary" scope="col">Action</th>
                             </tr>
@@ -108,6 +109,7 @@ function Table({ staffs, pagination, onPageChange }) {
                                         <td>{staff.address}</td>
                                         <td>{staff.title} {staff.initial}</td>
                                         <td>{staff.nic}</td>
+                                        <td>{staff.dob}</td>
                                         <td>{staff.active ? "Active" : "Inactive"}</td>
                                         <td>
                                         <button

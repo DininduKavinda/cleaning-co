@@ -8,15 +8,22 @@ import { getStaffs } from "@/Helpers/Api/StaffApi";
 
 function Index({ auth }) {
     const [staffs, setStaffs] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-
-    const [activeQuery, setActiveQuery] = useState("");
-    const [countryQuery, setCountryQuery] = useState("");
-    const [provinceQuery, setProvinceQuery] = useState("");
-    const [cityQuery, setCityQuery] = useState("");
-    const [districtQuery, setDistrictQuery] = useState("");
-
-    const [nicQuery, setNicQuery] = useState("");
+    const [searchFields, setSearchFields] = useState({
+        level_id: "",
+        country_id: "",
+        province_id: "",
+        city_id: "",
+        district_id: "",
+        department_id: "",
+        nic: "",
+        initial: "",
+        full_name: "",
+        dob: "",
+        address: "",
+        mobile: "",
+        civil_status: "",
+        active: "",
+    });
 
     const [pagination, setPagination] = useState({
         currentPage: 1,
@@ -25,39 +32,35 @@ function Index({ auth }) {
         perPage: 10,
     });
 
+    // Mapping of fields to their operators
+    const fieldOperators = {
+        level_id: "eq",
+        country_id: "eq",
+        province_id: "eq",
+        district_id: "eq",
+        city_id: "eq",
+        department_id: "eq",
+        nic: "eq",
+        initial: "like",
+        full_name: "like",
+        dob: "eq",
+        address: "eq",
+        mobile: "eq",
+        civil_status: "eq",
+        active: "eq",
+    };
+
     const fetchStaffs = async (page = 1) => {
         try {
-            const params = [];
+            const params = Object.entries(searchFields)
+                .filter(([key, value]) => value !== "")
+                .map(([key, value]) => {
+                    const operator = fieldOperators[key] || "eq";
+                    return `${key}[${operator}]=${encodeURIComponent(value)}`;
+                })
+                .join("&");
 
-            if (
-                searchQuery ||
-                activeQuery ||
-                countryQuery ||
-                provinceQuery ||
-                cityQuery ||
-                districtQuery ||
-                nicQuery
-            ) {
-                params.push(`full_name[like]=${searchQuery}`);
-                if (activeQuery != "") {
-                    params.push(`active[eq]=${activeQuery}`);
-                }
-                if (countryQuery != "") {
-                    params.push(`country_id[eq]=${countryQuery}`);
-                }
-                if (provinceQuery != "") {
-                    params.push(`province_id[eq]=${provinceQuery}`);
-                }
-                if (cityQuery != "") {
-                    params.push(`city_id[eq]=${cityQuery}`);
-                }
-                if (districtQuery != "") {
-                    params.push(`district_id[eq]=${districtQuery}`);
-                }
-                params.push(`nic[like]=${nicQuery}`);
-            }
-            const queryString = params.length > 0 ? `&${params.join("&")}` : "";
-
+            const queryString = params ? `&${params}` : "";
             const response = await getStaffs(page, queryString);
 
             setStaffs(response.data.data);
@@ -68,35 +71,20 @@ function Index({ auth }) {
                 perPage: response.data.meta.per_page,
             });
         } catch (error) {
-            console.error(
-                "There was an error fetching the staff data!",
-                error
-            );
+            console.error("There was an error fetching the staff data!", error);
         }
     };
 
     useEffect(() => {
         fetchStaffs();
-    }, [
-        searchQuery,
+    }, [searchFields]);
 
-        activeQuery,
-        countryQuery,
-        provinceQuery,
-        cityQuery,
-        districtQuery,
-
-        nicQuery,
-    ]);
-
-    const handleSearch = (query) => setSearchQuery(query);
-    const handleActiveSearch = (active) => setActiveQuery(active);
-    const handleCountrySearch = (country) => setCountryQuery(country);
-    const handleProvinceSearch = (province) => setProvinceQuery(province);
-    const handleCitySearch = (city) => setCityQuery(city);
-    const handleDistrictSearch = (district) => setDistrictQuery(district);
-
-    const handleNicSearch = (nic) => setNicQuery(nic);
+    const handleFieldChange = (field, value) => {
+        setSearchFields((prevFields) => ({
+            ...prevFields,
+            [field]: value,
+        }));
+    };
 
     const handlePageChange = (page) => fetchStaffs(page);
 
@@ -133,13 +121,23 @@ function Index({ auth }) {
 
             <div className="col-sm-12">
                 <SearchBox
-                    onSearch={handleSearch}
-                    onActiveSearch={handleActiveSearch}
-                    onCountrySearch={handleCountrySearch}
-                    onProvinceSearch={handleProvinceSearch}
-                    onCitySearch={handleCitySearch}
-                    onDistrictSearch={handleDistrictSearch}
-                    onNicSearch={handleNicSearch}
+                    onLevelSearch={(value) => handleFieldChange("level_id", value)}
+                    onCountrySearch={(value) => handleFieldChange("country_id", value)}
+                    onProvinceSearch={(value) => handleFieldChange("province_id", value)}
+                    onCitySearch={(value) => handleFieldChange("city_id", value)}
+                    onDistrictSearch={(value) => handleFieldChange("district_id", value)}
+                    onDepartmentSearch={(value) =>
+                        handleFieldChange("department_id", value)
+                    }
+                    onNicSearch={(value) => handleFieldChange("nic", value)}
+                    onInitialSearch={(value) => handleFieldChange("initial", value)}
+                    onFullNameSearch={(value) => handleFieldChange("full_name", value)}
+                    onDobSearch={(value) => handleFieldChange("dob", value)}
+                    onMobileSearch={(value) => handleFieldChange("mobile", value)}
+                    onCivilStatusSearch={(value) =>
+                        handleFieldChange("civil_status", value)
+                    }
+                    onActiveSearch={(value) => handleFieldChange("active", value)}
                 />
                 <Table
                     staffs={staffs}
