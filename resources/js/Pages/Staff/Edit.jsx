@@ -92,6 +92,7 @@ function StaffForm({ auth }) {
         Object.keys(staff).forEach((key) => {
             formData.append(key, staff[key]);
         });
+        console.log(staff);
         try {
             if (isEditing) {
                 await updateStaff(id, formData);
@@ -196,6 +197,16 @@ function StaffForm({ auth }) {
                                         />
                                     </div>
                                     <div className="mb-3">
+                                        <h6 className="form-label">Initials</h6>
+                                        <input
+                                            className="form-control"
+                                            name="initial"
+                                            value={staff.initial}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-3">
                                         <h6 className="form-label">
                                             First Name
                                         </h6>
@@ -273,6 +284,9 @@ function StaffForm({ auth }) {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <div className="mb-3">
+                                                <label className="form-label">
+                                                    Level
+                                                </label>
                                                 <LevelDropdown
                                                     selectedLevel={
                                                         staff.level_id
@@ -288,6 +302,9 @@ function StaffForm({ auth }) {
                                         </div>
                                         <div className="col-sm-6">
                                             <div className="mb-3">
+                                                <label className="form-label">
+                                                    Department
+                                                </label>
                                                 <DepartmentDropdown
                                                     selectedDepartment={
                                                         staff.department_id

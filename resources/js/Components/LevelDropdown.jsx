@@ -15,7 +15,10 @@ function LevelDropdown({ value, onChange }) {
     useEffect(() => {
         const fetchLevels = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/common/levels`,HEADER);
+                const response = await axios.get(
+                    `http://127.0.0.1:8000/api/common/levels`,
+                    HEADER
+                );
                 setLevels(response.data.data); // Assuming the API returns a list of levels
                 setLoading(false);
             } catch (error) {
@@ -30,6 +33,7 @@ function LevelDropdown({ value, onChange }) {
     return (
         <select
             className="form-control"
+            name="level_id"
             value={value}
             onChange={(e) => onChange(e.target.value)}
             disabled={loading}

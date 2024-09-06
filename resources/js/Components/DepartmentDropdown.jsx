@@ -31,6 +31,7 @@ function DepartmentDropdown({ value, onChange }) {
         <select
             className="form-control"
             value={value}
+            name="department_id"
             onChange={(e) => onChange(e.target.value)}
             disabled={loading}
         >

@@ -181,7 +181,7 @@ function SearchBox({
                     </div>
                     <div className="mb-4">
                         <div className="row">
-                            <div className="col-md-3">
+                            <div className="col-md-3 mt-3">
                                 <label>Level</label>
                                 <LevelDropdown
                                     value={searchFields.level_id}
@@ -191,7 +191,7 @@ function SearchBox({
                                 />
                             </div>
 
-                            <div className="col-md-3">
+                            <div className="col-md-3 mt-3">
                                 <label>NIC</label>
                                 <input
                                     type="text"
