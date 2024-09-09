@@ -1,5 +1,5 @@
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import React from "react";
 
 export default function Header() {
@@ -466,7 +466,7 @@ export default function Header() {
                                     />
                                 </div>
                                 <div className="user-content">
-                                    <h6>Ava Davis</h6>
+                                    <h6>Root</h6>
                                     <p className="mb-0">
                                         Admin
                                         <i className="fa-solid fa-chevron-down"></i>

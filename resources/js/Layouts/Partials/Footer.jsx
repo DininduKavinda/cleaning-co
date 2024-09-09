@@ -7,12 +7,11 @@ function Footer() {
                 <div className="row">
                     <div className="col-md-6 footer-copyright">
                         <p className="mb-0">
-                            Copyright 2024 © Admiro /theme by pixelstrap.
+                            Copyright 2024 © Dinindu Kavinda.
                         </p>
                     </div>
                     <div className="col-md-6">
                         <p className="float-end mb-0">
-                            Hand crafted &amp; made with
                             <svg className="svg-color footer-icon">
                                 <use href="/theme/assets/svg/iconly-sprite.svg#heart"></use>
                             </svg>
