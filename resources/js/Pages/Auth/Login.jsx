@@ -90,7 +90,7 @@ export default function Login({ status, canResetPassword }) {
                         />
                         <button
                             type="button"
-                            className="btn btn-outline-secondary"
+                            className="btn btn-primary"
                             onClick={togglePasswordVisibility}
                         >
                             {showPassword ? "Hide" : "Show"}

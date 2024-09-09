@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('nic');
-            $table->string('titile');
+            $table->string('title');
             $table->string('initial');
             $table->string('full_name');
             $table->date('dob');

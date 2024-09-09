@@ -11,7 +11,7 @@ class UpdateCountryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,19 +24,17 @@ class UpdateCountryRequest extends FormRequest
         $method = $this->method();
         if ($method == 'put') {
             return [
-                'country_name' => ['required', 'unique:countries', 'max:225'],
-                'iso_code' => ['required', 'unique:countries', 'max:225'],
-                'phone_code' => ['required', 'unique:countries', 'max:20'],
-                'user_id' => ['required'],
+                'country_name' => ['required', 'max:225'],
+                'iso_code' => ['required', 'max:225'],
+                'phone_code' => ['required', 'max:20'],
+
 
             ];
         } else {
             return [
-                'country_name' => ['sometimes', 'required', 'unique:countries', 'max:225'],
-                'iso_code' => ['sometimes', 'required', 'unique:countries', 'max:225'],
-                'phone_code' => ['sometimes', 'required', 'unique:countries', 'max:20'],
-                'user_id' => ['sometimes', 'required'],
-
+                'country_name' => ['sometimes', 'required', 'max:225'],
+                'iso_code' => ['sometimes', 'required', 'max:225'],
+                'phone_code' => ['sometimes', 'required', 'max:20'],
             ];
         }
     }

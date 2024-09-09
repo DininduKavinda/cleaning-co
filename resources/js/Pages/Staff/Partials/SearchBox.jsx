@@ -1,53 +1,53 @@
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
+import LevelDropdown from "@/Components/LevelDropdown";
 import CountryDropdown from "@/Components/CountryDropdown";
 import ProvinceDropdown from "@/Components/ProvinceDropdown";
 import DistrictDropdown from "@/Components/DistrictDropdown";
 import CityDropdown from "@/Components/CityDropdown";
+import DepartmentDropdown from "@/Components/DepartmentDropdown"; // Assuming you have this component
 
 function SearchBox({
-    onSearch,
-    onActiveSearch,
+    onLevelSearch,
     onCountrySearch,
     onProvinceSearch,
-    onCitySearch,
     onDistrictSearch,
+    onCitySearch,
+    onDepartmentSearch,
     onNicSearch,
+    onInitialSearch,
+    onFullNameSearch,
+    onDobSearch,
+    onMobileSearch,
+    onCivilStatusSearch,
+    onActiveSearch,
 }) {
-    const [name, setName] = useState("");
-    const [active, setActive] = useState("");
-    const [nic, setNic] = useState("");
-    const [location, setLocation] = useState({
-        country_id: null,
-        province_id: null,
-        district_id: null,
-        city_id: null,
+    const [searchFields, setSearchFields] = useState({
+        level_id: "",
+        country_id: "",
+        province_id: "",
+        district_id: "",
+        city_id: "",
+        department_id: "",
+        nic: "",
+        initial: "",
+        full_name: "",
+        dob: "",
+        mobile: "",
+        civil_status: "",
+        active: "",
     });
 
-    const handleNameChange = (e) => {
-        const value = e.target.value;
-        setName(value);
-        onSearch(value);
-    };
-
-    const handleActiveChange = (e) => {
-        const value = e.target.value;
-        setActive(value);
-        onActiveSearch(value);
-    };
-
-    const handleNicChange = (e) => {
-        const value = e.target.value;
-        setNic(value);
-        onNicSearch(value);
-    };
-
-    const handleLocationChange = (field, value) => {
-        setLocation((prevLocation) => ({
-            ...prevLocation,
+    const handleFieldChange = (field, value) => {
+        setSearchFields((prevFields) => ({
+            ...prevFields,
             [field]: value,
         }));
+
         switch (field) {
+            case "level_id":
+                onLevelSearch(value);
+                break;
             case "country_id":
                 onCountrySearch(value);
                 break;
@@ -59,6 +59,30 @@ function SearchBox({
                 break;
             case "city_id":
                 onCitySearch(value);
+                break;
+            case "department_id":
+                onDepartmentSearch(value);
+                break;
+            case "nic":
+                onNicSearch(value);
+                break;
+            case "initial":
+                onInitialSearch(value);
+                break;
+            case "full_name":
+                onFullNameSearch(value);
+                break;
+            case "dob":
+                onDobSearch(value);
+                break;
+            case "mobile":
+                onMobileSearch(value);
+                break;
+            case "civil_status":
+                onCivilStatusSearch(value);
+                break;
+            case "active":
+                onActiveSearch(value);
                 break;
             default:
                 break;
@@ -79,18 +103,20 @@ function SearchBox({
                                 <li className="nav-item">
                                     <a
                                         className={`nav-link ${
-                                            active === "" ? "active" : ""
+                                            searchFields.active === ""
+                                                ? "active"
+                                                : ""
                                         }`}
                                         id="top-home-tab"
                                         data-bs-toggle="tab"
                                         href="#top-home"
                                         role="tab"
                                         aria-controls="top-home"
-                                        aria-selected={active === ""}
+                                        aria-selected={
+                                            searchFields.active === ""
+                                        }
                                         onClick={() =>
-                                            handleActiveChange({
-                                                target: { value: "" },
-                                            })
+                                            handleFieldChange("active", "")
                                         }
                                     >
                                         <i data-feather="target"></i>All
@@ -99,18 +125,20 @@ function SearchBox({
                                 <li className="nav-item">
                                     <a
                                         className={`nav-link ${
-                                            active === "1" ? "active" : ""
+                                            searchFields.active === "1"
+                                                ? "active"
+                                                : ""
                                         }`}
                                         id="profile-top-tab"
                                         data-bs-toggle="tab"
                                         href="#top-profile"
                                         role="tab"
                                         aria-controls="top-profile"
-                                        aria-selected={active === "1"}
+                                        aria-selected={
+                                            searchFields.active === "1"
+                                        }
                                         onClick={() =>
-                                            handleActiveChange({
-                                                target: { value: "1" },
-                                            })
+                                            handleFieldChange("active", "1")
                                         }
                                     >
                                         <i data-feather="info"></i>Active
@@ -119,18 +147,20 @@ function SearchBox({
                                 <li className="nav-item">
                                     <a
                                         className={`nav-link ${
-                                            active === "0" ? "active" : ""
+                                            searchFields.active === "0"
+                                                ? "active"
+                                                : ""
                                         }`}
                                         id="contact-top-tab"
                                         data-bs-toggle="tab"
                                         href="#top-contact"
                                         role="tab"
                                         aria-controls="top-contact"
-                                        aria-selected={active === "0"}
+                                        aria-selected={
+                                            searchFields.active === "0"
+                                        }
                                         onClick={() =>
-                                            handleActiveChange({
-                                                target: { value: "0" },
-                                            })
+                                            handleFieldChange("active", "0")
                                         }
                                     >
                                         <i data-feather="check-circle"></i>
@@ -140,10 +170,9 @@ function SearchBox({
                             </ul>
                         </div>
                         <div className="col-md-6 d-md-block d-none">
-                            <div className="form-group mb-0 me-0"></div>
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
-                                href={route("clients.create")}
+                                href={route("staff.create")}
                             >
                                 {" "}
                                 <i data-feather="plus-square"></i>Create New{" "}
@@ -152,34 +181,110 @@ function SearchBox({
                     </div>
                     <div className="mb-4">
                         <div className="row">
-                            <div className="col-md-6">
-                                <label>Name</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Search by name..."
-                                    value={name}
-                                    onChange={handleNameChange}
+                            <div className="col-md-3 mt-3">
+                                <label>Level</label>
+                                <LevelDropdown
+                                    value={searchFields.level_id}
+                                    onChange={(value) =>
+                                        handleFieldChange("level_id", value)
+                                    }
                                 />
                             </div>
 
-                            <div className="col-md-6">
+                            <div className="col-md-3 mt-3">
                                 <label>NIC</label>
                                 <input
                                     type="text"
                                     className="form-control"
                                     placeholder="Search by NIC..."
-                                    value={nic}
-                                    onChange={handleNicChange}
+                                    value={searchFields.nic}
+                                    onChange={(e) =>
+                                        handleFieldChange("nic", e.target.value)
+                                    }
+                                />
+                            </div>
+
+                            <div className="col-md-3 mt-3">
+                                <label>Initial</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Search by initial..."
+                                    value={searchFields.initial}
+                                    onChange={(e) =>
+                                        handleFieldChange(
+                                            "initial",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+
+                            <div className="col-md-3 mt-3">
+                                <label>Full Name</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Search by full name..."
+                                    value={searchFields.full_name}
+                                    onChange={(e) =>
+                                        handleFieldChange(
+                                            "full_name",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+
+                            <div className="col-md-3 mt-3">
+                                <label>DOB</label>
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    value={searchFields.dob}
+                                    onChange={(e) =>
+                                        handleFieldChange("dob", e.target.value)
+                                    }
+                                />
+                            </div>
+
+                            <div className="col-md-3 mt-3">
+                                <label>Mobile</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Search by mobile..."
+                                    value={searchFields.mobile}
+                                    onChange={(e) =>
+                                        handleFieldChange(
+                                            "mobile",
+                                            e.target.value
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="col-md-3 mt-3">
+                                <label>Civil Status</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Search by civil status..."
+                                    value={searchFields.civil_status}
+                                    onChange={(e) =>
+                                        handleFieldChange(
+                                            "civil_status",
+                                            e.target.value
+                                        )
+                                    }
                                 />
                             </div>
 
                             <div className="col-md-3 mt-3">
                                 <label>Country</label>
                                 <CountryDropdown
-                                    countryId={location.country_id}
-                                    setCountryId={(value) =>
-                                        handleLocationChange("country_id", value)
+                                    value={searchFields.country_id}
+                                    onChange={(value) =>
+                                        handleFieldChange("country_id", value)
                                     }
                                 />
                             </div>
@@ -187,10 +292,10 @@ function SearchBox({
                             <div className="col-md-3 mt-3">
                                 <label>Province</label>
                                 <ProvinceDropdown
-                                    countryId={location.country_id}
-                                    provinceId={location.province_id}
-                                    setProvinceId={(value) =>
-                                        handleLocationChange("province_id", value)
+                                    country_id={searchFields.country_id}
+                                    value={searchFields.province_id}
+                                    onChange={(value) =>
+                                        handleFieldChange("province_id", value)
                                     }
                                 />
                             </div>
@@ -198,10 +303,10 @@ function SearchBox({
                             <div className="col-md-3 mt-3">
                                 <label>District</label>
                                 <DistrictDropdown
-                                    provinceId={location.province_id}
-                                    districtId={location.district_id}
-                                    setDistrictId={(value) =>
-                                        handleLocationChange("district_id", value)
+                                    province_id={searchFields.province_id}
+                                    value={searchFields.district_id}
+                                    onChange={(value) =>
+                                        handleFieldChange("district_id", value)
                                     }
                                 />
                             </div>
@@ -209,10 +314,23 @@ function SearchBox({
                             <div className="col-md-3 mt-3">
                                 <label>City</label>
                                 <CityDropdown
-                                    districtId={location.district_id}
-                                    cityId={location.city_id}
-                                    setCityId={(value) =>
-                                        handleLocationChange("city_id", value)
+                                    district_id={searchFields.district_id}
+                                    value={searchFields.city_id}
+                                    onChange={(value) =>
+                                        handleFieldChange("city_id", value)
+                                    }
+                                />
+                            </div>
+
+                            <div className="col-md-3 mt-3">
+                                <label>Department</label>
+                                <DepartmentDropdown
+                                    value={searchFields.department_id}
+                                    onChange={(value) =>
+                                        handleFieldChange(
+                                            "department_id",
+                                            value
+                                        )
                                     }
                                 />
                             </div>

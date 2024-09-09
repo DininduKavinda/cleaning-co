@@ -5,6 +5,12 @@ use App\Http\Controllers\Web\Auth\PermissionController;
 use App\Http\Controllers\Web\Auth\RoleController;
 use App\Http\Controllers\Web\Auth\UsersController;
 use App\Http\Controllers\Web\ClientController;
+use App\Http\Controllers\Web\MetaData\DepartmentController;
+use App\Http\Controllers\Web\MetaData\LevelController;
+use App\Http\Controllers\Web\MetaData\Location\CityController;
+use App\Http\Controllers\Web\MetaData\Location\CountryController;
+use App\Http\Controllers\Web\MetaData\Location\DistrictController;
+use App\Http\Controllers\Web\MetaData\Location\ProvinceController;
 use App\Http\Controllers\Web\StaffController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -33,13 +39,26 @@ Route::group(['prefix'=>'users_permissions'], function () {
     Route::resource('users',UsersController::class);
     Route::resource('permissions',PermissionController::class);
     Route::resource('roles', RoleController::class);
-})->middleware('auth');
+})->middleware(['auth', 'verified']);
 
 Route::group(['prefix'=>'web'], function () {
     Route::resource('clients',ClientController::class);
     Route::resource('staff', StaffController::class);
     Route::resource('permissions',PermissionController::class);
     Route::resource('roles', RoleController::class);
-})->middleware('auth');
+})->middleware(['auth', 'verified']);
+
+Route::group(['prefix'=>'location'], function () {
+    Route::resource('countries',CountryController::class);
+    Route::resource('provinces', ProvinceController::class);
+    Route::resource('districts',DistrictController::class);
+    Route::resource('cities', CityController::class);
+})->middleware(['auth', 'verified']);
+
+
+Route::group(['prefix'=>'meta'], function () {
+    Route::resource('departments',DepartmentController::class);
+    Route::resource('levels', LevelController::class);
+})->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';

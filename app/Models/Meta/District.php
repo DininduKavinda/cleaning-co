@@ -34,7 +34,7 @@ class District extends Model
         return $this->hasMany(Client::class);
     }
 
-    public function staffs()
+    public function staff()
     {
         return $this->hasMany(Staff::class);
     }

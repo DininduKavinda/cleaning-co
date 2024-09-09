@@ -23,10 +23,12 @@ class StaffResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'full_name' => $this->name,
+            'full_name' => $this->full_name,
             'nic' => $this->nic,
+            'email'=> $this->user->email,
             'mobile' => $this->mobile,
             'phone' => $this->phone,
+            'name' => $this->user->name,
             'address' => $this->address,
             'city_id' => $this->city_id,
             'district_id' => $this->district_id,
@@ -38,6 +40,7 @@ class StaffResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'title' => $this->title,
+            'dob' => $this->dob,
             'roles' => $this->user->roles->pluck('name'),
             'initial' => $this->initial,
             'civil_status' => $this->civil_status,

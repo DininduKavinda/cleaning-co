@@ -2,31 +2,36 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { usePage } from "@inertiajs/react";
 import LocationForm from "@/Components/LocationForm";
-import {
-    createClient,
-    getClientById,
-    updateClient,
-} from "@/Helpers/Api/ClientApi";
+import LevelDropdown from "@/Components/LevelDropdown";
+import DepartmentDropdown from "@/Components/DepartmentDropdown";
+import { createStaff, getStaffById, updateStaff } from "@/Helpers/Api/StaffApi";
 
-function ClientForm({ auth }) {
+function StaffForm({ auth }) {
     const page_info = usePage().props;
-    const id = page_info.client?.id;
-    const [client, setClient] = useState({
-        nic: "",
+    const id = page_info.staff?.id;
+    const [staff, setStaff] = useState({
+        level_id: "",
         name: "",
-        mobile: "",
-        phone: "",
-        address: "",
-        roles: ["user"],
+        department_id: "",
         country_id: "",
         province_id: "",
         district_id: "",
         city_id: "",
+        first_name: "",
+        last_name: "",
+        nic: "",
+        title: "",
+        initial: "",
         full_name: "",
+        dob: "",
+        address: "",
+        mobile: "",
+        phone: "",
+        civil_status: "",
         email: "",
         password: "",
         password_confirmation: "",
-        image: null,
+        image: "",
         last_login: "",
         active: 1,
     });
@@ -36,69 +41,78 @@ function ClientForm({ auth }) {
     useEffect(() => {
         if (id) {
             setIsEditing(true);
-            fetchClient();
+            fetchStaff();
         }
     }, [id]);
 
-    const fetchClient = async () => {
+    const fetchStaff = async () => {
         try {
-            const response = await getClientById(id);
-            const clientData = response.data.data;
-            setClient({
-                nic: clientData.nic,
-                name: clientData.name,
-                mobile: clientData.mobile,
-                phone: clientData.phone,
-                address: clientData.address,
-                country_id: clientData.country_id,
-                province_id: clientData.province_id,
-                district_id: clientData.district_id,
-                city_id: clientData.city_id,
-                full_name: clientData.full_name,
-                email: clientData.email,
-                roles: clientData.roles,
-                active: clientData.active,
+            const response = await getStaffById(id);
+            const staffData = response.data.data;
+            setStaff({
+                level_id: staffData.level_id,
+                country_id: staffData.country_id,
+                province_id: staffData.province_id,
+                district_id: staffData.district_id,
+                city_id: staffData.city_id,
+                department_id: staffData.department_id,
+                first_name: staffData.first_name,
+                last_name: staffData.last_name,
+                nic: staffData.nic,
+                name: staffData.name,
+                title: staffData.title,
+                initial: staffData.initial,
+                full_name: staffData.full_name,
+                dob: staffData.dob,
+                address: staffData.address,
+                mobile: staffData.mobile,
+                phone: staffData.phone,
+                civil_status: staffData.civil_status,
+                email: staffData.email,
+                image: staffData.image,
+                active: staffData.active,
             });
-            setImagePreview(clientData.image);
+            setImagePreview(staffData.image);
         } catch (error) {
-            console.error("Error fetching client data:", error);
+            console.error("Error fetching staff data:", error);
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setClient({ ...client, [name]: value });
+        setStaff({ ...staff, [name]: value });
     };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        setClient({ ...client, image: file });
+        setStaff({ ...staff, image: file });
         setImagePreview(URL.createObjectURL(file));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        Object.keys(client).forEach((key) => {
-            formData.append(key, client[key]);
+        Object.keys(staff).forEach((key) => {
+            formData.append(key, staff[key]);
         });
+        console.log(staff);
         try {
             if (isEditing) {
-                const response = await updateClient(id,formData);
+                await updateStaff(id, staff);
             } else {
-                await createClient(formData);
+                await createStaff(formData);
             }
         } catch (error) {
-            console.error("Error saving client data:", error);
+            console.error("Error saving staff data:", error);
         }
     };
 
     return (
         <AuthenticatedLayout
-            client={auth.client}
+            staff={auth.staff}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {isEditing ? "Edit Client" : "Create Client"}
+                    {isEditing ? "Edit Staff" : "Create Staff"}
                 </h2>
             }
         >
@@ -106,7 +120,9 @@ function ClientForm({ auth }) {
                 <div className="page-title">
                     <div className="row">
                         <div className="col-sm-6 col-12">
-                            <h2>Edit Profile</h2>
+                            <h2>
+                                {isEditing ? "Edit Profile" : "Create Profile"}
+                            </h2>
                         </div>
                         <div className="col-sm-6 col-12">
                             <ol className="breadcrumb">
@@ -117,7 +133,9 @@ function ClientForm({ auth }) {
                                 </li>
                                 <li className="breadcrumb-item">Users</li>
                                 <li className="breadcrumb-item active">
-                                    Edit Profile
+                                    {isEditing
+                                        ? "Edit Profile"
+                                        : "Create Profile"}
                                 </li>
                             </ol>
                         </div>
@@ -131,7 +149,7 @@ function ClientForm({ auth }) {
                             <div className="card">
                                 <div className="card-header card-no-border pb-0">
                                     <h3 className="card-title mb-0">
-                                        Client Profile
+                                        Staff Profile
                                     </h3>
                                 </div>
                                 <div className="card-body">
@@ -153,34 +171,74 @@ function ClientForm({ auth }) {
                                                 )}
                                                 <div className="flex-grow-1">
                                                     <h3 className="mb-1">
-                                                        {client.name ||
-                                                            "New Client"}
+                                                        {staff.full_name ||
+                                                            "New Staff"}
                                                     </h3>
-                                                    <p>
-                                                        {client.roles.join(
-                                                            ", "
-                                                        )}
-                                                    </p>
+                                                    <p>{staff.title}</p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="mb-3">
-                                        <h6 className="form-label">NIC</h6>
-                                        <input
-                                            className="form-control"
-                                            name="nic"
-                                            value={client.nic}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
                                     </div>
                                     <div className="mb-3">
                                         <h6 className="form-label">Username</h6>
                                         <input
                                             className="form-control"
                                             name="name"
-                                            value={client.name}
+                                            value={staff.name}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <h6 className="form-label">NIC</h6>
+                                        <input
+                                            className="form-control"
+                                            name="nic"
+                                            value={staff.nic}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <h6 className="form-label">Title</h6>
+                                        <input
+                                            className="form-control"
+                                            name="title"
+                                            value={staff.title}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <h6 className="form-label">Initials</h6>
+                                        <input
+                                            className="form-control"
+                                            name="initial"
+                                            value={staff.initial}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <h6 className="form-label">
+                                            First Name
+                                        </h6>
+                                        <input
+                                            className="form-control"
+                                            name="first_name"
+                                            value={staff.first_name}
+                                            onChange={handleInputChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <h6 className="form-label">
+                                            Last Name
+                                        </h6>
+                                        <input
+                                            className="form-control"
+                                            name="last_name"
+                                            value={staff.last_name}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -190,7 +248,7 @@ function ClientForm({ auth }) {
                                         <input
                                             className="form-control"
                                             name="mobile"
-                                            value={client.mobile}
+                                            value={staff.mobile}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -200,7 +258,7 @@ function ClientForm({ auth }) {
                                         <input
                                             className="form-control"
                                             name="phone"
-                                            value={client.phone}
+                                            value={staff.phone}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -210,7 +268,7 @@ function ClientForm({ auth }) {
                                         <input
                                             className="form-control"
                                             name="address"
-                                            value={client.address}
+                                            value={staff.address}
                                             onChange={handleInputChange}
                                             required
                                         />
@@ -232,7 +290,7 @@ function ClientForm({ auth }) {
                             <div className="card">
                                 <div className="card-header card-no-border pb-0">
                                     <h3 className="card-title mb-0">
-                                        Edit Client Details
+                                        Edit Staff Details
                                     </h3>
                                 </div>
                                 <div className="card-body">
@@ -240,12 +298,52 @@ function ClientForm({ auth }) {
                                         <div className="col-sm-6">
                                             <div className="mb-3">
                                                 <label className="form-label">
+                                                    Level
+                                                </label>
+                                                <LevelDropdown
+                                                    selectedLevel={
+                                                        staff.level_id
+                                                    }
+                                                    onChange={(value) =>
+                                                        setStaff({
+                                                            ...staff,
+                                                            level_id: value,
+                                                        })
+                                                    }
+                                                />
+
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div className="mb-3">
+                                                <label className="form-label">
+                                                    Department
+                                                </label>
+                                                <DepartmentDropdown
+                                                    selectedDepartment={
+                                                        staff.department_id
+                                                    }
+                                                    onChange={(
+                                                        value
+                                                    ) =>
+                                                        setStaff({
+                                                            ...staff,
+                                                            department_id:
+                                                                value,
+                                                        })
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-12">
+                                            <div className="mb-3">
+                                                <label className="form-label">
                                                     Full Name
                                                 </label>
                                                 <input
                                                     className="form-control"
                                                     name="full_name"
-                                                    value={client.full_name}
+                                                    value={staff.full_name}
                                                     onChange={handleInputChange}
                                                     required
                                                 />
@@ -254,24 +352,48 @@ function ClientForm({ auth }) {
                                         <div className="col-sm-6">
                                             <div className="mb-3">
                                                 <label className="form-label">
-                                                    Email
+                                                    Date of Birth
                                                 </label>
                                                 <input
+                                                    type="date"
                                                     className="form-control"
-                                                    name="email"
-                                                    value={client.email}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                />
-                                                <input
-                                                    hidden
-                                                    className="form-control"
-                                                    name="active"
-                                                    value={client.active}
+                                                    name="dob"
+                                                    value={staff.dob}
                                                     onChange={handleInputChange}
                                                     required
                                                 />
                                             </div>
+                                        </div>
+                                        <div className="col-sm-6">
+                                            <div className="mb-3">
+                                                <label className="form-label">
+                                                    Civil Status
+                                                </label>
+                                                <input
+                                                    className="form-control"
+                                                    name="civil_status"
+                                                    value={staff.civil_status}
+                                                    onChange={handleInputChange}
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        <LocationForm
+                                            client={staff}
+                                            setClient={setStaff}
+                                        />
+                                        <div className="mb-3">
+                                            <label className="form-label">
+                                                Email
+                                            </label>
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                name="email"
+                                                value={staff.email}
+                                                onChange={handleInputChange}
+                                                required
+                                            />
                                         </div>
                                         {!isEditing && (
                                             <>
@@ -285,7 +407,7 @@ function ClientForm({ auth }) {
                                                             className="form-control"
                                                             name="password"
                                                             value={
-                                                                client.password
+                                                                staff.password
                                                             }
                                                             onChange={
                                                                 handleInputChange
@@ -304,7 +426,7 @@ function ClientForm({ auth }) {
                                                             className="form-control"
                                                             name="password_confirmation"
                                                             value={
-                                                                client.password_confirmation
+                                                                staff.password_confirmation
                                                             }
                                                             onChange={
                                                                 handleInputChange
@@ -315,22 +437,31 @@ function ClientForm({ auth }) {
                                                 </div>
                                             </>
                                         )}
-                                        <LocationForm
-                                            client={client}
-                                            setClient={setClient}
-                                        />
-
-                                        <div className="card-footer">
-                                            <button
-                                                className="btn btn-primary btn-block"
-                                                type="submit"
+                                        <div className="mb-3">
+                                            <label className="form-label">
+                                                Active
+                                            </label>
+                                            <select
+                                                className="form-control"
+                                                name="active"
+                                                value={staff.active}
+                                                onChange={handleInputChange}
                                             >
-                                                {isEditing
-                                                    ? "Update Client"
-                                                    : "Create Client"}
-                                            </button>
+                                                <option value={1}>
+                                                    Active
+                                                </option>
+                                                <option value={0}>
+                                                    Inactive
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary"
+                                    >
+                                        {isEditing ? "Update" : "Create"} Staff
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -341,4 +472,4 @@ function ClientForm({ auth }) {
     );
 }
 
-export default ClientForm;
+export default StaffForm;

@@ -68,15 +68,15 @@ class ProvinceController extends Controller
         $includeCountry = request()->query('includeCountry');
         $includeAll = request()->query('includeAll');
         if ($includeAll) {
-            $provinces = $province->loadMissing(['districts', 'staffs', 'clients', 'country']);
+            $province = $province->loadMissing(['districts', 'staffs', 'clients', 'country']);
         } elseif ($includeStaff) {
-            $provinces = $province->loadMissing(['staffs']);
+            $province = $province->loadMissing(['staffs']);
         } elseif ($includeClients) {
-            $provinces = $province->loadMissing(['clients']);
+            $province = $province->loadMissing(['clients']);
         } elseif ($includeDistricts) {
-            $provinces = $province->loadMissing(['districts']);
+            $province = $province->loadMissing(['districts']);
         } elseif ($includeCountry) {
-            $provinces = $province->loadMissing(['country']);
+            $province = $province->loadMissing(['country']);
         }
         return new ProvinceResource($province);
     }
@@ -103,10 +103,10 @@ class ProvinceController extends Controller
      */
     public function destroy(Province $province)
     {
-        $province=$province->delete();
-        if($province){
+        $province = $province->delete();
+        if ($province) {
             $message = 'success';
-        }else{
+        } else {
             $message = 'error';
         }
         return response()->json([

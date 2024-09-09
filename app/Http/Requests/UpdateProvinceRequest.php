@@ -25,9 +25,9 @@ class UpdateProvinceRequest extends FormRequest
         if ($method == 'PUT') {
             return [
                 'country_id' => ['required'],
-                'name_en' => ['required', 'max:255'],
-                'name_si' => ['required', 'max:255'],
-                'name_ta' => ['required', 'max:255'],
+                'name_en' => ['sometimes', 'max:255'],
+                'name_si' => ['sometimes', 'max:255'],
+                'name_ta' => ['sometimes', 'max:255'],
 
             ];
         } else {
