@@ -37,13 +37,13 @@ class UpdateStaffRequest extends FormRequest
                 'initial' => ['required'],
                 'full_name' => ['required'],
                 'dob' => ['required'],
+                'name' => ['required'],
                 'address' => ['required'],
                 'mobile' => ['required'],
-                'name' => ['required'],
                 'phone' => ['required'],
                 'civil_status' => ['required'],
                 'email' => ['required', 'email'],
-                'image' => ['max:2048'],
+                'image' => ['sometimes','max:2048'],
                 'last_login' => ['sometimes'],
                 'active' => ['required'],
             ];
@@ -57,7 +57,7 @@ class UpdateStaffRequest extends FormRequest
                 'department_id' => ['sometimes', 'required'],
                 'first_name' => ['sometimes', 'required'],
                 'last_name' => ['sometimes', 'required'],
-                'name' => ['sometimes','required'],
+                'name' => ['sometimes', 'required'],
                 'nic' => ['sometimes', 'required'],
                 'title' => ['sometimes', 'required'],
                 'initial' => ['sometimes', 'required'],
@@ -67,7 +67,7 @@ class UpdateStaffRequest extends FormRequest
                 'mobile' => ['sometimes', 'required'],
                 'phone' => ['sometimes', 'required'],
                 'civil_status' => ['sometimes', 'required'],
-                'email' => ['required', 'email'],
+                'email' => ['sometimes', 'required'],
                 'image' => ['sometimes', 'max:2048'],
                 'last_login' => ['sometimes'],
                 'active' => ['sometimes', 'required'],
@@ -76,9 +76,9 @@ class UpdateStaffRequest extends FormRequest
     }
     protected function prepareForValidation()
     {
-        if ($this->name) {
+        if ($this->full_name) {
             $this->merge([
-                'name' => $this->name,
+                'full_name' => $this->full_name,
             ]);
         }
     }

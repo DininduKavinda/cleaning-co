@@ -31,7 +31,7 @@ function StaffForm({ auth }) {
         email: "",
         password: "",
         password_confirmation: "",
-        image: null,
+        image: "",
         last_login: "",
         active: 1,
     });
@@ -69,6 +69,7 @@ function StaffForm({ auth }) {
                 phone: staffData.phone,
                 civil_status: staffData.civil_status,
                 email: staffData.email,
+                image: staffData.image,
                 active: staffData.active,
             });
             setImagePreview(staffData.image);
@@ -97,7 +98,7 @@ function StaffForm({ auth }) {
         console.log(staff);
         try {
             if (isEditing) {
-                await updateStaff(id, formData);
+                await updateStaff(id, staff);
             } else {
                 await createStaff(formData);
             }

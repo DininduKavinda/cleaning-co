@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "http://127.0.0.1:8000/api/";
 
 const IncludeAll = "&includeAll=true";
-
+    
 const STAFFS_URL = BASE_URL + "web/staff";
 
 const TOKEN = localStorage.getItem("authToken");
@@ -31,9 +31,9 @@ export const getStaffById = (staffId) =>
 
 export const createStaff = (staffData) =>
     axios.post(`${STAFFS_URL}`, staffData, HEADER2);
-    
+
 export const updateStaff = (staffId, staffData) =>
-    axios.put(`${STAFFS_URL}/${staffId}`, staffData, HEADER);
+    axios.put(`${STAFFS_URL}/${staffId}`, staffData, HEADER2);
 
 export const deleteStaff = (staffId) =>
     axios.delete(`${STAFFS_URL}/${staffId}`, HEADER2);

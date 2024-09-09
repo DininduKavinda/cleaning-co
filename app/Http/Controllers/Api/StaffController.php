@@ -134,9 +134,9 @@ class StaffController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStaffRequest $request, Staff $staff)
+    public function update(Request $request, Staff $staff)
     {
-        $validatedData = $request->validated();
+        $validatedData = $request->all();
         $staff_id = $staff->id;
         $staffs = $staff->update([
             'full_name' => $validatedData['full_name'],
@@ -159,7 +159,7 @@ class StaffController extends Controller
             'active' => $validatedData['active'],
         ]);
         if ($staffs) {
-            $user = User::where('user_type_id', 1)->where('reference_id', $staff_id);
+            $user = User::where('user_type_id', 2)->where('reference_id', $staff_id);
             if ($request->hasFile('image')) {
                 $imageName = time() . '.' . $request->image->getClientOriginalExtension();
                 $request->image->move('img/profile/staff', $imageName);
@@ -175,7 +175,7 @@ class StaffController extends Controller
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'image' => $validatedData['image'],
-                'last_login' => $validatedData['last_login'],
+                // 'last_login' => $validatedData['last_login'],
                 'active' => $validatedData['active'],
             ]);
             if ($user) {
