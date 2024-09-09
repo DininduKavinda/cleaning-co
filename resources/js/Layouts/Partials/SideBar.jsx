@@ -49,7 +49,7 @@ function SideBar() {
                     <li className="sidebar-main-title">
                         <div>
                             <h5 className="lan-1 f-w-700 sidebar-title">
-                                User Management
+                               Settings
                             </h5>
                         </div>
                     </li>
@@ -290,6 +290,22 @@ function SideBar() {
                                 ></use>
                             </svg>
                             <h6>Level</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("tasks.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Task</h6>
                         </Link>
                     </li>
                 </ul>
