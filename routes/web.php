@@ -5,6 +5,8 @@ use App\Http\Controllers\Web\Auth\PermissionController;
 use App\Http\Controllers\Web\Auth\RoleController;
 use App\Http\Controllers\Web\Auth\UsersController;
 use App\Http\Controllers\Web\ClientController;
+use App\Http\Controllers\Web\MetaData\DepartmentController;
+use App\Http\Controllers\Web\MetaData\LevelController;
 use App\Http\Controllers\Web\MetaData\Location\CityController;
 use App\Http\Controllers\Web\MetaData\Location\CountryController;
 use App\Http\Controllers\Web\MetaData\Location\DistrictController;
@@ -51,6 +53,12 @@ Route::group(['prefix'=>'location'], function () {
     Route::resource('provinces', ProvinceController::class);
     Route::resource('districts',DistrictController::class);
     Route::resource('cities', CityController::class);
+})->middleware(['auth', 'verified']);
+
+
+Route::group(['prefix'=>'meta'], function () {
+    Route::resource('departments',DepartmentController::class);
+    Route::resource('levels', LevelController::class);
 })->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';

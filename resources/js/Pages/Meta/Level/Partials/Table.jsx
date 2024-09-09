@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Link, router } from "@inertiajs/react";
 import { toast } from "react-toastify";
-import { deleteCity } from "@/Helpers/Api/CityApi";
+import { deleteLevel } from "@/Helpers/Api/LevelApi";
 
-function Table({ cities, pagination, onPageChange, onDelete }) {
-    const [expandedRows, setExpandedRows] = useState({});
-
+function Table({ levels, pagination, onPageChange, onDelete }) {
     const renderPagination = () => {
         const pages = [];
         for (let i = 1; i <= pagination.lastPage; i++) {
@@ -65,9 +63,9 @@ function Table({ cities, pagination, onPageChange, onDelete }) {
     };
 
     const handleDelete = (id) => {
-        if (confirm("Are you sure you want to delete this city?")) {
-            deleteCity(id);
-            router.visit(route("cities.index"));
+        if (confirm("Are you sure you want to delete this level?")) {
+            deleteLevel(id);
+            router.visit(route("levels.index"));
         }
     };
 
@@ -82,38 +80,26 @@ function Table({ cities, pagination, onPageChange, onDelete }) {
                                     Id
                                 </th>
                                 <th className="bg-primary" scope="col">
-                                    Province Name
+                                    Level Name
                                 </th>
-                                <th className="bg-primary" scope="col">
-                                    City Name
-                                </th>
+
                                 <th className="bg-primary" scope="col">
                                     Actions
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
-                            {cities.map((city) => (
-                                <React.Fragment key={city.id}>
+                            {levels.map((level) => (
+                                <React.Fragment key={level.id}>
                                     <tr>
-                                        <th scope="row">{city.id}</th>
-                                        <td>
-                                            <Link
-                                                href={`${route(
-                                                    "districts.show",
-                                                    city.district.id
-                                                )}`}
-                                            >
-                                                {city.district.name_en}
-                                            </Link>
-                                        </td>
-                                        <td>{city.name_en}</td>
+                                        <th scope="row">{level.id}</th>
+                                        <td>{level.name}</td>
 
                                         <td>
                                             <Link
                                                 href={`${route(
-                                                    "cities.show",
-                                                    city.id
+                                                    "levels.show",
+                                                    level.id
                                                 )}`}
                                                 className="btn btn-warning btn-sm ms-2"
                                             >
@@ -122,7 +108,7 @@ function Table({ cities, pagination, onPageChange, onDelete }) {
                                             <button
                                                 className="btn btn-danger btn-sm ms-2"
                                                 onClick={() =>
-                                                    handleDelete(city.id)
+                                                    handleDelete(level.id)
                                                 }
                                             >
                                                 Delete

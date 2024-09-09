@@ -107,7 +107,16 @@ function Table({ districts, pagination, onPageChange, onDelete }) {
                                 <React.Fragment key={district.id}>
                                     <tr>
                                         <th scope="row">{district.id}</th>
-                                        <td>{district.province.name_en}</td>
+                                        <td>
+                                        <Link
+                                                href={`${route(
+                                                    "provinces.show",
+                                                    district.province.id
+                                                )}`}
+                                            >
+                                                {district.province.name_en}
+                                            </Link>
+                                            </td>
                                         <td>{district.name_en}</td>
                                         <td>
                                             <button
@@ -124,6 +133,7 @@ function Table({ districts, pagination, onPageChange, onDelete }) {
                                             </button>
                                         </td>
                                         <td>
+
                                             <Link
                                                 href={`${route(
                                                     "districts.show",
@@ -151,6 +161,7 @@ function Table({ districts, pagination, onPageChange, onDelete }) {
                                                         <tbody className="table-success">
                                                             <tr>
                                                                 <td>
+
                                                                     {district
                                                                         .cities
                                                                         .length >

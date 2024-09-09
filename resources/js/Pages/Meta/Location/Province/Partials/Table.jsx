@@ -107,7 +107,16 @@ function Table({ provinces, pagination, onPageChange, onDelete }) {
                                 <React.Fragment key={province.id}>
                                     <tr>
                                         <th scope="row">{province.id}</th>
-                                        <td>{province.country.country_name}</td>
+                                        <td>
+                                            <Link
+                                                href={`${route(
+                                                    "countries.show",
+                                                    province.country.id
+                                                )}`}
+                                            >
+                                                {province.country.country_name}
+                                            </Link>
+                                        </td>
                                         <td>{province.name_en}</td>
                                         <td>
                                             <button
