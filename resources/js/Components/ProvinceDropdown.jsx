@@ -52,7 +52,7 @@ const ProvinceDropdown = ({ countryId, setProvinceId }) => {
             onChange={handleChange}
             isClearable
             cacheOptions
-            isDisabled={!countryId}
+            // isDisabled={!countryId}
         />
     );
 };

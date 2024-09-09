@@ -3,26 +3,26 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import {
-    createProvince,
-    getProvinceById,
-    updateProvince,
-} from "@/Helpers/Api/ProvinceApi";
+    createDistrict,
+    getDistrictById,
+    updateDistrict,
+} from "@/Helpers/Api/DistrictApi";
 import { showToast } from "@/Components/Toastr";
-import CountryDropdown from "@/Components/CountryDropdown";
+import ProvinceDropdown from "@/Components/ProvinceDropdown";
 
-function ProvinceForm({ auth }) {
+function DistrictForm({ auth }) {
     const page_info = usePage().props;
-    const id = page_info.province?.id;
+    const id = page_info.district?.id;
 
     const {
-        data: province,
-        setData: setProvince,
+        data: district,
+        setData: setDistrict,
         put,
         post,
         reset,
     } = useForm({
         name_en: "",
-        country_id: "",
+        province_id: "",
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -30,45 +30,45 @@ function ProvinceForm({ auth }) {
     useEffect(() => {
         if (id) {
             setIsEditing(true);
-            fetchProvince();
+            fetchDistrict();
         }
     }, [id]);
 
     const handleLocationChange = (field, value) => {
-        setProvince((prevClient) => ({
+        setDistrict((prevClient) => ({
             ...prevClient,
             [field]: value,
         }));
     };
 
-    const fetchProvince = async () => {
+    const fetchDistrict = async () => {
         try {
-            const response = await getProvinceById(id);
-            const provinceData = response.data.data;
-            setProvince({
-                name_en: provinceData.name_en,
-                country_id: provinceData.country_id,
+            const response = await getDistrictById(id);
+            const districtData = response.data.data;
+            setDistrict({
+                name_en: districtData.name_en,
+                province_id: districtData.province_id,
             });
         } catch (error) {
-            console.error("Error fetching province data:", error);
+            console.error("Error fetching district data:", error);
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setProvince({ ...province, [name]: value });
+        setDistrict({ ...district, [name]: value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await updateProvince(id, province);
+                await updateDistrict(id, district);
             } else {
-                await createProvince(province);
+                await createDistrict(district);
             }
         } catch (error) {
-            console.error("Error saving province data:", error);
+            console.error("Error saving district data:", error);
         }
     };
 
@@ -77,7 +77,7 @@ function ProvinceForm({ auth }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {isEditing ? "Edit Province" : "Create Province"}
+                    {isEditing ? "Edit District" : "Create District"}
                 </h2>
             }
         >
@@ -87,8 +87,8 @@ function ProvinceForm({ auth }) {
                         <div className="col-sm-6 col-12">
                             <h2>
                                 {isEditing
-                                    ? "Edit Province"
-                                    : "Create Province"}
+                                    ? "Edit District"
+                                    : "Create District"}
                             </h2>
                         </div>
                         <div className="col-sm-6 col-12">
@@ -98,11 +98,11 @@ function ProvinceForm({ auth }) {
                                         <i className="iconly-Home icli svg-color"></i>
                                     </a>
                                 </li>
-                                <li className="breadcrumb-item">Provinces</li>
+                                <li className="breadcrumb-item">Districts</li>
                                 <li className="breadcrumb-item active">
                                     {isEditing
-                                        ? "Edit Province"
-                                        : "Create Province"}
+                                        ? "Edit District"
+                                        : "Create District"}
                                 </li>
                             </ol>
                         </div>
@@ -111,27 +111,27 @@ function ProvinceForm({ auth }) {
             </div>
 
             <div className="container-fluid">
-                <div className="edit-province">
+                <div className="edit-district">
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="card">
                                 <div className="card-header card-no-border pb-0">
                                     <h3 className="card-title mb-0">
                                         {isEditing
-                                            ? province.province_name
-                                            : "New Province"}
+                                            ? district.district_name
+                                            : "New District"}
                                     </h3>
                                 </div>
                                 <div className="card-body">
                                     <form onSubmit={handleSubmit}>
                                         <div className="mb-3">
                                             <label className="form-label">
-                                                Province Name
+                                                District Name
                                             </label>
                                             <input
                                                 className="form-control"
                                                 name="name_en"
-                                                value={province.name_en}
+                                                value={district.name_en}
                                                 onChange={handleInputChange}
                                                 required
                                             />
@@ -139,13 +139,13 @@ function ProvinceForm({ auth }) {
 
                                         <div className="mb-3">
                                             <label className="form-label">
-                                                Select Country
+                                                Select Province
                                             </label>
-                                            <CountryDropdown
-                                                countryId={province.country_id}
-                                                setCountryId={(value) =>
+                                            <ProvinceDropdown
+                                                provinceId={district.province_id}
+                                                setProvinceId={(value) =>
                                                     handleLocationChange(
-                                                        "country_id",
+                                                        "province_id",
                                                         value
                                                     )
                                                 }
@@ -158,8 +158,8 @@ function ProvinceForm({ auth }) {
                                                 type="submit"
                                             >
                                                 {isEditing
-                                                    ? "Update Province"
-                                                    : "Create Province"}
+                                                    ? "Update District"
+                                                    : "Create District"}
                                             </button>
                                         </div>
                                     </form>
@@ -173,4 +173,4 @@ function ProvinceForm({ auth }) {
     );
 }
 
-export default ProvinceForm;
+export default DistrictForm;

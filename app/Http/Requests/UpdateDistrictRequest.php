@@ -11,7 +11,7 @@ class UpdateDistrictRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,8 +26,8 @@ class UpdateDistrictRequest extends FormRequest
             return [
                 'province_id' => ['required'],
                 'name_en' => ['required', 'max:255'],
-                'name_si' => ['required', 'max:255'],
-                'name_ta' => ['required', 'max:255'],
+                'name_si' => ['sometimes', 'max:255'],
+                'name_ta' => ['sometimes', 'max:255'],
 
             ];
         } else {

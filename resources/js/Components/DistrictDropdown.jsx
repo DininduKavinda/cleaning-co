@@ -52,7 +52,7 @@ const DistrictDropdown = ({ provinceId, setDistrictId }) => {
             onChange={handleChange}
             isClearable
             cacheOptions
-            isDisabled={!provinceId}
+            // isDisabled={!provinceId}
         />
     );
 };

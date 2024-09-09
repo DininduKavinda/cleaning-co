@@ -11,7 +11,7 @@ class StoreCityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; 
+        return true;
     }
 
     /**
@@ -24,8 +24,8 @@ class StoreCityRequest extends FormRequest
         return [
             'district_id' => ['required'],
             'name_en' => ['required', 'max:255'],
-            'name_si' => ['required', 'max:255'],
-            'name_ta' => ['required', 'max:255'],
+            'name_si' => ['sometimes', 'max:255'],
+            'name_ta' => ['sometimes', 'max:255'],
         ];
     }
 

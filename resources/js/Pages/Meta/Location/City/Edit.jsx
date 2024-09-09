@@ -3,26 +3,26 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import {
-    createProvince,
-    getProvinceById,
-    updateProvince,
-} from "@/Helpers/Api/ProvinceApi";
+    createCity,
+    getCityById,
+    updateCity,
+} from "@/Helpers/Api/CityApi";
 import { showToast } from "@/Components/Toastr";
-import CountryDropdown from "@/Components/CountryDropdown";
+import DistrictDropdown from "@/Components/DistrictDropdown";
 
-function ProvinceForm({ auth }) {
+function CityForm({ auth }) {
     const page_info = usePage().props;
-    const id = page_info.province?.id;
+    const id = page_info.city?.id;
 
     const {
-        data: province,
-        setData: setProvince,
+        data: city,
+        setData: setCity,
         put,
         post,
         reset,
     } = useForm({
         name_en: "",
-        country_id: "",
+        district_id: "",
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -30,45 +30,45 @@ function ProvinceForm({ auth }) {
     useEffect(() => {
         if (id) {
             setIsEditing(true);
-            fetchProvince();
+            fetchCity();
         }
     }, [id]);
 
     const handleLocationChange = (field, value) => {
-        setProvince((prevClient) => ({
+        setCity((prevClient) => ({
             ...prevClient,
             [field]: value,
         }));
     };
 
-    const fetchProvince = async () => {
+    const fetchCity = async () => {
         try {
-            const response = await getProvinceById(id);
-            const provinceData = response.data.data;
-            setProvince({
-                name_en: provinceData.name_en,
-                country_id: provinceData.country_id,
+            const response = await getCityById(id);
+            const cityData = response.data.data;
+            setCity({
+                name_en: cityData.name_en,
+                district_id: cityData.district_id,
             });
         } catch (error) {
-            console.error("Error fetching province data:", error);
+            console.error("Error fetching city data:", error);
         }
     };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setProvince({ ...province, [name]: value });
+        setCity({ ...city, [name]: value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await updateProvince(id, province);
+                await updateCity(id, city);
             } else {
-                await createProvince(province);
+                await createCity(city);
             }
         } catch (error) {
-            console.error("Error saving province data:", error);
+            console.error("Error saving city data:", error);
         }
     };
 
@@ -77,7 +77,7 @@ function ProvinceForm({ auth }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {isEditing ? "Edit Province" : "Create Province"}
+                    {isEditing ? "Edit City" : "Create City"}
                 </h2>
             }
         >
@@ -87,8 +87,8 @@ function ProvinceForm({ auth }) {
                         <div className="col-sm-6 col-12">
                             <h2>
                                 {isEditing
-                                    ? "Edit Province"
-                                    : "Create Province"}
+                                    ? "Edit City"
+                                    : "Create City"}
                             </h2>
                         </div>
                         <div className="col-sm-6 col-12">
@@ -98,11 +98,11 @@ function ProvinceForm({ auth }) {
                                         <i className="iconly-Home icli svg-color"></i>
                                     </a>
                                 </li>
-                                <li className="breadcrumb-item">Provinces</li>
+                                <li className="breadcrumb-item">Cities</li>
                                 <li className="breadcrumb-item active">
                                     {isEditing
-                                        ? "Edit Province"
-                                        : "Create Province"}
+                                        ? "Edit City"
+                                        : "Create City"}
                                 </li>
                             </ol>
                         </div>
@@ -111,27 +111,27 @@ function ProvinceForm({ auth }) {
             </div>
 
             <div className="container-fluid">
-                <div className="edit-province">
+                <div className="edit-city">
                     <div className="row">
                         <div className="col-xl-12">
                             <div className="card">
                                 <div className="card-header card-no-border pb-0">
                                     <h3 className="card-title mb-0">
                                         {isEditing
-                                            ? province.province_name
-                                            : "New Province"}
+                                            ? city.city_name
+                                            : "New City"}
                                     </h3>
                                 </div>
                                 <div className="card-body">
                                     <form onSubmit={handleSubmit}>
                                         <div className="mb-3">
                                             <label className="form-label">
-                                                Province Name
+                                                City Name
                                             </label>
                                             <input
                                                 className="form-control"
                                                 name="name_en"
-                                                value={province.name_en}
+                                                value={city.name_en}
                                                 onChange={handleInputChange}
                                                 required
                                             />
@@ -139,13 +139,13 @@ function ProvinceForm({ auth }) {
 
                                         <div className="mb-3">
                                             <label className="form-label">
-                                                Select Country
+                                                Select District
                                             </label>
-                                            <CountryDropdown
-                                                countryId={province.country_id}
-                                                setCountryId={(value) =>
+                                            <DistrictDropdown
+                                                districtId={city.district_id}
+                                                setDistrictId={(value) =>
                                                     handleLocationChange(
-                                                        "country_id",
+                                                        "district_id",
                                                         value
                                                     )
                                                 }
@@ -158,8 +158,8 @@ function ProvinceForm({ auth }) {
                                                 type="submit"
                                             >
                                                 {isEditing
-                                                    ? "Update Province"
-                                                    : "Create Province"}
+                                                    ? "Update City"
+                                                    : "Create City"}
                                             </button>
                                         </div>
                                     </form>
@@ -173,4 +173,4 @@ function ProvinceForm({ auth }) {
     );
 }
 
-export default ProvinceForm;
+export default CityForm;

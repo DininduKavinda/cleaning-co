@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\MetaData\Location;
 
 use App\Http\Controllers\Controller;
+use App\Models\Meta\City;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -20,8 +21,16 @@ class CityController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
-    public function index(): response
+    public function index(): Response
     {
-        return Inertia::render();
+        return Inertia::render('Meta/Location/City/Index');
+    }
+    public function create(): response
+    {
+        return Inertia::render('Meta/Location/City/Edit');
+    }
+    public function show(City $city): response
+    {
+        return Inertia::render('Meta/Location/City/Edit',['city' => $city]);
     }
 }
