@@ -11,7 +11,7 @@ class StoreTimecardTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,6 +24,7 @@ class StoreTimecardTaskRequest extends FormRequest
         return [
             'name'=> ['required'],
             'rate'=>['required'],
+            'rate_type' => 'required',
             'active'=>['sometimes'],
         ];
     }

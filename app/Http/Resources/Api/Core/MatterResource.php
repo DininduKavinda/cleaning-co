@@ -29,6 +29,8 @@ class MatterResource extends JsonResource
             'name' => $this->name,
             'code' => $this->code,
             'description' => $this->description,
+            'map_longitude'=> $this->map_longitude,
+            'map_latitude'=> $this->map_latitude,
             'started_at' => $this->started_at,
             'ended_at' => $this->ended_at,
             'status' => $this->status,

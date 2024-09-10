@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\Com;
 
+use App\Http\Resources\Api\Core\MatterResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class TaskResource extends JsonResource
             'id'=>$this->id,
             'name' => $this->name,
             'active' => $this->active,
-            'staff'=> MatterResource::collection($this->whenLoaded('staffs')),
+            'matters'=> MatterResource::collection($this->whenLoaded('matters')),
         ];
     }
 }

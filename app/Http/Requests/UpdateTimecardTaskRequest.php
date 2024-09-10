@@ -11,7 +11,7 @@ class UpdateTimecardTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,14 +26,16 @@ class UpdateTimecardTaskRequest extends FormRequest
             return [
                 'name' => 'required|string|max:255',
                 'rate' => 'required|string|max:255',
-                'active' => 'required|string|in:Pending,InProgress,Completed',
+                'rate_type' => 'required',
+                'active' => 'sometimes',
             ];
         }
         else{
             return [
                 'name' => 'sometimes|required|string|max:255',
                 'rate' => 'sometimes|required|string|max:255',
-                'active' => 'sometimes|required|string|in:Pending,InProgress,Completed',
+                'rate_type' => 'sometimes',
+                'active' => 'sometimes',
             ];
         }
     }

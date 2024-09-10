@@ -18,8 +18,9 @@ class TimecardTaskResource extends JsonResource
             'id'=>$this->id,
             'name' => $this->name,
             'rate' => $this->rate,
+            'rate_type' =>$this->rate_type,
             'active' => $this->active,
-            'timecards'=> TimeCardResource::collection($this->whenLoaded('timecards')),
+            // 'timecards'=> TimeCardResource::collection($this->whenLoaded('timecards')),
         ];
     }
 }

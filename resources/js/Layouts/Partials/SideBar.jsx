@@ -486,6 +486,22 @@ function SideBar() {
                             <h6>Task</h6>
                         </Link>
                     </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("timecardTasks.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Timecard Task</h6>
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div className="right-arrow" id="right-arrow">

@@ -10,20 +10,9 @@ use App\Http\Resources\Api\Core\MatterResource;
 use App\Models\Module\Matter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class MatterController extends Controller implements HasMiddleware
+class MatterController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:view perhmission', only: ['indexs']),
-            new Middleware('permission:create perhmission', only: ['creates', 'stores']),
-            new Middleware('permission:update permhission', only: ['updates', 'edits']),
-            new Middleware('permission:delete permihssion', only: ['destroys'])
-        ];
-    }
     /**
      * Display a listing of the resource.
      */

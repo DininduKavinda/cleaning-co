@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\MetaData\Location\CountryController;
 use App\Http\Controllers\Web\MetaData\Location\DistrictController;
 use App\Http\Controllers\Web\MetaData\Location\ProvinceController;
 use App\Http\Controllers\Web\MetaData\TaskController;
+use App\Http\Controllers\Web\MetaData\TimecardTaskController;
 use App\Http\Controllers\Web\StaffController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,7 @@ Route::group(['prefix'=>'meta'], function () {
     Route::resource('departments',DepartmentController::class);
     Route::resource('levels', LevelController::class);
     Route::resource('tasks', TaskController::class);
+    Route::resource('timecardTasks', TimecardTaskController::class);
 })->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
