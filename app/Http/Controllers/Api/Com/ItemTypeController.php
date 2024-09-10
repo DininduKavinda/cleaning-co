@@ -9,20 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Com\ItemTypeCollection;
 use App\Http\Resources\Api\Com\ItemTypeResource;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class ItemTypeController extends Controller implements HasMiddleware
+class ItemTypeController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:view level', only: ['indexs', 'shows']),
-            new Middleware('permission:create level', only: ['creates', 'stores']),
-            new Middleware('permission:update clilevelent', only: ['updates', 'edits']),
-            new Middleware('permission:delete level', only: ['destroys']),
-        ];
-    }
     /**
      * Display a listing of the resource.
      */

@@ -502,6 +502,45 @@ function SideBar() {
                             <h6>Timecard Task</h6>
                         </Link>
                     </li>
+                    <li
+                        className={`sidebar-list ${
+                            activeItem === 5 ? "active" : ""
+                        }`}
+                    >
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <button
+                            className="sidebar-link btn btn-outline-none w-100 "
+                            onClick={() => handleSidebarClick(5)}
+                        >
+                            <svg className="stroke-icon stroke-none">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#web"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Item</h6>
+
+                            <i className="iconly-Arrow-Right-2 icli"></i>
+                        </button>
+                        <ul
+                            className="sidebar-submenu"
+                            style={{
+                                display: activeItem === 5 ? "block" : "none",
+                            }}
+                        >
+                            <li>
+                                <Link href={route("itemTypes.index")}>
+                                    Item Type
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route("items.index")}>
+                                    Item
+                                </Link>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div className="right-arrow" id="right-arrow">
