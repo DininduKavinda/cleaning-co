@@ -20,7 +20,7 @@ class ItemResource extends JsonResource
             'name' => $this->name,
             'price' => $this->price,
             'active' => $this->active,
-            'item_type' => new ItemTypeResource($this->whenLoaded('itemType')),
+            'itemType' => new ItemTypeResource($this->whenLoaded('itemType')),
         ];
     }
 }

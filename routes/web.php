@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\MetaData\Location\CityController;
 use App\Http\Controllers\Web\MetaData\Location\CountryController;
 use App\Http\Controllers\Web\MetaData\Location\DistrictController;
 use App\Http\Controllers\Web\MetaData\Location\ProvinceController;
+use App\Http\Controllers\Web\MetaData\Store\ItemController;
 use App\Http\Controllers\Web\MetaData\Store\ItemTypeController;
 use App\Http\Controllers\Web\MetaData\TaskController;
 use App\Http\Controllers\Web\MetaData\TimecardTaskController;
@@ -65,6 +66,7 @@ Route::group(['prefix'=>'meta'], function () {
     Route::resource('tasks', TaskController::class);
     Route::resource('timecardTasks', TimecardTaskController::class);
     Route::resource('itemTypes', ItemTypeController::class);
+    Route::resource('items', ItemController::class);
 })->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
