@@ -15871,7 +15871,7 @@ body.modal-open .select2-container--open .select2-dropdown {
 
 .social-profile {
   text-align: center;
-  background-image: url(../images/other-images/profile-bg.png);
+  background-image: url(/theme/assets/images/other-images/profile-bg.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -16443,12 +16443,12 @@ td.highlight {
 }
 
 td.details-control {
-  background: url("../images/details_open.png") no-repeat center center;
+  background: url("/theme/assets/images/details_open.png") no-repeat center center;
   cursor: pointer;
 }
 
 tr.shown td.details-control {
-  background: url("../images/details_close.png") no-repeat center center;
+  background: url("/theme/assets/images/details_close.png") no-repeat center center;
 }
 
 .dataTables_scroll ~ .dataTables_paginate {
@@ -19303,7 +19303,7 @@ th {
 }
 .custom-alert .demo-img .modal-content .balance-box {
   text-align: center;
-  background-image: url(../images/alert/bg-balance.png);
+  background-image: url(/theme/assets/images/alert/bg-balance.png);
   background-position: right;
   background-size: cover;
 }
@@ -21861,7 +21861,7 @@ th {
 }
 
 #range-slider-4 {
-  background: url(../images/logo/range.svg);
+  background: url(/theme/assets/images/logo/range.svg);
 }
 
 #range-slider-4 .range-slider__thumb {
@@ -21873,11 +21873,11 @@ th {
 }
 
 #range-slider-5 .range-slider__thumb[data-lower] {
-  background: url(../images/logo/range2.svg) #338e87;
+  background: url(/theme/assets/images/logo/range2.svg) #338e87;
   background-repeat: no-repeat;
 }
 #range-slider-5 .range-slider__thumb[data-upper] {
-  background: url(../images/logo/range5.svg) #338e87;
+  background: url(/theme/assets/images/logo/range5.svg) #338e87;
   background-repeat: no-repeat;
 }
 #range-slider-5 .range-slider__thumb {
@@ -21922,7 +21922,7 @@ th {
   width: 18px;
   height: 38px;
   border-radius: 4px;
-  background: url(../images/logo/range4.svg);
+  background: url(/theme/assets/images/logo/range4.svg);
   background-color: var(--white);
   background-repeat: no-repeat;
   background-position: center;
@@ -23738,10 +23738,10 @@ input::-webkit-inner-spin-button {
 }
 
 .default-square .form-switch .form-check-input {
-  background-image: url(../images/switch/square-gray.png);
+  background-image: url(/theme/assets/images/switch/square-gray.png);
 }
 .default-square .form-switch .form-check-input:checked {
-  background-image: url(../images/switch/square.svg);
+  background-image: url(/theme/assets/images/switch/square.svg);
 }
 
 .switch-state {
@@ -25045,7 +25045,7 @@ input::-webkit-inner-spin-button {
   margin: auto;
 }
 .avatar-upload div:first-child .avatar-preview > div {
-  background-image: url("../images/avatars/1.jpg");
+  background-image: url("/theme/assets/images/avatars/1.jpg");
   width: 100%;
   height: 100%;
   border-radius: 100%;
@@ -29455,7 +29455,7 @@ footer p .footer-icon {
 }
 
 .iti--allow-dropdown .iti__flag {
-  background-image: url("../images/forms/flags.png");
+  background-image: url("/theme/assets/images/forms/flags.png");
 }
 
 .select-box {
@@ -29606,7 +29606,7 @@ footer p .footer-icon {
       5.6 Select2 CSS Ends
   ==========================**/
 .box-layout {
-  background-image: url(../images/other-images/boxbg.jpg);
+  background-image: url(/theme/assets/images/other-images/boxbg.jpg);
   background-blend-mode: overlay;
   background-color: rgba(255, 255, 255, 0.5);
   overflow: hidden;
@@ -34870,7 +34870,7 @@ p.data-attributes svg {
 }
 
 .left-msg .msg-img {
-  background-image: url(../images/blog/4.jpg);
+  background-image: url(/theme/assets/images/blog/4.jpg);
   width: 33px;
   height: 33px;
 }
@@ -34898,7 +34898,7 @@ p.data-attributes svg {
 }
 .right-msg .msg-img {
   margin: 0 0 0 10px;
-  background-image: url(../images/blog/comment.jpg);
+  background-image: url(/theme/assets/images/blog/comment.jpg);
   width: 33px;
   height: 33px;
 }
@@ -38855,7 +38855,7 @@ p.data-attributes svg {
   }
 }
 .user-profile .hovercard .cardheader {
-  background: url(../images/other-images/bg-profile.png);
+  background: url(/theme/assets/images/other-images/bg-profile.png);
   background-size: cover;
   background-position: 10%;
   height: 470px;
@@ -39858,7 +39858,7 @@ p.data-attributes svg {
     3.37 Social-app CSS start
 ==========================**/
 .user-profile .hovercard .socialheader {
-  background: url(../images/social-app/social-image.png);
+  background: url(/theme/assets/images/social-app/social-image.png);
 }
 .user-profile .hovercard .user-image {
   position: relative;
@@ -40769,7 +40769,7 @@ pre {
   background-color: var(--white);
 }
 .error-wrapper.maintenance-bg {
-  background-image: url(../images/other-images/maintenance-bg.jpg);
+  background-image: url(/theme/assets/images/other-images/maintenance-bg.jpg);
   background-color: rgba(255, 255, 255, 0.6);
   background-blend-mode: overlay;
 }
@@ -40905,7 +40905,7 @@ pre {
     25. Authentication CSS Start
 ==========================**/
 .login_one_image {
-  background-image: url(../images/login/2.jpg);
+  background-image: url(/theme/assets/images/login/2.jpg);
   background-size: cover;
   background-position: center center;
 }
@@ -40925,7 +40925,7 @@ pre {
 }
 
 .login_bs_validation {
-  background-image: url(../images/login/1.jpg);
+  background-image: url(/theme/assets/images/login/1.jpg);
   background-size: cover;
   background-position: center center;
 }
@@ -40944,7 +40944,7 @@ pre {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  background: url("../images/login/login_bg.jpg");
+  background: url("/theme/assets/images/big-masonry/15.jpg");
   background-position: center;
   padding: 30px 12px;
 }
@@ -41189,7 +41189,7 @@ pre {
     3.7 Comingsoon CSS Start
 ==========================**/
 .comingsoon-bgimg {
-  background: url(../images/other-images/coming-soon-bg.jpg);
+  background: url(/theme/assets/images/other-images/coming-soon-bg.jpg);
   background-position: bottom;
   background-size: cover;
 }
@@ -42339,7 +42339,7 @@ pre {
   opacity: 1;
 }
 .general-widget .widget-1 {
-  background-image: url(../images/widget/widget-bg.png);
+  background-image: url(/theme/assets/images/widget/widget-bg.png);
   background-size: cover;
   margin-bottom: 25px;
 }
@@ -43086,7 +43086,7 @@ pre {
   color: #ffffff;
 }
 .landing-page .landing-home {
-  background-image: url("../images/landing/landing-bg.png");
+  background-image: url("/theme/assets/images/landing/landing-bg.png");
   background-size: cover;
   background-position: center;
   height: 1055px;
@@ -43137,7 +43137,7 @@ pre {
   }
 }
 .landing-page .landing-home .bottom-img-1 {
-  background-image: url("../images/landing/bg-footer.png");
+  background-image: url("/theme/assets/images/landing/bg-footer.png");
   position: absolute;
   left: 0;
   right: 0;
@@ -43165,7 +43165,7 @@ pre {
   background-size: cover;
   background-position: top;
   z-index: 2;
-  background-image: url("../images/landing/bg-footer-2.png");
+  background-image: url("/theme/assets/images/landing/bg-footer-2.png");
 }
 @media only screen and (max-width: 1470px) {
   .landing-page .landing-home .bottom-img-2 {
@@ -43280,7 +43280,7 @@ pre {
 .landing-page .landing-home .landing-center .title-content h1 span::after, .landing-page .landing-home .landing-center .title-content .h1 span::after {
   content: "";
   position: absolute;
-  background-image: url("../images/landing/Vector.png");
+  background-image: url("/theme/assets/images/landing/Vector.png");
   background-repeat: no-repeat;
   background-size: contain;
   left: 50%;
@@ -43762,7 +43762,7 @@ pre {
   }
 }
 .landing-page .framework-section .framworks .framework-list li .framework-bg {
-  background-image: url(../images/landing/polygon-1.png);
+  background-image: url(/theme/assets/images/landing/polygon-1.png);
   width: 100%;
   height: 145px;
   background-size: cover;
@@ -43785,7 +43785,7 @@ pre {
   }
 }
 .landing-page .framework-section .framworks .framework-list li .framework-bg:hover {
-  background-image: url(../images/landing/polygon-2.png);
+  background-image: url(/theme/assets/images/landing/polygon-2.png);
   filter: drop-shadow(0px 9.344px 9.344px rgba(48, 142, 135, 0.2));
 }
 .landing-page .framework-section .framworks .framework-list li .framework-bg:hover img {

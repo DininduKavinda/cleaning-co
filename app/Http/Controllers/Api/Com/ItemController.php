@@ -22,7 +22,7 @@ class ItemController extends Controller {
         $includeItemType = $request->query('includeAll');
         $item = Item::where($filterItems);
         if($includeItemType){
-            $item = $item->with(['itemType']);
+            $item = $item->with(['item_type']);
         }
         return new ItemCollection($item->paginate(10)->appends($request->query()));
     }
@@ -50,11 +50,11 @@ class ItemController extends Controller {
      */
     public function show(Item $item)
     {
-        $includeItemType = request()->query('include_item_type');
+        $includeItemType = request()->query('includeAll');
         if($includeItemType){
-            $item = $item->loadMissing(['itemType']);
+            $item = $item->loadMissing(['item_type']);
         }
-        new ItemResource($item);
+        return new ItemResource($item);
     }
 
     /**

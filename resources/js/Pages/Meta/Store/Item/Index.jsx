@@ -9,21 +9,21 @@ import { getItems } from "@/Helpers/Api/ItemApi"; // Update API call to fetch it
 function Index({ auth }) {
     const [items, setItems] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const [countryQuery, setCountryQuery] = useState("");
+    const [itemTypeQuery, setItemTypeQuery] = useState("");
     const [pagination, setPagination] = useState({
         currentPage: 1,
         lastPage: 1,
         total: 0,
         perPage: 10,
     });
-    // console.log(countryQuery);
+    // console.log(itemTypeQuery);
     const fetchItems = async (page = 1) => {
         try {
             const params = [];
-            if (searchQuery || countryQuery) {
-                params.push(`name_en[like]=${searchQuery}`);
-                if (countryQuery != "") {
-                    params.push(`country_id[eq]=${countryQuery}`);
+            if (searchQuery || itemTypeQuery) {
+                params.push(`name[like]=${searchQuery}`);
+                if (itemTypeQuery != "") {
+                    params.push(`item_type_id[eq]=${itemTypeQuery}`);
                 }
             }
 
@@ -48,13 +48,13 @@ function Index({ auth }) {
 
     useEffect(() => {
         fetchItems();
-    }, [ countryQuery,searchQuery,]);
+    }, [ itemTypeQuery,searchQuery,]);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
     };
 
-    const handleCountrySearch = (country) => setCountryQuery(country);
+    const handleItemTypeSearch = (itemType) => setItemTypeQuery(itemType);
 
     const handlePageChange = (page) => {
         fetchItems(page);
@@ -94,7 +94,7 @@ function Index({ auth }) {
             <div className="col-sm-12">
                 <SearchBox
                     onSearch={handleSearch}
-                    onCountrySearch={handleCountrySearch}
+                    onItemTypeSearch={handleItemTypeSearch}
                 />
                 <Table
                     items={items}

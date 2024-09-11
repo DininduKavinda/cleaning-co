@@ -18,7 +18,7 @@ class Item extends Model
         'active',
     ];
 
-    public function itemType()
+    public function item_type()
     {
         return $this->belongsTo(ItemType::class);
     }

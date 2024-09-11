@@ -17,7 +17,7 @@ class ItemTypeController extends Controller
      */
     public function index(Request $request)
     {
-        $includeItems = $request->query('includeItems');
+        $includeItems = $request->query('includeAll');
         $task = ItemType::whereNotNull('id');
         if ($includeItems) {
             $task = $task->with(['items']);

@@ -85,7 +85,9 @@ function Table({ items, pagination, onPageChange, onDelete }) {
                                 <th className="bg-primary" scope="col">
                                     Item
                                 </th>
-
+                                <th className="bg-primary" scope="col">
+                                    Status
+                                </th>
                                 <th className="bg-primary" scope="col">
                                     Actions
                                 </th>
@@ -100,14 +102,14 @@ function Table({ items, pagination, onPageChange, onDelete }) {
                                             <Link
                                                 href={`${route(
                                                     "itemTypes.show",
-                                                    item.itemType.id
+                                                    item.item_type.id
                                                 )}`}
                                             >
-                                                {item.itemType.name}
+                                                {item.item_type.name}
                                             </Link>
                                         </td>
                                         <td>{item.name}</td>
-
+                                        <td>{item.active ? 'Active' : 'Inactive'}</td>
                                         <td>
                                             <Link
                                                 href={`${route(

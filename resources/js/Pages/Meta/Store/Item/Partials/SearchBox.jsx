@@ -1,21 +1,20 @@
-import CountryDropdown from "@/Components/CountryDropdown";
+import ItemTypeDropdown from "@/Components/ItemTypeDropdown";
 import { Link } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
 
-function SearchBox({ onSearch, onCountrySearch }) {
+function SearchBox({ onSearch, onItemTypeSearch }) {
     const [name, setName] = useState("");
-    const [location, setLocation] = useState({
-        country_id: null,
+    const [searchFields, setSearchFields] = useState({
+        item_type_id: "",
     });
-
-    const handleLocationChange = (field, value) => {
-        setLocation((prevLocation) => ({
-            ...prevLocation,
+    const handleFieldChange = (field, value) => {
+        setSearchFields((prevFields) => ({
+            ...prevFields,
             [field]: value,
         }));
         switch (field) {
-            case "country_id":
-                onCountrySearch(value);
+            case "item_type_id":
+                onItemTypeSearch(value);
                 break;
             default:
                 break;
@@ -37,32 +36,32 @@ function SearchBox({ onSearch, onCountrySearch }) {
                         <div className="col-md-6 d-md-block d-none">
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
-                                href={route("provinces.create")}
+                                href={route("items.create")}
                             >
                                 <i data-feather="plus-square"></i>Create New
-                                Province
+                                
                             </Link>
                         </div>
                     </div>
                     <div className="mb-4">
                         <div className="row">
                             <div className="col-md-6 mt-3">
-                                <label>Province Name</label>
+                                <label>Item Name</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    placeholder="Search by province name..."
+                                    placeholder="Search by Item name..."
                                     value={name}
                                     onChange={handleNameChange}
                                 />
                             </div>
                             <div className="col-md-6 mt-3">
-                                <label>Country</label>
-                                <CountryDropdown
-                                    countryId={location.country_id}
-                                    setCountryId={(value) =>
-                                        handleLocationChange(
-                                            "country_id",
+                                <label>ItemType</label>
+                                <ItemTypeDropdown
+                                    value={searchFields.item_type_id}
+                                    onChange={(value) =>
+                                        handleFieldChange(
+                                            "item_type_id",
                                             value
                                         )
                                     }
