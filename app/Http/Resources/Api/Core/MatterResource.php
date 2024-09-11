@@ -42,6 +42,7 @@ class MatterResource extends JsonResource
             'department' => new DepartmentResource($this->whenLoaded('department')),
             'timecards' => TimecardTaskResource::collection($this->whenLoaded('timecards')),
             'matter_documents'=> MatterDocumentResource::collection($this->whenLoaded('matter_documents')),
+            'matter_access' => new MatterAccessResource($this->whenLoaded('matter_access')),
         ];
     }
 }

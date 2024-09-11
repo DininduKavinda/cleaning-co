@@ -227,6 +227,224 @@ function SideBar() {
                     <li className="sidebar-main-title">
                         <div>
                             <h5 className="lan-1 f-w-700 sidebar-title">
+                              Matter Management
+                            </h5>
+                        </div>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("matters.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Filter"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Matters</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-main-title">
+                        <div>
+                            <h5 className="lan-1 f-w-700 sidebar-title">
+                                Employee Management
+                            </h5>
+                        </div>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("clients.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Filter"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Clients</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-list">
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("staff.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Activity"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Employee</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-main-title">
+                        <div>
+                            <h5 className="lan-1 f-w-700 sidebar-title">
+                                Meta Data
+                            </h5>
+                        </div>
+                    </li>
+                    <li
+                        className={`sidebar-list ${
+                            activeItem === 4 ? "active" : ""
+                        }`}
+                    >
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <button
+                            className="sidebar-link btn btn-outline-none w-100 "
+                            onClick={() => handleSidebarClick(4)}
+                        >
+                            <svg className="stroke-icon stroke-none">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#web"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Location</h6>
+
+                            <i className="iconly-Arrow-Right-2 icli"></i>
+                        </button>
+                        <ul
+                            className="sidebar-submenu"
+                            style={{
+                                display: activeItem === 4 ? "block" : "none",
+                            }}
+                        >
+                            <li>
+                                <Link href={route("countries.index")}>
+                                    Country
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route("provinces.index")}>
+                                    Province
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route("districts.index")}>
+                                    District
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route("cities.index")}>City</Link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("departments.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Folder"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Department</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("levels.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Bookmark"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Level</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("tasks.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Play"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Task</h6>
+                        </Link>
+                    </li>
+                    <li className="sidebar-list">
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <Link
+                            className="sidebar-link btn btn-outline-none w-100"
+                            href={route("timecardTasks.index")}
+                        >
+                            <svg className="stroke-icon">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Chart"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Timecard Task</h6>
+                        </Link>
+                    </li>
+                    <li
+                        className={`sidebar-list ${
+                            activeItem === 5 ? "active" : ""
+                        }`}
+                    >
+                        <i className="fa-solid fa-thumbtack"></i>
+                        <button
+                            className="sidebar-link btn btn-outline-none w-100 "
+                            onClick={() => handleSidebarClick(5)}
+                        >
+                            <svg className="stroke-icon stroke-none">
+                                <use
+                                    href={
+                                        "/theme/assets/svg/iconly-sprite.svg#Edit-line"
+                                    }
+                                ></use>
+                            </svg>
+                            <h6>Item</h6>
+
+                            <i className="iconly-Arrow-Right-2 icli"></i>
+                        </button>
+                        <ul
+                            className="sidebar-submenu"
+                            style={{
+                                display: activeItem === 5 ? "block" : "none",
+                            }}
+                        >
+                            <li>
+                                <Link href={route("itemTypes.index")}>
+                                    Item Type
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href={route("items.index")}>
+                                    Item
+                                </Link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li className="sidebar-main-title">
+                        <div>
+                            <h5 className="lan-1 f-w-700 sidebar-title">
                                 Settings
                             </h5>
                         </div>
@@ -345,202 +563,7 @@ function SideBar() {
                             </li>
                         </ul>
                     </li>
-                    <li className="sidebar-main-title">
-                        <div>
-                            <h5 className="lan-1 f-w-700 sidebar-title">
-                                Employee Management
-                            </h5>
-                        </div>
-                    </li>
-                    <li className="sidebar-list">
-                        <i className="fa-solid fa-thumbtack"></i>
-                        <Link
-                            className="sidebar-link btn btn-outline-none w-100"
-                            href={route("clients.index")}
-                        >
-                            <svg className="stroke-icon">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Clients</h6>
-                        </Link>
-                    </li>
-                    <li className="sidebar-list">
-                        <Link
-                            className="sidebar-link btn btn-outline-none w-100"
-                            href={route("staff.index")}
-                        >
-                            <svg className="stroke-icon">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#Activity"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Employee</h6>
-                        </Link>
-                    </li>
-
-                    <li className="sidebar-main-title">
-                        <div>
-                            <h5 className="lan-1 f-w-700 sidebar-title">
-                                Meta Data
-                            </h5>
-                        </div>
-                    </li>
-                    <li
-                        className={`sidebar-list ${
-                            activeItem === 4 ? "active" : ""
-                        }`}
-                    >
-                        <i className="fa-solid fa-thumbtack"></i>
-                        <button
-                            className="sidebar-link btn btn-outline-none w-100 "
-                            onClick={() => handleSidebarClick(4)}
-                        >
-                            <svg className="stroke-icon stroke-none">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#web"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Location</h6>
-
-                            <i className="iconly-Arrow-Right-2 icli"></i>
-                        </button>
-                        <ul
-                            className="sidebar-submenu"
-                            style={{
-                                display: activeItem === 4 ? "block" : "none",
-                            }}
-                        >
-                            <li>
-                                <Link href={route("countries.index")}>
-                                    Country
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route("provinces.index")}>
-                                    Province
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route("districts.index")}>
-                                    District
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route("cities.index")}>City</Link>
-                            </li>
-                        </ul>
-                    </li>
-                    <li className="sidebar-list">
-                        <i className="fa-solid fa-thumbtack"></i>
-                        <Link
-                            className="sidebar-link btn btn-outline-none w-100"
-                            href={route("departments.index")}
-                        >
-                            <svg className="stroke-icon">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Department</h6>
-                        </Link>
-                    </li>
-                    <li className="sidebar-list">
-                        <i className="fa-solid fa-thumbtack"></i>
-                        <Link
-                            className="sidebar-link btn btn-outline-none w-100"
-                            href={route("levels.index")}
-                        >
-                            <svg className="stroke-icon">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Level</h6>
-                        </Link>
-                    </li>
-                    <li className="sidebar-list">
-                        <i className="fa-solid fa-thumbtack"></i>
-                        <Link
-                            className="sidebar-link btn btn-outline-none w-100"
-                            href={route("tasks.index")}
-                        >
-                            <svg className="stroke-icon">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Task</h6>
-                        </Link>
-                    </li>
-                    <li className="sidebar-list">
-                        <i className="fa-solid fa-thumbtack"></i>
-                        <Link
-                            className="sidebar-link btn btn-outline-none w-100"
-                            href={route("timecardTasks.index")}
-                        >
-                            <svg className="stroke-icon">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#More-box"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Timecard Task</h6>
-                        </Link>
-                    </li>
-                    <li
-                        className={`sidebar-list ${
-                            activeItem === 5 ? "active" : ""
-                        }`}
-                    >
-                        <i className="fa-solid fa-thumbtack"></i>
-                        <button
-                            className="sidebar-link btn btn-outline-none w-100 "
-                            onClick={() => handleSidebarClick(5)}
-                        >
-                            <svg className="stroke-icon stroke-none">
-                                <use
-                                    href={
-                                        "/theme/assets/svg/iconly-sprite.svg#web"
-                                    }
-                                ></use>
-                            </svg>
-                            <h6>Item</h6>
-
-                            <i className="iconly-Arrow-Right-2 icli"></i>
-                        </button>
-                        <ul
-                            className="sidebar-submenu"
-                            style={{
-                                display: activeItem === 5 ? "block" : "none",
-                            }}
-                        >
-                            <li>
-                                <Link href={route("itemTypes.index")}>
-                                    Item Type
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route("items.index")}>
-                                    Item
-                                </Link>
-                            </li>
-                        </ul>
-                    </li>
+                    
                 </ul>
             </div>
             <div className="right-arrow" id="right-arrow">
