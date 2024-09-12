@@ -79,7 +79,6 @@ export default function Header() {
                 </div>
                 <div className="nav-right">
                     <ul className="header-right">
-
                         <li className="search d-lg-none d-flex">
                             {" "}
                             <a href="javascript:void(0)">
@@ -461,7 +460,7 @@ export default function Header() {
                             <div className="user-wrap">
                                 <div className="user-img">
                                     <img
-                                        src={'/theme/assets/images/profile.png'}
+                                        src={"/theme/assets/images/profile.png"}
                                         alt="user"
                                     />
                                 </div>
@@ -510,13 +509,12 @@ export default function Header() {
                                             <use href="/theme/assets/svg/iconly-sprite.svg#Login"></use>
                                         </svg>
                                         <ResponsiveNavLink
-
-                                    method="post"
-                                    href={route("logout")}
-                                    as="button"
-                                >
-                                    Log Out
-                                </ResponsiveNavLink>
+                                            method="post"
+                                            href={route("logout")}
+                                            as="button"
+                                        >
+                                            Log Out
+                                        </ResponsiveNavLink>
                                     </li>
                                 </ul>
                             </div>
