@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Auth\PermissionController;
 use App\Http\Controllers\Api\Auth\RoleController;
 use App\Http\Controllers\Api\Auth\UserController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\Core\MatterDocumentController;
 use App\Http\Controllers\Api\Meta\CityController;
 use App\Http\Controllers\Api\Meta\CountryController;
 use App\Http\Controllers\Api\Meta\DistrictController;
@@ -60,6 +61,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::group(['prefix' => 'core'], function () {
         Route::apiResource('matters', MatterController::class);
+        Route::apiResource('matterDocuments',MatterDocumentController::class);
     });
 
     Route::group(['prefix' => 'admin'], function () {

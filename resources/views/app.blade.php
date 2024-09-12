@@ -66,8 +66,7 @@
     <!-- feather-->
     <script src="{{asset('theme/assets/js/vendors/feather-icon/feather.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/vendors/feather-icon/custom-script.js')}}"></script>
-    <!-- sidebar -->
-    {{-- <script src="{{asset('theme/assets/js/sidebar.js')}}"></script> --}}
+
     <!-- height_equal-->
     <script src="{{asset('theme/assets/js/height-equal.js')}}"></script>
     <!-- config-->
@@ -81,14 +80,6 @@
     <!-- slick-->
     <script src="{{asset('theme/assets/js/slick/slick.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/slick/slick.js')}}"></script>
-    <!-- data_table-->
-    <script src="{{asset('theme/assets/js/js-datatables/datatables/jquery.dataTables.min.js')}}"></script>
-    <!-- page_datatable-->
-    <script src="{{asset('theme/assets/js/js-datatables/datatables/datatable.custom.js')}}"></script>
-    <!-- page_datatable1-->
-    <script src="{{asset('theme/assets/js/js-datatables/datatables/datatable.custom1.js')}}"></script>
-    <!-- page_datatable-->
-    <script src="{{asset('theme/assets/js/datatable/datatables/datatable.custom.js')}}"></script>
     <!-- theme_customizer-->
     <script src="{{asset('theme/assets/js/theme-customizer/customizer.js')}}"></script>
     <!-- tilt-->

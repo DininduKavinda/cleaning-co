@@ -34,11 +34,16 @@ class StoreMatterRequest extends FormRequest
             'ended_at' => ['required'],
             'status' => ['required'],
             'active' => ['sometimes'],
+            //change if nessasary
+            'document' => ['required'],
+            'notes' => ['required'],
+            'file_name' => ['required'],
         ];
     }
-    protected function prepareForValidation(){
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name'=>$this->name,
+            'name' => $this->name,
         ]);
     }
 }

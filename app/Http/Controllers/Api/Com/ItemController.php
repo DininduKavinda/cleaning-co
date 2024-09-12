@@ -10,19 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Com\ItemCollection;
 use App\Http\Resources\Api\Com\ItemResource;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class ItemController extends Controller implements HasMiddleware
-{
-    public static function middleware(): array{
-        return [
-            new Middleware('permission:view perhmission', only: ['indexs']),
-            new Middleware('permission:create perhmission', only: ['creates', 'stores']),
-            new Middleware('permission:update permhission', only: ['updates', 'edits']),
-            new Middleware('permission:delete permihssion', only: ['destroys'])
-        ];
-    }
+class ItemController extends Controller {
     /**
      * Display a listing of the resource.
      */
@@ -30,10 +19,10 @@ class ItemController extends Controller implements HasMiddleware
     {
         $filter = new ItemFilter;
         $filterItems = $filter->transform($request);
-        $includeItemType = $request->query('include_item_type');
+        $includeItemType = $request->query('includeAll');
         $item = Item::where($filterItems);
         if($includeItemType){
-            $item = $item->with(['itemType']);
+            $item = $item->with(['item_type']);
         }
         return new ItemCollection($item->paginate(10)->appends($request->query()));
     }
@@ -61,11 +50,11 @@ class ItemController extends Controller implements HasMiddleware
      */
     public function show(Item $item)
     {
-        $includeItemType = request()->query('include_item_type');
+        $includeItemType = request()->query('includeAll');
         if($includeItemType){
-            $item = $item->loadMissing(['itemType']);
+            $item = $item->loadMissing(['item_type']);
         }
-        new ItemResource($item);
+        return new ItemResource($item);
     }
 
     /**

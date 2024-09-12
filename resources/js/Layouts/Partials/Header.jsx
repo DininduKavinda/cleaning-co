@@ -1,5 +1,5 @@
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import React from "react";
 
 export default function Header() {
@@ -79,7 +79,6 @@ export default function Header() {
                 </div>
                 <div className="nav-right">
                     <ul className="header-right">
-
                         <li className="search d-lg-none d-flex">
                             {" "}
                             <a href="javascript:void(0)">
@@ -461,12 +460,12 @@ export default function Header() {
                             <div className="user-wrap">
                                 <div className="user-img">
                                     <img
-                                        src={'/theme/assets/images/profile.png'}
+                                        src={"/theme/assets/images/profile.png"}
                                         alt="user"
                                     />
                                 </div>
                                 <div className="user-content">
-                                    <h6>Ava Davis</h6>
+                                    <h6>Root</h6>
                                     <p className="mb-0">
                                         Admin
                                         <i className="fa-solid fa-chevron-down"></i>
@@ -510,13 +509,12 @@ export default function Header() {
                                             <use href="/theme/assets/svg/iconly-sprite.svg#Login"></use>
                                         </svg>
                                         <ResponsiveNavLink
-
-                                    method="post"
-                                    href={route("logout")}
-                                    as="button"
-                                >
-                                    Log Out
-                                </ResponsiveNavLink>
+                                            method="post"
+                                            href={route("logout")}
+                                            as="button"
+                                        >
+                                            Log Out
+                                        </ResponsiveNavLink>
                                     </li>
                                 </ul>
                             </div>

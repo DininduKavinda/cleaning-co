@@ -52,7 +52,7 @@ const CityDropdown = ({ districtId, setCityId }) => {
             onChange={handleChange}
             isClearable
             cacheOptions
-            isDisabled={!districtId}
+            // isDisabled={!districtId}
         />
     );
 };

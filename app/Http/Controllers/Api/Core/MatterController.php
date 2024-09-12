@@ -10,20 +10,10 @@ use App\Http\Resources\Api\Core\MatterResource;
 use App\Models\Module\Matter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
+use App\Models\Module\MatterDocument;
 
-class MatterController extends Controller implements HasMiddleware
+class MatterController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('permission:view perhmission', only: ['indexs']),
-            new Middleware('permission:create perhmission', only: ['creates', 'stores']),
-            new Middleware('permission:update permhission', only: ['updates', 'edits']),
-            new Middleware('permission:delete permihssion', only: ['destroys'])
-        ];
-    }
     /**
      * Display a listing of the resource.
      */
@@ -37,10 +27,11 @@ class MatterController extends Controller implements HasMiddleware
         $includeApproved = $request->query('includeApprove');
         $includeDepartment = $request->query('includeDepartment');
         $includeTimecard = $request->query('includeTimecard');
+        $includeAccess = $request->query('includeMatterAccess');
         $includeAll = $request->query('includeAll');
         $matters = Matter::where($filterItems);
         if ($includeAll) {
-            $matters = $matters->with(['task', 'client', 'staff', 'department', 'timecards', 'approvals']);
+            $matters = $matters->with(['task', 'client', 'staff', 'department', 'timecards', 'approved', 'matter_documents', 'matter_access']);
         } elseif ($includeTask) {
             $matters = $matters->with(['task']);
         } elseif ($includeClient) {
@@ -53,6 +44,8 @@ class MatterController extends Controller implements HasMiddleware
             $matters = $matters->with(['timecards']);
         } elseif ($includeApproved) {
             $matters = $matters->with(['approved']);
+        } elseif ($includeAccess) {
+            $matters = $matters->with(['matter_access']);
         }
         return new MatterCollection($matters->paginate(10)->appends($request->query()));
     }
@@ -72,6 +65,22 @@ class MatterController extends Controller implements HasMiddleware
     {
         $validatedData = $request->validated();
         $matter = Matter::create($validatedData);
+        if ($matter) {
+            if ($request->hasFile('document')) {
+                $imageName = time() . '.' . $request->document->getClientOriginalExtension();
+                $request->document->move('document/matter', $imageName);
+                $validatedData['document'] = 'document/matter' . $imageName;
+            } else {
+                $validatedData['document'] = null;
+            }
+            $validatedData['matter_id'] = $matter->id;
+            $matterDoc = MatterDocument::create($validatedData);
+            if ($matterDoc) {
+                return response()->json(['data' => $matterDoc], 201);
+            }
+        }
+
+
         return response()->json(['data' => $matter], 201);
     }
 
@@ -86,9 +95,10 @@ class MatterController extends Controller implements HasMiddleware
         $includeApproved = $request->query('includeApprove');
         $includeDepartment = $request->query('includeDepartment');
         $includeTimecard = $request->query('includeTimecard');
+        $includeAccess = $request->query('includeMatterAccess');
         $includeAll = $request->query('includeAll');
         if ($includeAll) {
-            $matter = $matter->loadMissing(['task', 'client', 'staff', 'department', 'timecards', 'approvals']);
+            $matter = $matter->loadMissing(['task', 'client', 'staff', 'department', 'timecards', 'approved', 'matter_documents', 'matter_access']);
         } elseif ($includeTask) {
             $matter = $matter->loadMissing(['task']);
         } elseif ($includeClient) {
@@ -101,6 +111,8 @@ class MatterController extends Controller implements HasMiddleware
             $matter = $matter->loadMissing(['timecards']);
         } elseif ($includeApproved) {
             $matter = $matter->loadMissing(['approved']);
+        } elseif ($includeAccess) {
+            $matter = $matter->loadMissing(['matter_access']);
         }
         return new MatterResource($matter);
     }
