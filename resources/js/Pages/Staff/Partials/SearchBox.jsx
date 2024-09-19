@@ -23,12 +23,12 @@ function SearchBox({
     onActiveSearch,
 }) {
     const [searchFields, setSearchFields] = useState({
-        level_id: null,
+        level_id: "",
         country_id: null,
         province_id: null,
         district_id: null,
         city_id: null,
-        department_id: null,
+        department_id: "",
         nic: "",
         initial: "",
         full_name: "",

@@ -2,9 +2,9 @@ import React from "react";
 import { Link, router } from "@inertiajs/react";
 import { deleteUser } from "@/Helpers/Api/UserApi";
 
-function Table({ users, pagination, onPageChange }) {
+function Table({ users, pagination, onPageChange, permissions }) {
     const handleDelete = async (id) => {
-        if (         window.confirm("Are you sure you want to delete this user?")) {
+        if (window.confirm("Are you sure you want to delete this user?")) {
             try {
                 await deleteUser(id);
                 router.visit(route("users.index"));
@@ -97,9 +97,11 @@ function Table({ users, pagination, onPageChange }) {
                                 <th className="bg-primary" scope="col">
                                     Active
                                 </th>
-                                <th className="bg-primary" scope="col">
-                                    Action
-                                </th>
+                                {permissions["update user"] ? (
+                                    <th className="bg-primary" scope="col">
+                                        Action
+                                    </th>
+                                ) : null}
                             </tr>
                         </thead>
                         <tbody className="table-group-divider">
@@ -117,25 +119,30 @@ function Table({ users, pagination, onPageChange }) {
                                     <td>
                                         {user.active ? "Active" : "Inactive"}
                                     </td>
-                                    <td>
-                                        <Link
-                                            href={`${route(
-                                                "users.show",
-                                                user.id
-                                            )}`}
-                                            className="btn btn-warning btn-sm"
-                                        >
-                                            Edit
-                                        </Link>
-                                        <button
-                                            onClick={() =>
-                                                handleDelete(user.id)
-                                            }
-                                            className="btn btn-danger btn-sm ms-2"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+                                    {permissions["update user"] ? (
+                                        <td>
+                                            <Link
+                                                href={route(
+                                                    "users.show",
+                                                    user.id
+                                                )}
+                                                className="btn btn-warning btn-sm"
+                                            >
+                                                Edit
+                                            </Link>
+
+                                            {permissions["delete user"] ? (
+                                                <button
+                                                    onClick={() =>
+                                                        handleDelete(user.id)
+                                                    }
+                                                    className="btn btn-danger btn-sm ms-2"
+                                                >
+                                                    Delete
+                                                </button>
+                                            ) : null}
+                                        </td>
+                                    ) : null}
                                 </tr>
                             ))}
                         </tbody>

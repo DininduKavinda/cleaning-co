@@ -104,12 +104,14 @@ function Index({ auth, permissions }) {
                     onActiveSearch={handleActiveSearch}
                     onSearch={handleSearch}
                     onEmailSearch={handleEmailSearch}
+                    permissions={permissions}
                 />
                {permissions['view user'] ? (
                     <Table
                         users={users}
                         pagination={pagination}
                         onPageChange={handlePageChange}
+                        permissions={permissions}
                     />
                 ) : (
                     <p>You do not have permission to update users.</p>

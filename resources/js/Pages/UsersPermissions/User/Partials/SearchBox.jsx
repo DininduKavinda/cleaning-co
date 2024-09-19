@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
 
-function SearchBox({ onSearch, onEmailSearch, onActiveSearch }) {
+function SearchBox({ onSearch, onEmailSearch, onActiveSearch, permissions }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [active, setActive] = useState("");
@@ -30,57 +30,90 @@ function SearchBox({ onSearch, onEmailSearch, onActiveSearch }) {
                 <div className="card">
                     <div className="row">
                         <div className="col-md-6">
-                            <ul className="nav nav-tabs border-tab" id="top-tab" role="tablist">
+                            <ul
+                                className="nav nav-tabs border-tab"
+                                id="top-tab"
+                                role="tablist"
+                            >
                                 <li className="nav-item">
                                     <a
-                                        className={`nav-link ${active === "" ? "active" : ""}`}
+                                        className={`nav-link ${
+                                            active === "" ? "active" : ""
+                                        }`}
                                         id="top-home-tab"
                                         data-bs-toggle="tab"
                                         href="#top-home"
                                         role="tab"
                                         aria-controls="top-home"
                                         aria-selected={active === ""}
-                                        onClick={() => handleActiveChange({ target: { value: "" } })}
+                                        onClick={() =>
+                                            handleActiveChange({
+                                                target: { value: "" },
+                                            })
+                                        }
                                     >
                                         <i data-feather="target"></i>All
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a
-                                        className={`nav-link ${active === "1" ? "active" : ""}`}
+                                        className={`nav-link ${
+                                            active === "1" ? "active" : ""
+                                        }`}
                                         id="profile-top-tab"
                                         data-bs-toggle="tab"
                                         href="#top-profile"
                                         role="tab"
                                         aria-controls="top-profile"
                                         aria-selected={active === "1"}
-                                        onClick={() => handleActiveChange({ target: { value: "1" } })}
+                                        onClick={() =>
+                                            handleActiveChange({
+                                                target: { value: "1" },
+                                            })
+                                        }
                                     >
                                         <i data-feather="info"></i>Active
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a
-                                        className={`nav-link ${active === "0" ? "active" : ""}`}
+                                        className={`nav-link ${
+                                            active === "0" ? "active" : ""
+                                        }`}
                                         id="contact-top-tab"
                                         data-bs-toggle="tab"
                                         href="#top-contact"
                                         role="tab"
                                         aria-controls="top-contact"
                                         aria-selected={active === "0"}
-                                        onClick={() => handleActiveChange({ target: { value: "0" } })}
+                                        onClick={() =>
+                                            handleActiveChange({
+                                                target: { value: "0" },
+                                            })
+                                        }
                                     >
-                                        <i data-feather="check-circle"></i>Inactive
+                                        <i data-feather="check-circle"></i>
+                                        Inactive
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div className="col-md-6 d-md-block d-none">
-                            <div className="form-group mb-0 me-0"></div>
-                            <Link className="btn btn-primary d-flex align-items-center" href={route('users.create')}>
-                                {" "}
-                                <i data-feather="plus-square"></i>Create New{" "}
-                            </Link>
+                            {permissions["create user"] ? (
+                                <>
+                                    <div className="form-group mb-0 me-0"></div>
+                                    <Link
+                                        className="btn btn-primary d-flex align-items-center"
+                                        href={route("users.create")}
+                                    >
+                                        {" "}
+                                        <i data-feather="plus-square"></i>Create
+                                        New{" "}
+                                    </Link>
+                                </>
+                            ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
                     <div className="mb-4">
