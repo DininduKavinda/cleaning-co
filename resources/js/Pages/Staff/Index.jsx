@@ -9,12 +9,12 @@ import { getStaffs } from "@/Helpers/Api/StaffApi";
 function Index({ auth }) {
     const [staffs, setStaffs] = useState([]);
     const [searchFields, setSearchFields] = useState({
-        level_id: "",
-        country_id: "",
-        province_id: "",
-        city_id: "",
-        district_id: "",
-        department_id: "",
+        level_id: null,
+        country_id: null,
+        province_id: null,
+        city_id: null,
+        district_id: null,
+        department_id: null,
         nic: "",
         initial: "",
         full_name: "",
@@ -52,6 +52,7 @@ function Index({ auth }) {
 
     const fetchStaffs = async (page = 1) => {
         try {
+
             const params = Object.entries(searchFields)
                 .filter(([key, value]) => value !== "")
                 .map(([key, value]) => {
