@@ -65,6 +65,25 @@ function SearchBox({
         }
     };
 
+    const resetSearch = () => {
+        setName("");
+        setActive("");
+        setNic("");
+        setLocation({
+            country_id: null,
+            province_id: null,
+            district_id: null,
+            city_id: null,
+        });
+        onSearch("");
+        onActiveSearch("");
+        onNicSearch("");
+        onCountrySearch("");
+        onProvinceSearch("");
+        onDistrictSearch("");
+        onCitySearch("");
+    };
+
     return (
         <>
             <div className="col-md-12 project-list">
@@ -140,6 +159,14 @@ function SearchBox({
                             </ul>
                         </div>
                         <div className="col-md-6 d-md-block d-none">
+                            <div className="col-md-12">
+                                <button
+                                    className="btn btn-secondary"
+                                    onClick={resetSearch}
+                                >
+                                    Reset
+                                </button>
+                            </div>
                             <div className="form-group mb-0 me-0"></div>
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
@@ -179,7 +206,10 @@ function SearchBox({
                                 <CountryDropdown
                                     countryId={location.country_id}
                                     setCountryId={(value) =>
-                                        handleLocationChange("country_id", value)
+                                        handleLocationChange(
+                                            "country_id",
+                                            value
+                                        )
                                     }
                                 />
                             </div>
@@ -190,7 +220,10 @@ function SearchBox({
                                     countryId={location.country_id}
                                     provinceId={location.province_id}
                                     setProvinceId={(value) =>
-                                        handleLocationChange("province_id", value)
+                                        handleLocationChange(
+                                            "province_id",
+                                            value
+                                        )
                                     }
                                 />
                             </div>
@@ -201,7 +234,10 @@ function SearchBox({
                                     provinceId={location.province_id}
                                     districtId={location.district_id}
                                     setDistrictId={(value) =>
-                                        handleLocationChange("district_id", value)
+                                        handleLocationChange(
+                                            "district_id",
+                                            value
+                                        )
                                     }
                                 />
                             </div>

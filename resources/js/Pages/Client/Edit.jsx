@@ -28,7 +28,7 @@ function ClientForm({ auth }) {
         password_confirmation: "",
         image: null,
         last_login: "",
-        active: 1
+        active: 1,
     });
     const [isEditing, setIsEditing] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
@@ -84,7 +84,7 @@ function ClientForm({ auth }) {
         });
         try {
             if (isEditing) {
-                const response = await updateClient(id,formData);
+                const response = await updateClient(id, formData);
             } else {
                 await createClient(formData);
             }
@@ -145,10 +145,11 @@ function ClientForm({ auth }) {
                                                         src={imagePreview}
                                                     />
                                                 ) : (
+                                                    
                                                     <img
                                                         className="img-70 rounded-circle"
                                                         alt="Default"
-                                                        src="../assets/images/user/default.jpg"
+                                                        src="/theme/assets/images/user/user.png"
                                                     />
                                                 )}
                                                 <div className="flex-grow-1">

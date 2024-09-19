@@ -16,7 +16,7 @@ class ItemType extends Model
         'active',
     ];
 
-    public function item()
+    public function items()
     {
         return $this->hasMany(Item::class);
     }

@@ -166,7 +166,7 @@ function StaffForm({ auth }) {
                                                     <img
                                                         className="img-70 rounded-circle"
                                                         alt="Default"
-                                                        src="../assets/images/user/default.jpg"
+                                                        src="/theme/assets/images/user/user.png"
                                                     />
                                                 )}
                                                 <div className="flex-grow-1">
