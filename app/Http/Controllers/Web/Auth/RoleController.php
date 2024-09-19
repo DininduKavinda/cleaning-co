@@ -15,10 +15,10 @@ class RoleController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('permission:view user', only: ['index']),
-            new Middleware('permission:create user', only: ['create', 'store']),
-            new Middleware('permission:update user', only: ['update', 'edit']),
-            new Middleware('permission:delete user', only: ['destroy']),
+            new Middleware('permission:view role', only: ['index']),
+            new Middleware('permission:create role', only: ['create', 'store']),
+            new Middleware('permission:update role', only: ['update', 'edit']),
+            new Middleware('permission:delete role', only: ['destroy']),
         ];
     }
     public function index(): Response

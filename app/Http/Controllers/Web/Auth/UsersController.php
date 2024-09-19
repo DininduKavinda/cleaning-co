@@ -27,6 +27,7 @@ class UsersController extends Controller implements HasMiddleware
     }
     public function index(): response
     {
+
         return Inertia::render('UsersPermissions/User/Index');
     }
     public function create(): response

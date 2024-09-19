@@ -6,7 +6,7 @@ import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
 import { getUsers } from "@/Helpers/Api/UserApi";
 
-function Index({ auth }) {
+function Index({ auth, permissions }) {
     const [users, setUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [emailQuery, setEmailQuery] = useState("");
@@ -105,11 +105,15 @@ function Index({ auth }) {
                     onSearch={handleSearch}
                     onEmailSearch={handleEmailSearch}
                 />
-                <Table
-                    users={users}
-                    pagination={pagination}
-                    onPageChange={handlePageChange}
-                />
+               {permissions['view user'] ? (
+                    <Table
+                        users={users}
+                        pagination={pagination}
+                        onPageChange={handlePageChange}
+                    />
+                ) : (
+                    <p>You do not have permission to update users.</p>
+                )}
             </div>
         </AuthenticatedLayout>
     );
