@@ -1,21 +1,9 @@
 import axios from "axios";
+
+import { BASE_URL, HEADER, IncludeAll } from "./Api";
     
 const STAFFS_URL = BASE_URL + "web/staff";
 
-const TOKEN = localStorage.getItem("authToken");
-
-const HEADER = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-    },
-};
-
-const HEADER2 = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-    },
-};
 
 //Staffs APi Services
 
