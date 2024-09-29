@@ -1,18 +1,7 @@
 import axios from "axios";
-
-const BASE_URL = "http://127.0.0.1:8000/api/";
-
-const IncludeAll = "includeAll=true";
+import { BASE_URL, HEADER, IncludeAll } from "./Api";
 
 const TASKS_URL = BASE_URL + "common/timecardTasks";
-
-const TOKEN = localStorage.getItem("authToken");
-
-const HEADER = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-    },
-};
 
 //Tasks APi Services
 

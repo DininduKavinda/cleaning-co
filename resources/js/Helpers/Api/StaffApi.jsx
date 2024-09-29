@@ -1,8 +1,4 @@
 import axios from "axios";
-
-const BASE_URL = "http://127.0.0.1:8000/api/";
-
-const IncludeAll = "&includeAll=true";
     
 const STAFFS_URL = BASE_URL + "web/staff";
 
