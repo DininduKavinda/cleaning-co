@@ -1,25 +1,7 @@
 import axios from "axios";
-
-const BASE_URL = "http://127.0.0.1:8000/api/";
-
-const IncludeAll = "&includeAll=true";
+import { BASE_URL, HEADER, HEADER2, IncludeAll } from "./Api";
 
 const CLIENTS_URL = BASE_URL + "web/clients";
-
-const TOKEN = localStorage.getItem("authToken");
-
-const HEADER = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-    },
-};
-
-const HEADER2 = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-    },
-};
 
 //Clients APi Services
 

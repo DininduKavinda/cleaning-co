@@ -1,18 +1,8 @@
 import axios from "axios";
+import { BASE_URL, HEADER, IncludeAll } from "./Api";
 
-const BASE_URL = "http://127.0.0.1:8000/api/";
-
-const IncludeAll = "includeAll=true";
 
 const DEPARTMENTS_URL = BASE_URL + "common/departments";
-
-const TOKEN = localStorage.getItem("authToken");
-
-const HEADER = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-    },
-};
 
 //Departments APi Services
 

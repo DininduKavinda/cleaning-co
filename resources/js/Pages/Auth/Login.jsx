@@ -1,5 +1,6 @@
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
+import Cookies from "js-cookie";
 import { useState } from "react";
 
 export default function Login({ status, canResetPassword }) {
@@ -19,11 +20,11 @@ export default function Login({ status, canResetPassword }) {
                 `http://127.0.0.1:8000/api/auth/login`,
                 data
             );
-
+            console.log(response.data.token);
             if (response.status === 200) {
                 const token = response.data.token;
-
-                localStorage.setItem("authToken", token);
+                console.log(token);
+                Cookies.set("authToken", token, { expires: 7 });
 
             }
         } catch (error) {

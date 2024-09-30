@@ -1,18 +1,9 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8000/api/";
-
-const IncludeAll = "?includeAll=true";
+import { BASE_URL, HEADER } from "./Api";
 
 const ROLES_URL = BASE_URL + "admin/roles";
 
-const TOKEN = localStorage.getItem("authToken");
-
-const HEADER = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-    },
-};
 
 //Roles APi Services
 

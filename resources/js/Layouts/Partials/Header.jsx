@@ -1,8 +1,36 @@
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { usePage } from "@inertiajs/react";
+import { Inertia } from "@inertiajs/inertia"; // Assuming you're using Inertia.js
+import Cookies from "js-cookie";
+import axios from "axios";
 import React from "react";
 
 export default function Header() {
+    const handleLogout = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await axios.post(
+                `http://127.0.0.1:8000/api/auth/logout`,
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${Cookies.get("authToken")}`,
+                    },
+                }
+            );
+
+            if (response.status === 200) {
+              
+                Cookies.remove("authToken");
+
+                Inertia.post(route("logout"));
+            }
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+    };
+
     return (
         <header className="page-header row">
             <div className="logo-wrapper d-flex align-items-center col-auto">
@@ -512,6 +540,7 @@ export default function Header() {
                                             method="post"
                                             href={route("logout")}
                                             as="button"
+                                            onClick={handleLogout}
                                         >
                                             Log Out
                                         </ResponsiveNavLink>
