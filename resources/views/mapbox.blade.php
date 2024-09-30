@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapbox Map</title>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+    <title>Google Map - Click to Get Coordinates</title>
     <style>
         /* Set the size of the map */
         #map {
@@ -16,6 +14,7 @@
             font-family: Arial, sans-serif;
         }
     </style>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap"></script>
 </head>
 <body>
     <h1>Click on the Map to Get Latitude and Longitude</h1>
@@ -30,27 +29,24 @@
     </form>
 
     <script>
-        // Set your Mapbox access token
-        mapboxgl.accessToken = 'pk.eyJ1Ijoic3dhcG15cmlkZSIsImEiOiJjbGJidGxwbWwxaWI5M3Btcmt5aG1qM3QzIn0.a6HysriQllTrSISuxRgyXw';
+        function initMap() {
+            // Create a new map centered on the given coordinates
+            const center = { lat: 6.9209692563737235, lng: 79.87755895317827 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 9,
+                center: center,
+            });
+
+            // Add a click event listener to capture the latitude and longitude
+            map.addListener("click", (mapsMouseEvent) => {
+                const latLng = mapsMouseEvent.latLng;
+                document.getElementById('latitude').value = latLng.lat();
+                document.getElementById('longitude').value = latLng.lng();
+            });
+        }
 
         // Initialize the map
-        const map = new mapboxgl.Map({
-            container: 'map', // container ID
-            style: 'mapbox://styles/mapbox/streets-v11', // map style
-            center: [79.87755895317827,6.9209692563737235], // initial map center [lng, lat]
-            zoom: 9 // initial zoom level
-        });
-
-        // Add a click event listener to the map
-        map.on('click', (e) => {
-            // Get the longitude and latitude from the click event
-            const longitude = e.lngLat.lng;
-            const latitude = e.lngLat.lat;
-
-            // Update the input fields with the longitude and latitude
-            document.getElementById('latitude').value = latitude;
-            document.getElementById('longitude').value = longitude;
-        });
+        window.onload = initMap;
     </script>
 </body>
 </html>
