@@ -8,11 +8,11 @@ const USERS_URL = BASE_URL + "admin/users";
 // Users API Services
 
 export const getUsers = (page, url = '') =>
-    axios.get(`${USERS_URL}?page=${page}${url}${IncludeAll}`, HEADER);
+    axios.get(`${USERS_URL}?page=${page}${url}&${IncludeAll}`, HEADER);
 
 
 export const getUserById = (userId) =>
-    axios.get(`${USERS_URL}/${userId}${IncludeAll}`, HEADER);
+    axios.get(`${USERS_URL}/${userId}?${IncludeAll}`, HEADER);
 
 
 export const createUser = (userData) =>

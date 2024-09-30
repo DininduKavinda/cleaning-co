@@ -8,10 +8,10 @@ const CLIENTS_URL = BASE_URL + "web/clients";
 //Clients APi Services
 
 export const getClients = (page, url) =>
-    axios.get(`${CLIENTS_URL}?page=${page}${url}${IncludeAll}`, HEADER2);
+    axios.get(`${CLIENTS_URL}?page=${page}${url}&${IncludeAll}`, HEADER2);
 
 export const getClientById = (clientId) =>
-    axios.get(`${CLIENTS_URL}/${clientId}`, HEADER2);
+    axios.get(`${CLIENTS_URL}/${clientId}?${IncludeAll}`, HEADER2);
 
 export const createClient = (clientData) =>
     axios.post(CLIENTS_URL, clientData, HEADER);

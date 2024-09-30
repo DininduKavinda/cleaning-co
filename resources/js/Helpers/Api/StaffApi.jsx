@@ -1,17 +1,17 @@
 import axios from "axios";
 
 import { BASE_URL, HEADER, IncludeAll } from "./Api";
-    
+
 const STAFFS_URL = BASE_URL + "web/staff";
 
 
 //Staffs APi Services
 
 export const getStaffs = (page, url) =>
-    axios.get(`${STAFFS_URL}?page=${page}${url}${IncludeAll}`, HEADER);
+    axios.get(`${STAFFS_URL}?page=${page}${url}&${IncludeAll}`, HEADER);
 
 export const getStaffById = (staffId) =>
-    axios.get(`${STAFFS_URL}/${staffId}`, HEADER);
+    axios.get(`${STAFFS_URL}/${staffId}?${includeAll}`, HEADER);
 
 export const createStaff = (staffData) =>
     axios.post(`${STAFFS_URL}`, staffData, HEADER2);

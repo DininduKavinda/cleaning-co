@@ -1,3 +1,4 @@
+import { loginUser } from "@/Helpers/Api/AuthApi";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import Cookies from "js-cookie";
@@ -16,16 +17,10 @@ export default function Login({ status, canResetPassword }) {
         e.preventDefault();
 
         try {
-            const response = await axios.post(
-                `http://127.0.0.1:8000/api/auth/login`,
-                data
-            );
-            console.log(response.data.token);
+            const response = await loginUser(data);
             if (response.status === 200) {
                 const token = response.data.token;
-                console.log(token);
                 Cookies.set("authToken", token, { expires: 7 });
-
             }
         } catch (error) {
             console.error("Error during login:", error);
