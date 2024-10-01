@@ -17,7 +17,7 @@ const ProvinceDropdown = ({ countryId, setProvinceId }) => {
     const fetchProvinces = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/location/provinces`, {
+            const response = await axios.get(`https://cleaning-co.test/api/location/provinces`, {
                 params: {
                     'name_en[like]': inputValue,
                     'country_id[eq]': countryId,

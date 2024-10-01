@@ -15,7 +15,7 @@ function TaskDropdown({ value, onChange }) {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/common/tasks`,HEADER);
+                const response = await axios.get(`https://cleaning-co.test/api/common/tasks`,HEADER);
                 setTasks(response.data.data); // Assuming the API returns a list of tasks
                 setLoading(false);
             } catch (error) {

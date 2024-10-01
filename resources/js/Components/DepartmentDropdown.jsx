@@ -15,7 +15,7 @@ function DepartmentDropdown({ value, onChange }) {
     useEffect(() => {
         const fetchDepartments = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/common/departments`,HEADER);
+                const response = await axios.get(`https://cleaning-co.test/api/common/departments`,HEADER);
                 setDepartments(response.data.data); // Assuming the API returns a list of departments
                 setLoading(false);
             } catch (error) {

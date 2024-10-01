@@ -22,7 +22,7 @@ const ClientDropdown = ({ clientId, setClientId }) => {
         setIsLoading(true);
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/web/clients?full_name[like]=${inputValue}`,
+                `https://cleaning-co.test/api/web/clients?full_name[like]=${inputValue}`,
                 HEADER
             );
             const clients = response.data.data.map((client) => ({
@@ -51,7 +51,7 @@ const ClientDropdown = ({ clientId, setClientId }) => {
         setIsLoading(true);
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/web/clients/${id}`,
+                `https://cleaning-co.test/api/web/clients/${id}`,
                 HEADER
             );
             const client = response.data.data;

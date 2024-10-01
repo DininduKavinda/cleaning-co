@@ -17,7 +17,7 @@ const DistrictDropdown = ({ provinceId, setDistrictId }) => {
     const fetchDistricts = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/location/districts`, {
+            const response = await axios.get(`https://cleaning-co.test/api/location/districts`, {
                 params: {
                     'name_en[like]': inputValue,
                     'province_id[eq]': provinceId,

@@ -22,7 +22,7 @@ const StaffDropdown = ({ staffId, setStaffId }) => {
         setIsLoading(true);
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/web/staff?full_name[like]=${inputValue}`,HEADER
+                `https://cleaning-co.test/api/web/staff?full_name[like]=${inputValue}`,HEADER
             );
             const staffs = response.data.data.map((staff) => ({
                 value: staff.id,
@@ -40,7 +40,7 @@ const StaffDropdown = ({ staffId, setStaffId }) => {
         setIsLoading(true);
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/web/staff/${id}`,HEADER
+                `https://cleaning-co.test/api/web/staff/${id}`,HEADER
             );
             const staff = response.data.data;
             setOptions([{ value: staff.id, label: staff.full_name }]);

@@ -15,7 +15,7 @@ function ItemTypeDropdown({ value, onChange }) {
     useEffect(() => {
         const fetchItemTypes = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/common/itemTypes`,HEADER);
+                const response = await axios.get(`https://cleaning-co.test/api/common/itemTypes`,HEADER);
                 setItemTypes(response.data.data); // Assuming the API returns a list of item_types
                 setLoading(false);
             } catch (error) {

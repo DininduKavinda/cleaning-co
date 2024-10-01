@@ -16,7 +16,7 @@ const CountryDropdown = ({ countryId, setCountryId }) => {
         setIsLoading(true);
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/location/countries?country_name[like]=${inputValue}`
+                `https://cleaning-co.test/api/location/countries?country_name[like]=${inputValue}`
             );
             const countries = response.data.data.map((country) => ({
                 value: country.id,
@@ -34,7 +34,7 @@ const CountryDropdown = ({ countryId, setCountryId }) => {
         setIsLoading(true);
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/location/countries/${id}`
+                `https://cleaning-co.test/api/location/countries/${id}`
             );
             const country = response.data.data;
             setOptions([{ value: country.id, label: country.country_name }]);
