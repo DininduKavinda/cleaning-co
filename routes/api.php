@@ -5,11 +5,6 @@ use App\Http\Controllers\Api\Auth\PermissionController;
 use App\Http\Controllers\Api\Auth\RoleController;
 use App\Http\Controllers\Api\Auth\UserController;
 use App\Http\Controllers\Api\ClientController;
-use App\Http\Controllers\Api\Core\MatterDocumentController;
-use App\Http\Controllers\Api\Meta\CityController;
-use App\Http\Controllers\Api\Meta\CountryController;
-use App\Http\Controllers\Api\Meta\DistrictController;
-use App\Http\Controllers\Api\Meta\ProvinceController;
 use App\Http\Controllers\Api\Com\DepartmentController;
 use App\Http\Controllers\Api\Com\ItemController;
 use App\Http\Controllers\Api\Com\ItemTypeController;
@@ -18,6 +13,11 @@ use App\Http\Controllers\Api\Com\TaskController;
 use App\Http\Controllers\Api\Com\TimecardTaskController;
 use App\Http\Controllers\Api\Com\UserTypeController;
 use App\Http\Controllers\Api\Core\MatterController;
+use App\Http\Controllers\Api\Core\MatterDocumentController;
+use App\Http\Controllers\Api\Meta\CityController;
+use App\Http\Controllers\Api\Meta\CountryController;
+use App\Http\Controllers\Api\Meta\DistrictController;
+use App\Http\Controllers\Api\Meta\ProvinceController;
 use App\Http\Controllers\Api\StaffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:api');
-
 
 Route::group(['prefix' => 'location'], function () {
     Route::apiResource('countries', CountryController::class);
@@ -48,7 +47,6 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::apiResource('staff', StaffController::class);
     });
 
-
     Route::group(['prefix' => 'common'], function () {
         Route::apiResource('departments', DepartmentController::class);
         Route::apiResource('levels', LevelController::class);
@@ -61,7 +59,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::group(['prefix' => 'core'], function () {
         Route::apiResource('matters', MatterController::class);
-        Route::apiResource('matterDocuments',MatterDocumentController::class);
+        Route::apiResource('matterDocuments', MatterDocumentController::class);
     });
 
     Route::group(['prefix' => 'admin'], function () {
@@ -72,4 +70,3 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::post('givePermissionToRole/{id}', [RoleController::class, 'givePermissionToRole']);
     });
 });
-

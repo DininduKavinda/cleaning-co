@@ -27,7 +27,9 @@ class StoreCountryRequest extends FormRequest
             'phone_code' => ['required', 'unique:countries', 'max:20'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
             'country_name' => $this->country_name,
         ]);

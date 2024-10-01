@@ -15,7 +15,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\File;
 
-class ClientController extends Controller  implements HasMiddleware
+class ClientController extends Controller implements HasMiddleware
 {
     public static function middleware(): array
     {
@@ -26,6 +26,7 @@ class ClientController extends Controller  implements HasMiddleware
             new Middleware('permission:delete client', only: ['destroys']),
         ];
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -44,6 +45,7 @@ class ClientController extends Controller  implements HasMiddleware
         } elseif ($includeAll) {
             $clients = $clients->with(['user', 'district', 'country', 'province', 'city']);
         }
+
         return new ClientCollection($clients->paginate(10)->appends($request->query()));
     }
 
@@ -61,7 +63,7 @@ class ClientController extends Controller  implements HasMiddleware
     public function store(StoreClientRequest $request)
     {
         $validatedData = $request->validated();
-        $client =  new ClientResource(Client::create([
+        $client = new ClientResource(Client::create([
             'full_name' => $validatedData['full_name'],
             'nic' => $validatedData['nic'],
             'mobile' => $validatedData['mobile'],
@@ -76,9 +78,9 @@ class ClientController extends Controller  implements HasMiddleware
 
         if ($client) {
             if ($request->hasFile('image')) {
-                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $imageName = time().'.'.$request->image->getClientOriginalExtension();
                 $request->image->move('img/profile/client', $imageName);
-                $validatedData['image'] = 'img/profile/client' . $imageName;
+                $validatedData['image'] = 'img/profile/client'.$imageName;
             } else {
                 $validatedData['image'] = null;
             }
@@ -123,6 +125,7 @@ class ClientController extends Controller  implements HasMiddleware
         } elseif ($includeAll) {
             $client = $client->loadMissing(['user', 'district', 'country', 'province', 'city']);
         }
+
         return new ClientResource($client);
     }
 
@@ -157,9 +160,9 @@ class ClientController extends Controller  implements HasMiddleware
         if ($clients) {
             $user = User::where('user_type_id', 1)->where('reference_id', $client_id);
             if ($request->hasFile('image')) {
-                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $imageName = time().'.'.$request->image->getClientOriginalExtension();
                 $request->image->move('img/profile/client', $imageName);
-                $file_path = 'img/profile/client/' . $imageName;
+                $file_path = 'img/profile/client/'.$imageName;
                 $remove_old = File::delete($user->first()->image);
                 $validatedData['image'] = $file_path;
             } else {
@@ -181,6 +184,7 @@ class ClientController extends Controller  implements HasMiddleware
         } else {
             $message = 'Error Occured When Creating Client';
         }
+
         // $message = $validatedData;
         return response()->json([
             'message' => $message,
@@ -201,6 +205,7 @@ class ClientController extends Controller  implements HasMiddleware
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);

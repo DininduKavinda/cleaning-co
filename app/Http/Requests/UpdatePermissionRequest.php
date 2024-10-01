@@ -24,19 +24,20 @@ class UpdatePermissionRequest extends FormRequest
         $method = $this->method();
         if ($method == 'put') {
             return [
-                'name' => ['required','unique:permissions,name'],
+                'name' => ['required', 'unique:permissions,name'],
             ];
-        }else{
+        } else {
             return [
                 'name' => ['required', 'unique:permissions,name,'],
             ];
         }
     }
+
     protected function prepareForValidation()
     {
         if ($this->name) {
             $this->merge([
-                'name' => strtolower($this->name)
+                'name' => strtolower($this->name),
             ]);
         }
     }

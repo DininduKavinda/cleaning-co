@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\Com;
 
 use App\Filters\Com\TimecardTaskFilter;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTimecardTaskRequest;
 use App\Http\Requests\UpdateTimecardTaskRequest;
-use App\Models\Module\TimecardTask;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Com\TimecardTaskCollection;
 use App\Http\Resources\Api\Com\TimecardTaskResource;
+use App\Models\Module\TimecardTask;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -24,6 +24,7 @@ class TimecardTaskController extends Controller implements HasMiddleware
             new Middleware('permission:delete level', only: ['destroys']),
         ];
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -36,6 +37,7 @@ class TimecardTaskController extends Controller implements HasMiddleware
         if ($includeTimecards) {
             $tct = $tct->with(['matters']);
         }
+
         return new TimecardTaskCollection($tct->paginate(10)->appends($request->query()));
     }
 
@@ -54,6 +56,7 @@ class TimecardTaskController extends Controller implements HasMiddleware
     {
         $validatedData = $request->validated();
         $timecardTask = new TimecardTaskResource(TimecardTask::create($validatedData));
+
         return response()->json($timecardTask, 201);
     }
 
@@ -66,6 +69,7 @@ class TimecardTaskController extends Controller implements HasMiddleware
         if ($includeTimecards) {
             $timecardTask = $timecardTask->with(['matters']);
         }
+
         return new TimecardTaskResource($timecardTask);
     }
 
@@ -84,6 +88,7 @@ class TimecardTaskController extends Controller implements HasMiddleware
     {
         $validatedData = $request->validated();
         $timecardTask->update($validatedData);
+
         return response()->json(new TimecardTaskResource($timecardTask), 200);
     }
 
@@ -93,6 +98,7 @@ class TimecardTaskController extends Controller implements HasMiddleware
     public function destroy(TimecardTask $timecardTask)
     {
         $timecardTask->delete();
+
         return response()->json([], 204);
     }
 }

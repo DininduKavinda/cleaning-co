@@ -18,7 +18,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/mapbox',function(){
+Route::get('/mapbox', function () {
     return view('mapbox');
 });
 
@@ -28,11 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
-require __DIR__ . '/auth.php';
-require __DIR__ . '/web/meta.php';
-require __DIR__ . '/web/location.php';
-require __DIR__ . '/web/web.php';
-require __DIR__ . '/web/user_permissions.php';
-require __DIR__ . '/web/matter.php';
+require __DIR__.'/auth.php';
+require __DIR__.'/web/meta.php';
+require __DIR__.'/web/location.php';
+require __DIR__.'/web/web.php';
+require __DIR__.'/web/user_permissions.php';
+require __DIR__.'/web/matter.php';

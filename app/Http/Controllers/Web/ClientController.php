@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,13 +20,17 @@ class ClientController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
-    public function index():Response{
+
+    public function index(): Response
+    {
         return Inertia::render('Client/Index');
     }
+
     public function create(): response
     {
         return Inertia::render('Client/Edit');
     }
+
     public function show(Client $client): response
     {
         return Inertia::render('Client/Edit', ['client' => $client]);

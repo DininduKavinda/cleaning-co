@@ -37,6 +37,7 @@ class DistrictController extends Controller
         } elseif ($includeProvince) {
             $districts = $districts->with(['province']);
         }
+
         return new DistrictCollection($districts->paginate(10)->appends($request->query()));
     }
 
@@ -54,6 +55,7 @@ class DistrictController extends Controller
     public function store(StoreDistrictRequest $request)
     {
         $validatedData = $request->validated();
+
         return new DistrictResource(District::create($validatedData));
     }
 
@@ -78,6 +80,7 @@ class DistrictController extends Controller
         } elseif ($includeProvince) {
             $districts = $district->loadMissing(['province']);
         }
+
         return new DistrictResource($district);
     }
 
@@ -109,6 +112,7 @@ class DistrictController extends Controller
         } else {
             $message = 'error';
         }
+
         return response()->json([
             'message' => $message,
         ]);

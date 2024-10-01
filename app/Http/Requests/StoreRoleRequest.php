@@ -25,9 +25,11 @@ class StoreRoleRequest extends FormRequest
             'name' => ['required'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name'=>$this->name,
+            'name' => $this->name,
         ]);
     }
 }

@@ -28,7 +28,6 @@ class UpdateCountryRequest extends FormRequest
                 'iso_code' => ['required', 'max:225'],
                 'phone_code' => ['required', 'max:20'],
 
-
             ];
         } else {
             return [

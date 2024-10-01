@@ -28,7 +28,7 @@ class MatterDocumentResource extends JsonResource
             'active' => $this->active,
             'client' => new ClientResource($this->whenLoaded('client')),
             'staff' => new StaffResource($this->whenLoaded('staff')),
-            'matter'=> new MatterResource($this->whenLoaded('matter')),
+            'matter' => new MatterResource($this->whenLoaded('matter')),
         ];
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Com;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserTypeRequest;
 use App\Http\Requests\UpdateUserTypeRequest;
-use App\Models\UserType;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Com\UserTypeCollection;
 use App\Http\Resources\Api\Com\UserTypeResource;
+use App\Models\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -23,6 +23,7 @@ class UserTypeController extends Controller implements HasMiddleware
             new Middleware('permission:delete level', only: ['destroys']),
         ];
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -33,6 +34,7 @@ class UserTypeController extends Controller implements HasMiddleware
         if ($includeUsers) {
             $uT = $uT->with(['users']);
         }
+
         return new UserTypeCollection($uT->paginate(10)->appends($request->query()));
     }
 
@@ -51,6 +53,7 @@ class UserTypeController extends Controller implements HasMiddleware
     {
         $validatedData = $request->validated();
         $itemType = new UserTypeResource(UserType::create($validatedData));
+
         return response()->json($itemType, 201);
     }
 
@@ -77,6 +80,7 @@ class UserTypeController extends Controller implements HasMiddleware
     {
         $validatedData = $request->validated();
         $userType->update($validatedData);
+
         return new UserTypeResource($userType);
     }
 
@@ -86,6 +90,7 @@ class UserTypeController extends Controller implements HasMiddleware
     public function destroy(UserType $userType)
     {
         $userType->delete();
+
         return response()->json(['message' => 'userType deleted successfully'], 204);
     }
 }

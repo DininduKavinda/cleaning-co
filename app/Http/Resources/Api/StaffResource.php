@@ -25,7 +25,7 @@ class StaffResource extends JsonResource
             'id' => $this->id,
             'full_name' => $this->full_name,
             'nic' => $this->nic,
-            'email'=> $this->user->email,
+            'email' => $this->user->email,
             'mobile' => $this->mobile,
             'phone' => $this->phone,
             'name' => $this->user->name,
@@ -35,7 +35,7 @@ class StaffResource extends JsonResource
             'province_id' => $this->province_id,
             'country_id' => $this->country_id,
             'active' => $this->active,
-            'level_id'  => $this->level_id,
+            'level_id' => $this->level_id,
             'department_id' => $this->department_id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
@@ -49,8 +49,8 @@ class StaffResource extends JsonResource
             'district' => new DistrictResource($this->whenLoaded('district')),
             'province' => new ProvinceResource($this->whenLoaded('province')),
             'country' => new CountryResource($this->whenLoaded('country')),
-            'level' =>  new LevelResource($this->whenLoaded('level')),
-            'department'=> new DepartmentResource($this->whenLoaded('department')),
+            'level' => new LevelResource($this->whenLoaded('level')),
+            'department' => new DepartmentResource($this->whenLoaded('department')),
         ];
     }
 }

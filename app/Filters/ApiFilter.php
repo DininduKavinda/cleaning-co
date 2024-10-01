@@ -30,7 +30,7 @@ class ApiFilter
         $eloQuery = [];
         foreach ($this->safeParams as $param => $operators) {
             $query = $request->query($param);
-            if (!isset($query)) {
+            if (! isset($query)) {
                 continue;
             }
             $column = $this->columnMap[$param] ?? $param;

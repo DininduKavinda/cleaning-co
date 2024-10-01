@@ -58,6 +58,7 @@ class UpdateClientRequest extends FormRequest
             ];
         }
     }
+
     protected function prepareForValidation()
     {
         if ($this->nic) {

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Com;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreItemTypeRequest;
 use App\Http\Requests\UpdateItemTypeRequest;
-use App\Models\Item\ItemType;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Com\ItemTypeCollection;
 use App\Http\Resources\Api\Com\ItemTypeResource;
+use App\Models\Item\ItemType;
 use Illuminate\Http\Request;
 
 class ItemTypeController extends Controller
@@ -22,6 +22,7 @@ class ItemTypeController extends Controller
         if ($includeItems) {
             $task = $task->with(['items']);
         }
+
         return new ItemTypeCollection($task->paginate(10)->appends($request->query()));
     }
 
@@ -40,6 +41,7 @@ class ItemTypeController extends Controller
     {
         $validatedData = $request->validated();
         $itemType = new ItemTypeResource(ItemType::create($validatedData));
+
         return response()->json($itemType, 201);
     }
 
@@ -66,6 +68,7 @@ class ItemTypeController extends Controller
     {
         $validatedData = $request->validated();
         $itemType->update($validatedData);
+
         return new ItemTypeResource($itemType);
     }
 
@@ -75,6 +78,7 @@ class ItemTypeController extends Controller
     public function destroy(ItemType $itemType)
     {
         $itemType->delete();
+
         return response()->json(['message' => 'Item type deleted successfully'], 204);
     }
 }

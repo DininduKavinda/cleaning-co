@@ -21,16 +21,15 @@ class UpdateTimecardTaskRequest extends FormRequest
      */
     public function rules(): array
     {
-        $method= $this->method();
-        if ($method == 'put'){
+        $method = $this->method();
+        if ($method == 'put') {
             return [
                 'name' => 'required|string|max:255',
                 'rate' => 'required|string|max:255',
                 'rate_type' => 'required',
                 'active' => 'sometimes',
             ];
-        }
-        else{
+        } else {
             return [
                 'name' => 'sometimes|required|string|max:255',
                 'rate' => 'sometimes|required|string|max:255',
@@ -39,8 +38,10 @@ class UpdateTimecardTaskRequest extends FormRequest
             ];
         }
     }
-    protected function prepareForValidation(){
-        if($this->name){
+
+    protected function prepareForValidation()
+    {
+        if ($this->name) {
             $this->merge([
                 'name' => $this->name,
             ]);

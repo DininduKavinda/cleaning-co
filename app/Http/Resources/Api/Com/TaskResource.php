@@ -15,11 +15,11 @@ class TaskResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-         return [
-            'id'=>$this->id,
+        return [
+            'id' => $this->id,
             'name' => $this->name,
             'active' => $this->active,
-            'matters'=> MatterResource::collection($this->whenLoaded('matters')),
+            'matters' => MatterResource::collection($this->whenLoaded('matters')),
         ];
     }
 }

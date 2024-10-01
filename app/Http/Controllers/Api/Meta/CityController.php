@@ -35,6 +35,7 @@ class CityController extends Controller
         if ($includeAll) {
             $cities = $cities->with(['staff', 'clients', 'district']);
         }
+
         return new CityCollection($cities->paginate(10)->appends($request->query()));
     }
 
@@ -52,6 +53,7 @@ class CityController extends Controller
     public function store(StoreCityRequest $request)
     {
         $validatedData = $request->validated();
+
         return new CityResource(City::create($validatedData));
     }
 
@@ -71,6 +73,7 @@ class CityController extends Controller
         } elseif ($includeDistrict) {
             $city = $city->loadMissing(['district']);
         }
+
         return new CityResource($city);
     }
 
@@ -99,6 +102,7 @@ class CityController extends Controller
         } else {
             $message = 'error';
         }
+
         return response()->json([
             'message' => $message,
         ]);

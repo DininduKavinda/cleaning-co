@@ -41,9 +41,10 @@ class Staff extends Model
         'civil_status',
         'active',
     ];
+
     public function user()
     {
-        return $this->hasOne(User::class,'reference_id');
+        return $this->hasOne(User::class, 'reference_id');
     }
 
     public function department()
@@ -65,14 +66,17 @@ class Staff extends Model
     {
         return $this->belongsTo(District::class);
     }
+
     public function province()
     {
         return $this->belongsTo(Province::class);
     }
+
     public function country()
     {
         return $this->belongsTo(Country::class);
     }
+
     public function matters()
     {
         return $this->hasMany(Matter::class);

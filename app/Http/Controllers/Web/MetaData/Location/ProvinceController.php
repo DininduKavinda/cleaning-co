@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\MetaData\Location;
 
 use App\Http\Controllers\Controller;
 use App\Models\Meta\Province;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,16 +20,19 @@ class ProvinceController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
+
     public function index(): Response
     {
         return Inertia::render('Meta/Location/Province/Index');
     }
+
     public function create(): response
     {
         return Inertia::render('Meta/Location/Province/Edit');
     }
+
     public function show(Province $province): response
     {
-        return Inertia::render('Meta/Location/Province/Edit',['province' => $province]);
+        return Inertia::render('Meta/Location/Province/Edit', ['province' => $province]);
     }
 }

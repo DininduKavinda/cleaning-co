@@ -3,28 +3,25 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Filters\Auth\PermissionFilter;
-use App\Http\Resources\Api\Auth\PermissionCollection;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
+use App\Http\Resources\Api\Auth\PermissionCollection;
 use App\Http\Resources\Api\Auth\PermissionResource;
 use App\Http\Resources\UserResource;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-
     public function index(Request $request)
     {
         $filter = new PermissionFilter;
         $filterItems = $filter->transform($request);
         $permissions = Permission::where($filterItems)->paginate(10);
+
         return new PermissionCollection($permissions);
     }
-
 
     public function create()
     {
@@ -66,6 +63,7 @@ class PermissionController extends Controller
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);

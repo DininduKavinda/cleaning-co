@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\Api\Com;
 
-use App\Http\Resources\Api\StaffCollection;
 use App\Http\Resources\Api\StaffResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -20,7 +19,7 @@ class DepartmentResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'active' => $this->active,
-            'staff'=> StaffResource::collection($this->whenLoaded('staffs')),
+            'staff' => StaffResource::collection($this->whenLoaded('staffs')),
         ];
     }
 }

@@ -22,13 +22,15 @@ class StoreLevelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required'],
-            'active'=>['sometimes'],
+            'name' => ['required'],
+            'active' => ['sometimes'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name'=>$this->name,
+            'name' => $this->name,
         ]);
     }
 }

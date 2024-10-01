@@ -21,25 +21,26 @@ class UpdateItemRequest extends FormRequest
      */
     public function rules(): array
     {
-       $method=$this->method();
-       if($method=='put'){
-        return [
-            'item_type_id' => ['required'],
-            'name' =>  ['required'],
-            'price' =>  ['required'],
-            'active' =>  ['sometimes'],
-        ];
-       }
-       else{
-        return [
-            'item_type_id' => ['sometimes','required'],
-            'name' =>  ['sometimes','required'],
-            'price' =>  ['sometimes','required'],
-            'active' =>  ['sometimes'],
-        ];
-       }
+        $method = $this->method();
+        if ($method == 'put') {
+            return [
+                'item_type_id' => ['required'],
+                'name' => ['required'],
+                'price' => ['required'],
+                'active' => ['sometimes'],
+            ];
+        } else {
+            return [
+                'item_type_id' => ['sometimes', 'required'],
+                'name' => ['sometimes', 'required'],
+                'price' => ['sometimes', 'required'],
+                'active' => ['sometimes'],
+            ];
+        }
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         if ($this->name) {
             $this->merge([
                 'name' => $this->name,

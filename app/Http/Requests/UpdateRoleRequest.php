@@ -19,20 +19,22 @@ class UpdateRoleRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-     public function rules(): array
+    public function rules(): array
     {
         $method = $this->method();
         if ($method == 'put') {
             return [
                 'name' => ['required'],
             ];
-        }else{
+        } else {
             return [
                 'name' => ['required'],
             ];
         }
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         if ($this->name) {
             $this->merge([
                 'name' => $this->name,

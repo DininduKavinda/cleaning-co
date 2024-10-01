@@ -3,19 +3,16 @@
 namespace App\Http\Controllers\Api\Com;
 
 use App\Filters\Com\LevelFilter;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLevelRequest;
 use App\Http\Requests\UpdateLevelRequest;
 use App\Http\Resources\Api\Com\LevelCollection;
 use App\Http\Resources\Api\Com\LevelResource;
 use App\Models\Level;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use App\Http\Controllers\Controller;
 
 class LevelController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -28,6 +25,7 @@ class LevelController extends Controller
         if ($includeStaff) {
             $level = $level->with(['staffs']);
         }
+
         return new LevelCollection($level->paginate(10)->appends($request->query()));
     }
 
@@ -51,8 +49,9 @@ class LevelController extends Controller
         } else {
             $message = 'error';
         }
+
         return response()->json([
-            'message' => $message
+            'message' => $message,
         ]);
     }
 
@@ -65,6 +64,7 @@ class LevelController extends Controller
         if ($includeStaff) {
             $level = $level->loadMissing(['staffs']);
         }
+
         return new LevelResource($level);
     }
 
@@ -88,8 +88,9 @@ class LevelController extends Controller
         } else {
             $message = 'error';
         }
+
         return response()->json([
-            'message' => $message
+            'message' => $message,
         ]);
     }
 
@@ -104,6 +105,7 @@ class LevelController extends Controller
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);

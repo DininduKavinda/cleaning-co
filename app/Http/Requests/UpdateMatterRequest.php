@@ -21,7 +21,7 @@ class UpdateMatterRequest extends FormRequest
      */
     public function rules(): array
     {
-        $method =  $this->method();
+        $method = $this->method();
         if ($method == 'put') {
             return [
                 'task_id' => ['required'],
@@ -54,6 +54,7 @@ class UpdateMatterRequest extends FormRequest
             ];
         }
     }
+
     protected function prepareForValidation()
     {
         if ($this->name) {

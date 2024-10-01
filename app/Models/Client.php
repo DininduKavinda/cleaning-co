@@ -34,25 +34,29 @@ class Client extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class,'reference_id');
+        return $this->hasOne(User::class, 'reference_id');
     }
 
     public function city()
     {
         return $this->belongsTo(City::class);
     }
+
     public function district()
     {
         return $this->belongsTo(District::class);
     }
+
     public function province()
     {
         return $this->belongsTo(Province::class);
     }
+
     public function country()
     {
         return $this->belongsTo(Country::class);
     }
+
     public function matters()
     {
         return $this->hasMany(Matter::class);

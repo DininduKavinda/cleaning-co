@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Staff;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,14 +20,17 @@ class StaffController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
+
     public function index(): Response
     {
         return Inertia::render('Staff/Index');
     }
+
     public function create(): response
     {
         return Inertia::render('Staff/Edit');
     }
+
     public function show(Staff $staff): response
     {
         return Inertia::render('Staff/Edit', ['staff' => $staff]);

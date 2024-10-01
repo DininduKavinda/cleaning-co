@@ -32,7 +32,9 @@ class StoreMatterDocumentRequest extends FormRequest
             'active' => ['sometimes'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
             'name' => $this->name,
         ]);

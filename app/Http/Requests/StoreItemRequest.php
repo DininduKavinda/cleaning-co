@@ -23,14 +23,16 @@ class StoreItemRequest extends FormRequest
     {
         return [
             'item_type_id' => ['required'],
-            'name' =>  ['required'],
-            'price' =>  ['required'],
-            'active' =>  ['sometimes'],
+            'name' => ['required'],
+            'price' => ['required'],
+            'active' => ['sometimes'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name' => $this->name ,
+            'name' => $this->name,
         ]);
     }
 }

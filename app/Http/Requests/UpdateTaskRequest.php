@@ -22,19 +22,21 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         $method = $this->method();
-        if($method == 'put'){
+        if ($method == 'put') {
             return [
                 'name' => ['required'],
-                'active'=>['sometimes']
+                'active' => ['sometimes'],
             ];
-        }else{
+        } else {
             return [
                 'name' => ['sometimes'],
-                'active'=>['sometimes']
+                'active' => ['sometimes'],
             ];
         }
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         if ($this->name) {
             $this->merge([
                 'name' => $this->name,

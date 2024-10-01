@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,14 +20,17 @@ class PermissionController extends Controller implements HasMiddleware
             new Middleware('permission:delete permission', only: ['destroy']),
         ];
     }
+
     public function index(): response
     {
         return Inertia::render('UsersPermissions/Permission/Index');
     }
+
     public function create(): response
     {
         return Inertia::render('UsersPermissions/Permission/Edit');
     }
+
     public function show(Permission $permission): response
     {
         return Inertia::render('UsersPermissions/Permission/Edit', ['permission' => $permission]);

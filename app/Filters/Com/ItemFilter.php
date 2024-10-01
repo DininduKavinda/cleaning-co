@@ -9,7 +9,7 @@ class ItemFilter extends ApiFilter
     protected $safeParams = [
         'item_type_id' => ['eq'],
         'name' => ['like'],
-        'price'=>['eq','gt','lt'],
+        'price' => ['eq', 'gt', 'lt'],
         'active' => ['eq'],
     ];
 

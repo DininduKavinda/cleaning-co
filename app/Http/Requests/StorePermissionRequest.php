@@ -22,12 +22,14 @@ class StorePermissionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
+            'name' => 'required',
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name'=>'name',
+            'name' => 'name',
         ]);
     }
 }

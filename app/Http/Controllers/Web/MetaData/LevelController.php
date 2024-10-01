@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\MetaData;
 
 use App\Http\Controllers\Controller;
 use App\Models\Level;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,14 +20,17 @@ class LevelController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
+
     public function index(): Response
     {
         return Inertia::render('Meta/Level/Index');
     }
+
     public function create(): Response
     {
         return Inertia::render('Meta/Level/Edit');
     }
+
     public function show(Level $level): Response
     {
         return Inertia::render('Meta/Level/Edit', ['level' => $level]);

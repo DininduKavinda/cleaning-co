@@ -28,12 +28,13 @@ class CountryController extends Controller
         if ($includeAll) {
             $countries = $countries->with(['staffs', 'clients', 'provinces']);
         } elseif ($includeStaff) {
-            $countries =  $countries->with(['staffs']);
+            $countries = $countries->with(['staffs']);
         } elseif ($includeClients) {
-            $countries =  $countries->with(['clients']);
+            $countries = $countries->with(['clients']);
         } elseif ($includeProvinces) {
-            $countries =  $countries->with(['provinces']);
+            $countries = $countries->with(['provinces']);
         }
+
         return new CountryCollection($countries->paginate(10)->appends($request->query()));
     }
 
@@ -51,6 +52,7 @@ class CountryController extends Controller
     public function store(StoreCountryRequest $request)
     {
         $validatedData = $request->validated();
+
         return new CountryResource(Country::create($validatedData));
     }
 
@@ -66,11 +68,11 @@ class CountryController extends Controller
         if ($includeAll) {
             $country = $country->loadMissing(['staffs', 'clients', 'provinces']);
         } elseif ($includeStaff) {
-            $country =  $country->loadMissing(['staffs']);
+            $country = $country->loadMissing(['staffs']);
         } elseif ($includeClients) {
-            $country =  $country->loadMissing(['clients']);
+            $country = $country->loadMissing(['clients']);
         } elseif ($includeProvinces) {
-            $country =  $country->loadMissing(['provinces']);
+            $country = $country->loadMissing(['provinces']);
         }
 
         return new CountryResource($country);
@@ -99,11 +101,12 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         $country->delete();
-        if($country){
+        if ($country) {
             $message = 'success';
-        }else{
+        } else {
             $message = 'error';
         }
+
         return response()->json([
             'message' => $message,
         ]);

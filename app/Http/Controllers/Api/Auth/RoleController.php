@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Requests\UpdateRoleRequest;
-use App\Http\Resources\Api\Auth\RoleResource;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
 use App\Http\Resources\Api\Auth\RoleCollection;
+use App\Http\Resources\Api\Auth\RoleResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-
     public function index()
     {
         $roles = Role::get();
+
         return new RoleCollection($roles);
     }
 
@@ -58,6 +55,7 @@ class RoleController extends Controller
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);
@@ -75,6 +73,7 @@ class RoleController extends Controller
             ->where('role_has_permissions.role_id', $role->id)
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
+
         return response()->json([
             'role' => $role,
             'rolePermissions' => $rolePermissions,

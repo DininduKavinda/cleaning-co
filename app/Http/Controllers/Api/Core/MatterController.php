@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\Core;
 
 use App\Filters\Core\MatterFilter;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMatterRequest;
 use App\Http\Requests\UpdateMatterRequest;
 use App\Http\Resources\Api\Core\MatterCollection;
 use App\Http\Resources\Api\Core\MatterResource;
 use App\Models\Module\Matter;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Module\MatterDocument;
+use Illuminate\Http\Request;
 
 class MatterController extends Controller
 {
@@ -47,6 +47,7 @@ class MatterController extends Controller
         } elseif ($includeAccess) {
             $matters = $matters->with(['matter_access']);
         }
+
         return new MatterCollection($matters->paginate(10)->appends($request->query()));
     }
 
@@ -67,9 +68,9 @@ class MatterController extends Controller
         $matter = Matter::create($validatedData);
         if ($matter) {
             if ($request->hasFile('document')) {
-                $imageName = time() . '.' . $request->document->getClientOriginalExtension();
+                $imageName = time().'.'.$request->document->getClientOriginalExtension();
                 $request->document->move('document/matter', $imageName);
-                $validatedData['document'] = 'document/matter' . $imageName;
+                $validatedData['document'] = 'document/matter'.$imageName;
             } else {
                 $validatedData['document'] = null;
             }
@@ -79,7 +80,6 @@ class MatterController extends Controller
                 return response()->json(['data' => $matterDoc], 201);
             }
         }
-
 
         return response()->json(['data' => $matter], 201);
     }
@@ -114,6 +114,7 @@ class MatterController extends Controller
         } elseif ($includeAccess) {
             $matter = $matter->loadMissing(['matter_access']);
         }
+
         return new MatterResource($matter);
     }
 
@@ -132,6 +133,7 @@ class MatterController extends Controller
     {
         $validatedData = $request->validated();
         $matter->update($validatedData);
+
         return response()->json(['data' => $matter], 200);
     }
 
@@ -141,6 +143,7 @@ class MatterController extends Controller
     public function destroy(Matter $matter)
     {
         $matter->delete();
+
         return response()->json(['message' => 'Successfully deleted'], 204);
     }
 }

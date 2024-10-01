@@ -47,6 +47,7 @@ class AuthController extends Controller
                 $lastLogin = $user->update([
                     'last_login' => date('Y-m-d H:i:s'),
                 ]);
+
                 return response()->json([
                     'status' => true,
                     'message' => 'User logged in Successfully',

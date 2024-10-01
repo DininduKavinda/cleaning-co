@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\Com;
 
 use App\Filters\Com\TaskFilter;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Models\Module\Task;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Com\TaskCollection;
 use App\Http\Resources\Api\Com\TaskResource;
+use App\Models\Module\Task;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -24,6 +24,7 @@ class TaskController extends Controller implements HasMiddleware
             new Middleware('permission:delete level', only: ['destroys']),
         ];
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -36,6 +37,7 @@ class TaskController extends Controller implements HasMiddleware
         if ($includeStaff) {
             $task = $task->with(['matters']);
         }
+
         return new TaskCollection($task->paginate(10)->appends($request->query()));
     }
 
@@ -59,8 +61,9 @@ class TaskController extends Controller implements HasMiddleware
         } else {
             $message = 'error';
         }
+
         return response()->json([
-            'message' => $message
+            'message' => $message,
         ]);
     }
 
@@ -73,6 +76,7 @@ class TaskController extends Controller implements HasMiddleware
         if ($includeStaff) {
             $task = $task->loadMissing(['matters']);
         }
+
         return new TaskResource($task);
     }
 
@@ -96,8 +100,9 @@ class TaskController extends Controller implements HasMiddleware
         } else {
             $message = 'error';
         }
+
         return response()->json([
-            'message' => $message
+            'message' => $message,
         ]);
     }
 
@@ -112,6 +117,7 @@ class TaskController extends Controller implements HasMiddleware
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);

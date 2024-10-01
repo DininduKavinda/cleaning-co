@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Api\Com;
 
 use App\Filters\Com\ItemFilter;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
-use App\Models\Item\Item;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Com\ItemCollection;
 use App\Http\Resources\Api\Com\ItemResource;
+use App\Models\Item\Item;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller {
+class ItemController extends Controller
+{
     /**
      * Display a listing of the resource.
      */
@@ -21,9 +22,10 @@ class ItemController extends Controller {
         $filterItems = $filter->transform($request);
         $includeItemType = $request->query('includeAll');
         $item = Item::where($filterItems);
-        if($includeItemType){
+        if ($includeItemType) {
             $item = $item->with(['item_type']);
         }
+
         return new ItemCollection($item->paginate(10)->appends($request->query()));
     }
 
@@ -42,6 +44,7 @@ class ItemController extends Controller {
     {
         $validatedData = $request->validated();
         $item = Item::create($validatedData);
+
         return response()->json(['data' => $item], 201);
     }
 
@@ -51,9 +54,10 @@ class ItemController extends Controller {
     public function show(Item $item)
     {
         $includeItemType = request()->query('includeAll');
-        if($includeItemType){
+        if ($includeItemType) {
             $item = $item->loadMissing(['item_type']);
         }
+
         return new ItemResource($item);
     }
 
@@ -72,6 +76,7 @@ class ItemController extends Controller {
     {
         $validatedData = $request->validated();
         $item->update($validatedData);
+
         return response()->json(['data' => $item], 200);
     }
 
@@ -81,6 +86,7 @@ class ItemController extends Controller {
     public function destroy(Item $item)
     {
         $item->delete();
+
         return response()->json(['message' => 'Item deleted successfully'], 204);
     }
 }

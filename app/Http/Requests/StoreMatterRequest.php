@@ -40,6 +40,7 @@ class StoreMatterRequest extends FormRequest
             'file_name' => ['required'],
         ];
     }
+
     protected function prepareForValidation()
     {
         $this->merge([

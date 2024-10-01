@@ -41,12 +41,13 @@ class UpdateUserRequest extends FormRequest
                 'name' => ['sometimes', 'required'],
                 'email' => ['sometimes', 'required', 'email'],
                 'image' => ['sometimes'],
-                'roles' => ['sometimes','required'],
+                'roles' => ['sometimes', 'required'],
                 'last_login' => ['sometimes'],
                 'active' => ['sometimes'],
             ];
         }
     }
+
     protected function prepareForValidation()
     {
         if ($this->name) {

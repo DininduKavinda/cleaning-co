@@ -2,19 +2,14 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { Link, usePage } from "@inertiajs/react";
+import {HEADER} from "@/Helpers/Api/Api";
 
 function GivePermission({ auth }) {
     const page_info = usePage().props;
     const roleId = page_info.role?.id;
     const [permissions, setPermissions] = useState([]);
     const [checkedPermissions, setCheckedPermissions] = useState([]);
-    const TOKEN = localStorage.getItem("authToken");
 
-    const HEADER = {
-        headers: {
-            Authorization: `Bearer ${TOKEN}`,
-        },
-    };
     useEffect(() => {
         if (roleId) {
             fetchPermissions();
@@ -30,7 +25,7 @@ function GivePermission({ auth }) {
         try {
             while (page <= lastPage) {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/admin/permissions?page=${page}`,
+                    `https://cleaning-co.test/api/admin/permissions?page=${page}`,
                     HEADER
                 );
                 const data = response.data.data;
@@ -61,7 +56,7 @@ function GivePermission({ auth }) {
     const fetchRolePermissions = async () => {
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/admin/addPermissionToRole/${roleId}`,
+                `https://cleaning-co.test/api/admin/addPermissionToRole/${roleId}`,
                 HEADER
             );
             const activePermissions = response.data.rolePermissionsNames;
@@ -86,7 +81,7 @@ function GivePermission({ auth }) {
         e.preventDefault();
         try {
             await axios.post(
-                `http://127.0.0.1:8000/api/admin/givePermissionToRole/${roleId}`,
+                `https://cleaning-co.test/api/admin/givePermissionToRole/${roleId}`,
                 {
                     permission: checkedPermissions,
                 } ,HEADER

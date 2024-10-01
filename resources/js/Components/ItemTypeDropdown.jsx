@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getItemTypes } from "@/Helpers/Api/ItemTypeApi";
 
-const TOKEN = localStorage.getItem("authToken");
-const HEADER = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-    },
-};
 
 function ItemTypeDropdown({ value, onChange }) {
     const [item_types, setItemTypes] = useState([]);
@@ -15,7 +10,7 @@ function ItemTypeDropdown({ value, onChange }) {
     useEffect(() => {
         const fetchItemTypes = async () => {
             try {
-                const response = await axios.get(`https://cleaning-co.test/api/common/itemTypes`,HEADER);
+                const response = await getItemTypes();
                 setItemTypes(response.data.data); // Assuming the API returns a list of item_types
                 setLoading(false);
             } catch (error) {

@@ -37,6 +37,7 @@ class ProvinceController extends Controller
         } elseif ($includeCountry) {
             $provinces = $provinces->with(['country']);
         }
+
         return new ProvinceCollection($provinces->paginate(10)->appends($request->query()));
     }
 
@@ -54,6 +55,7 @@ class ProvinceController extends Controller
     public function store(StoreProvinceRequest $request)
     {
         $validatedData = $request->validated();
+
         return new ProvinceResource(Province::create($validatedData));
     }
 
@@ -78,6 +80,7 @@ class ProvinceController extends Controller
         } elseif ($includeCountry) {
             $province = $province->loadMissing(['country']);
         }
+
         return new ProvinceResource($province);
     }
 
@@ -109,6 +112,7 @@ class ProvinceController extends Controller
         } else {
             $message = 'error';
         }
+
         return response()->json([
             'message' => $message,
         ]);

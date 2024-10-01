@@ -25,17 +25,19 @@ class StoreUserRequest extends FormRequest
             'reference_id' => ['sometimes'],
             'user_type_id' => ['sometimes'],
             'name' => ['required'],
-            'roles' => ['required','array'],
-            'email' => ['required','email'],
+            'roles' => ['required', 'array'],
+            'email' => ['required', 'email'],
             'image' => ['sometimes'],
             'password' => ['required'],
             'last_login' => ['sometimes'],
             'active' => ['sometimes'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
-            'name'=>$this->name,
+            'name' => $this->name,
         ]);
     }
 }

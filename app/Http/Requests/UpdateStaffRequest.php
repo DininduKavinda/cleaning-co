@@ -43,7 +43,7 @@ class UpdateStaffRequest extends FormRequest
                 'phone' => ['required'],
                 'civil_status' => ['required'],
                 'email' => ['required', 'email'],
-                'image' => ['sometimes','max:2048'],
+                'image' => ['sometimes', 'max:2048'],
                 'last_login' => ['sometimes'],
                 'active' => ['required'],
             ];
@@ -74,6 +74,7 @@ class UpdateStaffRequest extends FormRequest
             ];
         }
     }
+
     protected function prepareForValidation()
     {
         if ($this->full_name) {

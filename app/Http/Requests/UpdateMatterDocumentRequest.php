@@ -46,6 +46,7 @@ class UpdateMatterDocumentRequest extends FormRequest
             ];
         }
     }
+
     protected function prepareForValidation()
     {
         if ($this->file_name) {

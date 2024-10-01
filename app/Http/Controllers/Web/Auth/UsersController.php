@@ -6,13 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller implements HasMiddleware
 {
@@ -25,15 +22,18 @@ class UsersController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
+
     public function index(): response
     {
 
         return Inertia::render('UsersPermissions/User/Index');
     }
+
     public function create(): response
     {
         return Inertia::render('UsersPermissions/User/Edit');
     }
+
     public function store(StoreUserRequest $request): Response
     {
         $validatedData = $request->validated();
@@ -44,6 +44,7 @@ class UsersController extends Controller implements HasMiddleware
 
         return Inertia::render('UsersPermissions/User/Index');
     }
+
     public function update(UpdateUserRequest $request, User $user): response
     {
         $validatedData = $request->validated();
@@ -54,6 +55,7 @@ class UsersController extends Controller implements HasMiddleware
 
         return Inertia::render('UsersPermissions/User/Index');
     }
+
     public function show(User $user): response
     {
         return Inertia::render('UsersPermissions/User/Edit', ['user' => $user]);

@@ -42,12 +42,13 @@ class StoreStaffRequest extends FormRequest
             'civil_status' => ['required'],
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|same:password',
-            'email' => ['required','email'],
+            'email' => ['required', 'email'],
             'image' => ['max:2048'],
             'last_login' => ['sometimes'],
             'active' => ['required'],
         ];
     }
+
     protected function prepareForValidation()
     {
         $this->merge([

@@ -22,13 +22,15 @@ class StoreTimecardTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=> ['required'],
-            'rate'=>['required'],
+            'name' => ['required'],
+            'rate' => ['required'],
             'rate_type' => 'required',
-            'active'=>['sometimes'],
+            'active' => ['sometimes'],
         ];
     }
-    protected function prepareForValidation(){
+
+    protected function prepareForValidation()
+    {
         $this->merge([
             'name' => $this->name,
         ]);

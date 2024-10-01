@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
                 return Permission::pluck('name')->mapWithKeys(function ($permission) {
                     return [$permission => false];
                 })->toArray();
-            }
+            },
         ]);
     }
 }

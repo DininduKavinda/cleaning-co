@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\MetaData\Store;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item\ItemType;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,14 +20,17 @@ class ItemTypeController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
+
     public function index(): Response
     {
         return Inertia::render('Meta/Store/ItemType/Index');
     }
+
     public function create(): Response
     {
         return Inertia::render('Meta/Store/ItemType/Edit');
     }
+
     public function show(ItemType $itemType): Response
     {
         return Inertia::render('Meta/Store/ItemType/Edit', ['itemType' => $itemType]);

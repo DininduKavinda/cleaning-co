@@ -1,5 +1,6 @@
 import { loginUser } from "@/Helpers/Api/AuthApi";
 import GuestLayout from "@/Layouts/GuestLayout";
+import { Inertia } from "@inertiajs/inertia";
 import { Head, Link, useForm } from "@inertiajs/react";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -21,14 +22,16 @@ export default function Login({ status, canResetPassword }) {
             if (response.status === 200) {
                 const token = response.data.token;
                 Cookies.set("authToken", token, { expires: 7 });
+                
+                post(route("login"), {
+                    onFinish: () => {
+                        reset("password");
+                    },
+                });
             }
         } catch (error) {
             console.error("Error during login:", error);
         }
-
-        post(route("login"), {
-            onFinish: () => reset("password"),
-        });
     };
 
     const togglePasswordVisibility = () => {

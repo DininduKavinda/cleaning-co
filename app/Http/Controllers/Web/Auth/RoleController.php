@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,20 +20,24 @@ class RoleController extends Controller implements HasMiddleware
             new Middleware('permission:delete role', only: ['destroy']),
         ];
     }
+
     public function index(): Response
     {
         return Inertia::render('UsersPermissions/Role/Index');
     }
+
     public function create(): response
     {
         return Inertia::render('UsersPermissions/Role/Edit');
     }
+
     public function show(Role $role): response
     {
         return Inertia::render('UsersPermissions/Role/Edit', ['role' => $role]);
     }
+
     public function edit(Role $role): response
     {
-        return  Inertia::render('UsersPermissions/Role/GivePermission', ['role' => $role]);
+        return Inertia::render('UsersPermissions/Role/GivePermission', ['role' => $role]);
     }
 }

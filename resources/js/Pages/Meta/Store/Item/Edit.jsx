@@ -4,6 +4,7 @@ import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createItem, getItemById, updateItem } from "@/Helpers/Api/ItemApi";
 import ItemTypeDropdown from "@/Components/ItemTypeDropdown";
+import { Inertia } from "@inertiajs/inertia";
 
 function ItemForm({ auth }) {
     const page_info = usePage().props;
@@ -61,11 +62,15 @@ function ItemForm({ auth }) {
             } else {
                 await createItem(item);
             }
+        
+            Inertia.visit(route('items.index'), {
+                data: { success: 'Item saved successfully!' }, 
+            });
+    
         } catch (error) {
             console.error("Error saving item data:", error);
         }
     };
-
     return (
         <AuthenticatedLayout
             user={auth.user}

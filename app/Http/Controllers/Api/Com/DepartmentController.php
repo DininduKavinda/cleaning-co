@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\Api\Com;
 
 use App\Filters\Com\DepartmentFilter;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
 use App\Http\Resources\Api\Com\DepartmentCollection;
 use App\Http\Resources\Api\Com\DepartmentResource;
 use App\Models\Department;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
-use App\Http\Controllers\Controller;
 
 class DepartmentController extends Controller
 {
@@ -27,6 +25,7 @@ class DepartmentController extends Controller
         if ($includeStaff) {
             $department = $department->with(['staffs']);
         }
+
         return new DepartmentCollection($department->paginate(10)->appends($request->query()));
     }
 
@@ -50,8 +49,9 @@ class DepartmentController extends Controller
         } else {
             $message = 'error';
         }
+
         return response()->json([
-            'message' => $message
+            'message' => $message,
         ]);
     }
 
@@ -64,6 +64,7 @@ class DepartmentController extends Controller
         if ($includeStaff) {
             $department = $department->loadMissing(['staffs']);
         }
+
         return new DepartmentResource($department);
     }
 
@@ -87,8 +88,9 @@ class DepartmentController extends Controller
         } else {
             $message = 'error';
         }
+
         return response()->json([
-            'message' => $message
+            'message' => $message,
         ]);
     }
 
@@ -103,6 +105,7 @@ class DepartmentController extends Controller
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);

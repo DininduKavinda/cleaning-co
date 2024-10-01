@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\MetaData;
 
 use App\Http\Controllers\Controller;
 use App\Models\Module\TimecardTask;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
@@ -21,14 +20,17 @@ class TimecardTaskController extends Controller implements HasMiddleware
             new Middleware('permission:delete user', only: ['destroy']),
         ];
     }
+
     public function index(): Response
     {
         return Inertia::render('Meta/TimecardTasks/Index');
     }
+
     public function create(): Response
     {
         return Inertia::render('Meta/TimecardTasks/Edit');
     }
+
     public function show(TimecardTask $timecardTask): Response
     {
         return Inertia::render('Meta/TimecardTasks/Edit', ['timecardTask' => $timecardTask]);

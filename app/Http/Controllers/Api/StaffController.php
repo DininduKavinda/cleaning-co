@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Filters\Staff\StaffFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStaffRequest;
-use App\Http\Requests\UpdateStaffRequest;
 use App\Http\Resources\Api\StaffCollection;
 use App\Http\Resources\Api\StaffResource;
 use App\Models\Staff;
@@ -33,6 +32,7 @@ class StaffController extends Controller
         } elseif ($includeAll) {
             $staff = $staff->with(['user', 'district', 'country', 'province', 'city', 'level', 'department']);
         }
+
         return new StaffCollection($staff->paginate(10)->appends($request->query()));
     }
 
@@ -50,7 +50,7 @@ class StaffController extends Controller
     public function store(StoreStaffRequest $request)
     {
         $validatedData = $request->validated();
-        $staff =  new StaffResource(Staff::create([
+        $staff = new StaffResource(Staff::create([
             'full_name' => $validatedData['full_name'],
             'first_name' => $validatedData['first_name'],
             'last_name' => $validatedData['last_name'],
@@ -73,9 +73,9 @@ class StaffController extends Controller
 
         if ($staff) {
             if ($request->hasFile('image')) {
-                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $imageName = time().'.'.$request->image->getClientOriginalExtension();
                 $request->image->move('img/profile/staff', $imageName);
-                $validatedData['image'] = 'img/profile/staff' . $imageName;
+                $validatedData['image'] = 'img/profile/staff'.$imageName;
             } else {
                 $validatedData['image'] = null;
             }
@@ -99,6 +99,7 @@ class StaffController extends Controller
         } else {
             $message = 'Error Occured When Creating Employee';
         }
+
         // $message = 'triggred';
         return response()->json([
             'message' => $message,
@@ -120,6 +121,7 @@ class StaffController extends Controller
         } elseif ($includeAll) {
             $staff = $staff->loadMissing(['user', 'district', 'country', 'province', 'city', 'level', 'department']);
         }
+
         return new StaffResource($staff);
     }
 
@@ -161,9 +163,9 @@ class StaffController extends Controller
         if ($staffs) {
             $user = User::where('user_type_id', 2)->where('reference_id', $staff_id);
             if ($request->hasFile('image')) {
-                $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+                $imageName = time().'.'.$request->image->getClientOriginalExtension();
                 $request->image->move('img/profile/staff', $imageName);
-                $file_path = 'img/profile/staff/' . $imageName;
+                $file_path = 'img/profile/staff/'.$imageName;
                 $remove_old = File::delete($user->first()->image);
                 $validatedData['image'] = $file_path;
             } else {
@@ -206,6 +208,7 @@ class StaffController extends Controller
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);

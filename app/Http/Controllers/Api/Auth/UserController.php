@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Filters\Auth\UserFilter;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
     public function index(Request $request)
     {
         $filter = new UserFilter;
@@ -29,9 +28,9 @@ class UserController extends Controller
         } elseif ($includeAll) {
             $user = $user->with(['staffs', 'clients', 'user_type']);
         }
+
         return new UserCollection($user->paginate(10)->appends($request->query()));
     }
-
 
     public function create()
     {
@@ -70,6 +69,7 @@ class UserController extends Controller
         } else {
             $user = $user->loadMissing('roles');
         }
+
         return new UserResource($user);
     }
 
@@ -88,7 +88,6 @@ class UserController extends Controller
         ]);
     }
 
-
     public function destroy(User $user)
     {
         $user = $user->delete();
@@ -97,6 +96,7 @@ class UserController extends Controller
         } else {
             $message = 'An Error Occured';
         }
+
         return response()->json([
             'message' => $message,
         ]);
