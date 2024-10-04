@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Select from "react-select";
+import { searchProvinces } from "@/Helpers/Api/ProvinceApi";
 
 const ProvinceDropdown = ({ countryId, setProvinceId }) => {
     const [options, setOptions] = useState([]);
@@ -8,7 +9,7 @@ const ProvinceDropdown = ({ countryId, setProvinceId }) => {
 
     useEffect(() => {
         if (countryId) {
-            fetchProvinces('');
+            fetchProvinces("");
         } else {
             setOptions([]);
         }
@@ -17,11 +18,9 @@ const ProvinceDropdown = ({ countryId, setProvinceId }) => {
     const fetchProvinces = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`https://cleaning-co.test/api/location/provinces`, {
-                params: {
-                    'name_en[like]': inputValue,
-                    'country_id[eq]': countryId,
-                },
+            const response = await searchProvinces({
+                "name_en[like]": inputValue,
+                "country_id[eq]": countryId,
             });
             const provinces = response.data.data.map((province) => ({
                 value: province.id,
@@ -29,7 +28,7 @@ const ProvinceDropdown = ({ countryId, setProvinceId }) => {
             }));
             setOptions(provinces);
         } catch (error) {
-            console.error('Error fetching provinces:', error);
+            console.error("Error fetching provinces:", error);
         } finally {
             setIsLoading(false);
         }

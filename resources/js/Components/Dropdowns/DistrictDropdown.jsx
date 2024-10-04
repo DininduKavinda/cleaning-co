@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Select from "react-select";
+import { searchDistricts } from "@/Helpers/Api/DistrictApi";
 
 const DistrictDropdown = ({ provinceId, setDistrictId }) => {
     const [options, setOptions] = useState([]);
@@ -8,7 +9,7 @@ const DistrictDropdown = ({ provinceId, setDistrictId }) => {
 
     useEffect(() => {
         if (provinceId) {
-            fetchDistricts('');
+            fetchDistricts("");
         } else {
             setOptions([]);
         }
@@ -17,11 +18,9 @@ const DistrictDropdown = ({ provinceId, setDistrictId }) => {
     const fetchDistricts = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`https://cleaning-co.test/api/location/districts`, {
-                params: {
-                    'name_en[like]': inputValue,
-                    'province_id[eq]': provinceId,
-                },
+            const response = await searchDistricts({
+                "name_en[like]": inputValue,
+                "province_id[eq]": provinceId,
             });
             const districts = response.data.data.map((district) => ({
                 value: district.id,
@@ -29,7 +28,7 @@ const DistrictDropdown = ({ provinceId, setDistrictId }) => {
             }));
             setOptions(districts);
         } catch (error) {
-            console.error('Error fetching districts:', error);
+            console.error("Error fetching districts:", error);
         } finally {
             setIsLoading(false);
         }

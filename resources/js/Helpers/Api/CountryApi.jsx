@@ -16,3 +16,5 @@ export const updateCountry = (countryId, countryData) =>
     axios.put(`${COUNTRIES_URL}/${countryId}`, countryData, HEADER);
 
 export const deleteCountry = (countryId) => axios.delete(`${COUNTRIES_URL}/${countryId}`, HEADER);
+
+export const searchCountries = (params) => axios.get(`${COUNTRIES_URL}?${IncludeAll}`, { params }, HEADER);

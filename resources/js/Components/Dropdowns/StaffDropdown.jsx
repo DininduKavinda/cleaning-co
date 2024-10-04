@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
+import { getStaffById, searchStaff } from "@/Helpers/Api/StaffApi";
 
 const StaffDropdown = ({ staffId, setStaffId }) => {
     const [options, setOptions] = useState([]);
@@ -21,9 +22,9 @@ const StaffDropdown = ({ staffId, setStaffId }) => {
     const fetchStaffs = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(
-                `https://cleaning-co.test/api/web/staff?full_name[like]=${inputValue}`,HEADER
-            );
+            const response = searchStaff({
+                "full_name[like]": inputValue,
+            });
             const staffs = response.data.data.map((staff) => ({
                 value: staff.id,
                 label: staff.full_name,
@@ -39,9 +40,7 @@ const StaffDropdown = ({ staffId, setStaffId }) => {
     const fetchInitialStaff = async (id) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(
-                `https://cleaning-co.test/api/web/staff/${id}`,HEADER
-            );
+            const response = await getStaffById(id);
             const staff = response.data.data;
             setOptions([{ value: staff.id, label: staff.full_name }]);
         } catch (error) {

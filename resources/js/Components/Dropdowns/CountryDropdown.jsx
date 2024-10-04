@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
+import { searchCountries } from "@/Helpers/Api/CountryApi";
 
 const CountryDropdown = ({ countryId, setCountryId }) => {
     const [options, setOptions] = useState([]);
@@ -15,9 +16,9 @@ const CountryDropdown = ({ countryId, setCountryId }) => {
     const fetchCountries = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(
-                `https://cleaning-co.test/api/location/countries?country_name[like]=${inputValue}`
-            );
+            const response = await searchCountries({
+                "country_name[like]" : inputValue,
+            });
             const countries = response.data.data.map((country) => ({
                 value: country.id,
                 label: country.country_name,

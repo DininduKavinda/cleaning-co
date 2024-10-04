@@ -4,7 +4,6 @@ import { BASE_URL, HEADER, IncludeAll } from "./Api";
 
 const STAFFS_URL = BASE_URL + "web/staff";
 
-
 //Staffs APi Services
 
 export const getStaffs = (page, url) =>
@@ -21,3 +20,6 @@ export const updateStaff = (staffId, staffData) =>
 
 export const deleteStaff = (staffId) =>
     axios.delete(`${STAFFS_URL}/${staffId}`, HEADER2);
+
+export const searchStaff = (params) =>
+    axios.get(`${STAFF_URL}?${IncludeAll}`, { params }, HEADER);

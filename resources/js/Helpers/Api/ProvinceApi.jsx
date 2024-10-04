@@ -18,3 +18,5 @@ export const updateProvince = (provinceId, provinceData) =>
     axios.put(`${PROVINCES_URL}/${provinceId}`, provinceData, HEADER);
 
 export const deleteProvince = (provinceId) => axios.delete(`${PROVINCES_URL}/${provinceId}`, HEADER);
+
+export const searchProvinces = (params) => axios.get(`${PROVINCES_URL}?${IncludeAll}`, { params }, HEADER);

@@ -16,3 +16,5 @@ export const updateDistrict = (districtId, districtData) =>
     axios.put(`${DISTRICTS_URL}/${districtId}`, districtData, HEADER);
 
 export const deleteDistrict = (districtId) => axios.delete(`${DISTRICTS_URL}/${districtId}`, HEADER);
+
+export const searchDistricts = (params) => axios.get(`${DISTRICTS_URL}?${IncludeAll}`, { params }, HEADER);
