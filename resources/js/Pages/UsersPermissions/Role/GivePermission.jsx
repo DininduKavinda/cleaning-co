@@ -3,13 +3,14 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { Link, usePage } from "@inertiajs/react";
 import {HEADER} from "@/Helpers/Api/Api";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function GivePermission({ auth }) {
     const page_info = usePage().props;
     const roleId = page_info.role?.id;
     const [permissions, setPermissions] = useState([]);
     const [checkedPermissions, setCheckedPermissions] = useState([]);
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     useEffect(() => {
         if (roleId) {
             fetchPermissions();
@@ -80,12 +81,27 @@ function GivePermission({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(
+
+        const    response =  await axios.post(
                 `https://cleaning-co.test/api/admin/givePermissionToRole/${roleId}`,
                 {
                     permission: checkedPermissions,
                 } ,HEADER
             );
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
+            }
             alert("Permissions updated successfully!");
         } catch (error) {
             console.error("Error updating permissions:", error);
@@ -200,6 +216,7 @@ function GivePermission({ auth }) {
                                                 </Link>
                                             </div>
                                         </form>
+                                        {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                     </div>
                                 </div>
                             </div>

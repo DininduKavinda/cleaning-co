@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, router } from "@inertiajs/react";
 import { toast } from "react-toastify";
 import { deleteProvince } from "@/Helpers/Api/ProvinceApi";
-
+import Pagination from "@/Components/Pagination";
 function Table({ provinces, pagination, onPageChange, onDelete }) {
     const [expandedRows, setExpandedRows] = useState({});
 
@@ -12,63 +12,7 @@ function Table({ provinces, pagination, onPageChange, onDelete }) {
             [id]: !prevState[id],
         }));
     };
-    const renderPagination = () => {
-        const pages = [];
-        for (let i = 1; i <= pagination.lastPage; i++) {
-            pages.push(
-                <li
-                    key={i}
-                    className={`page-item ${
-                        pagination.currentPage === i ? "active" : ""
-                    }`}
-                >
-                    <a
-                        href="javascript:void(0)"
-                        className="page-link rounded-circle"
-                        onClick={() => onPageChange(i)}
-                    >
-                        {i}
-                    </a>
-                </li>
-            );
-        }
-
-        return (
-            <nav aria-label="Page navigation example">
-                <ul className="pagination pagination-secondary gap-2 justify-content-center">
-                    <li className="page-item">
-                        <a
-                            className="page-link rounded-circle"
-                            href="javascript:void(0)"
-                            aria-label="Previous"
-                            onClick={() =>
-                                onPageChange(pagination.currentPage - 1)
-                            }
-                            disabled={pagination.currentPage === 1}
-                        >
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    {pages}
-                    <li className="page-item">
-                        <a
-                            className="page-link rounded-circle"
-                            href="javascript:void(0)"
-                            aria-label="Next"
-                            onClick={() =>
-                                onPageChange(pagination.currentPage + 1)
-                            }
-                            disabled={
-                                pagination.currentPage === pagination.lastPage
-                            }
-                        >
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        );
-    };
+    
 
     const handleDelete = (id) => {
         if (confirm("Are you sure you want to delete this province?")) {
@@ -188,7 +132,11 @@ function Table({ provinces, pagination, onPageChange, onDelete }) {
                         </tbody>
                     </table>
                     <br />
-                    {renderPagination()}
+                    <Pagination
+                        currentPage={pagination.currentPage}
+                        lastPage={pagination.lastPage}
+                        onPageChange={onPageChange}
+                    />
                 </div>
             </div>
         </div>

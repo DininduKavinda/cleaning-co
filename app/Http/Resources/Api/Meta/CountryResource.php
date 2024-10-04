@@ -23,8 +23,8 @@ class CountryResource extends JsonResource
             'iso_code' => $this->iso_code,
             'phone_code' => $this->phone_code,
             'provinces' => ProvinceResource::collection($this->whenLoaded('provinces')),
-            'staff' => StaffResource::collection($this->whenLoaded('staff')),
-            'clients' => ClientResource::collection($this->whenLoaded('clients')),
+            // 'staff' => StaffResource::collection($this->whenLoaded('staff')),
+            // 'clients' => ClientResource::collection($this->whenLoaded('clients')),
         ];
     }
 }

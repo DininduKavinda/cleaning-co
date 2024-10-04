@@ -7,10 +7,10 @@ import {
     getClientById,
     updateClient,
 } from "@/Helpers/Api/ClientApi";
-
+import BootstrapToaster from "@/Components/BootstrapToaster";
 function ClientForm({ auth }) {
     const page_info = usePage().props;
-    const id = page_info.client?.id;
+    const id = page_info.client?.id; const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const [client, setClient] = useState({
         nic: "",
         name: "",
@@ -83,10 +83,25 @@ function ClientForm({ auth }) {
             formData.append(key, client[key]);
         });
         try {
+            let response;
             if (isEditing) {
-                const response = await updateClient(id, formData);
+                response = await updateClient(id, formData);
             } else {
-                await createClient(formData);
+                response = await createClient(formData);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving client data:", error);
@@ -145,7 +160,6 @@ function ClientForm({ auth }) {
                                                         src={imagePreview}
                                                     />
                                                 ) : (
-                                                    
                                                     <img
                                                         className="img-70 rounded-circle"
                                                         alt="Default"
@@ -336,6 +350,7 @@ function ClientForm({ auth }) {
                             </div>
                         </div>
                     </form>
+                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                 </div>
             </div>
         </AuthenticatedLayout>

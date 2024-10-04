@@ -7,13 +7,13 @@ import {
     getCityById,
     updateCity,
 } from "@/Helpers/Api/CityApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 import DistrictDropdown from "@/Components/DistrictDropdown";
 
 function CityForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.city?.id;
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const {
         data: city,
         setData: setCity,
@@ -62,10 +62,25 @@ function CityForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateCity(id, city);
+              response =   await updateCity(id, city);
             } else {
-                await createCity(city);
+               response = await createCity(city);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving city data:", error);
@@ -163,6 +178,7 @@ function CityForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>

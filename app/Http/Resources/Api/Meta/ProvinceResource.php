@@ -24,8 +24,8 @@ class ProvinceResource extends JsonResource
             'country_id' => $this->country_id,
             'districts' => DistrictResource::collection($this->whenLoaded('districts')),
             'country' => new CountryResource($this->whenLoaded('country')),
-            'staff' => StaffResource::collection($this->whenLoaded('staff')),
-            'clients' => ClientResource::collection($this->whenLoaded('clients')),
+            // 'staff' => StaffResource::collection($this->whenLoaded('staff')),
+            // 'clients' => ClientResource::collection($this->whenLoaded('clients')),
         ];
     }
 }

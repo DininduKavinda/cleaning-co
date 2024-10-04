@@ -3,11 +3,11 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createLevel, getLevelById, updateLevel } from "@/Helpers/Api/LevelApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function LevelForm({ auth }) {
     const page_info = usePage().props;
-    const id = page_info.level?.id;
+    const id = page_info.level?.id; const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
 
     const {
         data: level,
@@ -50,10 +50,25 @@ function LevelForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateLevel(id, level);
+               response =  await updateLevel(id, level);
             } else {
-                await createLevel(level);
+               response = await createLevel(level);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving level data:", error);
@@ -136,6 +151,7 @@ function LevelForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>

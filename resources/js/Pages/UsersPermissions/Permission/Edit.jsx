@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage } from "@inertiajs/react";
 import { createPermission, getPermissionById, updatePermission } from "@/Helpers/Api/PermissionApi";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function PermissionForm({ auth }) {
     const page_info = usePage().props;
@@ -11,7 +12,7 @@ function PermissionForm({ auth }) {
         name: ""
     });
     const [isEditing, setIsEditing] = useState(false);
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     useEffect(() => {
         if (id) {
             setIsEditing(true);
@@ -40,10 +41,25 @@ function PermissionForm({ auth }) {
         e.preventDefault();
         // console.log(permission);
         try {
+            let response;
             if (isEditing) {
-                await updatePermission(id, permission);
+               response= await updatePermission(id, permission);
             } else {
-                await createPermission(permission);
+               response= await createPermission(permission);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
             // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {
@@ -113,6 +129,7 @@ function PermissionForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>

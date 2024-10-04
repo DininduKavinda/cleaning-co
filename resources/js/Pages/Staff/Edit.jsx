@@ -5,10 +5,11 @@ import LocationForm from "@/Components/LocationForm";
 import LevelDropdown from "@/Components/LevelDropdown";
 import DepartmentDropdown from "@/Components/DepartmentDropdown";
 import { createStaff, getStaffById, updateStaff } from "@/Helpers/Api/StaffApi";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function StaffForm({ auth }) {
     const page_info = usePage().props;
-    const id = page_info.staff?.id;
+    const id = page_info.staff?.id; const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const [staff, setStaff] = useState({
         level_id: "",
         name: "",
@@ -97,10 +98,25 @@ function StaffForm({ auth }) {
         });
         console.log(staff);
         try {
+            let response;
             if (isEditing) {
-                await updateStaff(id, staff);
+                response=await updateStaff(id, staff);
             } else {
-                await createStaff(formData);
+                response=await createStaff(formData);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving staff data:", error);
@@ -466,6 +482,7 @@ function StaffForm({ auth }) {
                             </div>
                         </div>
                     </form>
+                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                 </div>
             </div>
         </AuthenticatedLayout>

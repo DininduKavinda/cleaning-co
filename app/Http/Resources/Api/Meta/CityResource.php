@@ -24,8 +24,8 @@ class CityResource extends JsonResource
             'name_ta' => $this->name_ta,
             'postcode' => $this->postcode,
             'district' => new ProvinceResource($this->whenLoaded('district')),
-            'staff' => StaffResource::collection($this->whenLoaded('staff')),
-            'clients' => ClientResource::collection($this->whenLoaded('clients')),
+            // 'staff' => StaffResource::collection($this->whenLoaded('staff')),
+            // 'clients' => ClientResource::collection($this->whenLoaded('clients')),
         ];
     }
 }

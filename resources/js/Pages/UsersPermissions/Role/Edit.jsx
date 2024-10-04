@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { router, usePage } from "@inertiajs/react";
 import { createRole, getRoleById, updateRole } from "@/Helpers/Api/RoleApi";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function RoleForm({ auth }) {
     const page_info = usePage().props;
@@ -12,7 +13,7 @@ function RoleForm({ auth }) {
         name: "",
     });
     const [isEditing, setIsEditing] = useState(false);
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     useEffect(() => {
         if (id) {
             setIsEditing(true);
@@ -40,13 +41,28 @@ function RoleForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateRole(id, role).then(
+               response= await updateRole(id, role).then(
                     router.visit(route("roles.index"))
                 );
 
             } else {
-                await createRole(role);
+               response= await createRole(role);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
             // Handle success (e.g., redirect, show a message, etc.)
         } catch (error) {
@@ -115,10 +131,11 @@ function RoleForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>
-                        {/* Additional content can go here */}
+
                     </div>
                 </div>
             </div>

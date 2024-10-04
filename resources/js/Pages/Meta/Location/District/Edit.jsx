@@ -7,13 +7,13 @@ import {
     getDistrictById,
     updateDistrict,
 } from "@/Helpers/Api/DistrictApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 import ProvinceDropdown from "@/Components/ProvinceDropdown";
 
 function DistrictForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.district?.id;
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const {
         data: district,
         setData: setDistrict,
@@ -62,10 +62,25 @@ function DistrictForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateDistrict(id, district);
+               response =  await updateDistrict(id, district);
             } else {
-                await createDistrict(district);
+               response =  await createDistrict(district);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving district data:", error);
@@ -163,6 +178,7 @@ function DistrictForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>

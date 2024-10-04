@@ -3,12 +3,12 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createCountry, getCountryById, updateCountry } from "@/Helpers/Api/CountryApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function CountryForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.country?.id;
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const {
         data: country,
         setData: setCountry,
@@ -53,10 +53,25 @@ function CountryForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateCountry(id, country);
+               response = await updateCountry(id, country);
             } else {
-                await createCountry(country);
+              response =  await createCountry(country);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving country data:", error);
@@ -162,6 +177,7 @@ function CountryForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>

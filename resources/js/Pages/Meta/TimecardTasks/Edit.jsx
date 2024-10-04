@@ -6,11 +6,12 @@ import {
     getTimecardTaskById,
     updateTimecardTask,
 } from "@/Helpers/Api/TimecardTaskApi";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function TimecardTaskForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.timecardTask?.id;
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const {
         data: timecardTask,
         setData: setTimecardTask,
@@ -58,10 +59,25 @@ function TimecardTaskForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateTimecardTask(id, timecardTask);
+              response =  await updateTimecardTask(id, timecardTask);
             } else {
-                await createTimecardTask(timecardTask);
+              response =  await createTimecardTask(timecardTask);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving timecardTask data:", error);
@@ -202,6 +218,7 @@ function TimecardTaskForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>
@@ -210,6 +227,6 @@ function TimecardTaskForm({ auth }) {
             </div>
         </AuthenticatedLayout>
     );
-}
+}   {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}s
 
 export default TimecardTaskForm;

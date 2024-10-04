@@ -3,12 +3,12 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createItemType, getItemTypeById, updateItemType } from "@/Helpers/Api/ItemTypeApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import BootstrapToaster  from "@/Components/BootstrapToaster";
 
 function ItemTypeForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.itemType?.id;
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const {
         data: itemType,
         setData: setItemType,
@@ -50,10 +50,25 @@ function ItemTypeForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateItemType(id, itemType);
+              response =  await updateItemType(id, itemType);
             } else {
-                await createItemType(itemType);
+              response =  await createItemType(itemType);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving itemType data:", error);
@@ -136,6 +151,7 @@ function ItemTypeForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>

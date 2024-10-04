@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
-import { createDepartment, getDepartmentById, updateDepartment } from "@/Helpers/Api/DepartmentApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import {
+    createDepartment,
+    getDepartmentById,
+    updateDepartment,
+} from "@/Helpers/Api/DepartmentApi";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 
 function DepartmentForm({ auth }) {
     const page_info = usePage().props;
-    const id = page_info.department?.id;
+    const id = page_info.department?.id; const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
 
     const {
         data: department,
@@ -17,7 +21,6 @@ function DepartmentForm({ auth }) {
         reset,
     } = useForm({
         name: "",
-
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -35,7 +38,6 @@ function DepartmentForm({ auth }) {
             const departmentData = response.data.data;
             setDepartment({
                 name: departmentData.name,
-
             });
         } catch (error) {
             console.error("Error fetching department data:", error);
@@ -50,17 +52,30 @@ function DepartmentForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateDepartment(id, department);
+                response = await updateDepartment(id, department);
             } else {
-                await createDepartment(department);
+                response = await createDepartment(department);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving department data:", error);
         }
     };
-
-
 
     return (
         <AuthenticatedLayout
@@ -76,7 +91,9 @@ function DepartmentForm({ auth }) {
                     <div className="row">
                         <div className="col-sm-6 col-12">
                             <h2>
-                                {isEditing ? "Edit Department" : "Create Department"}
+                                {isEditing
+                                    ? "Edit Department"
+                                    : "Create Department"}
                             </h2>
                         </div>
                         <div className="col-sm-6 col-12">
@@ -136,6 +153,13 @@ function DepartmentForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && (
+                                        <BootstrapToaster
+                                            type={toastData.type}
+                                            message={toastData.message}
+                                            title={toastData.title}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>

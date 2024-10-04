@@ -7,13 +7,17 @@ import {
     getProvinceById,
     updateProvince,
 } from "@/Helpers/Api/ProvinceApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 import CountryDropdown from "@/Components/CountryDropdown";
 
 function ProvinceForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.province?.id;
-
+    const [toastData, setToastData] = useState({
+        type: "",
+        message: "",
+        title: "",
+    });
     const {
         data: province,
         setData: setProvince,
@@ -62,10 +66,24 @@ function ProvinceForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateProvince(id, province);
+                response = await updateProvince(id, province);
             } else {
-                await createProvince(province);
+                response = await createProvince(province);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            } else {
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving province data:", error);
@@ -163,6 +181,13 @@ function ProvinceForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && (
+                                        <BootstrapToaster
+                                            type={toastData.type}
+                                            message={toastData.message}
+                                            title={toastData.title}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>

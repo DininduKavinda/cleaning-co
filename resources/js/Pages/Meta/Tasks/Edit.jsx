@@ -3,12 +3,12 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createTask, getTaskById, updateTask } from "@/Helpers/Api/TaskApi";
-import { showToast } from "@/Components/BootstrapToaster";
+import BootstrapToaster  from "@/Components/BootstrapToaster";
 
 function TaskForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.task?.id;
-
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
     const {
         data: task,
         setData: setTask,
@@ -50,10 +50,25 @@ function TaskForm({ auth }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            let response;
             if (isEditing) {
-                await updateTask(id, task);
+              response =  await updateTask(id, task);
             } else {
-                await createTask(task);
+              response =  await createTask(task);
+            }
+            if (response.status === 201) {
+                setToastData({
+                    type: "success",
+                    message: "success.",
+                    title: "Success",
+                });
+            }
+            else{
+                setToastData({
+                    type: "error",
+                    message: response.data.message,
+                    title: "error",
+                });
             }
         } catch (error) {
             console.error("Error saving task data:", error);
@@ -136,6 +151,7 @@ function TaskForm({ auth }) {
                                             </button>
                                         </div>
                                     </form>
+                                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                 </div>
                             </div>
                         </div>
