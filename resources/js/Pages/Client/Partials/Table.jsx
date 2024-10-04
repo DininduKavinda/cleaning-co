@@ -2,10 +2,10 @@ import React from "react";
 import Table from "@/Components/Table";
 import { deleteClient } from "@/Helpers/Api/ClientApi";
 
-function ClientsTable({ clients, pagination, onPageChange }) {
-    const columns = ["Id", "Name", "NIC","Roles","Email","City","Active","Action"];
+function ClientTable({ clients, pagination, onPageChange }) {
+    const columns = ["Id", "Name", "NIC", "Roles", "Email","City", "Active", "Action"];
 
-    const columnData = ["id", "full_name","nic","roles.length > 0 ? client.roles.join(', ') : 'No Roles'" , "email","city.name_en","active ? 'Active' : 'Inactive'"];
+    const columnData = ["id", "full_name", "nic", "roles", "email","city.name_en", "active"];
 
     const actions = {
         show: "clients.show",
@@ -25,4 +25,4 @@ function ClientsTable({ clients, pagination, onPageChange }) {
     );
 }
 
-export default ClientsTable;
+export default ClientTable;
