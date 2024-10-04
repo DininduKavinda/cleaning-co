@@ -77,6 +77,8 @@
     <!-- scrollbar-->
     {{-- <script src="{{asset('theme/assets/js/scrollbar/simplebar.js')}}"></script>
     <script src="{{asset('theme/assets/js/scrollbar/custom.js')}}"></script> --}}
+      <!-- toasts-->
+    <script src="{{asset('theme/assets/js/toasts-custom.js')}}"></script>
     <!-- slick-->
     <script src="{{asset('theme/assets/js/slick/slick.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/slick/slick.js')}}"></script>

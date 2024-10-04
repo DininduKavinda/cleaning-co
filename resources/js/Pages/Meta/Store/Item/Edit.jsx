@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createItem, getItemById, updateItem } from "@/Helpers/Api/ItemApi";
 import ItemTypeDropdown from "@/Components/ItemTypeDropdown";
+import BootstrapToaster from "@/Components/BootstrapToaster";
 import { Inertia } from "@inertiajs/inertia";
 
 function ItemForm({ auth }) {
     const page_info = usePage().props;
     const id = page_info.item?.id;
-
-    const { data: item, setData: setItem, post, put } = useForm({
+    const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
+    const {
+        data: item,
+        setData: setItem,
+        post,
+        put,
+    } = useForm({
         name: "",
         item_type_id: "",
         price: "",
@@ -30,7 +35,7 @@ function ItemForm({ auth }) {
         try {
             const response = await getItemById(id);
             const itemData = response.data.data;
-            console.log("Fetched item data:", itemData);
+
             setItem({
                 name: itemData.name,
                 item_type_id: itemData.item_type_id,
@@ -56,17 +61,23 @@ function ItemForm({ auth }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
+            let response;
             if (isEditing) {
-                await updateItem(id, item);
+
+                response = await updateItem(id, item);
+
             } else {
-                await createItem(item);
+
+                response = await createItem(item);
+                
             }
-        
-            Inertia.visit(route('items.index'), {
-                data: { success: 'Item saved successfully!' }, 
-            });
-    
+
+            if (response.status === 201) {
+                setToastData({ type: "success", message: "success.", title: "Success" });
+                
+            }
         } catch (error) {
             console.error("Error saving item data:", error);
         }
@@ -115,7 +126,9 @@ function ItemForm({ auth }) {
                                     <div className="card-body">
                                         <form onSubmit={handleSubmit}>
                                             <div className="mb-3">
-                                                <label className="form-label">Item Name</label>
+                                                <label className="form-label">
+                                                    Item Name
+                                                </label>
                                                 <input
                                                     className="form-control"
                                                     name="name"
@@ -125,17 +138,24 @@ function ItemForm({ auth }) {
                                                 />
                                             </div>
                                             <div className="mb-3">
-                                                <label className="form-label">Select Item Type</label>
+                                                <label className="form-label">
+                                                    Select Item Type
+                                                </label>
                                                 <ItemTypeDropdown
                                                     value={item.item_type_id}
                                                     onChange={(value) =>
-                                                        handleLocationChange("item_type_id", value)
+                                                        handleLocationChange(
+                                                            "item_type_id",
+                                                            value
+                                                        )
                                                     }
                                                 />
                                             </div>
 
                                             <div className="mb-3">
-                                                <label className="form-label">Price</label>
+                                                <label className="form-label">
+                                                    Price
+                                                </label>
                                                 <input
                                                     className="form-control"
                                                     type="number"
@@ -153,10 +173,16 @@ function ItemForm({ auth }) {
                                                     name="active"
                                                     checked={item.active}
                                                     onChange={(e) =>
-                                                        setItem({ ...item, active: e.target.checked })
+                                                        setItem({
+                                                            ...item,
+                                                            active: e.target
+                                                                .checked,
+                                                        })
                                                     }
                                                 />
-                                               <label className=" px-4 form-label">Active </label>
+                                                <label className=" px-4 form-label">
+                                                    Active{" "}
+                                                </label>
                                             </div>
 
                                             <div className="form-footer">
@@ -164,10 +190,13 @@ function ItemForm({ auth }) {
                                                     className="btn btn-primary btn-block"
                                                     type="submit"
                                                 >
-                                                    {isEditing ? "Update Item" : "Create Item"}
+                                                    {isEditing
+                                                        ? "Update Item"
+                                                        : "Create Item"}
                                                 </button>
                                             </div>
                                         </form>
+                                        {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
                                     </div>
                                 </div>
                             </div>

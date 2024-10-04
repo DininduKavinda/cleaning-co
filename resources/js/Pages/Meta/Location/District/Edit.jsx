@@ -7,7 +7,7 @@ import {
     getDistrictById,
     updateDistrict,
 } from "@/Helpers/Api/DistrictApi";
-import { showToast } from "@/Components/Toastr";
+import { showToast } from "@/Components/BootstrapToaster";
 import ProvinceDropdown from "@/Components/ProvinceDropdown";
 
 function DistrictForm({ auth }) {

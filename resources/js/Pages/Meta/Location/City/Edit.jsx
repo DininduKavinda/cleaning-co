@@ -7,7 +7,7 @@ import {
     getCityById,
     updateCity,
 } from "@/Helpers/Api/CityApi";
-import { showToast } from "@/Components/Toastr";
+import { showToast } from "@/Components/BootstrapToaster";
 import DistrictDropdown from "@/Components/DistrictDropdown";
 
 function CityForm({ auth }) {

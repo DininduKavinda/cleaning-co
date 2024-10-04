@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { getUserById } from "@/Helpers/Api/UserApi";
-import { showToast } from "@/Components/Toastr";
+import { showToast } from "@/Components/BootstrapToaster";
 
 function UserForm({ auth }) {
     const page_info = usePage().props;

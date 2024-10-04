@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createDepartment, getDepartmentById, updateDepartment } from "@/Helpers/Api/DepartmentApi";
-import { showToast } from "@/Components/Toastr";
+import { showToast } from "@/Components/BootstrapToaster";
 
 function DepartmentForm({ auth }) {
     const page_info = usePage().props;

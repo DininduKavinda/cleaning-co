@@ -7,7 +7,7 @@ import {
     getProvinceById,
     updateProvince,
 } from "@/Helpers/Api/ProvinceApi";
-import { showToast } from "@/Components/Toastr";
+import { showToast } from "@/Components/BootstrapToaster";
 import CountryDropdown from "@/Components/CountryDropdown";
 
 function ProvinceForm({ auth }) {

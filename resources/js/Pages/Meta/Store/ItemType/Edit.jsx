@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createItemType, getItemTypeById, updateItemType } from "@/Helpers/Api/ItemTypeApi";
-import { showToast } from "@/Components/Toastr";
+import { showToast } from "@/Components/BootstrapToaster";
 
 function ItemTypeForm({ auth }) {
     const page_info = usePage().props;

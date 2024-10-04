@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import axios from "axios";
 import { usePage, useForm } from "@inertiajs/react";
 import { createCountry, getCountryById, updateCountry } from "@/Helpers/Api/CountryApi";
-import { showToast } from "@/Components/Toastr";
+import { showToast } from "@/Components/BootstrapToaster";
 
 function CountryForm({ auth }) {
     const page_info = usePage().props;
