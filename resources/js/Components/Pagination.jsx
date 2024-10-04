@@ -3,7 +3,16 @@ import React from "react";
 function Pagination({ currentPage, lastPage, onPageChange }) {
     const renderPagination = () => {
         const pages = [];
-        for (let i = 1; i <= lastPage; i++) {
+        const visiblePages = 5; 
+
+        let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
+        let endPage = Math.min(lastPage - 1, startPage + visiblePages - 1); 
+
+        if (endPage - startPage < visiblePages - 1) {
+            startPage = Math.max(1, endPage - visiblePages + 1);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
             pages.push(
                 <li
                     key={i}
@@ -17,6 +26,31 @@ function Pagination({ currentPage, lastPage, onPageChange }) {
                         onClick={() => onPageChange(i)}
                     >
                         {i}
+                    </a>
+                </li>
+            );
+        }
+
+     
+        if (endPage < lastPage - 1) {
+            pages.push(
+                <li key="ellipsis" className="page-item disabled">
+                    <span className="page-link">...</span>
+                </li>
+            );
+            pages.push(
+                <li
+                    key={lastPage}
+                    className={`page-item ${
+                        currentPage === lastPage ? "active" : ""
+                    }`}
+                >
+                    <a
+                        href="javascript:void(0)"
+                        className="page-link rounded-circle"
+                        onClick={() => onPageChange(lastPage)}
+                    >
+                        {lastPage}
                     </a>
                 </li>
             );
