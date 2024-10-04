@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getLevels } from "@/Helpers/Api/LevelApi";
 
 const TOKEN = localStorage.getItem("authToken");
 const HEADER = {
@@ -8,41 +9,41 @@ const HEADER = {
     },
 };
 
-function TaskDropdown({ value, onChange }) {
-    const [tasks, setTasks] = useState([]);
+function LevelDropdown({ value, onChange }) {
+    const [levels, setLevels] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchTasks = async () => {
+        const fetchLevels = async () => {
             try {
-                const response = await axios.get(`https://cleaning-co.test/api/common/tasks`,HEADER);
-                setTasks(response.data.data); // Assuming the API returns a list of tasks
+                const response = await getLevels();
+                setLevels(response.data.data);
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching tasks:", error);
+                console.error("Error fetching levels:", error);
                 setLoading(false);
             }
         };
 
-        fetchTasks();
+        fetchLevels();
     }, []);
 
     return (
         <select
             className="form-control"
+            name="level_id"
             value={value}
-            name="task_id"
             onChange={(e) => onChange(e.target.value)}
             disabled={loading}
         >
-            <option value="">Select Task</option>
-            {tasks.map((task) => (
-                <option key={task.id} value={task.id}>
-                    {task.name}
+            <option value="">Select Level</option>
+            {levels.map((level) => (
+                <option key={level.id} value={level.id}>
+                    {level.name}
                 </option>
             ))}
         </select>
     );
 }
 
-export default TaskDropdown;
+export default LevelDropdown;

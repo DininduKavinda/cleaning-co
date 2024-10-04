@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getDepartments } from "@/Helpers/Api/DepartmentApi";
 
 const TOKEN = localStorage.getItem("authToken");
 const HEADER = {
@@ -15,7 +16,7 @@ function DepartmentDropdown({ value, onChange }) {
     useEffect(() => {
         const fetchDepartments = async () => {
             try {
-                const response = await axios.get(`https://cleaning-co.test/api/common/departments`,HEADER);
+                const response = await getDepartments();
                 setDepartments(response.data.data); // Assuming the API returns a list of departments
                 setLoading(false);
             } catch (error) {

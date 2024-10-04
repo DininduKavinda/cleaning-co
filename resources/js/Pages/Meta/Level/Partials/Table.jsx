@@ -12,6 +12,9 @@ function LevelsTable({ levels, pagination, onPageChange }) {
         delete: deleteLevel,
     };
 
+
+    console.log(levels);
+
     return (
         <Table
             data={levels}

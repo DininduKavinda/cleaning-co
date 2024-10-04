@@ -20,7 +20,7 @@ function SearchBox({ onSearch }) {
                         </div>
                         <div className="col-md-6 d-md-block d-none">
                             <div className="form-group mb-0 me-0"></div>
-                            <Link className="btn btn-primary d-flex align-items-center" href={route('levels.create')}>
+                            <Link className="btn btn-primary d-flex align-items-center" href={route('departments.create')}>
                                 {" "}
                                 <i data-feather="plus-square"></i>Create New{" "}
                             </Link>

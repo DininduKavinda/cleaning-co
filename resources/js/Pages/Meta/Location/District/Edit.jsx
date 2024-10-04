@@ -8,7 +8,7 @@ import {
     updateDistrict,
 } from "@/Helpers/Api/DistrictApi";
 import BootstrapToaster from "@/Components/BootstrapToaster";
-import ProvinceDropdown from "@/Components/ProvinceDropdown";
+import ProvinceDropdown from "@/Components/Dropdowns/ProvinceDropdown";
 
 function DistrictForm({ auth }) {
     const page_info = usePage().props;

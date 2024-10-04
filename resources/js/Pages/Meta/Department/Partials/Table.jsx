@@ -3,7 +3,8 @@ import Table from "@/Components/Table";
 import { deleteDepartment } from "@/Helpers/Api/DepartmentApi";
 
 function DepartmentsTable({ departments, pagination, onPageChange }) {
-    const columns = ["Id", "Department Name", "Actions"];
+    const columns = ["Id", "Department Name","status", "Actions"];
+    const columnData = ["id", "name", "active"];
     const actions = {
         show: "departments.show", 
         delete: deleteDepartment 
@@ -13,6 +14,7 @@ function DepartmentsTable({ departments, pagination, onPageChange }) {
         <Table
             data={departments}
             columns={columns}
+            columnData={columnData}
             actions={actions}
             pagination={pagination}
             onPageChange={onPageChange}

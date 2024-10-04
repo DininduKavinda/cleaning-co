@@ -1,4 +1,4 @@
-import ItemTypeDropdown from "@/Components/ItemTypeDropdown";
+import ItemTypeDropdown from "@/Components/Dropdowns/ItemTypeDropdown";
 import { Link } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
 

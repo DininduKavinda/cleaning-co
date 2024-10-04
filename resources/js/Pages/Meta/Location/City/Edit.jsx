@@ -8,7 +8,7 @@ import {
     updateCity,
 } from "@/Helpers/Api/CityApi";
 import BootstrapToaster from "@/Components/BootstrapToaster";
-import DistrictDropdown from "@/Components/DistrictDropdown";
+import DistrictDropdown from "@/Components/Dropdowns/DistrictDropdown";
 
 function CityForm({ auth }) {
     const page_info = usePage().props;

@@ -1,9 +1,9 @@
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
-import CountryDropdown from "@/Components/CountryDropdown";
-import ProvinceDropdown from "@/Components/ProvinceDropdown";
-import DistrictDropdown from "@/Components/DistrictDropdown";
-import CityDropdown from "@/Components/CityDropdown";
+import CountryDropdown from "@/Components/Dropdowns/CountryDropdown";
+import ProvinceDropdown from "@/Components/Dropdowns/ProvinceDropdown";
+import DistrictDropdown from "@/Components/Dropdowns/DistrictDropdown";
+import CityDropdown from "@/Components/Dropdowns/CityDropdown";
 
 function SearchBox({
     onSearch,

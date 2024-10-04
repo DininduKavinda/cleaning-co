@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import CountryDropdown from "./CountryDropdown";
-import ProvinceDropdown from "./ProvinceDropdown";
-import DistrictDropdown from "./DistrictDropdown";
-import CityDropdown from "./CityDropdown";
+import CountryDropdown from "./Dropdowns/CountryDropdown";
+import ProvinceDropdown from "./Dropdowns/ProvinceDropdown";
+import DistrictDropdown from "./Dropdowns/DistrictDropdown";
+import CityDropdown from "./Dropdowns/CityDropdown";
 
 const LocationForm = ({ client, setClient }) => {
     const { country_id, province_id, district_id, city_id } = client;

@@ -8,7 +8,7 @@ import {
     updateProvince,
 } from "@/Helpers/Api/ProvinceApi";
 import BootstrapToaster from "@/Components/BootstrapToaster";
-import CountryDropdown from "@/Components/CountryDropdown";
+import CountryDropdown from "@/Components/Dropdowns/CountryDropdown";
 
 function ProvinceForm({ auth }) {
     const page_info = usePage().props;

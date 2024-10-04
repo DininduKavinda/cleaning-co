@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { usePage } from "@inertiajs/react";
 import LocationForm from "@/Components/LocationForm";
-import LevelDropdown from "@/Components/LevelDropdown";
-import DepartmentDropdown from "@/Components/DepartmentDropdown";
+import LevelDropdown from "@/Components/Dropdowns/LevelDropdown";
+import DepartmentDropdown from "@/Components/Dropdowns/DepartmentDropdown";
 import { createStaff, getStaffById, updateStaff } from "@/Helpers/Api/StaffApi";
 import BootstrapToaster from "@/Components/BootstrapToaster";
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getTasks } from "@/Helpers/Api/TaskApi";
 
 const TOKEN = localStorage.getItem("authToken");
 const HEADER = {
@@ -8,44 +9,41 @@ const HEADER = {
     },
 };
 
-function LevelDropdown({ value, onChange }) {
-    const [levels, setLevels] = useState([]);
+function TaskDropdown({ value, onChange }) {
+    const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchLevels = async () => {
+        const fetchTasks = async () => {
             try {
-                const response = await axios.get(
-                    `https://cleaning-co.test/api/common/levels`,
-                    HEADER
-                );
-                setLevels(response.data.data);
+                const response = await getTasks();
+                setTasks(response.data.data); // Assuming the API returns a list of tasks
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching levels:", error);
+                console.error("Error fetching tasks:", error);
                 setLoading(false);
             }
         };
 
-        fetchLevels();
+        fetchTasks();
     }, []);
 
     return (
         <select
             className="form-control"
-            name="level_id"
             value={value}
+            name="task_id"
             onChange={(e) => onChange(e.target.value)}
             disabled={loading}
         >
-            <option value="">Select Level</option>
-            {levels.map((level) => (
-                <option key={level.id} value={level.id}>
-                    {level.name}
+            <option value="">Select Task</option>
+            {tasks.map((task) => (
+                <option key={task.id} value={task.id}>
+                    {task.name}
                 </option>
             ))}
         </select>
     );
 }
 
-export default LevelDropdown;
+export default TaskDropdown;

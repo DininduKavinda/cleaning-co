@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { usePage, useForm } from "@inertiajs/react";
 import { createItem, getItemById, updateItem } from "@/Helpers/Api/ItemApi";
-import ItemTypeDropdown from "@/Components/ItemTypeDropdown";
+import ItemTypeDropdown from "@/Components/Dropdowns/ItemTypeDropdown";
 import BootstrapToaster from "@/Components/BootstrapToaster";
 import { Inertia } from "@inertiajs/inertia";
 

@@ -1,9 +1,9 @@
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
-import TaskDropdown from "@/Components/TaskDropdown";
-import ClientDropdown from "@/Components/ClientDropdown";
-import StaffDropdown from "@/Components/StaffDropdown";
-import Approved_byDropdown from "@/Components/StaffDropdown";
+import TaskDropdown from "@/Components/Dropdowns/TaskDropdown";
+import ClientDropdown from "@/Components/Dropdowns/ClientDropdown";
+import StaffDropdown from "@/Components/Dropdowns/StaffDropdown";
+import Approved_byDropdown from "@/Components/Dropdowns/StaffDropdown";
 
 function SearchBox({
     onSearch,

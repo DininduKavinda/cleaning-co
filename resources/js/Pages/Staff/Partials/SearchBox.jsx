@@ -1,11 +1,11 @@
 import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
-import LevelDropdown from "@/Components/LevelDropdown";
-import CountryDropdown from "@/Components/CountryDropdown";
-import ProvinceDropdown from "@/Components/ProvinceDropdown";
-import DistrictDropdown from "@/Components/DistrictDropdown";
-import CityDropdown from "@/Components/CityDropdown";
-import DepartmentDropdown from "@/Components/DepartmentDropdown"; // Assuming you have this component
+import LevelDropdown from "@/Components/Dropdowns/LevelDropdown";
+import CountryDropdown from "@/Components/Dropdowns/CountryDropdown";
+import ProvinceDropdown from "@/Components/Dropdowns/ProvinceDropdown";
+import DistrictDropdown from "@/Components/Dropdowns/DistrictDropdown";
+import CityDropdown from "@/Components/Dropdowns/CityDropdown";
+import DepartmentDropdown from "@/Components/Dropdowns/DepartmentDropdown"; // Assuming you have this component
 
 function SearchBox({
     onLevelSearch,

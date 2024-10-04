@@ -1,4 +1,4 @@
-import ProvinceDropdown from "@/Components/ProvinceDropdown";
+import ProvinceDropdown from "@/Components/Dropdowns/ProvinceDropdown";
 import { Link } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
 

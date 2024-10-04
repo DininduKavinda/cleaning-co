@@ -37,12 +37,12 @@ class User extends Authenticatable
 
     public function clients()
     {
-        return $this->belongsTo(Client::class, 'reference_id')->where('user_type_id', 1);
+        return $this->belongsTo(Client::class, 'reference_id')->where('user_type_id', "=", 1);
     }
 
     public function staffs()
     {
-        return $this->belongsTo(Staff::class, 'reference_id')->where('user_type_id', 2);
+        return $this->belongsTo(Staff::class, 'reference_id')->where('user_type_id', "=", 2);
     }
 
     /**
