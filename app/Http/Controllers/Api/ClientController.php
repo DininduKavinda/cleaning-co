@@ -61,54 +61,30 @@ class ClientController extends Controller implements HasMiddleware
      * Store a newly created resource in storage.
      */
     public function store(StoreClientRequest $request)
-    {
-        $validatedData = $request->validated();
-        $client = new ClientResource(Client::create([
-            'full_name' => $validatedData['full_name'],
-            'nic' => $validatedData['nic'],
-            'mobile' => $validatedData['mobile'],
-            'phone' => $validatedData['phone'],
-            'address' => $validatedData['address'],
-            'city_id' => $validatedData['city_id'],
-            'district_id' => $validatedData['district_id'],
-            'province_id' => $validatedData['province_id'],
-            'country_id' => $validatedData['country_id'],
-            'active' => $validatedData['active'],
-        ]));
+{
+    $validatedData = $request->validated();
 
-        if ($client) {
-            if ($request->hasFile('image')) {
-                $imageName = time().'.'.$request->image->getClientOriginalExtension();
-                $request->image->move('img/profile/client', $imageName);
-                $validatedData['image'] = 'img/profile/client'.$imageName;
-            } else {
-                $validatedData['image'] = null;
-            }
-            $user = User::create([
-                'reference_id' => $client->id,
-                'user_type_id' => 1,
-                'name' => $validatedData['name'],
-                'email' => $validatedData['email'],
-                'image' => $validatedData['image'],
-                'password' => bcrypt($validatedData['password']),
-                'last_login' => $validatedData['last_login'],
-                'active' => $validatedData['active'],
-            ]);
-            auth()->shouldUse('web');
-            $user->syncRoles(['user']);
-            if ($user) {
-                $message = 'Client Creaeted Successfully';
-            } else {
-                $message = 'Error Occured When Creating User';
-            }
+    $client = new ClientResource(Client::create($validatedData));
+
+    if ($client) {
+        $type = 1;
+        
+        $user = (new User)->createUser($client, $validatedData, $request, $type); // Call createUser method
+
+        if ($user) {
+            $message = 'Client Created Successfully';
         } else {
-            $message = 'Error Occured When Creating Client';
+            $message = 'Error Occurred When Creating User';
         }
-
-        return response()->json([
-            'message' => $message,
-        ]);
+    } else {
+        $message = 'Error Occurred When Creating Client';
     }
+
+    return response()->json([
+        'message' => $message,
+    ]);
+}
+
 
     /**
      * Display the specified resource.

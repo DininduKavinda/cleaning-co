@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Module\Timecard;
 use Illuminate\Database\Seeder;
 
 class TimecardSeeder extends Seeder
@@ -11,6 +12,6 @@ class TimecardSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Timecard::factory()->count(200)->create();
     }
 }
