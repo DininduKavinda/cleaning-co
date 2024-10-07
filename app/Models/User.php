@@ -74,30 +74,36 @@ class User extends Authenticatable
     }
 
     public function createUser($user, $validatedData, $request, $type)
-{
-    if ($request->hasFile('image')) {
-        $imageName = time().'.'.$request->image->getClientOriginalExtension();
-        $request->image->move('img/profile/client', $imageName);
-        $validatedData['image'] = 'img/profile/client/'.$imageName;
-    } else {
-        $validatedData['image'] = null;
+    {
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move('img/profile/client', $imageName);
+            $validatedData['image'] = 'img/profile/client/' . $imageName;
+        } else {
+            $validatedData['image'] = null;
+        }
+
+        $user = self::create([
+            'reference_id' => $user->id,
+            'user_type_id' => $type,
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'image' => $validatedData['image'],
+            'password' => bcrypt($validatedData['password']),
+            'last_login' => $validatedData['last_login'],
+            'active' => $validatedData['active'],
+        ]);
+
+        if($type == 1){
+            $role = 'user';
+        }else{
+            $role = 'staff';
+        }
+
+        auth()->shouldUse('web');
+        $user->syncRoles([$role]);
+
+        return $user;
     }
-
-    $user = self::create([
-        'reference_id' => $user->id,
-        'user_type_id' => $type,  
-        'name' => $validatedData['name'],
-        'email' => $validatedData['email'],
-        'image' => $validatedData['image'],
-        'password' => bcrypt($validatedData['password']),
-        'last_login' => $validatedData['last_login'],
-        'active' => $validatedData['active'],
-    ]);
-
-    auth()->shouldUse('web'); 
-    $user->syncRoles(['user']); 
-
-    return $user;
-}
-
+    
 }
