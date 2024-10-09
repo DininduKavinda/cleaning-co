@@ -227,6 +227,6 @@ function TimecardTaskForm({ auth }) {
             </div>
         </AuthenticatedLayout>
     );
-}   {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}s
+}
 
 export default TimecardTaskForm;
