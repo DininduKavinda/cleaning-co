@@ -36,12 +36,12 @@ class StaffFactory extends Factory
             'mobile'         => $this->faker->phoneNumber(),
             'phone'          => $this->faker->phoneNumber(),
             'civil_status'   => $this->faker->randomElement(['Single', 'Married', 'Divorced', 'Widowed']),
-            'level_id'       => Level::factory(),
+            'level_id'       => Level::inRandomOrder()->first()->id,
             'country_id'  => Country::inRandomOrder()->first()->id,
             'province_id' => Province::inRandomOrder()->first()->id,
             'district_id' => District::inRandomOrder()->first()->id,
             'city_id'     => City::inRandomOrder()->first()->id,
-            'department_id'  => Department::factory(),
+            'department_id'  => Department::inRandomOrder()->first()->id,
             'active'         => $this->faker->boolean(90),
         ];
     }

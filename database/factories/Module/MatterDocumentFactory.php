@@ -22,12 +22,12 @@ class MatterDocumentFactory extends Factory
         return [
             'document'   => $this->faker->word() . '.pdf',
             'file_name'  => $this->faker->lexify('document_????.pdf'),
-            'status'     => $this->faker->numberBetween(1, 3), 
+            'status'     => $this->faker->numberBetween(1, 3),
             'notes'      => $this->faker->sentence(),
             'active'     => $this->faker->boolean(90),
-            'matter_id'  => Matter::factory(),
-            'client_id'  => Client::factory(),
-            'staff_id'   =>  Staff::factory(),
+            'matter_id'  => Matter::inRandomOrder()->first()->id,
+            'client_id'  => Client::inRandomOrder()->first()->id,
+            'staff_id'   =>  Staff::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -31,11 +31,11 @@ class MatterFactory extends Factory
             'map_longitude'   => $this->faker->longitude(),
             'status'          => $this->faker->numberBetween(1, 5),
             'active'          => $this->faker->boolean(90),
-            'task_id'         => Task::factory(),
-            'client_id'       => Client::factory(),
-            'staff_id'        => Staff::factory(),
-            'approved_by'     => Staff::factory(),
-            'department_id'   => Department::factory(),
+            'task_id'         => Task::inRandomOrder()->first()->id,
+            'client_id'       => Client::inRandomOrder()->first()->id,
+            'staff_id'        => Staff::inRandomOrder()->first()->id,
+            'approved_by'     => Staff::inRandomOrder()->first()->id,
+            'department_id'   => Department::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -30,22 +30,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'root@admin.com',
             'password' => '1234',
         ]);
-
-        $this->call([
-            CountrySeeder::class,
-            ProvinceSeeder::class,
-            DistrictSeeder::class,
-            CitySeeder::class,
-            UserRolePermissionSeeder::class,
-            UserTypeSeeder::class,
-            ClientSeeder::class,
-            StaffSeeder::class,
-            MatterSeeder::class,
-            MatterAccessSeeder::class,
-            MatterDocumentSeeder::class,
-            TimecardSeeder::class,
-        ]);
-
         // Seed departments
         Department::factory()->count(10)->create();
 
@@ -63,5 +47,19 @@ class DatabaseSeeder extends Seeder
             ->hasItems(5)
             ->count(10)
             ->create();
+        $this->call([
+            CountrySeeder::class,
+            ProvinceSeeder::class,
+            DistrictSeeder::class,
+            CitySeeder::class,
+            UserRolePermissionSeeder::class,
+            UserTypeSeeder::class,
+            ClientSeeder::class,
+            StaffSeeder::class,
+            MatterSeeder::class,
+            MatterAccessSeeder::class,
+            MatterDocumentSeeder::class,
+            TimecardSeeder::class,
+        ]);
     }
 }

@@ -18,9 +18,9 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'item_type_id' => ItemType::factory(),
+            'item_type_id' => ItemType::inRandomOrder()->first()->id,
             'name' => $this->faker->word(),
-            'price' => $this->faker->randomFloat(2, 10, 500), 
+            'price' => $this->faker->randomFloat(2, 10, 500),
             'active' => $this->faker->boolean(80),
         ];
     }

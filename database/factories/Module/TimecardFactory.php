@@ -30,8 +30,8 @@ class TimecardFactory extends Factory
             'time_spent'      => $this->faker->randomFloat(2, 1, 12), // Hours spent
             'charge_rate'     => $this->faker->randomFloat(2, 50, 200), // Rate per hour or flat
             'active'          => $this->faker->boolean(90),
-            'timecard_task_id'=> TimecardTask::factory(),
-            'matter_id'       => Matter::factory(),
+            'timecard_task_id'=> TimecardTask::inRandomOrder()->first()->id,
+            'matter_id'       => Matter::inRandomOrder()->first()->id,
         ];
     }
 }
