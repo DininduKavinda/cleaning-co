@@ -6,11 +6,11 @@ import { deleteItem } from "@/Helpers/Api/ItemApi";
 function ItemTable({ items, pagination, onPageChange }) {
     const columns = ["Id", " Item Type", "Item","Status", "Action"];
 
-    const columnData = ["id", "item_type.name", "name"];
+    const columnData = ["id", "item_type.name", "name","active"];
 
     const actions = {
         show: "items.show",
-        delete: deleteItem,   
+        delete: deleteItem,
     };
 
     return (

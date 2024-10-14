@@ -20,14 +20,14 @@ class MatterDocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            'document'   => $this->faker->word() . '.pdf',
-            'file_name'  => $this->faker->lexify('document_????.pdf'),
-            'status'     => $this->faker->numberBetween(1, 3),
-            'notes'      => $this->faker->sentence(),
-            'active'     => $this->faker->boolean(90),
-            'matter_id'  => Matter::inRandomOrder()->first()->id,
-            'client_id'  => Client::inRandomOrder()->first()->id,
-            'staff_id'   =>  Staff::inRandomOrder()->first()->id,
+            'document' => $this->faker->word().'.pdf',
+            'file_name' => $this->faker->lexify('document_????.pdf'),
+            'status' => $this->faker->numberBetween(1, 3),
+            'notes' => $this->faker->sentence(),
+            'active' => $this->faker->boolean(90),
+            'matter_id' => Matter::inRandomOrder()->first()->id,
+            'client_id' => Client::inRandomOrder()->first()->id,
+            'staff_id' => Staff::inRandomOrder()->first()->id,
         ];
     }
 }

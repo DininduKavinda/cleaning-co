@@ -18,7 +18,7 @@ class DepartmentFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
-            'active' => $this->faker->boolean(80), 
+            'active' => $this->faker->boolean(80),
         ];
     }
 }

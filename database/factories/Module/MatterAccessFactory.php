@@ -19,13 +19,13 @@ class MatterAccessFactory extends Factory
     public function definition(): array
     {
         return [
-            'geo_latitude'  => $this->faker->latitude(),
-            'geo_longtude'  => $this->faker->longitude(),
-            'area'          => $this->faker->numberBetween(1, 100),
-            'permitted_on'  => $this->faker->optional()->date(),
-            'active'        => $this->faker->boolean(90),
-            'matter_id'     => Matter::inRandomOrder()->first()->id,
-            'staff_id'      => Staff::inRandomOrder()->first()->id,
+            'geo_latitude' => $this->faker->latitude(),
+            'geo_longtude' => $this->faker->longitude(),
+            'area' => $this->faker->numberBetween(1, 100),
+            'permitted_on' => $this->faker->optional()->date(),
+            'active' => $this->faker->boolean(90),
+            'matter_id' => Matter::inRandomOrder()->first()->id,
+            'staff_id' => Staff::inRandomOrder()->first()->id,
         ];
     }
 }

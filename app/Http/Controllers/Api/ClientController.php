@@ -61,30 +61,29 @@ class ClientController extends Controller implements HasMiddleware
      * Store a newly created resource in storage.
      */
     public function store(StoreClientRequest $request)
-{
-    $validatedData = $request->validated();
+    {
+        $validatedData = $request->validated();
 
-    $client = new ClientResource(Client::create($validatedData));
+        $client = new ClientResource(Client::create($validatedData));
 
-    if ($client) {
-        $type = 1;
-        
-        $user = (new User)->createUser($client, $validatedData, $request, $type); // Call createUser method
+        if ($client) {
+            $type = 1;
 
-        if ($user) {
-            $message = 'Client Created Successfully';
+            $user = (new User)->createUser($client, $validatedData, $request, $type); // Call createUser method
+
+            if ($user) {
+                $message = 'Client Created Successfully';
+            } else {
+                $message = 'Error Occurred When Creating User';
+            }
         } else {
-            $message = 'Error Occurred When Creating User';
+            $message = 'Error Occurred When Creating Client';
         }
-    } else {
-        $message = 'Error Occurred When Creating Client';
+
+        return response()->json([
+            'message' => $message,
+        ]);
     }
-
-    return response()->json([
-        'message' => $message,
-    ]);
-}
-
 
     /**
      * Display the specified resource.

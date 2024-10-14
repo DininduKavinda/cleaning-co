@@ -18,8 +18,8 @@ class TimecardTaskFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'rate' => $this->faker->randomFloat(2, 10, 100), 
-            'rate_type' => $this->faker->numberBetween(1, 2), 
+            'rate' => $this->faker->randomFloat(2, 10, 100),
+            'rate_type' => $this->faker->numberBetween(1, 2),
             'active' => $this->faker->boolean(80),
         ];
     }
