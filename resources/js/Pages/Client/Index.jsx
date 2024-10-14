@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
 import { getClients } from "@/Helpers/Api/ClientApi";

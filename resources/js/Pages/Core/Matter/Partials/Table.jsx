@@ -4,7 +4,9 @@ import { deleteMatter } from "@/Helpers/Api/MatterApi";
 
 
 function MatterTable({ matters, pagination, onPageChange }) {
-    const columns = ['Task',
+    const columns = [
+        'Serial',
+        'Task',
         'Client',
         'Code',
         'Start',
@@ -12,6 +14,7 @@ function MatterTable({ matters, pagination, onPageChange }) {
         'active','Action'];
 
     const columnData = [
+        'id',
         'task.name',
         'client.name',
         'code',

@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import axios from "axios";
 import SearchBox from "./Partials/SearchBox";
 import Table from "./Partials/Table";
 import { getMatters } from "@/Helpers/Api/MatterApi";
 
 function Index({ auth }) {
+
     const [matters, setMatters] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
-
+    const [nameQuery, setNameQuery] = useState("");
+    const [codeQuery, setCodeQuery] = useState("");
+    const [startedAtQuery, setStartedAtQuery] = useState("");
+    const [endedAtQuery, setEndedAtQuery] = useState("");
+    const [statusQuery, setStatusQuery] = useState("");
     const [activeQuery, setActiveQuery] = useState("");
-    const [countryQuery, setCountryQuery] = useState("");
-    const [provinceQuery, setProvinceQuery] = useState("");
-    const [cityQuery, setCityQuery] = useState("");
-    const [districtQuery, setDistrictQuery] = useState("");
-
-    const [nicQuery, setNicQuery] = useState("");
+    const [taskQuery, setTaskQuery] = useState(null);
+    const [clientQuery, setClientQuery] = useState(null);
+    const [staffQuery, setStaffQuery] = useState(null);
+    const [approvedByQuery, setApprovedByQuery] = useState(null);
+    const [departmentQuery, setDepartmentQuery] = useState(null);
 
     const [pagination, setPagination] = useState({
         currentPage: 1,
@@ -30,32 +32,50 @@ function Index({ auth }) {
             const params = [];
 
             if (
-                searchQuery ||
+                nameQuery ||
+                codeQuery ||
+                startedAtQuery ||
+                statusQuery ||
                 activeQuery ||
-                countryQuery ||
-                provinceQuery ||
-                cityQuery ||
-                districtQuery ||
-                nicQuery
+                taskQuery ||
+                clientQuery ||
+                staffQuery ||
+                approvedByQuery ||
+                departmentQuery
             ) {
-                params.push(`full_name[like]=${searchQuery}`);
-                if (activeQuery != "") {
-                    params.push(`active[eq]=${activeQuery}`);
+                if (nameQuery) {
+                    params.push(`name[like]=${(nameQuery)}`);
                 }
-                if (countryQuery != "") {
-                    params.push(`country_id[eq]=${countryQuery}`);
+                if (codeQuery) {
+                    params.push(`code[like]=${(codeQuery)}`);
                 }
-                if (provinceQuery != "") {
-                    params.push(`province_id[eq]=${provinceQuery}`);
+                if (startedAtQuery) {
+                    params.push(`started_at[gte]=${(startedAtQuery)}`);
                 }
-                if (cityQuery != "") {
-                    params.push(`city_id[eq]=${cityQuery}`);
+
+                if (statusQuery !== "") {
+                    params.push(`status[eq]=${(statusQuery)}`);
                 }
-                if (districtQuery != "") {
-                    params.push(`district_id[eq]=${districtQuery}`);
+                if (activeQuery !== "") {
+                    params.push(`active[eq]=${(activeQuery)}`);
                 }
-                params.push(`nic[like]=${nicQuery}`);
+                if (taskQuery) {
+                    params.push(`task_id[eq]=${(taskQuery)}`);
+                }
+                if (clientQuery) {
+                    params.push(`client_id[eq]=${(clientQuery)}`);
+                }
+                if (staffQuery) {
+                    params.push(`staff_id[eq]=${(staffQuery)}`);
+                }
+                if (approvedByQuery) {
+                    params.push(`approved_by_id[eq]=${(approvedByQuery)}`);
+                }
+                if (departmentQuery) {
+                    params.push(`department_id[eq]=${(departmentQuery)}`);
+                }
             }
+
             const queryString = params.length > 0 ? `&${params.join("&")}` : "";
 
             const response = await getMatters(page, queryString);
@@ -68,35 +88,37 @@ function Index({ auth }) {
                 perPage: response.data.meta.per_page,
             });
         } catch (error) {
-            console.error(
-                "There was an error fetching the matter data!",
-                error
-            );
+            console.error("There was an error fetching the matter data!", error);
         }
     };
 
     useEffect(() => {
         fetchMatters();
     }, [
-        searchQuery,
-
+        nameQuery,
+        codeQuery,
+        startedAtQuery,
+        endedAtQuery,
+        statusQuery,
         activeQuery,
-        countryQuery,
-        provinceQuery,
-        cityQuery,
-        districtQuery,
-
-        nicQuery,
+        taskQuery,
+        clientQuery,
+        staffQuery,
+        approvedByQuery,
+        departmentQuery,
     ]);
 
-    const handleSearch = (query) => setSearchQuery(query);
+    const handleSearch = (name) => setNameQuery(name);
+    const handleCodeSearch = (code) => setCodeQuery(code);
+    const handleStartedAtSearch = (date) => setStartedAtQuery(date);
+    const handleEndedAtSearch = (date) => setEndedAtQuery(date);
+    const handleStatusSearch = (status) => setStatusQuery(status);
     const handleActiveSearch = (active) => setActiveQuery(active);
-    const handleCountrySearch = (country) => setCountryQuery(country);
-    const handleProvinceSearch = (province) => setProvinceQuery(province);
-    const handleCitySearch = (city) => setCityQuery(city);
-    const handleDistrictSearch = (district) => setDistrictQuery(district);
-
-    const handleNicSearch = (nic) => setNicQuery(nic);
+    const handleTaskSearch = (taskId) => setTaskQuery(taskId);
+    const handleClientSearch = (clientId) => setClientQuery(clientId);
+    const handleStaffSearch = (staffId) => setStaffQuery(staffId);
+    const handleApprovedBySearch = (approvedById) => setApprovedByQuery(approvedById);
+    const handleDepartmentSearch = (departmentId) => setDepartmentQuery(departmentId);
 
     const handlePageChange = (page) => fetchMatters(page);
 
@@ -135,11 +157,15 @@ function Index({ auth }) {
                 <SearchBox
                     onSearch={handleSearch}
                     onActiveSearch={handleActiveSearch}
-                    onCountrySearch={handleCountrySearch}
-                    onProvinceSearch={handleProvinceSearch}
-                    onCitySearch={handleCitySearch}
-                    onDistrictSearch={handleDistrictSearch}
-                    onNicSearch={handleNicSearch}
+                    onTaskSearch={handleTaskSearch}
+                    onClientSearch={handleClientSearch}
+                    onApproved_bySearch={handleApprovedBySearch}
+                    onStaffSearch={handleStaffSearch}
+                    onDepartmentSearch={handleDepartmentSearch}
+                    onCodeSearch={handleCodeSearch}
+                    onStartedAtSearch={handleStartedAtSearch}
+                    onEndedAtSearch={handleEndedAtSearch}
+                    onStatusSearch={handleStatusSearch}
                 />
                 <Table
                     matters={matters}

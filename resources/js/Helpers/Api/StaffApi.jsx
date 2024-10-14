@@ -22,4 +22,4 @@ export const deleteStaff = (staffId) =>
     axios.delete(`${STAFFS_URL}/${staffId}`, HEADER2);
 
 export const searchStaff = (params) =>
-    axios.get(`${STAFF_URL}?${IncludeAll}`, { params }, HEADER);
+    axios.get(`${STAFFS_URL}?${IncludeAll}&${params}`, HEADER);
