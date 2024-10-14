@@ -1,112 +1,102 @@
-import React, { useState, useEffect } from "react";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { usePage } from "@inertiajs/react";
-import LocationForm from "@/Components/LocationForm";
-import {
-    createClient,
-    getClientById,
-    updateClient,
-} from "@/Helpers/Api/ClientApi";
-import BootstrapToaster from "@/Components/BootstrapToaster";
 
-function ClientForm({ auth }) {
-    const page_info = usePage().props; const [toastData, setToastData] = useState({ type: "", message: "", title: "" });
-    const id = page_info.client?.id;
-    const [client, setClient] = useState({
-        nic: "",
-        name: "",
-        mobile: "",
-        phone: "",
+import React, { useState, useEffect, useRef } from "react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import NavigationTabs from "./Partials/Form/NavigationTabs";
+import MatterInformation from "./Partials/Form/MatterInformation";
+import LocationAndContact from "./Partials/Form/LocationAndContact";
+import Files from "./Partials/Form/Files";
+import Access from "./Partials/Form/Access";
+import MatterDetails from "./Partials/Form/MatterDetails";
+
+function Edit({ auth }) {
+    const mapRef = useRef(null);
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+
+    const [formData, setFormData] = useState({
+        matterName: "",
+        matterCode: "",
+        startDate: "",
+        task: "",
+        department: "",
+        chooseClient: "",
+        otherNotes: "",
+        matterType: "",
+        customerName: "",
+        customerNIC: "",
+        customerPhone: "",
+        country: "",
+        province: "",
+        district: "",
+        city: "",
         address: "",
-        roles: ["user"],
-        country_id: "",
-        province_id: "",
-        district_id: "",
-        city_id: "",
-        full_name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
-        image: null,
-        last_login: "",
-        active: 1
+        areaRadius: "",
+        fileName: "",
+        fileNotes: "",
+        fileStatus: "",
+        fileUpload: null,
+        permittedTo: "",
+        permittedOn: "",
+        accessNotes: "",
     });
-    const [isEditing, setIsEditing] = useState(false);
-    const [imagePreview, setImagePreview] = useState(null);
 
     useEffect(() => {
-        if (id) {
-            setIsEditing(true);
-            fetchClient();
-        }
-    }, [id]);
-
-    const fetchClient = async () => {
-        try {
-            const response = await getClientById(id);
-            const clientData = response.data.data;
-            setClient({
-                nic: clientData.nic,
-                name: clientData.name,
-                mobile: clientData.mobile,
-                phone: clientData.phone,
-                address: clientData.address,
-                country_id: clientData.country_id,
-                province_id: clientData.province_id,
-                district_id: clientData.district_id,
-                city_id: clientData.city_id,
-                full_name: clientData.full_name,
-                email: clientData.email,
-                roles: clientData.roles,
-                active: clientData.active,
+        const initMap = () => {
+            const center = { lat: 6.9209692563737235, lng: 79.87755895317827 };
+            const map = new window.google.maps.Map(mapRef.current, {
+                zoom: 9,
+                center: center,
             });
-            setImagePreview(clientData.image);
-        } catch (error) {
-            console.error("Error fetching client data:", error);
-        }
-    };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setClient({ ...client, [name]: value });
-    };
+            // Add a click event listener to capture the latitude and longitude
+            map.addListener("click", (mapsMouseEvent) => {
+                const latLng = mapsMouseEvent.latLng;
+                setLatitude(latLng.lat());
+                setLongitude(latLng.lng());
+            });
+        };
 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        setClient({ ...client, image: file });
-        setImagePreview(URL.createObjectURL(file));
-    };
+        // Load the Google Maps script
+        const loadScript = (url, callback) => {
+            const existingScript = document.getElementById("googleMaps");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        Object.keys(client).forEach((key) => {
-            formData.append(key, client[key]);
-        });
-        try {
-            let responer;
-            if (isEditing) {
-                 response = await updateClient(id,formData);
+            if (!existingScript) {
+                const script = document.createElement("script");
+                script.src = url;
+                script.id = "googleMaps";
+                script.async = true;
+                script.defer = true;
+                script.onload = callback;
+                document.body.appendChild(script);
             } else {
-              response =  await createClient(formData);
+                callback();
             }
-            if (response.status === 201) {
-                setToastData({
-                    type: "success",
-                    message: "success.",
-                    title: "Success",
-                });
-            }
-            else{
-                setToastData({
-                    type: "error",
-                    message: response.data.message,
-                    title: "error",
-                });
-            }
-        } catch (error) {
-            console.error("Error saving client data:", error);
+        };
+
+        loadScript('https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places', initMap);
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value, type, files } = e.target;
+        if (type === "file") {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: files[0],
+            }));
+        } else {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
         }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Implement form submission logic here
+        console.log("Form Data:", formData);
+        console.log("Latitude:", latitude);
+        console.log("Longitude:", longitude);
     };
 
     return (
@@ -114,7 +104,7 @@ function ClientForm({ auth }) {
             client={auth.client}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    {isEditing ? "Edit Client" : "Create Client"}
+                    Create Client
                 </h2>
             }
         >
@@ -140,222 +130,65 @@ function ClientForm({ auth }) {
                     </div>
                 </div>
             </div>
-            <div className="container-fluid">
-                <div className="edit-profile">
-                    <form onSubmit={handleSubmit} className="row">
-                        <div className="col-xl-4">
-                            <div className="card">
-                                <div className="card-header card-no-border pb-0">
-                                    <h3 className="card-title mb-0">
-                                        Client Profile
-                                    </h3>
-                                </div>
-                                <div className="card-body">
-                                    <div className="row mb-2">
-                                        <div className="profile-title">
-                                            <div className="d-flex gap-3">
-                                                {imagePreview ? (
-                                                    <img
-                                                        className="img-70 rounded-circle"
-                                                        alt="Profile"
-                                                        src={imagePreview}
-                                                    />
-                                                ) : (
-                                                    <img
-                                                        className="img-70 rounded-circle"
-                                                        alt="Default"
-                                                        src="../assets/images/user/default.jpg"
-                                                    />
-                                                )}
-                                                <div className="flex-grow-1">
-                                                    <h3 className="mb-1">
-                                                        {client.name ||
-                                                            "New Client"}
-                                                    </h3>
-                                                    <p>
-                                                        {client.roles.join(
-                                                            ", "
-                                                        )}
-                                                    </p>
+            <div className="col-md-12">
+                <div className="card">
+                    <div className="card-header card-no-border pb-0">
+                        <h3>Shipping form</h3>
+                        <p className="mt-1 mb-0">Fill up your true details and next proceed.</p>
+                    </div>
+                    <div className="card-body">
+                        <div className="row shopping-wizard">
+                            <div className="col-12">
+                                <div className="row shipping-form g-3">
+                                    <div className="col-xl-8 shipping-border">
+                                        <div className="row">
+                                            <div className="col-12">
+                                                <NavigationTabs />
+                                            </div>
+                                            <div className="col-12">
+                                                <div className="tab-content dark-field shipping-content" id="cart-options-tabContent">
+                                                    <div className="tab-pane fade show active" id="bill-wizard" role="tabpanel" aria-labelledby="bill-wizard-tab">
+                                                        <MatterInformation
+                                                            formData={formData}
+                                                            handleChange={handleChange}
+                                                        />
+                                                    </div>
+                                                    <div className="tab-pane fade shipping-wizard" id="ship-wizard" role="tabpanel" aria-labelledby="ship-wizard-tab">
+                                                        <LocationAndContact
+                                                            formData={formData}
+                                                            handleChange={handleChange}
+                                                            latitude={latitude}
+                                                            longitude={longitude}
+                                                        />
+                                                    </div>
+                                                    <div className="tab-pane fade shipping-wizard" id="payment-wizard" role="tabpanel" aria-labelledby="payment-wizard-tab">
+                                                        <Files
+                                                            formData={formData}
+                                                            handleChange={handleChange}
+                                                        />
+                                                    </div>
+                                                    <div className="tab-pane fade shipping-wizard finish-wizard1" id="finish-wizard" role="tabpanel" aria-labelledby="finish-wizard-tab">
+                                                        <Access
+                                                            formData={formData}
+                                                            handleChange={handleChange}
+                                                            handleSubmit={handleSubmit}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
-                                        <h6 className="form-label">NIC</h6>
-                                        <input
-                                            className="form-control"
-                                            name="nic"
-                                            value={client.nic}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <h6 className="form-label">Username</h6>
-                                        <input
-                                            className="form-control"
-                                            name="name"
-                                            value={client.name}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <h6 className="form-label">Mobile</h6>
-                                        <input
-                                            className="form-control"
-                                            name="mobile"
-                                            value={client.mobile}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <h6 className="form-label">Phone</h6>
-                                        <input
-                                            className="form-control"
-                                            name="phone"
-                                            value={client.phone}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <h6 className="form-label">Address</h6>
-                                        <input
-                                            className="form-control"
-                                            name="address"
-                                            value={client.address}
-                                            onChange={handleInputChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <h6 className="form-label">
-                                            Upload Image
-                                        </h6>
-                                        <input
-                                            type="file"
-                                            className="form-control"
-                                            onChange={handleImageChange}
-                                        />
+                                    <div className="col-xl-4">
+                                        <MatterDetails formData={formData} />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-8">
-                            <div className="card">
-                                <div className="card-header card-no-border pb-0">
-                                    <h3 className="card-title mb-0">
-                                        Edit Client Details
-                                    </h3>
-                                </div>
-                                <div className="card-body">
-                                    <div className="row">
-                                        <div className="col-sm-6">
-                                            <div className="mb-3">
-                                                <label className="form-label">
-                                                    Full Name
-                                                </label>
-                                                <input
-                                                    className="form-control"
-                                                    name="full_name"
-                                                    value={client.full_name}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <div className="mb-3">
-                                                <label className="form-label">
-                                                    Email
-                                                </label>
-                                                <input
-                                                    className="form-control"
-                                                    name="email"
-                                                    value={client.email}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                />
-                                                <input
-                                                    hidden
-                                                    className="form-control"
-                                                    name="active"
-                                                    value={client.active}
-                                                    onChange={handleInputChange}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        {!isEditing && (
-                                            <>
-                                                <div className="col-sm-6">
-                                                    <div className="mb-3">
-                                                        <label className="form-label">
-                                                            Password
-                                                        </label>
-                                                        <input
-                                                            type="password"
-                                                            className="form-control"
-                                                            name="password"
-                                                            value={
-                                                                client.password
-                                                            }
-                                                            onChange={
-                                                                handleInputChange
-                                                            }
-                                                            required
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-6">
-                                                    <div className="mb-3">
-                                                        <label className="form-label">
-                                                            Confirm Password
-                                                        </label>
-                                                        <input
-                                                            type="password"
-                                                            className="form-control"
-                                                            name="password_confirmation"
-                                                            value={
-                                                                client.password_confirmation
-                                                            }
-                                                            onChange={
-                                                                handleInputChange
-                                                            }
-                                                            required
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </>
-                                        )}
-                                        <LocationForm
-                                            client={client}
-                                            setClient={setClient}
-                                        />
-
-                                        <div className="card-footer">
-                                            <button
-                                                className="btn btn-primary btn-block"
-                                                type="submit"
-                                            >
-                                                {isEditing
-                                                    ? "Update Client"
-                                                    : "Create Client"}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    {toastData.message && <BootstrapToaster type={toastData.type} message={toastData.message} title={toastData.title} />}
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>
     );
 }
 
-export default ClientForm;
+export default Edit;

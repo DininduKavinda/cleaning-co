@@ -6,12 +6,6 @@ import { getStaffById, searchStaff } from "@/Helpers/Api/StaffApi";
 const StaffDropdown = ({ staffId, setStaffId }) => {
     const [options, setOptions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const TOKEN = localStorage.getItem("authToken");
-    const HEADER = {
-        headers: {
-            Authorization: `Bearer ${TOKEN}`,
-        },
-    };
 
     useEffect(() => {
         if (staffId) {
@@ -22,14 +16,24 @@ const StaffDropdown = ({ staffId, setStaffId }) => {
     const fetchStaffs = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = searchStaff({
+            const response = await searchStaff({
                 "full_name[like]": inputValue,
             });
             const staffs = response.data.data.map((staff) => ({
                 value: staff.id,
                 label: staff.full_name,
             }));
-            setOptions(staffs);
+
+            setOptions((prevOptions) => {
+
+                const updatedOptions = [
+                    ...prevOptions,
+                    ...staffs.filter((staff) =>
+                        prevOptions.every((option) => option.value !== staff.value)
+                    ),
+                ];
+                return updatedOptions;
+            });
         } catch (error) {
             console.error("Error fetching staffs:", error);
         } finally {
@@ -42,7 +46,15 @@ const StaffDropdown = ({ staffId, setStaffId }) => {
         try {
             const response = await getStaffById(id);
             const staff = response.data.data;
-            setOptions([{ value: staff.id, label: staff.full_name }]);
+            const initialStaffOption = { value: staff.id, label: staff.full_name };
+
+            setOptions((prevOptions) => {
+                // Ensure the selected staff is in the options
+                if (!prevOptions.some((option) => option.value === staff.id)) {
+                    return [...prevOptions, initialStaffOption];
+                }
+                return prevOptions;
+            });
         } catch (error) {
             console.error("Error fetching initial staff:", error);
         } finally {

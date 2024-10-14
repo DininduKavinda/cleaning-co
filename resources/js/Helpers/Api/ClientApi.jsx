@@ -19,3 +19,6 @@ export const updateClient = (clientId, clientData) =>
 
 export const deleteClient = (clientId) =>
     axios.delete(`${CLIENTS_URL}/${clientId}`, HEADER2);
+
+export const searchClient = (params) =>
+    axios.get(`${CLIENTS_URL}?${IncludeAll}&${params}` ,HEADER);

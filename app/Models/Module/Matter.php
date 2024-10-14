@@ -14,6 +14,73 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ *
+ *
+ * @property int $task_id
+ * @property int $client_id
+ * @property int $staff_id
+ * @property int $approved_by
+ * @property int $department_id
+ * @property int $id
+ * @property string $code
+ * @property string $name
+ * @property string $description
+ * @property string $started_at
+ * @property string $ended_at
+ * @property string|null $map_latitude
+ * @property string|null $map_longitude
+ * @property int $status
+ * @property int $active
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, GDN> $GDN
+ * @property-read int|null $g_d_n_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, GRN> $GRN
+ * @property-read int|null $g_r_n_count
+ * @property-read Staff $approved
+ * @property-read Client $client
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Complain> $complains
+ * @property-read int|null $complains_count
+ * @property-read Department $department
+ * @property-read Invoice|null $invoice
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, InvoiceTimecard> $invoice_timecard
+ * @property-read int|null $invoice_timecard_count
+ * @property-read \App\Models\Module\MatterAccess|null $matter_access
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Module\MatterDocument> $matter_documents
+ * @property-read int|null $matter_documents_count
+ * @property-read Staff $staff
+ * @property-read \App\Models\Module\Task $task
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Module\Timecard> $timecards
+ * @property-read int|null $timecards_count
+ * @method static \Database\Factories\Module\MatterFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereApprovedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereDepartmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereEndedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereMapLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereMapLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereStaffId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereStartedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereTaskId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Matter withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Matter extends Model
 {
     use HasFactory, SoftDeletes;

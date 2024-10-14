@@ -41,8 +41,10 @@ class StoreClientRequest extends FormRequest
             'active' => ['sometimes'],
         ];
     }
+
     /**
      * Summary of prepareForValidation
+     *
      * @return void
      */
     protected function prepareForValidation()

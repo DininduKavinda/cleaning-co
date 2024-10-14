@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from "react-select";
+import { getClientById, searchClient } from "@/Helpers/Api/ClientApi";
 
 const ClientDropdown = ({ clientId, setClientId }) => {
     const [options, setOptions] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const TOKEN = localStorage.getItem("authToken");
-    const HEADER = {
-        headers: {
-            Authorization: `Bearer ${TOKEN}`,
-        },
-    };
 
     useEffect(() => {
         if (clientId) {
@@ -21,17 +16,16 @@ const ClientDropdown = ({ clientId, setClientId }) => {
     const fetchClients = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(
-                `https://cleaning-co.test/api/web/clients?full_name[like]=${inputValue}`,
-                HEADER
-            );
+            const response = await searchClient({
+                "full_name[like]": inputValue,
+            });
             const clients = response.data.data.map((client) => ({
                 value: client.id,
                 label: client.full_name,
             }));
 
             setOptions((prevOptions) => {
-                // Merge new clients with any existing options (to keep the selected client in the list)
+
                 const updatedOptions = [
                     ...prevOptions,
                     ...clients.filter((client) =>
@@ -50,10 +44,7 @@ const ClientDropdown = ({ clientId, setClientId }) => {
     const fetchInitialClient = async (id) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(
-                `https://cleaning-co.test/api/web/clients/${id}`,
-                HEADER
-            );
+            const response = await getClientById(id);
             const client = response.data.data;
             const initialClientOption = { value: client.id, label: client.full_name };
 

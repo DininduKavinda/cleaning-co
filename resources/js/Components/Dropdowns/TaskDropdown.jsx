@@ -2,13 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getTasks } from "@/Helpers/Api/TaskApi";
 
-const TOKEN = localStorage.getItem("authToken");
-const HEADER = {
-    headers: {
-        Authorization: `Bearer ${TOKEN}`,
-    },
-};
-
 function TaskDropdown({ value, onChange }) {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);

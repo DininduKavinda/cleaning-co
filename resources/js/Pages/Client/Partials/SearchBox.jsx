@@ -5,8 +5,9 @@ import ProvinceDropdown from "@/Components/Dropdowns/ProvinceDropdown";
 import DistrictDropdown from "@/Components/Dropdowns/DistrictDropdown";
 import CityDropdown from "@/Components/Dropdowns/CityDropdown";
 
+
 function SearchBox({
-    onSearch,
+    onSearch,   
     onActiveSearch,
     onCountrySearch,
     onProvinceSearch,
@@ -171,6 +172,7 @@ function SearchBox({
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
                                 href={route("clients.create")}
+                               
                             >
                                 {" "}
                                 <i data-feather="plus-square"></i>Create New{" "}

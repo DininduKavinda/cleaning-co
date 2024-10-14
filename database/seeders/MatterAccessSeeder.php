@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Module\MatterAccess;
 use Illuminate\Database\Seeder;
 
 class MatterAccessSeeder extends Seeder
@@ -11,6 +12,6 @@ class MatterAccessSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        MatterAccess::factory()->count(100)->create();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Module\Matter;
 use Illuminate\Database\Seeder;
 
 class MatterSeeder extends Seeder
@@ -12,5 +13,6 @@ class MatterSeeder extends Seeder
     public function run(): void
     {
         //
+        Matter::factory()->count(30)->create();
     }
 }

@@ -15,13 +15,11 @@ function SearchBox({
     onDepartmentSearch,
     onCodeSearch,
     onStartedAtSearch,
-    onEndedAtSearch,
     onStatusSearch,
 }) {
     const [name, setName] = useState("");
     const [code, setCode] = useState("");
     const [started_at, setStartedAt] = useState("");
-    const [ended_at, setEndedAt] = useState("");
     const [status, setStatus] = useState("");
     const [active, setActive] = useState("");
     const [location, setLocation] = useState({
@@ -44,18 +42,10 @@ function SearchBox({
         onCodeSearch(value);
     };
 
-
-
     const handleStartedAtChange = (e) => {
         const value = e.target.value;
         setStartedAt(value);
         onStartedAtSearch(value);
-    };
-
-    const handleEndedAtChange = (e) => {
-        const value = e.target.value;
-        setEndedAt(value);
-        onEndedAtSearch(value);
     };
 
     const handleStatusChange = (e) => {
@@ -183,7 +173,7 @@ function SearchBox({
                     </div>
                     <div className="mb-4">
                         <div className="row">
-                            <div className="col-md-6  mt-3">
+                            <div className="col-md-3 mt-3">
                                 <label>Name</label>
                                 <input
                                     type="text"
@@ -194,7 +184,7 @@ function SearchBox({
                                 />
                             </div>
 
-                            <div className="col-md-6  mt-3">
+                            <div className="col-md-3 mt-3">
                                 <label>Code</label>
                                 <input
                                     type="text"
@@ -216,19 +206,10 @@ function SearchBox({
                             </div>
 
                             <div className="col-md-3 mt-3">
-                                <label>End Date</label>
-                                <input
-                                    type="date"
-                                    className="form-control"
-                                    value={ended_at}
-                                    onChange={handleEndedAtChange}
-                                />
-                            </div>
-                            <div className="col-md-3 mt-3">
                                 <label>Task</label>
                                 <TaskDropdown
                                     taskId={location.task_id}
-                                    setTaskId={(value) =>
+                                    onChange={(value) =>
                                         handleLocationChange("task_id", value)
                                     }
                                 />
@@ -248,10 +229,10 @@ function SearchBox({
                                 </select>
                             </div>
 
-                            <div className="col-md-4 mt-3">
+                            <div className="col-md-3 mt-3">
                                 <label>Client</label>
                                 <ClientDropdown
-                                    taskId={location.task_id}
+
                                     clientId={location.client_id}
                                     setClientId={(value) =>
                                         handleLocationChange("client_id", value)
@@ -259,10 +240,10 @@ function SearchBox({
                                 />
                             </div>
 
-                            <div className="col-md-4 mt-3">
+                            <div className="col-md-3 mt-3">
                                 <label>Staff</label>
                                 <StaffDropdown
-                                    clientId={location.client_id}
+
                                     staffId={location.staff_id}
                                     setStaffId={(value) =>
                                         handleLocationChange("staff_id", value)
@@ -270,10 +251,10 @@ function SearchBox({
                                 />
                             </div>
 
-                            <div className="col-md-4 mt-3">
+                            <div className="col-md-3 mt-3">
                                 <label>Approved_by</label>
                                 <Approved_byDropdown
-                                    staffId={location.staff_id}
+
                                     approved_byId={location.approved_by_id}
                                     setApproved_byId={(value) =>
                                         handleLocationChange(
@@ -284,7 +265,7 @@ function SearchBox({
                                 />
                             </div>
 
-                          
+
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Item;
 
+use App\Models\Item\ItemType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'item_type_id' => ItemType::inRandomOrder()->first()->id,
+            'name' => $this->faker->word(),
+            'price' => $this->faker->randomFloat(2, 10, 500),
+            'active' => $this->faker->boolean(80),
         ];
     }
 }
