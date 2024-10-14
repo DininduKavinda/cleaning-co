@@ -1,4 +1,3 @@
-// src/Components/Forms/LocationAndContact.js
 
 import React from "react";
 

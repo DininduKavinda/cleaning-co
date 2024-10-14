@@ -1,4 +1,3 @@
-// src/Components/Forms/Files.js
 
 import React from "react";
 
