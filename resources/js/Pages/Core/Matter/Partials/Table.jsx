@@ -16,7 +16,7 @@ function MatterTable({ matters, pagination, onPageChange }) {
     const columnData = [
         'id',
         'task.name',
-        'client.name',
+        'client.full_name',
         'code',
         'started_at',
         'ended_at',
