@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('city_id')->references('id')->on('cities');
             $table->id();
             $table->string('full_name');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('phone');
             $table->string('mobile');
             $table->string('nic');

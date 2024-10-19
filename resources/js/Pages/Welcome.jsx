@@ -66,14 +66,14 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                                         >
                                                             Log in
                                                         </Link>
-                                                        <Link
+                                                        {/* <Link
                                                             href={route(
                                                                 "register"
                                                             )}
                                                             className="btn btn-secondary btn-block w-100 mt-3"
                                                         >
                                                             Register
-                                                        </Link>
+                                                        </Link> */}
                                                     </>
                                                 )}
                                             </div>
