@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $item_id
  * @property int $id
  * @property int $status
@@ -19,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Item\Item|null $item
+ *
  * @method static \Database\Factories\Item\InventoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory newQuery()
@@ -35,6 +34,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Inventory withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Inventory extends Model

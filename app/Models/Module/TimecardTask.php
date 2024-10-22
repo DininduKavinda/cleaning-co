@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $rate
@@ -19,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Module\Timecard> $timecards
  * @property-read int|null $timecards_count
+ *
  * @method static \Database\Factories\Module\TimecardTaskFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|TimecardTask newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TimecardTask newQuery()
@@ -34,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|TimecardTask whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TimecardTask withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TimecardTask withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class TimecardTask extends Model

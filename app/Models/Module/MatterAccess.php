@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $matter_id
  * @property int $staff_id
  * @property int $id
@@ -25,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $matter_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Staff> $staff
  * @property-read int|null $staff_count
+ *
  * @method static \Database\Factories\Module\MatterAccessFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|MatterAccess newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MatterAccess newQuery()
@@ -43,6 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|MatterAccess whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MatterAccess withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|MatterAccess withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class MatterAccess extends Model

@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int|null $matter_id
  * @property int|null $client_id
  * @property int|null $staff_id
@@ -24,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read Client|null $client
  * @property-read Matter|null $matter
  * @property-read Staff|null $staff
+ *
  * @method static \Database\Factories\Meta\ComplainFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Complain newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Complain newQuery()
@@ -40,6 +39,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Complain whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Complain withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Complain withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Complain extends Model

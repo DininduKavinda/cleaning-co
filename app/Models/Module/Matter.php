@@ -15,8 +15,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
- *
  * @property int $task_id
  * @property int $client_id
  * @property int $staff_id
@@ -54,6 +52,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Module\Task $task
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Module\Timecard> $timecards
  * @property-read int|null $timecards_count
+ *
  * @method static \Database\Factories\Module\MatterFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Matter newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Matter newQuery()
@@ -79,6 +78,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Matter whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Matter withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Matter withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Matter extends Model

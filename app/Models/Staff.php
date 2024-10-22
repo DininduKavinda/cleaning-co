@@ -17,8 +17,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $level_id
  * @property int $country_id
  * @property int $province_id
@@ -66,6 +64,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $matters_count
  * @property-read Province $province
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Database\Factories\StaffFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Staff newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Staff newQuery()
@@ -95,6 +94,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Staff whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Staff withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Staff withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Staff extends Model

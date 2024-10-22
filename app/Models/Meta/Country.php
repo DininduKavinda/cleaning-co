@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $country_name
  * @property string $iso_code
@@ -24,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $provinces_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Staff> $staffs
  * @property-read int|null $staffs_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Country newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Country newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Country onlyTrashed()
@@ -37,6 +36,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Country whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Country withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Country withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Country extends Model

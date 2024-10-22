@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $client_id
  * @property int $invoice_deduction_id
  * @property int $matter_id
@@ -35,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Invoice\InvoiceTimecard> $invoice_timecard
  * @property-read int|null $invoice_timecard_count
  * @property-read Matter $matter
+ *
  * @method static \Database\Factories\Invoice\InvoiceFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newQuery()
@@ -61,6 +60,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereWHT($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Invoice extends Model

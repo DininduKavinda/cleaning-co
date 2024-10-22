@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property string $description
@@ -19,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Invoice\Invoice> $invoice
  * @property-read int|null $invoice_count
+ *
  * @method static \Database\Factories\Invoice\InvoiceDeductionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceDeduction newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceDeduction newQuery()
@@ -34,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceDeduction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceDeduction withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|InvoiceDeduction withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class InvoiceDeduction extends Model

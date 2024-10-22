@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $timecard_task_id
  * @property int $matter_id
  * @property int $id
@@ -28,6 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $invoice_timecard_count
  * @property-read \App\Models\Module\Matter $matter
  * @property-read \App\Models\Module\TimecardTask $timecard_task
+ *
  * @method static \Database\Factories\Module\TimecardFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Timecard newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Timecard newQuery()
@@ -49,6 +48,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Timecard whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Timecard withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Timecard withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Timecard extends Model

@@ -7,6 +7,7 @@ function MatterTable({ matters, pagination, onPageChange }) {
     const columns = [
         'Serial',
         'Task',
+        'Matter',
         'Client',
         'Code',
         'Start',
@@ -16,6 +17,7 @@ function MatterTable({ matters, pagination, onPageChange }) {
     const columnData = [
         'id',
         'task.name',
+        'name',
         'client.full_name',
         'code',
         'started_at',

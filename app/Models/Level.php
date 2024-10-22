@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name
  * @property int $active
@@ -17,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Staff> $staffs
  * @property-read int|null $staffs_count
+ *
  * @method static \Database\Factories\LevelFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Level newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Level newQuery()
@@ -30,6 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Level whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Level withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Level withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Level extends Model

@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $item_id
  * @property Staff|null $approved_by
  * @property Staff $returned_by
@@ -24,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Item\Item $item
  * @property-read Matter|null $matter
+ *
  * @method static \Database\Factories\Item\GRNFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|GRN newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|GRN newQuery()
@@ -42,6 +41,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|GRN whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GRN withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|GRN withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class GRN extends Model

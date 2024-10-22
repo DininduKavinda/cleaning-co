@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $matter_id
  * @property int|null $client_id
  * @property int|null $staff_id
@@ -26,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read Client|null $client
  * @property-read \App\Models\Module\Matter $matter
  * @property-read Staff|null $staff
+ *
  * @method static \Database\Factories\Module\MatterDocumentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|MatterDocument newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MatterDocument newQuery()
@@ -45,6 +44,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|MatterDocument whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MatterDocument withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|MatterDocument withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class MatterDocument extends Model

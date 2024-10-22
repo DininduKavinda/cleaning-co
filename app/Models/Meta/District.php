@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property int $province_id
  * @property string $name_en
@@ -26,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Meta\Province $province
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Staff> $staff
  * @property-read int|null $staff_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|District newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|District newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|District onlyTrashed()
@@ -40,6 +39,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|District whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|District withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|District withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class District extends Model

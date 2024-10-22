@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $item_type_id
  * @property int $id
  * @property string $name
@@ -23,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $g_r_n_count
  * @property-read \App\Models\Item\Inventory|null $inventory
  * @property-read \App\Models\Item\ItemType $item_type
+ *
  * @method static \Database\Factories\Item\ItemFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Item newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Item newQuery()
@@ -38,6 +37,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Item whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Item withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Item withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Item extends Model
