@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import NavigationTabs from "./Partials/Form/NavigationTabs";
@@ -9,9 +8,6 @@ import Access from "./Partials/Form/Access";
 import MatterDetails from "./Partials/Form/MatterDetails";
 
 function Edit({ auth }) {
-    const mapRef = useRef(null);
-    const [latitude, setLatitude] = useState('');
-    const [longitude, setLongitude] = useState('');
 
     const [formData, setFormData] = useState({
         matterName: "",
@@ -40,41 +36,7 @@ function Edit({ auth }) {
         accessNotes: "",
     });
 
-    useEffect(() => {
-        const initMap = () => {
-            const center = { lat: 6.9209692563737235, lng: 79.87755895317827 };
-            const map = new window.google.maps.Map(mapRef.current, {
-                zoom: 9,
-                center: center,
-            });
 
-            // Add a click event listener to capture the latitude and longitude
-            map.addListener("click", (mapsMouseEvent) => {
-                const latLng = mapsMouseEvent.latLng;
-                setLatitude(latLng.lat());
-                setLongitude(latLng.lng());
-            });
-        };
-
-        // Load the Google Maps script
-        const loadScript = (url, callback) => {
-            const existingScript = document.getElementById("googleMaps");
-
-            if (!existingScript) {
-                const script = document.createElement("script");
-                script.src = url;
-                script.id = "googleMaps";
-                script.async = true;
-                script.defer = true;
-                script.onload = callback;
-                document.body.appendChild(script);
-            } else {
-                callback();
-            }
-        };
-
-        loadScript('https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places', initMap);
-    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -157,8 +119,7 @@ function Edit({ auth }) {
                                                         <LocationAndContact
                                                             formData={formData}
                                                             handleChange={handleChange}
-                                                            latitude={latitude}
-                                                            longitude={longitude}
+                                                         
                                                         />
                                                     </div>
                                                     <div className="tab-pane fade shipping-wizard" id="payment-wizard" role="tabpanel" aria-labelledby="payment-wizard-tab">

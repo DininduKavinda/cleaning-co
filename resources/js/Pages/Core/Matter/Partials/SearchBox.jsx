@@ -5,7 +5,7 @@ import ClientDropdown from "@/Components/Dropdowns/ClientDropdown";
 import StaffDropdown from "@/Components/Dropdowns/StaffDropdown";
 import Approved_byDropdown from "@/Components/Dropdowns/StaffDropdown";
 
-function SearchBox({
+function SearchBox( {
     onSearch,
     onActiveSearch,
     onTaskSearch,

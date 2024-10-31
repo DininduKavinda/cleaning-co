@@ -12,14 +12,14 @@ function Access({ formData, handleChange, handleSubmit }) {
                         className="form-select"
                         id="permittedTo"
                         name="permittedTo"
-                        value={formData.permittedTo}
+                        defaultValue={formData.permittedTo}
                         onChange={handleChange}
                         required
                     >
-                        <option value="">Select Permission</option>
-                        <option value="admin">Admin</option>
-                        <option value="editor">Editor</option>
-                        <option value="viewer">Viewer</option>
+                        <option defaultValue="">Select Permission</option>
+                        <option defaultValue="admin">Admin</option>
+                        <option defaultValue="editor">Editor</option>
+                        <option defaultValue="viewer">Viewer</option>
                     </select>
                     <div className="valid-feedback">Looks good!</div>
                 </div>
@@ -30,7 +30,7 @@ function Access({ formData, handleChange, handleSubmit }) {
                         id="permittedOn"
                         type="date"
                         name="permittedOn"
-                        value={formData.permittedOn}
+                        defaultValue={formData.permittedOn}
                         onChange={handleChange}
                         required
                     />
@@ -44,7 +44,7 @@ function Access({ formData, handleChange, handleSubmit }) {
                         rows="3"
                         placeholder="Enter your notes..."
                         name="accessNotes"
-                        value={formData.accessNotes}
+                        defaultValue={formData.accessNotes}
                         onChange={handleChange}
                     ></textarea>
                 </div>

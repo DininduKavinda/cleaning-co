@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreign('department_id')->references('id')->on('departments');
             $table->foreignId('task_id');
             $table->foreignId('client_id');
-            $table->foreignId('staff_id');
-            $table->foreignId('approved_by');
-            $table->foreignId('department_id');
+            $table->foreignId('staff_id')->nullable();
+            $table->foreignId('approved_by')->nullable();
+            $table->foreignId('department_id')->nullable();
             $table->id();
             $table->string('code');
             $table->string('name');

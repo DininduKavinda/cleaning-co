@@ -19,7 +19,7 @@ function Files({ formData, handleChange }) {
                                         required
                                         placeholder="Enter file name"
                                         name="fileName"
-                                        value={formData.fileName}
+                                        defaultValue={formData.fileName}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -31,7 +31,7 @@ function Files({ formData, handleChange }) {
                                         rows="3"
                                         placeholder="Enter your notes..."
                                         name="fileNotes"
-                                        value={formData.fileNotes}
+                                        defaultValue={formData.fileNotes}
                                         onChange={handleChange}
                                     ></textarea>
                                 </div>
@@ -41,14 +41,14 @@ function Files({ formData, handleChange }) {
                                         className="form-select"
                                         id="fileStatus"
                                         name="fileStatus"
-                                        value={formData.fileStatus}
+                                        defaultValue={formData.fileStatus}
                                         onChange={handleChange}
                                         required
                                     >
-                                        <option value="">Select Status</option>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
-                                        <option value="pending">Pending</option>
+                                        <option defaultValue="">Select Status</option>
+                                        <option defaultValue="active">Active</option>
+                                        <option defaultValue="inactive">Inactive</option>
+                                        <option defaultValue="pending">Pending</option>
                                     </select>
                                     <div className="invalid-feedback">Please select a valid status.</div>
                                 </div>

@@ -26,7 +26,7 @@ function GivePermission({ auth }) {
         try {
             while (page <= lastPage) {
                 const response = await axios.get(
-                    `https://cleaning-co.test/api/admin/permissions?page=${page}`,
+                    `http://cleaning-co.test/api/admin/permissions?page=${page}`,
                     HEADER
                 );
                 const data = response.data.data;
@@ -57,7 +57,7 @@ function GivePermission({ auth }) {
     const fetchRolePermissions = async () => {
         try {
             const response = await axios.get(
-                `https://cleaning-co.test/api/admin/addPermissionToRole/${roleId}`,
+                `http://cleaning-co.test/api/admin/addPermissionToRole/${roleId}`,
                 HEADER
             );
             const activePermissions = response.data.rolePermissionsNames;
@@ -83,7 +83,7 @@ function GivePermission({ auth }) {
         try {
 
         const    response =  await axios.post(
-                `https://cleaning-co.test/api/admin/givePermissionToRole/${roleId}`,
+                `http://cleaning-co.test/api/admin/givePermissionToRole/${roleId}`,
                 {
                     permission: checkedPermissions,
                 } ,HEADER

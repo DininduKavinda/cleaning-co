@@ -10,7 +10,7 @@ export const getStaffs = (page, url) =>
     axios.get(`${STAFFS_URL}?page=${page}${url}&${IncludeAll}`, HEADER);
 
 export const getStaffById = (staffId) =>
-    axios.get(`${STAFFS_URL}/${staffId}?${includeAll}`, HEADER);
+    axios.get(`${STAFFS_URL}/${staffId}?${IncludeAll}`, HEADER);
 
 export const createStaff = (staffData) =>
     axios.post(`${STAFFS_URL}`, staffData, HEADER2);
