@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->date('started_at');
-            $table->date('ended_at');
+            $table->date('ended_at')->nullable();
             $table->string('map_latitude')->nullable();
             $table->string('map_longitude')->nullable();
             $table->tinyInteger('status');

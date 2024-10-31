@@ -66,7 +66,7 @@ class MatterController extends Controller
     {
         $validatedData = $request->validated();
         $matter = Matter::create($validatedData);
-        if ($matter) {
+        if ($matter && $request->hasFile('document')) {
             if ($request->hasFile('document')) {
                 $imageName = time().'.'.$request->document->getClientOriginalExtension();
                 $request->document->move('document/matter', $imageName);

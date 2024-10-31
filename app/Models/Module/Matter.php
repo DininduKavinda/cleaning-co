@@ -93,6 +93,7 @@ class Matter extends Model
         'department_id',
         'id',
         'code',
+        'name',
         'map_longitude',
         'map_latitude',
         'description',

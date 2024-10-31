@@ -1,54 +1,84 @@
-import React from "react";
+import ClientDropdown from "@/Components/Dropdowns/ClientDropdown";
+import DepartmentDropdown from "@/Components/Dropdowns/DepartmentDropdown";
+import TaskDropdown from "@/Components/Dropdowns/TaskDropdown";
+import React, { useState } from "react";
+import { createMatter } from "@/Helpers/Api/MatterApi";
+import { router } from "@inertiajs/react";
 
 function MatterInformation({ formData, handleChange }) {
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await createMatter(formData);
+            if (response.status === 201) {
+                router.get(`${response.data.data.id}`);
+            } else {
+                setError("Failed to create matter. Please try again.");
+            }
+        } catch (error) {
+            setError("An error occurred while creating the matter.");
+        } finally {
+            setLoading(false);
+
+        }
+    };
+
     return (
         <>
             <h5 className="f-w-600">Matter Information</h5>
             <p>Fill up the following information</p>
-            <form className="row g-3 needs-validation basic-form" noValidate>
+            <form className="row g-3 needs-validation basic-form" noValidate onSubmit={handleSubmit}>
                 <div className="col-sm-6">
-                    <label className="form-label" htmlFor="matterName">
+                    <label className="form-label" htmlFor="name">
                         Matter<span className="text-danger">*</span>
                     </label>
                     <input
                         className="form-control"
-                        id="matterName"
+                        id="name"
                         type="text"
                         placeholder="Enter matter name"
-                        name="matterName"
-                        defaultValue={formData.matterName}
+                        name="name"
+                        defaultValue={formData.name}
                         onChange={handleChange}
                         required
                     />
                     <div className="valid-feedback">Looks good!</div>
                 </div>
                 <div className="col-sm-6">
-                    <label className="form-label" htmlFor="matterCode">
+                    <label className="form-label" htmlFor="code">
                         Code<span className="text-danger">*</span>
                     </label>
                     <input
                         className="form-control"
-                        id="matterCode"
+                        id="code"
                         type="text"
                         placeholder="Enter code"
-                        name="matterCode"
-                        defaultValue={formData.matterCode}
+                        name="code"
+                        defaultValue={formData.code}
                         onChange={handleChange}
                         required
                     />
                     <div className="valid-feedback">Looks good!</div>
                 </div>
                 <div className="col-sm-4">
-                    <label className="form-label" htmlFor="startDate">
+                    <label className="form-label" htmlFor="started_at">
                         Start Date
                     </label>
                     <input
                         className="form-control"
-                        id="startDate"
+                        id="started_at"
                         type="date"
                         placeholder="Enter start date"
-                        name="startDate"
-                        defaultValue={formData.startDate}
+                        name="started_at"
+                        defaultValue={formData.started_at}
                         onChange={handleChange}
                     />
                     <div className="valid-feedback">Looks good!</div>
@@ -57,25 +87,11 @@ function MatterInformation({ formData, handleChange }) {
                     <label className="form-label" htmlFor="task">
                         Task
                     </label>
-                    <select
-                        className="form-select"
-                        id="task"
-                        name="task"
-                        defaultValue={formData.task}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option defaultValue="">Select Task</option>
-                        <option defaultValue="Africa">Africa</option>
-                        <option defaultValue="India">India</option>
-                        <option defaultValue="Indonesia">Indonesia</option>
-                        <option defaultValue="Netherlands">Netherlands</option>
-                        <option defaultValue="UK">U.K</option>
-                        <option defaultValue="US">U.S</option>
-                    </select>
-                    <div className="invalid-feedback">
-                        Please select a valid task.
-                    </div>
+                    <TaskDropdown
+                        taskId={formData.task_id}
+                        onChange={(value) => handleChange({ target: { name: "task_id", value } })}
+                    />
+                    <div className="invalid-feedback">Please select a valid task.</div>
                 </div>
                 <div className="col-sm-4">
                     <label className="form-label" htmlFor="department">
@@ -83,63 +99,40 @@ function MatterInformation({ formData, handleChange }) {
                     </label>
                     <DepartmentDropdown
                         selectedDepartment={formData.department_id}
-                        onChange={(value) =>
-                            setDepartment({
-                                ...formData,
-                                department_id: value,
-                            })
-                        }
+                        onChange={(value) => handleChange({ target: { name: "department_id", value } })}
                     />
-                    <div className="invalid-feedback">
-                        Please select a valid department.
-                    </div>
+                    <div className="invalid-feedback">Please select a valid department.</div>
                 </div>
                 <div className="col-sm-6">
                     <label className="form-label" htmlFor="chooseClient">
                         Choose Client
                     </label>
-                    <select
-                        className="form-select"
-                        id="chooseClient"
-                        name="chooseClient"
-                        defaultValue={formData.chooseClient}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option defaultValue="">Select Client</option>
-                        <option defaultValue="Client1">Client1</option>
-                        <option defaultValue="Client2">Client2</option>
-                        <option defaultValue="Client3">Client3</option>
-                    </select>
-                    <div className="invalid-feedback">
-                        Please select a valid client.
-                    </div>
+                    <ClientDropdown
+                        clientId={formData.client_id}
+                        setClientId={(value) => handleChange({ target: { name: "client_id", value } })}
+                    />
+                    <div className="invalid-feedback">Please select a valid client.</div>
                 </div>
                 <div className="col-12">
-                    <label className="form-label" htmlFor="otherNotes">
+                    <label className="form-label" htmlFor="description">
                         Other Notes
                     </label>
                     <textarea
                         className="form-control"
-                        id="otherNotes"
+                        id="description"
                         rows="3"
                         placeholder="Enter your description..."
-                        name="otherNotes"
-                        defaultValue={formData.otherNotes}
+                        name="description"
+                        defaultValue={formData.description}
                         onChange={handleChange}
                     ></textarea>
                 </div>
+                {error && <p className="text-danger">{error}</p>}
                 <div className="col-12 text-end">
-                    <a
-                        className="btn btn-primary"
-                        data-bs-toggle="pill"
-                        href="#ship-wizard"
-                        role="tab"
-                        aria-controls="ship-wizard"
-                    >
-                        Proceed to Next
+                    <button type="submit" className="btn btn-primary" disabled={loading}>
+                        {loading ? "Saving..." : "Proceed to Next"}
                         <i className="fa-solid fa-truck proceed-next pe-2"> </i>
-                    </a>
+                    </button>
                 </div>
             </form>
         </>

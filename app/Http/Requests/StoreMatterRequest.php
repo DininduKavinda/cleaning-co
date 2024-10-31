@@ -11,7 +11,7 @@ class StoreMatterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,20 +24,19 @@ class StoreMatterRequest extends FormRequest
         return [
             'task_id' => ['required'],
             'client_id' => ['required'],
-            'staff_id' => ['required'],
-            'approved_by' => ['required'],
+            'staff_id' => ['nullable'],
+            'approved_by' => ['nullable'],
             'department_id' => ['required'],
             'name' => ['required'],
             'code' => ['required'],
             'description' => ['required'],
             'started_at' => ['required'],
-            'ended_at' => ['required'],
-            'status' => ['required'],
+            'ended_at' => ['nullable'],
+            'status' => ['nullable'],
             'active' => ['sometimes'],
-            //change if nessasary
-            'document' => ['required'],
-            'notes' => ['required'],
-            'file_name' => ['required'],
+            'document' => ['nullable'],
+            'notes' => ['nullable'],
+            'file_name' => ['nullable'],
         ];
     }
 

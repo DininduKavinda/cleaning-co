@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import axios from "axios";
-import { usePage, useForm } from "@inertiajs/react";
+import { usePage, useForm, router } from "@inertiajs/react";
 import {
     createDepartment,
     getDepartmentById,
@@ -59,19 +58,32 @@ function DepartmentForm({ auth }) {
                 response = await createDepartment(department);
             }
             if (response.status === 201) {
+
+                router.get(`${response.data.data.id}`);
                 setToastData({
                     type: "success",
-                    message: "success.",
+                    message: response.data.message,
+                    title: "Success",
+                });
+            }
+            else if(response.status === 200){
+
+                router.reload;
+                setToastData({
+                    type: "success",
+                    message: response.data.message,
                     title: "Success",
                 });
             }
             else{
+                router.get(`${response.data.data.id}`);
                 setToastData({
                     type: "error",
                     message: response.data.message,
                     title: "error",
                 });
             }
+
         } catch (error) {
             console.error("Error saving department data:", error);
         }

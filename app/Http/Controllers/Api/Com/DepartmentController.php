@@ -52,6 +52,7 @@ class DepartmentController extends Controller
 
         return response()->json([
             'message' => $message,
+            'data' => $create,
         ]);
     }
 
@@ -91,6 +92,7 @@ class DepartmentController extends Controller
 
         return response()->json([
             'message' => $message,
+            'data' => $update
         ]);
     }
 

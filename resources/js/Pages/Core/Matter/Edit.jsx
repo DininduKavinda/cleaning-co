@@ -10,12 +10,13 @@ import MatterDetails from "./Partials/Form/MatterDetails";
 function Edit({ auth }) {
 
     const [formData, setFormData] = useState({
-        matterName: "",
-        matterCode: "",
-        startDate: "",
+        name: "",
+        getComputedStyle: "",
+        started_at: "",
         task: "",
         department: "",
         chooseClient: "",
+        description : "",
         otherNotes: "",
         matterType: "",
         customerName: "",
@@ -119,7 +120,7 @@ function Edit({ auth }) {
                                                         <LocationAndContact
                                                             formData={formData}
                                                             handleChange={handleChange}
-                                                         
+
                                                         />
                                                     </div>
                                                     <div className="tab-pane fade shipping-wizard" id="payment-wizard" role="tabpanel" aria-labelledby="payment-wizard-tab">
