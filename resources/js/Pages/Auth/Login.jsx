@@ -142,22 +142,22 @@ export default function Login({ status, canResetPassword }) {
                 <div className="form-group">
                     <ul className="login-social">
                         <li>
-                            <a href="http://www.linkedin.com" target="_blank">
+                            <a href="https://www.linkedin.com" target="_blank">
                                 <i className="icon-linkedin"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="http://twitter.com" target="_blank">
+                            <a href="https://twitter.com" target="_blank">
                                 <i className="icon-twitter"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.facebook.com" target="_blank">
+                            <a href="https://www.facebook.com" target="_blank">
                                 <i className="icon-facebook"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="http://www.instagram.com" target="_blank">
+                            <a href="https://www.instagram.com" target="_blank">
                                 <i className="icon-instagram"></i>
                             </a>
                         </li>

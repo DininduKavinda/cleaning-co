@@ -6,10 +6,10 @@ import mkcert from 'vite-plugin-mkcert'
 export default defineConfig({
     server: {
         host : "cleaning-co.test",
-        // https : true,
+        https : true,
     },
     plugins: [
-        // mkcert(),
+        mkcert(),
         laravel({
             input: ['resources/js/app.jsx'],
             refresh: true,

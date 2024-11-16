@@ -10,8 +10,8 @@
     <link rel="icon" href="{{ asset('theme/assets/images/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/favicon.png') }}" type="image/x-icon">
     <!-- Google font-->
-    <link rel="preconnect" href="http://fonts.googleapis.com">
-    <link rel="preconnect" href="http://fonts.gstatic.com" crossorigin="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link
         href="{{ asset('css2?family=Nunito+Sans:opsz,wght@6..12,200;6..12,300;6..12,400;6..12,500;6..12,600;6..12,700;6..12,800;6..12,900;6..12,1000&amp;display=swap') }}"
         rel="stylesheet">
@@ -37,9 +37,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/assets/css/vendors/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/assets/css/vendors/slick-theme.css') }}">
     <!-- Fonts -->
-    <link rel="preconnect" href="http://fonts.bunny.net">
-    <link href="http://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap"></script>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap"></script>
     <!-- Scripts -->
     @routes
     @viteReactRefresh

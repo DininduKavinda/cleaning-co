@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-export const BASE_URL = "http://cleaning-co.test/api/";
+export const BASE_URL = "https://cleaning-co.test/api/";
 
 export const IncludeAll = "includeAll=true";
 
