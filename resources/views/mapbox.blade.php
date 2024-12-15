@@ -14,7 +14,7 @@
             font-family: Arial, sans-serif;
         }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap"></script>
 </head>
 <body>
     <h1>Click on the Map to Get Latitude and Longitude</h1>
@@ -48,6 +48,6 @@
         // Initialize the map
         window.onload = initMap;
     </script>
-    [Matters -> view , edit , create , searchbox](https://chatgpt.com/share/67041dbf-41c0-800c-ac05-e755dbc4e309)
+    [Matters -> view , edit , create , searchbox](http://chatgpt.com/share/67041dbf-41c0-800c-ac05-e755dbc4e309)
 </body>
 </html>
