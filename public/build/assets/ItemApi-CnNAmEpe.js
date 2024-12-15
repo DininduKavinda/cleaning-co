@@ -1,0 +1,1 @@
+import{b as e}from"./app-XFbUVf-n.js";import{B as $,b as s,I as m}from"./Api-C_e93x4I.js";const o=$+"common/items",I=(t,a)=>e.get(`${o}?page=${t}${a}&${m}`,s),p=t=>e.get(`${o}/${t}?${m}`,s),d=t=>e.post(o,t,s),g=(t,a)=>e.put(`${o}/${t}`,a,s),r=t=>e.delete(`${o}/${t}`,s);export{I as a,d as c,r as d,p as g,g as u};
