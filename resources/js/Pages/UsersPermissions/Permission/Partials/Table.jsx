@@ -10,7 +10,7 @@ function Table({ permissions, pagination, onPageChange }) {
             try {
                 await deletePermission(id);
 
-                router.visit(route("permission_webs_webs.index"));
+                router.visit(route("permission_web_webs.index"));
             } catch (error) {
                 console.error("Error deleting permission:", error);
             }

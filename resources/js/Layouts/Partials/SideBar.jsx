@@ -515,12 +515,12 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("permission_webs_webs.index")}>
+                                <Link href={route("permission_web_webs.index")}>
                                     Permissions
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route("permission_webs_webs.create")}>
+                                <Link href={route("permission_web_webs.create")}>
                                     New Permission
                                 </Link>
                             </li>
@@ -554,10 +554,10 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("role_webs_webs.index")}>Roles</Link>
+                                <Link href={route("role_web_webs.index")}>Roles</Link>
                             </li>
                             <li>
-                                <Link href={route("role_webs_webs.create")}>
+                                <Link href={route("role_web_webs.create")}>
                                     New Role
                                 </Link>
                             </li>

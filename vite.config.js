@@ -1,15 +1,15 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
-import mkcert from 'vite-plugin-mkcert'
+// import mkcert from 'vite-plugin-mkcert'
 
 export default defineConfig({
     server: {
         host : "cleaning-co.test",
-        https : true,
+        // https : true,
     },
     plugins: [
-        mkcert(),
+        // mkcert(),
         laravel({
             input: ['resources/js/app.jsx'],
             refresh: true,

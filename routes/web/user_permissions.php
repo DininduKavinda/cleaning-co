@@ -7,6 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'users_permissions'], function () {
     Route::resource('user_webs', UsersController::class);
-    Route::resource('permission_webs', PermissionController::class);
-    Route::resource('role_webs', RoleController::class);
+    Route::resource('permission_web', PermissionController::class);
+    Route::resource('role_web', RoleController::class);
 })->middleware(['auth', 'verified']);
