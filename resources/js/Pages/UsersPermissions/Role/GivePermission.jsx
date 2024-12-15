@@ -102,7 +102,7 @@ function GivePermission({ auth }) {
                     title: "error",
                 });
             }
-            alert("Permissions updated successfully!");
+            alert("permission_webs_webs updated successfully!");
         } catch (error) {
             console.error("Error updating permissions:", error);
         }
@@ -209,7 +209,7 @@ function GivePermission({ auth }) {
                                                     Update
                                                 </button>
                                                 <Link
-                                                    href={route("roles.index")}
+                                                    href={route("role_webs_webs.index")}
                                                     className="btn btn-info"
                                                 >
                                                     Cancel

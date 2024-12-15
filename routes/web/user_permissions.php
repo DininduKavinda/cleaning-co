@@ -6,7 +6,7 @@ use App\Http\Controllers\Web\Auth\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'users_permissions'], function () {
-    Route::resource('users', UsersController::class);
-    Route::resource('permissions', PermissionController::class);
-    Route::resource('roles', RoleController::class);
+    Route::resource('user_webs', UsersController::class);
+    Route::resource('permission_webs', PermissionController::class);
+    Route::resource('role_webs', RoleController::class);
 })->middleware(['auth', 'verified']);

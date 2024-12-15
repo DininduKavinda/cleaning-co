@@ -7,7 +7,7 @@ function Table({ roles }) {
         if (window.confirm("Are you sure you want to delete this role?")) {
             try {
                 await deleteRole(id);
-                router.visit(route("roles.index"));
+                router.visit(route("role_webs_webs.index"));
             } catch (error) {
                 console.error("Error deleting role:", error);
             }

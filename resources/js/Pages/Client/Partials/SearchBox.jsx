@@ -171,7 +171,7 @@ function SearchBox({
                             <div className="form-group mb-0 me-0"></div>
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
-                                href={route("clients.create")}
+                                href={route("client_webs.create")}
                                
                             >
                                 {" "}

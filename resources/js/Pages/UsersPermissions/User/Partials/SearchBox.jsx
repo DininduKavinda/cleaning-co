@@ -104,7 +104,7 @@ function SearchBox({ onSearch, onEmailSearch, onActiveSearch, permissions }) {
                                     <div className="form-group mb-0 me-0"></div>
                                     <Link
                                         className="btn btn-primary d-flex align-items-center"
-                                        href={route("users.create")}
+                                        href={route("user_webs.create")}
                                     >
                                         {" "}
                                         <i data-feather="plus-square"></i>Create

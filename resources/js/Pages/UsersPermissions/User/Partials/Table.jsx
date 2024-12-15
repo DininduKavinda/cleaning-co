@@ -7,7 +7,7 @@ function Table({ users, pagination, onPageChange, permissions }) {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
                 await deleteUser(id);
-                router.visit(route("users.index"));
+                router.visit(route("user_webs.index"));
             } catch (error) {
                 console.error("Error deleting user:", error);
             }

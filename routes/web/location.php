@@ -7,8 +7,8 @@ use App\Http\Controllers\Web\MetaData\Location\ProvinceController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'location'], function () {
-    Route::resource('countries', CountryController::class);
-    Route::resource('provinces', ProvinceController::class);
-    Route::resource('districts', DistrictController::class);
-    Route::resource('cities', CityController::class);
+    Route::resource('countrie_webs', CountryController::class);
+    Route::resource('province_webs', ProvinceController::class);
+    Route::resource('district_webs', DistrictController::class);
+    Route::resource('citie_webs', CityController::class);
 })->middleware(['auth', 'verified']);

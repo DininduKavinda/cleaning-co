@@ -44,7 +44,7 @@ function RoleForm({ auth }) {
             let response;
             if (isEditing) {
                response= await updateRole(id, role).then(
-                    router.visit(route("roles.index"))
+                    router.visit(route("role_webs_webs.index"))
                 );
 
             } else {

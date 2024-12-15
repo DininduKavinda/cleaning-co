@@ -36,7 +36,7 @@ function SearchBox({ onSearch, onItemTypeSearch }) {
                         <div className="col-md-6 d-md-block d-none">
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
-                                href={route("items.create")}
+                                href={route("item_webs.create")}
                             >
                                 <i data-feather="plus-square"></i>Create New
                                 

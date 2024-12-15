@@ -57,7 +57,7 @@ function UserForm({ auth }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isEditing) {
-            put(route("users.update", id), {
+            put(route("user_webs.update", id), {
                 onSuccess: () => {
                     showToast("User updated successfully!", "success");
                     reset("password");
@@ -68,7 +68,7 @@ function UserForm({ auth }) {
                 },
             });
         } else {
-            post(route("users.create"), {
+            post(route("user_webs.create"), {
                 onSuccess: () => {
                     showToast("User created successfully!", "success");
                     reset("password");
