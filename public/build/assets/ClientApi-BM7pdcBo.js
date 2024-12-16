@@ -1,0 +1,1 @@
+import{b as e}from"./app-XFbUVf-n.js";import{B as c,I as n,H as o,b as $}from"./Api-C_e93x4I.js";const s=c+"web/clients",g=(t,a)=>e.get(`${s}?page=${t}${a}&${n}`,o),p=t=>e.get(`${s}/${t}?${n}`,o),r=t=>e.post(s,t,$),C=(t,a)=>e.put(`${s}/${t}`,a,$),d=t=>e.delete(`${s}/${t}`,o),E=t=>e.get(`${s}?${n}&${t}`,$);export{g as a,r as c,d,p as g,E as s,C as u};

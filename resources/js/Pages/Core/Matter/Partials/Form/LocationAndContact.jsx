@@ -39,7 +39,7 @@ function LocationAndContact({ formData, handleChange }) {
         };
 
         loadScript(
-            `http://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap`,
+            `https://maps.googleapis.com/maps/api/js?sensor=false&callback=myMap`,
             initMap
         );
     }, [latitude, longitude]);

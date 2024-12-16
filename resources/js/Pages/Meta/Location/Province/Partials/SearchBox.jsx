@@ -37,7 +37,7 @@ function SearchBox({ onSearch, onCountrySearch }) {
                         <div className="col-md-6 d-md-block d-none">
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
-                                href={route("provinces.create")}
+                                href={route("province_webs.create")}
                             >
                                 <i data-feather="plus-square"></i>Create New
                                 Province

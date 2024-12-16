@@ -9,10 +9,10 @@ use App\Http\Controllers\Web\MetaData\TimecardTaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'meta'], function () {
-    Route::resource('departments', DepartmentController::class);
-    Route::resource('levels', LevelController::class);
-    Route::resource('tasks', TaskController::class);
-    Route::resource('timecardTasks', TimecardTaskController::class);
-    Route::resource('itemTypes', ItemTypeController::class);
-    Route::resource('items', ItemController::class);
+    Route::resource('department_webs', DepartmentController::class);
+    Route::resource('level_webs', LevelController::class);
+    Route::resource('task_webs', TaskController::class);
+    Route::resource('timecardTask_webs', TimecardTaskController::class);
+    Route::resource('itemType_webs', ItemTypeController::class);
+    Route::resource('item_webs', ItemController::class);
 })->middleware(['auth', 'verified']);

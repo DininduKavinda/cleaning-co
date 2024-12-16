@@ -164,7 +164,7 @@ function SearchBox( {
                             <div className="form-group mb-0 me-0"></div>
                             <Link
                                 className="btn btn-primary d-flex align-items-center"
-                                href={route("matters.create")}
+                                href={route("matter_webss.create")}
                             >
                                 {" "}
                                 <i data-feather="plus-square"></i>Create New{" "}

@@ -235,7 +235,7 @@ function SideBar() {
                         <i className="fa-solid fa-thumbtack"></i>
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href={route("matters.index")}
+                            href={route("matter_webss.index")}
                         >
                             <svg className="stroke-icon">
                                 <use
@@ -258,7 +258,7 @@ function SideBar() {
                         <i className="fa-solid fa-thumbtack"></i>
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href={route("clients.index")}
+                            href={route("client_webs.index")}
                         >
                             <svg className="stroke-icon">
                                 <use
@@ -273,7 +273,7 @@ function SideBar() {
                     <li className="sidebar-list">
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href={route("staff.index")}
+                            href={route("staff_webs_webs.index")}
                         >
                             <svg className="stroke-icon">
                                 <use
@@ -320,22 +320,22 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("countries.index")}>
+                                <Link href={route("countrie_webs.index")}>
                                     Country
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route("provinces.index")}>
+                                <Link href={route("province_webs.index")}>
                                     Province
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route("districts.index")}>
+                                <Link href={route("district_webs.index")}>
                                     District
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route("cities.index")}>City</Link>
+                                <Link href={route("citie_webs.index")}>City</Link>
                             </li>
                         </ul>
                     </li>
@@ -343,7 +343,7 @@ function SideBar() {
                         <i className="fa-solid fa-thumbtack"></i>
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href={route("departments.index")}
+                            href={route("department_webs.index")}
                         >
                             <svg className="stroke-icon">
                                 <use
@@ -359,7 +359,7 @@ function SideBar() {
                         <i className="fa-solid fa-thumbtack"></i>
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href={route("levels.index")}
+                            href={route("level_webs.index")}
                         >
                             <svg className="stroke-icon">
                                 <use
@@ -375,7 +375,7 @@ function SideBar() {
                         <i className="fa-solid fa-thumbtack"></i>
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href={route("tasks.index")}
+                            href={route("task_web.index")}
                         >
                             <svg className="stroke-icon">
                                 <use
@@ -391,7 +391,7 @@ function SideBar() {
                         <i className="fa-solid fa-thumbtack"></i>
                         <Link
                             className="sidebar-link btn btn-outline-none w-100"
-                            href={route("timecardTasks.index")}
+                            href={route("timecardTask_webs.index")}
                         >
                             <svg className="stroke-icon">
                                 <use
@@ -431,12 +431,12 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("itemTypes.index")}>
+                                <Link href={route("itemType_webs.index")}>
                                     Item Type
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route("items.index")}>
+                                <Link href={route("item_webs.index")}>
                                     Item
                                 </Link>
                             </li>
@@ -478,10 +478,10 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("users.index")}>Users</Link>
+                                <Link href={route("user_webs.index")}>Users</Link>
                             </li>
                             <li>
-                                <Link href={route("users.create")}>
+                                <Link href={route("user_webs.create")}>
                                     New User
                                 </Link>
                             </li>
@@ -515,12 +515,12 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("permissions.index")}>
+                                <Link href={route("permission_web_webs.index")}>
                                     Permissions
                                 </Link>
                             </li>
                             <li>
-                                <Link href={route("permissions.create")}>
+                                <Link href={route("permission_web_webs.create")}>
                                     New Permission
                                 </Link>
                             </li>
@@ -554,10 +554,10 @@ function SideBar() {
                             }}
                         >
                             <li>
-                                <Link href={route("roles.index")}>Roles</Link>
+                                <Link href={route("role_web_webs.index")}>Roles</Link>
                             </li>
                             <li>
-                                <Link href={route("roles.create")}>
+                                <Link href={route("role_web_webs.create")}>
                                     New Role
                                 </Link>
                             </li>

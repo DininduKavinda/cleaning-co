@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
-import mkcert from 'vite-plugin-mkcert'
+// import mkcert from 'vite-plugin-mkcert'
 
 export default defineConfig({
     server: {
@@ -14,6 +14,6 @@ export default defineConfig({
             input: ['resources/js/app.jsx'],
             refresh: true,
         }),
-        react(),
+        react(), 
     ],
 });

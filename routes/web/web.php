@@ -7,8 +7,8 @@ use App\Http\Controllers\Web\StaffController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'web'], function () {
-    Route::resource('clients', ClientController::class);
-    Route::resource('staff', StaffController::class);
-    Route::resource('permissions', PermissionController::class);
-    Route::resource('roles', RoleController::class);
+    Route::resource('client_webs', ClientController::class);
+    Route::resource('staff_web', StaffController::class);
+    Route::resource('permission_webs', PermissionController::class);
+    Route::resource('role_webs', RoleController::class);
 })->middleware(['auth', 'verified']);
