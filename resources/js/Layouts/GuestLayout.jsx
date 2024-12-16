@@ -8,6 +8,9 @@ export default function Guest({ children }) {
                 </div>
                 <div className="col-xl-7 p-0">
                     <div className="login-card login-dark login-bg">
+                    <div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
                         <div>
                             <div>
                                 <Link className="logo" href="index.html">
