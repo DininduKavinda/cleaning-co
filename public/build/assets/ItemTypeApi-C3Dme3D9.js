@@ -1,0 +1,1 @@
+import{b as t}from"./app--yM69B3u.js";import{I as p,b as s,B as m}from"./Api-Rb4oq7BM.js";const o=m+"common/itemTypes",n=(e,a)=>t.get(`${o}?page=${e}${a}&${p}`,s),I=e=>t.get(`${o}/${e}?${p}`,s),y=e=>t.post(o,e,s),T=(e,a)=>t.put(`${o}/${e}`,a,s),d=e=>t.delete(`${o}/${e}`,s);export{I as a,y as c,d,n as g,T as u};

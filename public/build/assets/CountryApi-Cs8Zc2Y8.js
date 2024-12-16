@@ -1,0 +1,1 @@
+import{b as s}from"./app--yM69B3u.js";import{I as n,b as o,B as r}from"./Api-Rb4oq7BM.js";const e=r+"location/countries",u=(t,a)=>s.get(`${e}?page=${t}${a}&${n}`,o),g=t=>s.get(`${e}/${t}?${n}`,o),i=t=>s.post(e,t,o),p=(t,a)=>s.put(`${e}/${t}`,a,o),C=t=>s.delete(`${e}/${t}`,o),d=t=>s.get(`${e}?${n}`,{params:t},o);export{u as a,i as c,C as d,g,d as s,p as u};

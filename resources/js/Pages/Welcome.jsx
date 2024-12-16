@@ -10,6 +10,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="row">
                         <div className="col-12">
                             <div className="login-card login-dark">
+                                <div class="bg"></div>
+                                <div class="bg bg2"></div>
+                                <div class="bg bg3"></div>
                                 <div>
                                     <div>
                                         <Link
@@ -44,7 +47,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                             )}
 
                                             <div className="form-group mt-4">
-                                                    <img className="img-thumbnail border-0" src="/theme/assets/images/forms/authenticate.png" />
+                                                <img
+                                                    className="img-thumbnail border-0"
+                                                    src="/theme/assets/images/forms/authenticate.png"
+                                                />
                                             </div>
                                             <div>
                                                 {auth.user ? (

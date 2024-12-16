@@ -35,7 +35,7 @@ const CountryDropdown = ({ countryId, setCountryId }) => {
         setIsLoading(true);
         try {
             const response = await axios.get(
-                `http://cleaning-co.test/api/location/countries/${id}`
+                `http://16.171.64.154/api/location/countries/${id}`
             );
             const country = response.data.data;
             setOptions([{ value: country.id, label: country.country_name }]);

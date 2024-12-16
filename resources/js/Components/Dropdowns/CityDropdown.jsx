@@ -17,7 +17,7 @@ const CityDropdown = ({ districtId, setCityId }) => {
     const fetchCities = async (inputValue) => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://cleaning-co.test/api/location/cities`, {
+            const response = await axios.get(`http://16.171.64.154/api/location/cities`, {
                 params: {
                     'name_en[like]': inputValue,
                     'district_id[eq]': districtId,
