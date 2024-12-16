@@ -1,1 +1,0 @@
-import{b as e}from"./app-XFbUVf-n.js";import{B as $,b as t,I as o}from"./Api-C_e93x4I.js";const a=$+"admin/users",n=(s,r="")=>e.get(`${a}?page=${s}${r}&${o}`,t),U=s=>e.get(`${a}/${s}?${o}`,t),c=s=>e.delete(`${a}/${s}`,t);export{n as a,c as d,U as g};

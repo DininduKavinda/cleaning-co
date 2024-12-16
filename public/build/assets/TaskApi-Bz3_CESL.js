@@ -1,1 +1,0 @@
-import{b as a}from"./app-XFbUVf-n.js";import{B as c,b as t,I as $}from"./Api-C_e93x4I.js";const e=c+"common/tasks",d=(s,o)=>a.get(`${e}?page=${s}${o}&${$}`,t),g=s=>a.get(`${e}/${s}?${$}`,t),k=s=>a.post(e,s,t),m=(s,o)=>a.put(`${e}/${s}`,o,t),r=s=>a.delete(`${e}/${s}`,t);export{g as a,k as c,r as d,d as g,m as u};

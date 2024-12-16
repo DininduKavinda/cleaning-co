@@ -1,1 +1,0 @@
-import{b as o}from"./app-XFbUVf-n.js";import{B as R,b as t}from"./Api-C_e93x4I.js";const s=R+"admin/roles",l=(e,a)=>o.get(`${s}?page=${e}${a}`,t),n=e=>o.get(`${s}/${e}`,t),p=e=>o.post(s,e,t),r=(e,a)=>o.put(`${s}/${e}`,a,t),d=e=>o.delete(`${s}/${e}`,t);export{l as a,p as c,d,n as g,r as u};

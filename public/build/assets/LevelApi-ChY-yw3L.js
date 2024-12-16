@@ -1,1 +1,0 @@
-import{b as s}from"./app-BGrlIOB8.js";import{I as l,b as t,B as $}from"./Api-_485fmwb.js";const o=$+"common/levels",n=(e,a)=>s.get(`${o}?page=${e}${a}&${l}`,t),p=e=>s.get(`${o}/${e}?${l}`,t),d=e=>s.post(o,e,t),g=(e,a)=>s.put(`${o}/${e}`,a,t),m=e=>s.delete(`${o}/${e}`,t);export{n as a,d as c,m as d,p as g,g as u};

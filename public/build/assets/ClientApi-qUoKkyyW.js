@@ -1,1 +1,0 @@
-import{b as e}from"./app-BGrlIOB8.js";import{I as o,H as n,B as $,b as l}from"./Api-_485fmwb.js";const s=$+"web/clients",p=(t,a)=>e.get(`${s}?page=${t}${a}&${o}`,n),d=t=>e.get(`${s}/${t}?${o}`,n),g=t=>e.post(s,t,l),r=(t,a)=>e.put(`${s}/${t}`,a,l),C=t=>e.delete(`${s}/${t}`,n);export{p as a,g as c,C as d,d as g,r as u};

@@ -1,0 +1,1 @@
+import{b as s}from"./app--yM69B3u.js";import{I as o,b as e,B as d}from"./Api-Rb4oq7BM.js";const t=d+"common/timecardTasks",T=(a,c)=>s.get(`${t}?page=${a}${c}&${o}`,e),$=a=>s.get(`${t}/${a}?${o}`,e),i=a=>s.post(t,a,e),n=(a,c)=>s.put(`${t}/${a}`,c,e),p=a=>s.delete(`${t}/${a}`,e);export{T as a,i as c,p as d,$ as g,n as u};

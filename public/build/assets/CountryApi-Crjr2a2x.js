@@ -1,1 +1,0 @@
-import{b as s}from"./app-BGrlIOB8.js";import{I as n,b as o,B as r}from"./Api-_485fmwb.js";const e=r+"location/countries",u=(t,a)=>s.get(`${e}?page=${t}${a}&${n}`,o),g=t=>s.get(`${e}/${t}?${n}`,o),i=t=>s.post(e,t,o),p=(t,a)=>s.put(`${e}/${t}`,a,o),C=t=>s.delete(`${e}/${t}`,o),d=t=>s.get(`${e}?${n}`,{params:t},o);export{u as a,i as c,C as d,g,d as s,p as u};

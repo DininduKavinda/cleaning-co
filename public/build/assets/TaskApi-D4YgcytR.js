@@ -1,0 +1,1 @@
+import{b as a}from"./app--yM69B3u.js";import{I as $,b as t,B as c}from"./Api-Rb4oq7BM.js";const e=c+"common/tasks",d=(s,o)=>a.get(`${e}?page=${s}${o}&${$}`,t),g=s=>a.get(`${e}/${s}?${$}`,t),k=s=>a.post(e,s,t),m=(s,o)=>a.put(`${e}/${s}`,o,t),r=s=>a.delete(`${e}/${s}`,t);export{g as a,k as c,r as d,d as g,m as u};
