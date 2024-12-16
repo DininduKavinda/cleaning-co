@@ -10,7 +10,7 @@ use App\Http\Resources\Api\Meta\CityCollection;
 use App\Http\Resources\Api\Meta\CityResource;
 use App\Models\Meta\City;
 use Illuminate\Http\Request;
-
+ 
 class CityController extends Controller
 {
     /**
