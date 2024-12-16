@@ -1,0 +1,1 @@
+import{b as e}from"./app-CillZM3T.js";import{B as p,I as n,b as a}from"./Api-Rb4oq7BM.js";const s=p+"common/departments",$=(t,o)=>e.get(`${s}?page=${t}${o}&${n}`,a),c=t=>e.get(`${s}/${t}?${n}`,a),d=t=>e.post(s,t,a),D=(t,o)=>e.put(`${s}/${t}`,o,a),g=t=>e.delete(`${s}/${t}`,a);export{$ as a,d as c,g as d,c as g,D as u};

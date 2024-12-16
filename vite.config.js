@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     server: {
-        host : "cleaning-co.test",
+        host : "16.171.64.154",
         // https : true,
     },
     plugins: [

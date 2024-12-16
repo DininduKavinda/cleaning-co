@@ -1,0 +1,1 @@
+import{b as s}from"./app-CillZM3T.js";import{B as $,I as l,b as t}from"./Api-Rb4oq7BM.js";const o=$+"common/levels",n=(e,a)=>s.get(`${o}?page=${e}${a}&${l}`,t),p=e=>s.get(`${o}/${e}?${l}`,t),d=e=>s.post(o,e,t),g=(e,a)=>s.put(`${o}/${e}`,a,t),m=e=>s.delete(`${o}/${e}`,t);export{n as a,d as c,m as d,p as g,g as u};

@@ -1,1 +1,0 @@
-import{b as e}from"./app--yM69B3u.js";import{I as r,H as a,b as c,B as E}from"./Api-Rb4oq7BM.js";const s=E+"core/matters",m=(t,o)=>e.get(`${s}?page=${t}${o}&${r}`,a),n=t=>e.post(s,t,c),p=t=>e.delete(`${s}/${t}`,a);export{n as c,p as d,m as g};

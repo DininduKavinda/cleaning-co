@@ -1,1 +1,0 @@
-import{b as e}from"./app--yM69B3u.js";import{I as n,H as o,B as c,b as $}from"./Api-Rb4oq7BM.js";const s=c+"web/clients",g=(t,a)=>e.get(`${s}?page=${t}${a}&${n}`,o),p=t=>e.get(`${s}/${t}?${n}`,o),r=t=>e.post(s,t,$),C=(t,a)=>e.put(`${s}/${t}`,a,$),d=t=>e.delete(`${s}/${t}`,o),E=t=>e.get(`${s}?${n}&${t}`,$);export{g as a,r as c,d,p as g,E as s,C as u};
